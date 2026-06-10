@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B787 Memory Items Drill</title>
+<style>
+  :root{
+    --bg:#01172b; --panel:#062b46; --panel2:#0a3556; --line:#13486e;
+    --ink:#eaf3fb; --muted:#8fb3cf;
+    --mid:#01426A; --atlas:#0074C8; --breeze:#00C7E6; --green:#C0E585;
+    --amber:#f2a65a;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px 60px;}
+  .wrap{width:100%;max-width:700px}
+  header{display:flex;align-items:baseline;justify-content:space-between;
+    border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:18px;gap:12px}
+  h1{font-size:15px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin:0}
+  h1 .sub{color:var(--breeze);font-weight:600}
+  .src{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em}
+  .bar{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:14px;flex-wrap:wrap}
+  .bar .count{color:var(--ink)}
+  .track{flex:1;height:3px;background:var(--panel2);border-radius:2px;overflow:hidden;min-width:120px}
+  .fill{height:100%;width:0;background:var(--atlas);transition:width .25s}
+  .chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--breeze);border:1px solid var(--line);border-radius:3px;padding:3px 8px;align-self:flex-start}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    padding:24px 22px;min-height:240px;display:flex;flex-direction:column;gap:14px}
+  .prompt .lead{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .q{font-size:23px;line-height:1.25;font-weight:700;letter-spacing:.01em}
+  .cond{font-size:13px;color:var(--muted);font-style:italic;margin-top:6px;line-height:1.4}
+  .readout{background:#02101f;border:1px solid #0c3a5e;border-left:3px solid var(--green);
+    border-radius:5px;padding:0 16px;font-size:14.5px;line-height:1.5;
+    opacity:0;max-height:0;overflow:hidden;transition:opacity .2s}
+  .readout.show{opacity:1;max-height:1200px;padding:14px 16px}
+  .readout .ln{margin:3px 0;color:var(--ink)}
+  .readout .num{display:inline-block;min-width:18px;color:var(--breeze);font-weight:700;font-family:var(--mono)}
+  .readout .sub{margin-left:22px;color:#cfe2f2}
+  .readout .bul{margin-left:34px;color:#cfe2f2}
+  .readout b{color:var(--green);font-weight:700}
+  .readout i{color:var(--muted);font-style:italic}
+  .spacer{flex:1}
+  .controls{display:flex;gap:10px;flex-wrap:wrap}
+  button{font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;border-radius:6px;
+    padding:11px 18px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);transition:.12s}
+  button:hover{border-color:var(--breeze)}
+  button:focus-visible{outline:2px solid var(--breeze);outline-offset:2px}
+  .primary{background:var(--atlas);color:#fff;border-color:var(--atlas)}
+  .primary:hover{filter:brightness(1.1)}
+  .ghost{background:transparent}
+  .mark{flex:1}
+  .knew{border-color:var(--green);color:var(--green)}
+  .knew:hover{background:rgba(192,229,133,.12)}
+  .rev{border-color:var(--amber);color:var(--amber)}
+  .rev:hover{background:rgba(242,166,90,.12)}
+  .foot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .foot button{padding:6px 12px;font-size:12px}
+  .hint{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;margin-top:18px;letter-spacing:.03em}
+  .summary{text-align:center;padding:38px 20px}
+  .summary .big{font-family:var(--mono);font-size:46px;color:var(--green);font-weight:700}
+  .summary .lbl{color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:24px}
+  .summary .stat{display:flex;justify-content:center;gap:32px;margin:18px 0 28px;font-family:var(--mono)}
+  .summary .stat div span{display:block;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+  .summary .stat .r{color:var(--amber)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  @media (max-width:480px){.q{font-size:19px}.readout{font-size:13.5px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>B787 Memory Items <span class="sub">// Recite Cold</span></h1>
+    <span class="src">QRH R7</span>
+  </header>
+  <div id="app"></div>
+  <div class="hint">Recite aloud, then reveal to check &nbsp;·&nbsp; Space / Enter = reveal then advance &nbsp;·&nbsp; K = got it &nbsp;·&nbsp; R = review</div>
+</div>
+
+<script>
+const DATA=[
+ {name:"CABIN ALTITUDE",ref:"QRH 2.1",cond:"Cabin altitude is excessive.",steps:[
+   {t:'n',n:'1',h:'Don the oxygen masks.'},
+   {t:'n',n:'2',h:'Establish crew communications.'},
+   {t:'n',n:'3',h:'Check the cabin altitude and rate.'},
+   {t:'n',n:'4',h:'If the cabin altitude is uncontrollable:'},
+   {t:'s',h:'PASS OXYGEN switch: <b>Push to ON and hold for 1 second</b>'},
+   {t:'s',h:'Without delay, descend to the lowest safe altitude or <b>10,000 feet</b>, whichever is higher.'},
+   {t:'s',h:'To descend:'},
+   {t:'b',h:'Move the thrust levers to idle'},
+   {t:'b',h:'Extend the speedbrakes'},
+   {t:'b',h:'If structural integrity is in doubt, limit airspeed and avoid high maneuvering loads'},
+   {t:'b',h:'Descend at Vmo/Mmo'},
+ ]},
+ {name:"ABORTED ENGINE START L, R",ref:"QRH 7.1",cond:"On the ground, an aborted engine start is needed.",steps:[
+   {t:'n',n:'1',h:'FUEL CONTROL switch (affected side): <b>CUTOFF</b>'},
+ ]},
+ {name:"DUAL ENG FAIL/STALL",ref:"QRH 7.2",cond:"Engine speed for both engines is below idle.",steps:[
+   {t:'n',n:'1',h:'FUEL CONTROL switches (both): <b>CUTOFF, then RUN</b>'},
+   {t:'n',n:'2',h:'RAM AIR TURBINE switch: <b>Push and hold for 1 second</b>'},
+ ]},
+ {name:"ENG AUTOSTART L, R",ref:"QRH 7.3",cond:"Autostart did not start the engine.",steps:[
+   {t:'n',n:'1',h:'FUEL CONTROL switch (affected side): <i>Confirm</i> <b>CUTOFF</b>'},
+ ]},
+ {name:"ENG LIMIT EXCEED L, R",ref:"QRH 7.4",cond:"An engine limit exceedance occurs.",steps:[
+   {t:'n',n:'1',h:'A/T ARM switch (affected side): <i>Confirm</i> <b>OFF</b>'},
+   {t:'n',n:'2',h:'Thrust lever (affected side): <i>Confirm</i> <b>Retard</b> until ENG LIMIT EXCEED message blanks or the thrust lever is at idle'},
+ ]},
+ {name:"ENG SURGE L, R",ref:"QRH 7.7",cond:"An engine surge or stall that requires crew action is detected.",steps:[
+   {t:'n',n:'1',h:'A/T ARM switch (affected side): <i>Confirm</i> <b>OFF</b>'},
+   {t:'n',n:'2',h:'Thrust lever (affected side): <i>Confirm</i> <b>Retard</b> until the ENG SURGE message blanks or the thrust lever is at idle'},
+ ]},
+ {name:"ENG SVR DAMAGE/SEP L, R",ref:"QRH 7.10",cond:"Airframe vibrations with abnormal engine indications, or engine separation.",steps:[
+   {t:'n',n:'1',h:'A/T ARM switch (affected side): <i>Confirm</i> <b>OFF</b>'},
+   {t:'n',n:'2',h:'Thrust lever (affected side): <i>Confirm</i> <b>Idle</b>'},
+   {t:'n',n:'3',h:'FUEL CONTROL switch (affected side): <i>Confirm</i> <b>CUTOFF</b>'},
+   {t:'n',n:'4',h:'Engine fire switch (affected side): <i>Confirm</i> <b>Pull</b>'},
+ ]},
+ {name:"FIRE ENG L, R",ref:"QRH 8.2",cond:"Fire is detected in the affected engine. (Memory item applies in flight; on the ground it routes to step 13.)",steps:[
+   {t:'n',n:'1',h:'Choose one:'},
+   {t:'b',h:'On the ground: Go to step 13'},
+   {t:'b',h:'In flight: Go to step 2'},
+   {t:'n',n:'2',h:'A/T ARM switch (affected side): <i>Confirm</i> <b>OFF</b>'},
+   {t:'n',n:'3',h:'Thrust lever (affected side): <i>Confirm</i> <b>Idle</b>'},
+   {t:'n',n:'4',h:'FUEL CONTROL switch (affected side): <i>Confirm</i> <b>CUTOFF</b>'},
+   {t:'n',n:'5',h:'Engine fire switch (affected side): <i>Confirm</i> <b>Pull</b>'},
+   {t:'n',n:'6',h:'If the FIRE ENG message stays shown:'},
+   {t:'s',h:'Engine fire switch (affected side): <b>Rotate to the stop and hold for 1 second</b>'},
+ ]},
+ {name:"STABILIZER",ref:"QRH 9.1",cond:"Stabilizer movement without a signal to trim, or the stabilizer is failed.",steps:[
+   {t:'n',n:'1',h:'STAB cutout switches (both): <b>CUTOUT</b>'},
+   {t:'n',n:'2',h:'Do not exceed the current airspeed.'},
+ ]},
+ {name:"AIRSPEED UNRELIABLE",ref:"QRH 10.1",cond:"The airspeed or Mach indications disagree with AOA calculated airspeed.",steps:[
+   {t:'n',n:'1',h:'Autopilot disconnect switch: <b>Push</b>'},
+   {t:'n',n:'2',h:'A/T ARM switches (both): <b>OFF</b>'},
+   {t:'n',n:'3',h:'F/D switches (both): <b>OFF</b>'},
+   {t:'n',n:'4',h:'Set the following gear up pitch attitude and thrust:'},
+   {t:'b',h:'Flaps extended: <b>10 deg and 85% N1</b>'},
+   {t:'b',h:'Flaps up: <b>4 deg and 70% N1</b>'},
+ ]},
+];
+
+let order=[], idx=0, revealed=false, known=new Set(), review=new Set(), reviewMode=false;
+const app=document.getElementById("app");
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function stepsHTML(steps){
+  return steps.map(s=>{
+    if(s.t==='n')return `<div class="ln"><span class="num">${s.n}</span>${s.h}</div>`;
+    if(s.t==='s')return `<div class="ln sub">${s.h}</div>`;
+    return `<div class="ln bul">&bull; ${s.h}</div>`;
+  }).join('');
+}
+function start(reviewOnly){
+  reviewMode=reviewOnly;
+  order= reviewOnly ? shuffle([...review]) : shuffle([...Array(DATA.length).keys()]);
+  if(!reviewOnly){known=new Set();review=new Set();}
+  idx=0;revealed=false;render();
+}
+function render(){
+  if(idx>=order.length)return summary();
+  const d=DATA[order[idx]];
+  app.innerHTML=`
+    <div class="bar">
+      <span class="count">${idx+1} / ${order.length}</span>
+      <div class="track"><div class="fill" style="width:${(idx/order.length)*100}%"></div></div>
+      <span>${reviewMode?"REVIEW SET":"FULL SET"}</span>
+    </div>
+    <div class="card">
+      <span class="chip">${d.ref}</span>
+      <div class="prompt">
+        <div class="lead">Recite the memory items</div>
+        <div class="q">${d.name}</div>
+        <div class="cond">Condition: ${d.cond}</div>
+      </div>
+      <div class="readout${revealed?' show':''}">${stepsHTML(d.steps)}</div>
+      <div class="spacer"></div>
+      <div class="controls">
+        ${revealed?`
+          <button class="mark knew" onclick="grade(true)">Got it &nbsp;K</button>
+          <button class="mark rev" onclick="grade(false)">Review &nbsp;R</button>
+        `:`
+          <button class="primary" style="flex:1" onclick="reveal()">Reveal steps</button>
+        `}
+      </div>
+    </div>
+    <div class="foot">
+      <button class="ghost" onclick="start(false)">Restart full set</button>
+      <span>got it ${known.size} &middot; review ${review.size}</span>
+    </div>`;
+}
+function reveal(){revealed=true;render()}
+function grade(ok){const id=order[idx];if(ok){known.add(id);review.delete(id)}else{review.add(id)}idx++;revealed=false;render()}
+function summary(){
+  const pct=Math.round((known.size/DATA.length)*100);
+  app.innerHTML=`
+    <div class="card"><div class="summary">
+      <div class="big">${pct}%</div>
+      <div class="lbl">recited cold</div>
+      <div class="stat">
+        <div>${known.size}<span>got it</span></div>
+        <div class="r">${review.size}<span>to review</span></div>
+      </div>
+      <div class="controls" style="justify-content:center">
+        ${review.size?`<button class="primary" onclick="start(true)">Drill review only (${review.size})</button>`:''}
+        <button class="ghost" onclick="start(false)">Restart full set</button>
+      </div>
+    </div></div>`;
+}
+document.addEventListener("keydown",e=>{
+  if(idx>=order.length)return;
+  if(e.code==="Space"||e.code==="Enter"){e.preventDefault();revealed?grade(true):reveal();}
+  else if(e.key==="k"||e.key==="K"){if(revealed)grade(true)}
+  else if(e.key==="r"||e.key==="R"){if(revealed)grade(false)}
+});
+start(false);
+</script>
+</body>
+</html>
