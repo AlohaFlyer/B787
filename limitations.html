@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B787 Limitations Drill</title>
+<style>
+  :root{
+    --bg:#190f2b; --panel:#241640; --panel2:#2f1d52; --line:#4a2f72;
+    --ink:#f3ecfb; --muted:#ab95c7;
+    --grn:#ff7a59; --amb:#d2058a; --cyn:#c9a6ff;
+    --grndim:#3a1a14;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;
+    padding:24px 16px 60px;}
+  .wrap{width:100%;max-width:680px}
+  header{display:flex;align-items:baseline;justify-content:space-between;
+    border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:18px;gap:12px}
+  h1{font-size:15px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin:0}
+  h1 .sub{color:var(--amb);font-weight:600}
+  .src{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em}
+  .bar{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:12px;
+    color:var(--muted);margin-bottom:14px;flex-wrap:wrap}
+  .bar .count{color:var(--ink)}
+  .track{flex:1;height:3px;background:var(--panel2);border-radius:2px;overflow:hidden;min-width:120px}
+  .fill{height:100%;width:0;background:var(--grn);transition:width .25s}
+  .chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--cyn);border:1px solid var(--line);border-radius:3px;padding:3px 8px;align-self:flex-start}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    padding:26px 24px;min-height:230px;display:flex;flex-direction:column;gap:18px}
+  .q{font-size:21px;line-height:1.4;font-weight:500}
+  .readout{font-family:var(--mono);background:#150b25;border:1px solid var(--grndim);
+    border-left:3px solid var(--grn);border-radius:5px;padding:16px 16px;
+    font-size:20px;color:var(--grn);line-height:1.45;letter-spacing:.01em;
+    opacity:0;max-height:0;overflow:hidden;transition:opacity .2s}
+  .readout.show{opacity:1;max-height:400px;padding:16px}
+  .readout .tag{display:block;font-size:11px;color:var(--muted);letter-spacing:.06em;margin-top:10px}
+  .spacer{flex:1}
+  .controls{display:flex;gap:10px;flex-wrap:wrap}
+  button{font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;
+    border-radius:6px;padding:11px 18px;border:1px solid var(--line);
+    background:var(--panel2);color:var(--ink);transition:.12s;letter-spacing:.01em}
+  button:hover{border-color:var(--muted)}
+  button:focus-visible{outline:2px solid var(--cyn);outline-offset:2px}
+  .primary{background:var(--grn);color:#2a0d1e;border-color:var(--grn)}
+  .primary:hover{filter:brightness(1.08)}
+  .ghost{background:transparent}
+  .mark{flex:1}
+  .knew{border-color:var(--grn);color:var(--grn)}
+  .knew:hover{background:var(--grndim)}
+  .rev{border-color:var(--amb);color:var(--amb)}
+  .rev:hover{background:#3a0a26}
+  .foot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;
+    font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .foot button{padding:6px 12px;font-size:12px}
+  .hint{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;margin-top:18px;letter-spacing:.03em}
+  .summary{text-align:center;padding:40px 20px}
+  .summary .big{font-family:var(--mono);font-size:46px;color:var(--grn);font-weight:700}
+  .summary .lbl{color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:24px}
+  .summary .stat{display:flex;justify-content:center;gap:32px;margin:18px 0 28px;font-family:var(--mono)}
+  .summary .stat div span{display:block;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+  .summary .stat .r{color:var(--amb)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  @media (max-width:480px){.q{font-size:18px}.readout{font-size:17px}}
+</style>
+</head>
+<body>
+<div style="position:fixed;top:0;left:12px;z-index:9999;"><a href="index.html" style="display:inline-block;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:12px;font-weight:700;color:#fff;background:#01416e;padding:5px 14px;border-radius:0 0 6px 6px;text-decoration:none;">&#9664; B787 Study Portal</a></div>
+
+<div class="wrap">
+  <header>
+    <h1>B787 Limitations <span class="sub">// Memorize</span></h1>
+    <span class="src">FCOM R10 · L.10</span>
+  </header>
+
+  <div id="app"></div>
+
+  <div class="hint">Space / Enter = reveal then advance &nbsp;·&nbsp; K = knew it &nbsp;·&nbsp; R = review</div>
+</div>
+
+<script>
+const DATA=[
+ {s:"Airplane General",q:"Maximum takeoff and landing tailwind?",a:"15 knots",ref:"L.10.2"},
+ {s:"Airplane General",q:"Operating HF radios when refueling?",a:"Prohibited",ref:"L.10.2"},
+ {s:"Airplane General",q:"Severe turbulent air penetration speed: below 25,000 ft?",a:"290 KIAS",ref:"L.10.3"},
+ {s:"Airplane General",q:"Severe turbulent air penetration speed: at and above 25,000 ft?",a:"310 KIAS / .84 Mach, whichever is lower",ref:"L.10.3"},
+ {s:"Airplane General",q:"Weather radar operation in a hangar?",a:"Avoid (test mode exempt)",ref:"L.10.3"},
+ {s:"Autoflight",q:"Autopilot minimum engage altitude after takeoff?",a:"200 ft AGL",ref:"L.10.8"},
+ {s:"Autoflight",q:"Without LAND 2 or LAND 3, autopilot must be disengaged below?",a:"135 ft AGL",ref:"L.10.8"},
+ {s:"Autoflight",q:"With LAND 2 or LAND 3 and glideslope > 3.25 deg, autopilot must be disengaged below?",a:"100 ft AGL",ref:"L.10.8"},
+ {s:"HUD Takeoff",q:"HUD takeoff: maximum headwind?",a:"25 knots",ref:"L.10.9"},
+ {s:"HUD Takeoff",q:"HUD takeoff: maximum tailwind?",a:"15 knots",ref:"L.10.9"},
+ {s:"HUD Takeoff",q:"HUD takeoff: maximum crosswind?",a:"20 knots",ref:"L.10.9"},
+ {s:"Autoland",q:"Autoland maximum airport field elevation?",a:"8,400 ft",ref:"L.10.8"},
+ {s:"Autoland",q:"Autoland: maximum headwind?",a:"25 knots",ref:"L.10.9"},
+ {s:"Autoland",q:"Autoland: maximum tailwind?",a:"15 knots",ref:"L.10.9"},
+ {s:"Autoland",q:"Autoland: maximum crosswind?",a:"25 knots (15 knots for CAT II/III)",ref:"L.10.9"},
+ {s:"Autoland",q:"Autoland: maximum glideslope angle?",a:"3.25 degrees",ref:"L.10.9"},
+ {s:"Autoland",q:"Autoland: minimum glideslope angle?",a:"2.5 degrees",ref:"L.10.9"},
+ {s:"Approach",q:"FLCH on final approach below what altitude?",a:"Do not use below 1,000 ft AFE",ref:"L.10.9"},
+ {s:"Engines",q:"Oil temperature minimum for engine start?",a:"Greater than -40 deg C",ref:"L.10.10"},
+ {s:"Engines",q:"Intentional selection of reverse thrust in flight?",a:"Prohibited",ref:"L.10.10"},
+ {s:"Engines",q:"Backing the airplane with reverse thrust?",a:"Prohibited",ref:"L.10.10"},
+ {s:"Flight Controls",q:"Rapid and large alternating control inputs?",a:"Avoid; structural failure risk at any speed, including below VA",ref:"L.10.10"},
+];
+
+let order=[], idx=0, revealed=false, known=new Set(), review=new Set(), reviewMode=false;
+const app=document.getElementById("app");
+
+function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
+function start(reviewOnly){
+  reviewMode=reviewOnly;
+  order= reviewOnly ? shuffle([...review]) : shuffle([...Array(DATA.length).keys()]);
+  if(!reviewOnly){known=new Set();review=new Set();}
+  idx=0;revealed=false;render();
+}
+function render(){
+  if(idx>=order.length){return summary();}
+  const d=DATA[order[idx]];
+  app.innerHTML=`
+    <div class="bar">
+      <span class="count">${idx+1} / ${order.length}</span>
+      <div class="track"><div class="fill" style="width:${(idx/order.length)*100}%"></div></div>
+      <span>${reviewMode?"REVIEW SET":"FULL SET"}</span>
+    </div>
+    <div class="card">
+      <span class="chip">${d.s}</span>
+      <div class="q">${d.q}</div>
+      <div class="readout${revealed?' show':''}">${d.a}<span class="tag">FCOM ${d.ref}</span></div>
+      <div class="spacer"></div>
+      <div class="controls">
+        ${revealed?`
+          <button class="mark knew" onclick="grade(true)">Knew it &nbsp;K</button>
+          <button class="mark rev" onclick="grade(false)">Review &nbsp;R</button>
+        `:`
+          <button class="primary" style="flex:1" onclick="reveal()">Reveal limit</button>
+        `}
+      </div>
+    </div>
+    <div class="foot">
+      <button class="ghost" onclick="restart()">Restart full set</button>
+      <span>known ${known.size} · review ${review.size}</span>
+    </div>`;
+}
+function reveal(){revealed=true;render()}
+function grade(ok){const id=order[idx];if(ok){known.add(id);review.delete(id)}else{review.add(id)}idx++;revealed=false;render()}
+function restart(){start(false)}
+function summary(){
+  const pct=Math.round((known.size/DATA.length)*100);
+  app.innerHTML=`
+    <div class="card"><div class="summary">
+      <div class="big">${pct}%</div>
+      <div class="lbl">memorized cold</div>
+      <div class="stat">
+        <div>${known.size}<span>knew it</span></div>
+        <div class="r">${review.size}<span>to review</span></div>
+      </div>
+      <div class="controls" style="justify-content:center">
+        ${review.size?`<button class="primary" onclick="start(true)">Drill review only (${review.size})</button>`:''}
+        <button class="ghost" onclick="start(false)">Restart full set</button>
+      </div>
+    </div></div>`;
+}
+document.addEventListener("keydown",e=>{
+  if(idx>=order.length)return;
+  if(e.code==="Space"||e.code==="Enter"){e.preventDefault();revealed?grade(true):reveal();}
+  else if(e.key==="k"||e.key==="K"){if(revealed)grade(true)}
+  else if(e.key==="r"||e.key==="R"){if(revealed)grade(false)}
+});
+start(false);
+</script>
+</body>
+</html>
