@@ -70,6 +70,8 @@
   .complete-screen p { color: var(--text-dim); margin-bottom: 24px; }
   .queue-info { font-size: 0.78rem; color: var(--text-dim); display: flex; gap: 16px; flex-wrap: wrap; }
   .queue-info span { color: var(--text); font-weight: 600; }
+  .exam-tip { margin-top: 18px; padding: 10px 14px; border: 1px dashed var(--border); border-radius: var(--radius); font-size: 0.78rem; color: var(--text-dim); line-height: 1.5; }
+  .exam-tip b { color: var(--amber); font-weight: 600; }
   .reset-link { font-size: 0.72rem; color: var(--text-dim); cursor: pointer; text-decoration: underline; margin-left: auto; }
   .reset-link:hover { color: var(--red); }
   .portal-bar { width: 100%; background: #01416e; padding: 8px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
@@ -89,7 +91,7 @@
       <div class="header-title">B787 SYSTEMS QUIZ</div>
       <div class="header-sub" id="hdr-sub">Active recall - All Systems</div>
     </div>
-    <div class="header-ver">Ver 2.0</div>
+    <div class="header-ver">Ver 2.1</div>
   </div>
   <div id="main"></div>
 </div>
@@ -1830,7 +1832,7 @@ function getActivePool() {
 function buildQueue(keepRetired) {
   const pool = getActivePool();
   if (!keepRetired) { pool.forEach(q => state.retired.delete(q.id)); }
-  state.queue = shuffleArray(pool.filter(q => !state.retired.has(q.id)));
+  state.queue = shuffleArray(pool.filter(q => !state.retired.has(q.id))).slice(0, 100);
   state.missed.clear();
   state.currentIdx = 0;
   state.revealed = false;
@@ -1868,7 +1870,7 @@ function renderFilterBar() {
     const pool = s === 'All' ? QUESTIONS : QUESTIONS.filter(q => q.system === s);
     const m = pool.filter(q => state.retired.has(q.id)).length;
     const done = m === pool.length && pool.length > 0;
-    return `<button class="filter-btn ${state.filter===s?'active':''} ${done?'fdone':''}" onclick="setFilter('${s.replace(/'/g, "\\'")}')">${s} <span class="n">${m}/${pool.length}</span></button>`;
+    return `<button class="filter-btn ${state.filter===s?'active':''} ${done?'fdone':''}" onclick="setFilter('${s.replace(/'/g, "\\'")}')">${s === 'All' ? 'ALL SYS' : s} <span class="n">${m}/${pool.length}</span></button>`;
   }).join('')}</div>`;
 }
 function renderStats() {
@@ -1934,8 +1936,8 @@ function renderCard(q) {
 function renderComplete() {
   return `<div class="complete-screen">
     <div class="trophy">&#127942;</div>
-    <h2>${state.filter} Complete</h2>
-    <p>All ${getActivePool().length} cards mastered.<br>
+    <h2>${state.filter === 'All' ? 'ALL SYS' : state.filter} Session Complete</h2>
+    <p>Session complete.<br>
     Correct: ${state.sessionCorrect} &nbsp;|&nbsp; Missed: ${state.sessionMissed}</p>
     <div class="btn-row" style="justify-content:center;max-width:400px;margin:0 auto">
       <button class="btn btn-reveal" onclick="restart()">Go Again</button>
@@ -1943,11 +1945,14 @@ function renderComplete() {
     </div>
   </div>`;
 }
+function examTip() {
+  return `<div class="exam-tip"><b>SV exam tip:</b> For the real systems exam, when "All of the Above" is shown that is the answer, and most of the time when it's True or False the answer is True.</div>`;
+}
 function render() {
   const main = document.getElementById('main');
   if (!main) return;
   const sub = document.getElementById('hdr-sub');
-  if (sub) sub.textContent = 'Active recall - ' + (state.filter === 'All' ? 'All Systems' : state.filter) + ' - ' + QUESTIONS.length + ' questions total';
+  if (sub) sub.textContent = 'Active recall - ' + (state.filter === 'All' ? 'ALL SYS' : state.filter) + ' - 100-question session from ' + QUESTIONS.length + ' question bank';
   const q = currentCard();
   if (!q) {
     if (state.missed.size > 0) {
@@ -1957,10 +1962,10 @@ function render() {
       state.queue = state.queue.concat(recycled);
       if (state.queue[state.currentIdx]) { state.revealed = false; render(); return; }
     }
-    main.innerHTML = renderProgress() + renderFilterBar() + renderStats() + renderComplete();
+    main.innerHTML = renderProgress() + renderFilterBar() + renderStats() + renderComplete() + examTip();
     return;
   }
-  main.innerHTML = renderProgress() + renderFilterBar() + renderStats() + renderCard(q);
+  main.innerHTML = renderProgress() + renderFilterBar() + renderStats() + renderCard(q) + examTip();
 }
 
 // ============================================================
