@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B787 Systems Mastery Quiz</title>
+<style>
+  :root {
+    --bg: #0a0d12;
+    --surface: #141820;
+    --surface2: #1c2230;
+    --border: #2a3344;
+    --green: #4caf73;
+    --amber: #f0a030;
+    --red: #e05050;
+    --blue: #5090d0;
+    --text: #d8dde8;
+    --text-dim: #7a8899;
+    --magenta: #d060b0;
+    --radius: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #app { width: 100%; max-width: 800px; padding: 16px; }
+
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 0 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+  .header-title { font-size: 1rem; font-weight: 600; color: var(--blue); letter-spacing: 0.05em; }
+  .header-sub { font-size: 0.75rem; color: var(--text-dim); margin-top: 2px; }
+
+  .progress-row {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+  }
+  .progress-bar-wrap {
+    flex: 1; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%; background: var(--green); border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+  .progress-label { font-size: 0.8rem; color: var(--text-dim); white-space: nowrap; }
+  .streak-badge {
+    font-size: 0.75rem; color: var(--amber); font-weight: 600;
+    background: rgba(240,160,48,0.12); border-radius: 12px; padding: 2px 8px;
+  }
+
+  .filter-bar {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;
+  }
+  .filter-btn {
+    padding: 4px 12px; border-radius: 12px; border: 1px solid var(--border);
+    background: var(--surface); color: var(--text-dim); font-size: 0.78rem;
+    cursor: pointer; transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: var(--blue); color: var(--text); }
+  .filter-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; font-weight: 600; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  .card .system-tag {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+    color: var(--amber); text-transform: uppercase; margin-bottom: 10px;
+  }
+  .card .source-tag {
+    font-size: 0.7rem; color: var(--text-dim); margin-bottom: 10px;
+  }
+  .card .question {
+    font-size: 1.1rem; line-height: 1.55; color: var(--text); font-weight: 500;
+  }
+  .verify-flag {
+    display: inline-block; font-size: 0.7rem; background: rgba(240,160,48,0.15);
+    color: var(--amber); border-radius: 4px; padding: 1px 6px; margin-top: 6px;
+  }
+
+  .answer-area {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    display: none;
+  }
+  .answer-area.visible { display: block; }
+  .answer-label {
+    font-size: 0.7rem; font-weight: 700; color: var(--green); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .answer-text {
+    font-size: 1rem; line-height: 1.6; color: var(--text);
+  }
+
+  /* FCOM detail panel */
+  .fcom-area {
+    background: #0d1520;
+    border: 1px solid #2a4060;
+    border-left: 3px solid var(--blue);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    display: none;
+  }
+  .fcom-area.visible { display: block; }
+  .fcom-label {
+    font-size: 0.68rem; font-weight: 700; color: var(--blue); letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+  .fcom-block {
+    margin-bottom: 12px;
+  }
+  .fcom-block:last-child { margin-bottom: 0; }
+  .fcom-ref {
+    font-size: 0.7rem; color: var(--blue); font-weight: 600; margin-bottom: 4px;
+    font-family: monospace; letter-spacing: 0.05em;
+  }
+  .fcom-quote {
+    font-size: 0.85rem; line-height: 1.6; color: #a0b8d0;
+    font-style: italic;
+    border-left: 2px solid #2a4060;
+    padding-left: 10px;
+  }
+  .fcom-note {
+    font-size: 0.8rem; color: var(--text-dim); margin-top: 6px;
+    font-style: normal;
+  }
+
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .btn {
+    padding: 11px 20px; border-radius: var(--radius); border: none;
+    font-size: 0.88rem; font-weight: 600; cursor: pointer; transition: all 0.15s;
+    text-align: center;
+  }
+  .btn-reveal { background: var(--blue); color: #fff; flex: 2; }
+  .btn-reveal:hover { background: #6aa0e0; }
+  .btn-fcom {
+    background: rgba(80,144,208,0.12); color: var(--blue);
+    border: 1px solid #2a4060; flex: 1;
+  }
+  .btn-fcom:hover { background: rgba(80,144,208,0.25); }
+  .btn-fcom.active { background: rgba(80,144,208,0.2); border-color: var(--blue); }
+  .btn-got-it {
+    background: rgba(76,175,115,0.15); color: var(--green);
+    border: 1px solid var(--green); flex: 1;
+  }
+  .btn-got-it:hover { background: rgba(76,175,115,0.3); }
+  .btn-missed {
+    background: rgba(224,80,80,0.12); color: var(--red);
+    border: 1px solid var(--red); flex: 1;
+  }
+  .btn-missed:hover { background: rgba(224,80,80,0.25); }
+  .btn-restart {
+    background: var(--surface2); color: var(--text-dim); border: 1px solid var(--border);
+  }
+  .btn-restart:hover { color: var(--text); border-color: var(--text-dim); }
+
+  .stats-row {
+    display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap;
+  }
+  .stat-chip {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 10px 16px; flex: 1; min-width: 100px;
+  }
+  .stat-chip .stat-val { font-size: 1.4rem; font-weight: 700; color: var(--text); }
+  .stat-chip .stat-lbl { font-size: 0.72rem; color: var(--text-dim); margin-top: 2px; }
+  .stat-chip.green .stat-val { color: var(--green); }
+  .stat-chip.amber .stat-val { color: var(--amber); }
+  .stat-chip.red .stat-val { color: var(--red); }
+
+  .complete-screen { text-align: center; padding: 48px 24px; }
+  .complete-screen .trophy { font-size: 3rem; margin-bottom: 16px; }
+  .complete-screen h2 { font-size: 1.4rem; color: var(--green); margin-bottom: 8px; }
+  .complete-screen p { color: var(--text-dim); margin-bottom: 24px; }
+
+  .queue-info {
+    font-size: 0.78rem; color: var(--text-dim);
+    display: flex; gap: 16px;
+  }
+  .queue-info span { color: var(--text); font-weight: 600; }
+
+  .portal-bar {
+    width: 100%; background: #01416e;
+    padding: 8px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .portal-back {
+    color: #b1d887; text-decoration: none;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em;
+  }
+  .portal-back:hover { color: #fff; }
+  .portal-brand { color: #b1d887; font-size: 0.7rem; letter-spacing: 0.05em; opacity: 0.8; }
+</style>
+</head>
+<body>
+<div class="portal-bar">
+  <a href="index.html" class="portal-back">&#9664; B787 STUDY PORTAL</a>
+  <div class="portal-brand">FCOM R10 &nbsp;|&nbsp; QRH R7</div>
+</div>
+<div id="app">
+  <div class="header">
+    <div>
+      <div class="header-title">B787 SYSTEMS QUIZ</div>
+      <div class="header-sub">Active recall — Fuel System (FCOM R10)</div>
+    </div>
+  </div>
+  <div id="main"></div>
+</div>
+
+<script>
+// ============================================================
+// FCOM DETAIL DATABASE  (keyed by question id)
+// All quotes are verbatim from FCOM R10 or FCTM R9
+// ============================================================
+const FCOM_DETAIL = {
+
+  "fuel-001": [
+    { ref: "FCOM 12.10.3 — Fuel Indications",
+      quote: "Total fuel quantity (pounds x 1000). Fuel temperature (ºC).",
+      note: "Normal display is on primary EICAS. Expanded tank quantities shown on FUEL synoptic." }
+  ],
+
+  "fuel-002": [
+    { ref: "FCOM 12.20.4 — Fuel Tank Locations",
+      quote: "Surge Tank | Main Tank | Center Tank",
+      note: "Three tanks: Left Main, Right Main, Center. Surge tanks are outboard of each main tank and drain into the mains — they are not usable tanks." },
+    { ref: "FCOM L.10.11 — Fuel Loading Limitation (AFM)",
+      quote: "Main tanks must be scheduled to be full if center tank fuel is loaded.",
+      note: "Exception: center tank may hold up to 22,000 lbs with less than full mains provided center tank fuel weight + actual ZFW does not exceed MZFW, and CG limits are observed." }
+  ],
+
+  "fuel-003": [
+    { ref: "FCOM 12.20.1 — Fuel Pumps",
+      quote: "Each fuel tank contains two AC–powered fuel pumps. A single pump can supply sufficient fuel to operate one engine under all conditions.",
+      note: "Main tank pumps are designated FWD and AFT." }
+  ],
+
+  "fuel-004": [
+    { ref: "FCOM 12.20.1 — Fuel Pumps",
+      quote: "Each fuel tank contains two AC–powered fuel pumps.",
+      note: "Center tank pumps are designated L and R (not FWD/AFT). They are override/jettison type." }
+  ],
+
+  "fuel-005": [
+    { ref: "FCOM 12.20.1 — Fuel Pumps",
+      quote: "The two center tank fuel pumps are override/jettison pumps. These pumps have a higher output pressure than the left and right main tank fuel pumps. The center tank pumps override the main tank pumps so that center tank fuel is used before wing tank fuel." }
+  ],
+
+  "fuel-006": [
+    { ref: "FCOM 12.20.7 — APU Fuel Feed",
+      quote: "APU fuel is supplied from the left fuel manifold. APU fuel can be provided by any AC fuel pump supplying fuel to the left fuel manifold or by the left main tank DC fuel pump.",
+      note: "On the ground with no AC power and APU ON, the DC pump runs automatically. With AC power, the left aft AC pump operates automatically regardless of pump switch position." }
+  ],
+
+  "fuel-007": [
+    { ref: "FCOM 12.10.3 — Normal Fuel Indications",
+      quote: "Total fuel quantity (pounds x 1000). Fuel temperature (ºC).",
+      note: "Units switch to LBS x 1000 when jettison is ARMED. Normal display is KGS x 1000 per Hawaiian Airlines FCOM (metric units)." }
+  ],
+
+  "fuel-008": [
+    { ref: "FCOM 12.10.5 — Fuel Jettison Indications",
+      quote: "Fuel to remain (fuel jettison ARMED): the fuel to remain defaults to a fuel quantity that leaves the airplane at maximum landing weight (MLW) when jettison is complete. The fuel to remain display replaces the fuel temperature and static air temperature displays." },
+    { ref: "FCOM 12.20.8 — Fuel Jettison Schematic",
+      quote: "LBS X 1000 [shown on jettison synoptic]",
+      note: "Display switches from KGS to LBS x 1000 when jettison is armed." }
+  ],
+
+  "fuel-009": [
+    { ref: "FCOM 12.20.7 — Fuel Jettison",
+      quote: "The jettison system automatically sets the fuel–to–remain to the maximum landing weight (MLW) fuel quantity. The TO REMAIN quantity replaces fuel temperature on the EICAS display.",
+      note: "TO REMAIN shown in magenta on EICAS display per slide 9 depiction." }
+  ],
+
+  "fuel-010": [
+    { ref: "FCOM 12.20.7 — Fuel Jettison",
+      quote: "At least 8700 pounds of fuel remains in each main tank after jettison is complete." }
+  ],
+
+  "fuel-011": [
+    { ref: "FCOM 12.10.2 — Fuel Jettison FUEL TO REMAIN Selector",
+      quote: "PULL ON – changes the mode from MLW (maximum landing weight) to MAN (manual). Rotate – clockwise to increase the MANUAL fuel–to–remain quantity; counterclockwise to decrease the MANUAL fuel–to–remain quantity. Push – automatically selects the MLW fuel–to–remain quantity." }
+  ],
+
+  "fuel-012": [
+    { ref: "FCOM 12.10.2 — Fuel Jettison NOZZLE Switches",
+      quote: "ON – the jettison nozzle valve is selected open in flight. Off (ON not visible) – the jettison nozzle valve is selected closed.",
+      note: "Red/white striped guard (hazard guard) protects NOZZLE L and R switches. Guard must be lifted to access." }
+  ],
+
+  "fuel-013": [
+    { ref: "FCOM 12.10.4 — Fuel Imbalance Indications",
+      quote: "When fuel is back in balance within 200 pounds between the main tanks and the crossfeed valve is open or the balance system is ON, FUEL BALANCED replaces FUEL QTY on the expanded fuel quantity display and flashes for 5 seconds." }
+  ],
+
+  "fuel-014": [
+    { ref: "FCOM 12.10.4 — Fuel Imbalance Indications",
+      quote: "A solid white fuel imbalance pointer is displayed if: the FUEL IMBALANCE message is not displayed and the main tank fuel differs by more than 200 pounds, and either the crossfeed valve is open or the balance system is ON.",
+      note: "Amber pointer = FUEL IMBALANCE message active. White pointer = imbalance exists but below message threshold. Pointer flashes if balancing is going the wrong direction." }
+  ],
+
+  "fuel-015": [
+    { ref: "FCOM 12.20.9 — Nitrogen Generation System",
+      quote: "The Nitrogen Generation System (NGS) provides automatic full time flammability protection for the fuel system. It generates nitrogen enriched air to displace fuel vapors in all fuel tanks. The nitrogen enriched air minimizes fuel flammability during normal flight and ground operations." }
+  ],
+
+  "fuel-016": [
+    { ref: "FCOM 12.20.1 — Fuel Pumps (Load Shed)",
+      quote: "When less than all engines/generators are operating, there may not be sufficient electrical power to operate all fuel pumps. In such cases, the fuel system automatically determines the best pumps to operate depending on how much electrical power is available. Certain fuel pumps may be load shed until enough electrical power is available. The indications that a fuel pump has load shed are that the pump switch PRESS light is illuminated and the pump is labeled LOAD SHED on the fuel synoptic." }
+  ],
+
+  "fuel-017": [
+    { ref: "FCOM 12.10.3 — Expanded Fuel Indications (trigger conditions)",
+      quote: "The expanded FUEL QTY display (left main, center, and right main tank quantities) appears for any of the following conditions: the FUEL QTY LOW alert message is displayed... the FUEL FLOW ENG alert message is displayed... the INSUFFICIENT FUEL alert message is displayed... the FUEL IMBALANCE alert message is displayed.",
+      note: "FUEL QTY LOW, FUEL FLOW ENG, FUEL IMBALANCE, and INSUFFICIENT FUEL are alert (caution) level messages. See FCOM 12.30 for full EICAS message table." }
+  ],
+
+  "fuel-018": [
+    { ref: "FCOM 12.10.3 — Expanded Fuel Indications (trigger conditions)",
+      quote: "The expanded FUEL QTY display appears for: the FUEL IN CENTER alert message is displayed (center tank quantity is amber)... the FUEL LOW CENTER alert message is displayed (low center tank quantity is amber).",
+      note: "FUEL IN CENTER and FUEL LOW CENTER trigger the expanded display but are advisory level — no immediate checklist action required. Verify in FCOM 12.30 for exact message levels." }
+  ],
+
+  "fuel-019": [
+    { ref: "FCOM 12.20.3 — Fuel Crossfeed",
+      quote: "The fuel manifolds are arranged so that any fuel tank pump can supply either engine. The crossfeed valve is closed during normal operations. The closed crossfeed valve isolates the left and right systems. The valve can be opened to feed an engine from the opposite fuel tank." }
+  ],
+
+  "fuel-020": [
+    { ref: "FCOM 12.20.8 — Fuel Jettison Schematic",
+      quote: "MIN FUEL TEMP −37c / FUEL TEMP 13c / TO REMAIN 25.0 MLW / JETT TIME 30 MIN",
+      note: "Jettison synoptic footer shows: minimum fuel temp, current fuel temp, TO REMAIN quantity (with MLW label), and JETT TIME in minutes remaining." }
+  ],
+
+  "fuel-021": [
+    { ref: "FCOM 12.10.1 — CROSSFEED Switch",
+      quote: "On (bar visible) – the crossfeed valve is selected open. Off (bar not visible) – the crossfeed valve is selected closed.",
+      note: "CROSSFEED VALVE light (amber) = valve not in selected position. White 'VALVE' annunciation on panel = valve is open (bar visible)." }
+  ],
+
+  "fuel-022": [
+    { ref: "FCOM 12.10.4 — Expanded Fuel Indications",
+      quote: "The expanded FUEL QTY display (left main, center, and right main tank quantities).",
+      note: "Order on EICAS: L MAIN | CENTER | R MAIN. Example from FCOM: 33.0 | 149.5 | 33.0 (LBS x 1000)." }
+  ],
+
+  "fuel-023": [
+    { ref: "FCOM 12.20.8 — Fuel Jettison Schematic",
+      quote: "MIN FUEL TEMP −37c",
+      note: "This is the minimum temp indicator shown in the jettison synoptic example — the displayed freeze reference for the fuel loaded. The AFM operating limits are in L.10.11 below." },
+    { ref: "FCOM L.10.11 — Fuel Temperature Limitations (AFM)",
+      quote: "Tank fuel temperature prior to takeoff must not be less than −29°C (−20°F). In-flight tank fuel temperature must be maintained at least −42°C, as well as 3°C above the freezing point of the fuel being used. The use of Fuel System Icing Inhibitor additives does not change the minimum fuel tank temperature limit.",
+      note: "Max at takeoff: 49°C (120°F). Inflight max: 65°C (150°F) Jet A/Jet A-1/JP-5/JP-8; 57°C (135°F) TS-1 at or above 35,000 ft." },
+    { ref: "QRH R7 — Memory Items: Fuel System",
+      quote: "No dedicated fuel system memory items exist in QRH R7.",
+      note: "The FUEL CONTROL switch (CUTOFF/RUN) appears as a step in engine abnormal memory items: Aborted Engine Start (7.1), Dual Eng Fail/Stall (7.2), Eng Autostart (7.3), Eng Svr Damage/Sep (7.10), and Fire Eng (8.2). No fuel jettison, imbalance, or temperature checklists carry memory items." }
+  ],
+
+  "fuel-024": [
+    { ref: "FCOM 12.10.5 — Fuel Jettison Indications",
+      quote: "Fuel to remain (fuel jettison ARMED): the fuel to remain defaults to a fuel quantity that leaves the airplane at maximum landing weight (MLW) when jettison is complete. The fuel to remain display replaces the fuel temperature and static air temperature displays." },
+    { ref: "FCOM 12.20.7 — Fuel Jettison",
+      quote: "The jettison system automatically sets the fuel–to–remain to the maximum landing weight (MLW) fuel quantity.",
+      note: "GROSS WT and MLW both appear on EICAS when jettison is armed. MLW example from FCOM schematic: 365.0 (LBS x 1000)." }
+  ]
+};
+
+// ============================================================
+// QUESTION BANK
+// ============================================================
+const QUESTIONS = [
+  { id:"fuel-001", system:"Fuel", question:"Where is total fuel quantity displayed?", answer:"Primary EICAS display.", source:"Fuel deck slide 2" },
+  { id:"fuel-002", system:"Fuel", question:"How many fuel tanks does the 787 have, and what are they called?", answer:"Three: L MAIN, R MAIN, and CENTER.", source:"Fuel deck slide 4" },
+  { id:"fuel-003", system:"Fuel", question:"How many pumps are in each main tank, and what are they called?", answer:"Two: FWD and AFT.", source:"Fuel deck slide 4" },
+  { id:"fuel-004", system:"Fuel", question:"How many pumps are in the center tank, and what are they called?", answer:"Two: L and R.", source:"Fuel deck slide 4" },
+  { id:"fuel-005", system:"Fuel", question:"What type of pumps are the center tank fuel pumps, and what is special about their output pressure?", answer:"Override/jettison pumps. Higher output pressure than main tank pumps — center fuel is used before wing fuel.", source:"Fuel deck slide 13, FCOM 12.20.1" },
+  { id:"fuel-006", system:"Fuel", question:"Which tank does the APU receive fuel from?", answer:"Left fuel manifold (L MAIN tank). With no AC power, the L MAIN DC pump runs automatically.", source:"Fuel deck slide 3, FCOM 12.20.7" },
+  { id:"fuel-007", system:"Fuel", question:"What are the normal fuel quantity units on the EICAS display?", answer:"KGS x 1000.", source:"Fuel deck slide 4" },
+  { id:"fuel-008", system:"Fuel", question:"What units does EICAS switch to when fuel jettison is ARMED?", answer:"LBS x 1000.", source:"Fuel deck slide 9, FCOM 12.20.8" },
+  { id:"fuel-009", system:"Fuel", question:"What color is the TO REMAIN target quantity on EICAS when jettison is armed?", answer:"Magenta.", source:"Fuel deck slide 9" },
+  { id:"fuel-010", system:"Fuel", question:"What is the minimum fuel that remains in each main tank after jettison is complete?", answer:"8,700 lbs per main tank.", source:"FCOM 12.20.7" },
+  { id:"fuel-011", system:"Fuel", question:"What does the FUEL TO REMAIN knob do, and how do you activate manual mode?", answer:"Sets fuel quantity to remain after jettison. PULL ON to switch from MLW to manual mode. Rotate to adjust. Push to return to MLW.", source:"FCOM 12.10.2" },
+  { id:"fuel-012", system:"Fuel", question:"What type of guard protects the NOZZLE L and R jettison switches?", answer:"Red/white striped hazard guard.", source:"Fuel deck slide 6" },
+  { id:"fuel-013", system:"Fuel", question:"What EICAS header change indicates fuel balance has been achieved?", answer:"FUEL BALANCED replaces FUEL QTY (flashes 5 seconds).", source:"FCOM 12.10.4" },
+  { id:"fuel-014", system:"Fuel", question:"What color imbalance pointer appears when imbalance exceeds 200 lbs but the FUEL IMBALANCE message is NOT displayed?", answer:"Solid white pointer.", source:"FCOM 12.10.4" },
+  { id:"fuel-015", system:"Fuel", question:"What does the Nitrogen Generation System (NGS) do?", answer:"Generates nitrogen-enriched air to displace fuel vapors in all tanks — minimizes flammability during flight and ground ops.", source:"FCOM 12.20.9" },
+  { id:"fuel-016", system:"Fuel", question:"How is a fuel pump load shed indicated on the flight deck?", answer:"PRESS light illuminates on the pump switch AND the pump is labeled LOAD SHED on the fuel synoptic.", source:"FCOM 12.20.1" },
+  { id:"fuel-017", system:"Fuel", question:"Which EICAS fuel messages are alert (caution) level and require checklist action?", answer:"FUEL QTY LOW, FUEL FLOW ENG, FUEL IMBALANCE, INSUFFICIENT FUEL.", source:"Fuel deck slide 5, FCOM 12.30" },
+  { id:"fuel-018", system:"Fuel", question:"Which EICAS fuel messages are advisory only (no immediate checklist)?", answer:"FUEL IN CENTER, FUEL LOW CENTER.", source:"Fuel deck slide 5" },
+  { id:"fuel-019", system:"Fuel", question:"What valve connects L MAIN and R MAIN tanks, and what is its normal position?", answer:"CROSSFEED valve. Normally CLOSED. Opening it allows any tank pump to supply either engine.", source:"FCOM 12.20.3" },
+  { id:"fuel-020", system:"Fuel", question:"What four items are shown in the jettison synoptic footer?", answer:"MIN FUEL TEMP, FUEL TEMP, TO REMAIN (with MLW), and JETT TIME (minutes remaining).", source:"FCOM 12.20.8" },
+  { id:"fuel-021", system:"Fuel", question:"What does a lit amber CROSSFEED VALVE light indicate?", answer:"Crossfeed valve is NOT in the selected position (disagreement).", source:"FCOM 12.10.1" },
+  { id:"fuel-022", system:"Fuel", question:"On the expanded EICAS fuel display, in what left-to-right order are tank quantities shown?", answer:"L MAIN | CENTER | R MAIN.", source:"FCOM 12.10.4" },
+  { id:"fuel-023", system:"Fuel", question:"What minimum fuel temperature is shown on the jettison synoptic? What are the AFM min/max limits (pre-takeoff and inflight)?", answer:"-37°C shown on synoptic. AFM (L.10.11): pre-takeoff min -29°C, inflight min -42°C (also ≥3°C above freeze point). Takeoff max 49°C, inflight max 65°C.", source:"FCOM 12.20.8, L.10.11" },
+  { id:"fuel-024", system:"Fuel", question:"When jettison is ARMED, what two weight references appear on the primary EICAS?", answer:"GROSS WT (current) and MLW (max landing weight) — displayed so crew can determine how much fuel to jettison.", source:"FCOM 12.10.5, 12.20.7" }
+];
+
+// ============================================================
+// STATE
+// ============================================================
+const state = {
+  filter: 'All',
+  queue: [],
+  retired: new Set(),
+  missed: new Set(),
+  currentIdx: 0,
+  revealed: false,
+  fcomOpen: false,
+  streak: 0,
+  sessionCorrect: 0,
+  sessionMissed: 0,
+};
+
+function getSystems() {
+  const s = new Set(QUESTIONS.map(q => q.system));
+  return ['All', ...Array.from(s).sort()];
+}
+
+function getActivePool() {
+  return state.filter === 'All' ? QUESTIONS : QUESTIONS.filter(q => q.system === state.filter);
+}
+
+function buildQueue() {
+  const pool = getActivePool();
+  state.queue = shuffleArray(pool.filter(q => !state.retired.has(q.id)));
+  state.retired.clear();
+  state.missed.clear();
+  state.currentIdx = 0;
+  state.revealed = false;
+  state.fcomOpen = false;
+  state.streak = 0;
+  state.sessionCorrect = 0;
+  state.sessionMissed = 0;
+}
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function currentCard() { return state.queue[state.currentIdx] || null; }
+
+// ============================================================
+// RENDER
+// ============================================================
+function renderProgress() {
+  const total = getActivePool().length;
+  const mastered = state.retired.size;
+  const pct = total > 0 ? (mastered / total) * 100 : 0;
+  return `<div class="progress-row">
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+    <div class="progress-label">${mastered}/${total} mastered</div>
+    ${state.streak >= 3 ? `<div class="streak-badge">🔥 ${state.streak} streak</div>` : ''}
+  </div>`;
+}
+
+function renderFilterBar() {
+  return `<div class="filter-bar">${getSystems().map(s =>
+    `<button class="filter-btn ${state.filter===s?'active':''}" onclick="setFilter('${s}')">${s}</button>`
+  ).join('')}</div>`;
+}
+
+function renderStats() {
+  const remaining = state.queue.length - state.currentIdx;
+  return `<div class="stats-row">
+    <div class="stat-chip green"><div class="stat-val">${state.retired.size}</div><div class="stat-lbl">Mastered</div></div>
+    <div class="stat-chip amber"><div class="stat-val">${remaining}</div><div class="stat-lbl">Remaining</div></div>
+    <div class="stat-chip red"><div class="stat-val">${state.missed.size}</div><div class="stat-lbl">Recycle</div></div>
+  </div>`;
+}
+
+function renderFcomDetail(q) {
+  const blocks = FCOM_DETAIL[q.id];
+  if (!blocks || blocks.length === 0) {
+    return `<div class="fcom-area ${state.fcomOpen?'visible':''}" id="fcom-area">
+      <div class="fcom-label">FCOM / FCTM Reference</div>
+      <div class="fcom-block"><div class="fcom-ref">No direct quote mapped for this question.</div></div>
+    </div>`;
+  }
+  const blocksHtml = blocks.map(b => `
+    <div class="fcom-block">
+      <div class="fcom-ref">${b.ref}</div>
+      <div class="fcom-quote">"${b.quote}"</div>
+      ${b.note ? `<div class="fcom-note">${b.note}</div>` : ''}
+    </div>
+  `).join('');
+  return `<div class="fcom-area ${state.fcomOpen?'visible':''}" id="fcom-area">
+    <div class="fcom-label">FCOM / FCTM Reference</div>
+    ${blocksHtml}
+  </div>`;
+}
+
+function renderCard(q) {
+  const verifyTag = q.verify ? `<div class="verify-flag">verify in FCOM</div>` : '';
+  const hasFcom = !!(FCOM_DETAIL[q.id] && FCOM_DETAIL[q.id].length > 0);
+
+  const revealButtons = !state.revealed
+    ? `<div class="btn-row">
+        <button class="btn btn-reveal" onclick="reveal()">Reveal Answer</button>
+        <button class="btn btn-fcom ${state.fcomOpen?'active':''}" onclick="toggleFcom()"
+          title="Show FCOM source text">${state.fcomOpen ? 'Hide FCOM' : 'FCOM Detail'}</button>
+      </div>`
+    : `<div class="btn-row">
+        <button class="btn btn-got-it" onclick="mark(true)">Got it ✓</button>
+        <button class="btn btn-missed" onclick="mark(false)">Missed it ✗</button>
+        <button class="btn btn-fcom ${state.fcomOpen?'active':''}" onclick="toggleFcom()"
+          style="flex:0.6">${state.fcomOpen ? 'Hide' : 'FCOM'}</button>
+      </div>`;
+
+  return `
+    <div class="card">
+      <div class="system-tag">${q.system}</div>
+      <div class="source-tag">${q.source}</div>
+      <div class="question">${q.question}</div>
+      ${verifyTag}
+    </div>
+    <div class="answer-area ${state.revealed?'visible':''}" id="answer-area">
+      <div class="answer-label">Answer</div>
+      <div class="answer-text">${q.answer}</div>
+    </div>
+    ${renderFcomDetail(q)}
+    ${revealButtons}
+    <div class="queue-info" style="margin-top:8px">
+      <div>Card <span>${state.currentIdx+1}</span> of <span>${state.queue.length}</span></div>
+      <div>Recycle: <span>${state.missed.size}</span></div>
+    </div>`;
+}
+
+function renderComplete() {
+  return `<div class="complete-screen">
+    <div class="trophy">🏆</div>
+    <h2>Session Complete</h2>
+    <p>All ${getActivePool().length} cards mastered this round.<br>
+    Correct: ${state.sessionCorrect} &nbsp;|&nbsp; Missed: ${state.sessionMissed}</p>
+    <div class="btn-row" style="justify-content:center;max-width:400px;margin:0 auto">
+      <button class="btn btn-reveal" onclick="restart()">Go Again</button>
+      <button class="btn btn-restart" onclick="restart(true)">Shuffle New Session</button>
+    </div>
+  </div>`;
+}
+
+function render() {
+  const main = document.getElementById('main');
+  if (!main) return;
+  const q = currentCard();
+  if (!q) {
+    if (state.missed.size > 0) {
+      const pool = getActivePool();
+      const recycled = shuffleArray(pool.filter(qq => state.missed.has(qq.id)));
+      state.missed.clear();
+      state.queue = state.queue.concat(recycled);
+      if (state.queue[state.currentIdx]) { state.revealed = false; render(); return; }
+    }
+    main.innerHTML = renderProgress() + renderFilterBar() + renderStats() + renderComplete();
+    return;
+  }
+  main.innerHTML = renderProgress() + renderFilterBar() + renderStats() + renderCard(q);
+}
+
+// ============================================================
+// ACTIONS
+// ============================================================
+function reveal() { state.revealed = true; render(); }
+
+function toggleFcom() {
+  state.fcomOpen = !state.fcomOpen;
+  render();
+}
+
+function mark(correct) {
+  const q = currentCard();
+  if (correct) {
+    state.retired.add(q.id); state.missed.delete(q.id);
+    state.streak++; state.sessionCorrect++;
+  } else {
+    state.missed.add(q.id); state.streak = 0; state.sessionMissed++;
+  }
+  state.currentIdx++;
+  state.revealed = false;
+  state.fcomOpen = false;
+  if (state.currentIdx >= state.queue.length && state.missed.size > 0) {
+    const pool = getActivePool();
+    const recycled = shuffleArray(pool.filter(qq => state.missed.has(qq.id)));
+    state.missed.clear();
+    state.queue = state.queue.concat(recycled);
+  }
+  render();
+}
+
+function setFilter(f) { state.filter = f; buildQueue(); render(); }
+function restart(shuffle) { buildQueue(); if (shuffle) state.queue = shuffleArray(state.queue); render(); }
+
+buildQueue();
+render();
+</script>
+</body>
+</html>
