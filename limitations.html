@@ -66,6 +66,13 @@
   .summary .stat .r{color:var(--amb)}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
   @media (max-width:480px){.q{font-size:18px}.readout{font-size:17px}}
+.srcbtn{background:transparent;border:1px solid var(--grn);color:var(--grn);border-radius:5px;padding:10px 14px;font-weight:700;font-family:var(--sans);cursor:pointer}
+.srcbtn:hover{background:var(--grn);color:#2a0d1e}
+.srcpanel{max-height:0;overflow:hidden;opacity:0;background:#150b25;border:1px solid var(--grndim);border-radius:6px;padding:0 16px;margin-top:10px;transition:max-height .2s,opacity .2s,padding .2s}
+.srcpanel.show{max-height:320px;opacity:1;padding:14px 16px}
+.srclabel{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.srcref{font-family:var(--mono);font-size:14px;color:var(--grn);font-weight:700}
+.srcsub{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.45}
 </style>
 </head>
 <body>
@@ -108,7 +115,7 @@ const DATA=[
  {s:"Flight Controls",q:"Rapid and large alternating control inputs?",a:"Avoid; structural failure risk at any speed, including below VA",ref:"L.10.10"},
 ];
 
-let order=[], idx=0, revealed=false, known=new Set(), review=new Set(), reviewMode=false;
+let order=[], idx=0, revealed=false, known=new Set(), review=new Set(), reviewMode=false, srcOpen=false;
 const app=document.getElementById("app");
 
 function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
@@ -116,7 +123,7 @@ function start(reviewOnly){
   reviewMode=reviewOnly;
   order= reviewOnly ? shuffle([...review]) : shuffle([...Array(DATA.length).keys()]);
   if(!reviewOnly){known=new Set();review=new Set();}
-  idx=0;revealed=false;render();
+  idx=0;revealed=false;srcOpen=false;render();
 }
 function render(){
   if(idx>=order.length){return summary();}
@@ -131,6 +138,7 @@ function render(){
       <span class="chip">${d.s}</span>
       <div class="q">${d.q}</div>
       <div class="readout${revealed?' show':''}">${d.a}<span class="tag">FCOM ${d.ref}</span></div>
+      <div class="srcpanel${srcOpen?' show':''}"><div class="srclabel">Source</div><div class="srcref">FCOM Vol 1 &middot; Limitations &middot; ${d.ref}</div><div class="srcsub">${d.s} &mdash; per FCOM L.10.1 exact wording is not required; know the value, units, and condition.</div></div>
       <div class="spacer"></div>
       <div class="controls">
         ${revealed?`
@@ -139,6 +147,7 @@ function render(){
         `:`
           <button class="primary" style="flex:1" onclick="reveal()">Reveal limit</button>
         `}
+        <button class="srcbtn" onclick="toggleSrc()">${srcOpen?'Hide source':'Source'}</button>
       </div>
     </div>
     <div class="foot">
@@ -147,7 +156,8 @@ function render(){
     </div>`;
 }
 function reveal(){revealed=true;render()}
-function grade(ok){const id=order[idx];if(ok){known.add(id);review.delete(id)}else{review.add(id)}idx++;revealed=false;render()}
+function toggleSrc(){srcOpen=!srcOpen;render()}
+function grade(ok){const id=order[idx];if(ok){known.add(id);review.delete(id)}else{review.add(id)}idx++;revealed=false;srcOpen=false;render()}
 function restart(){start(false)}
 function summary(){
   const pct=Math.round((known.size/DATA.length)*100);

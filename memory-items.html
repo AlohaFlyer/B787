@@ -68,6 +68,13 @@
   .summary .stat .r{color:var(--amber)}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
   @media (max-width:480px){.q{font-size:19px}.readout{font-size:13.5px}}
+.srcbtn{background:transparent;border:1px solid var(--atlas);color:var(--breeze);border-radius:5px;padding:10px 14px;font-weight:700;font-family:var(--sans);cursor:pointer}
+.srcbtn:hover{background:var(--atlas);color:#fff}
+.srcpanel{max-height:0;overflow:hidden;opacity:0;background:#01233b;border:1px solid var(--line);border-radius:6px;padding:0 16px;margin-top:10px;transition:max-height .2s,opacity .2s,padding .2s}
+.srcpanel.show{max-height:320px;opacity:1;padding:14px 16px}
+.srclabel{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.srcref{font-family:var(--mono);font-size:14px;color:var(--breeze);font-weight:700}
+.srcsub{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.45}
 </style>
 </head>
 <body>
@@ -146,7 +153,7 @@ const DATA=[
  ]},
 ];
 
-let order=[], idx=0, revealed=false, known=new Set(), review=new Set(), reviewMode=false;
+let order=[], idx=0, revealed=false, known=new Set(), review=new Set(), reviewMode=false, srcOpen=false;
 const app=document.getElementById("app");
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function stepsHTML(steps){
@@ -160,7 +167,7 @@ function start(reviewOnly){
   reviewMode=reviewOnly;
   order= reviewOnly ? shuffle([...review]) : shuffle([...Array(DATA.length).keys()]);
   if(!reviewOnly){known=new Set();review=new Set();}
-  idx=0;revealed=false;render();
+  idx=0;revealed=false;srcOpen=false;render();
 }
 function render(){
   if(idx>=order.length)return summary();
@@ -179,6 +186,7 @@ function render(){
         <div class="cond">Condition: ${d.cond}</div>
       </div>
       <div class="readout${revealed?' show':''}">${stepsHTML(d.steps)}</div>
+      <div class="srcpanel${srcOpen?' show':''}"><div class="srclabel">Source</div><div class="srcref">${d.ref}</div><div class="srcsub">QRH R7 (19 Jan 2026) &mdash; memory item; recite verbatim, exact wording required.</div></div>
       <div class="spacer"></div>
       <div class="controls">
         ${revealed?`
@@ -187,6 +195,7 @@ function render(){
         `:`
           <button class="primary" style="flex:1" onclick="reveal()">Reveal steps</button>
         `}
+        <button class="srcbtn" onclick="toggleSrc()">${srcOpen?'Hide source':'Source'}</button>
       </div>
     </div>
     <div class="foot">
@@ -195,7 +204,8 @@ function render(){
     </div>`;
 }
 function reveal(){revealed=true;render()}
-function grade(ok){const id=order[idx];if(ok){known.add(id);review.delete(id)}else{review.add(id)}idx++;revealed=false;render()}
+function toggleSrc(){srcOpen=!srcOpen;render()}
+function grade(ok){const id=order[idx];if(ok){known.add(id);review.delete(id)}else{review.add(id)}idx++;revealed=false;srcOpen=false;render()}
 function summary(){
   const pct=Math.round((known.size/DATA.length)*100);
   app.innerHTML=`
