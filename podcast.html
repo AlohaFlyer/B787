@@ -1,39 +1,109 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>B787 SFTD 1 & 2 - Study Podcast</title>
+<title>Flight Deck Notes - B787 Podcast</title>
 <style>
-:root{--midnight:#01426A;--atlas:#0074C8;--green:#00805E;--good:#b1d887;--ink:#eaf3fb;}
+:root{--midnight:#01426A;--atlas:#0074C8;--green:#00805E;--good:#b1d887;--ink:#16313f;--ice:#E8F3FA;}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Segoe UI",Arial,Helvetica,sans-serif;background:#01172b;color:var(--ink);min-height:100vh;display:flex;flex-direction:column}
+body{font-family:"Segoe UI",Arial,Helvetica,sans-serif;background:#01172b;color:#eaf3fb;min-height:100vh;display:flex;flex-direction:column}
 .bar{display:flex;align-items:center;gap:14px;background:var(--midnight);padding:9px 14px;flex-wrap:wrap}
 .bar a.back{display:inline-flex;align-items:center;gap:6px;background:#01416e;color:#fff;text-decoration:none;font-size:13px;font-weight:700;padding:7px 14px;border-radius:6px;border:1px solid #0074C8}
 .bar a.back:hover{background:#0074C8}
 .bar .title{color:var(--good);font-size:14px;font-weight:700;letter-spacing:.04em}
-.wrap{max-width:640px;margin:0 auto;padding:34px 20px;width:100%}
-.mic{font-size:46px;text-align:center;margin-bottom:6px}
-h1{font-size:22px;text-align:center;color:#fff;margin-bottom:6px}
-.sub{text-align:center;color:#8fb3cf;font-size:13px;margin-bottom:22px;line-height:1.5}
-audio{width:100%;margin:8px 0 18px}
-.card{background:#062b46;border:1px solid #13486e;border-radius:10px;padding:20px}
-.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:6px}
-.row a{color:var(--good);text-decoration:none;border:1px solid var(--green);border-radius:6px;padding:9px 14px;font-weight:700;font-size:13px}
-.row a:hover{background:var(--green);color:#fff}
-.note{color:#8fb3cf;font-size:11.5px;line-height:1.5;margin-top:18px;text-align:center}
+.wrap{max-width:760px;margin:0 auto;padding:26px 16px 60px;width:100%}
+.mic{font-size:40px;text-align:center}
+h1{font-size:22px;text-align:center;color:#fff;margin:4px 0 4px}
+.sub{text-align:center;color:#8fb3cf;font-size:13px;margin-bottom:8px;line-height:1.5}
+.prog{text-align:center;color:var(--good);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;margin-bottom:18px}
+.ep{background:#062b46;border:1px solid #13486e;border-radius:10px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.ep.coming{opacity:.72}
+.epnum{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;color:#8fb3cf;min-width:34px;text-align:center}
+.epmain{flex:1 1 240px;min-width:200px}
+.eptitle{font-size:16px;font-weight:700;color:#fff}
+.eptopic{font-size:12.5px;color:#8fb3cf;margin-top:2px}
+.eplen{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:#cfe2f2;white-space:nowrap}
+.acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.btn{font-size:12.5px;font-weight:700;text-decoration:none;border-radius:6px;padding:8px 12px;border:1px solid;cursor:pointer;background:transparent;font-family:inherit}
+.listen{border-color:var(--atlas);color:#7fc4f0}.listen:hover{background:var(--atlas);color:#fff}
+.listen[disabled]{border-color:#2a4761;color:#587;cursor:default}
+.quiz{border-color:var(--green);color:#9ad9b9}.quiz:hover{background:var(--green);color:#fff}
+.heard{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#8fb3cf;cursor:pointer;user-select:none}
+.heard input{width:16px;height:16px;accent-color:var(--green)}
+.badge{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#02233b;background:var(--good);border-radius:3px;padding:2px 6px;font-weight:700}
+.player{width:100%;margin-top:8px}
+.note{color:#8fb3cf;font-size:11.5px;text-align:center;margin-top:18px;line-height:1.5}
+.micbtn{font-size:22px;line-height:1;background:none;border:none;cursor:pointer;padding:2px 4px;filter:grayscale(1) opacity(.35);transition:.12s}
+.micbtn.on{filter:none;}
+.micbtn.on:hover{transform:scale(1.15);}
+.micbtn.off{cursor:default;}
 </style></head>
 <body>
-<div class="bar"><a class="back" href="index.html">&#9664; B787 Study Portal</a><span class="title">SFTD 1 &amp; 2 - Study Podcast</span></div>
+<div class="bar"><a class="back" href="index.html">&#9664; B787 Study Portal</a><span class="title">Flight Deck Notes - Podcast</span></div>
 <div class="wrap">
   <div class="mic">&#127897;&#65039;</div>
-  <h1>Flight Deck Notes - SFTD 1 &amp; 2</h1>
-  <div class="sub">High-yield, two-host walk-through of the Systems FTD 1 &amp; 2 questions.<br>Hosts: Tom (US) and Jess (NZ, FO). ~6.5 min.</div>
-  <div class="card">
-    <audio controls preload="metadata" src="B787_SFTD_Podcast.mp3"></audio>
-    <div class="row">
-      <a href="B787_SFTD_Podcast.mp3" download>&#11015; Download MP3</a>
-      <a href="B787_SFTD_Podcast_Script.pdf" target="_blank" rel="noopener">&#128196; Read the script (PDF)</a>
-    </div>
-  </div>
-  <div class="note">Draft narration generated by text-to-speech (single voice). Content vetted against FCOM/FOM - verify all numbers in current manuals.</div>
+  <h1>Flight Deck Notes</h1>
+  <div class="sub">Three-host B787 study podcast - Pualani, Chester &amp; Otto. One episode per system, plus the cross-system Hotlist.</div>
+  <div class="prog" id="prog"></div>
+  <div id="list"></div>
+  <div class="note">Tick an episode once you've listened - it's saved on this device. A greyed mic means the episode is scripted and in production; it lights up once the audio is approved. "Quiz" opens the Systems Quiz for that topic.</div>
 </div>
+<script>
+var EPISODES=[
+ {n:1,title:"The Hotlist",topic:"SFTD 1 & 2 - cross-system high-yield",len:"6:45",audio:"B787_SFTD_Podcast.mp3",quiz:"systems_quiz.html"},
+ {n:2,title:"Aircraft General",topic:"Dimensions, doors, power-up, displays",audio:null,quiz:"systems_quiz.html"},
+ {n:3,title:"Electrical",topic:"No-bleed architecture, VFSGs, batteries, RAT",audio:null,quiz:"systems_quiz.html"},
+ {n:4,title:"Hydraulics",topic:"L/C/R systems, EMPs, EDPs",audio:null,quiz:"systems_quiz.html"},
+ {n:5,title:"Fuel",topic:"Tanks, pumps, CG, temps",audio:null,quiz:"systems_quiz.html"},
+ {n:6,title:"Engines",topic:"GEnx, start, thrust, indications",audio:null,quiz:"systems_quiz.html"},
+ {n:7,title:"APU",topic:"Start, fire protection, limits",audio:null,quiz:"systems_quiz.html"},
+ {n:8,title:"Fire Protection",topic:"Detection, bottles, cargo",audio:null,quiz:"systems_quiz.html"},
+ {n:9,title:"Air Systems",topic:"Bleed, packs, pressurization",audio:null,quiz:"systems_quiz.html"},
+ {n:10,title:"Anti-Ice & Rain",topic:"Engine & wing anti-ice, window heat",audio:null,quiz:"systems_quiz.html"},
+ {n:11,title:"Flight Controls",topic:"FBW laws, modes, surfaces",audio:null,quiz:"systems_quiz.html"},
+ {n:12,title:"Landing Gear & Brakes",topic:"Gear, antiskid, autobrakes, steering",audio:null,quiz:"systems_quiz.html"},
+ {n:13,title:"Warning Systems",topic:"EICAS, alerts, GPWS, TCAS",audio:null,quiz:"systems_quiz.html"},
+ {n:14,title:"Flight Instruments & Displays",topic:"PFD/ND, DUs, ISFD, IRS/ADRS",audio:null,quiz:"systems_quiz.html"},
+ {n:15,title:"Navigation & FMS",topic:"FMC, LNAV/VNAV, failures",audio:null,quiz:"systems_quiz.html"},
+ {n:16,title:"Communications",topic:"VHF, HF, SATCOM, ACARS",audio:null,quiz:"systems_quiz.html"},
+ {n:17,title:"HUD",topic:"Symbology, modes, limits",audio:null,quiz:"systems_quiz.html"}
+];
+function key(n){return 'fdn_heard_'+n;}
+function heard(n){return localStorage.getItem(key(n))==='1';}
+function setHeard(n,v){localStorage.setItem(key(n),v?'1':'0');render();}
+function updateProg(){
+  var avail=EPISODES.filter(function(e){return e.audio;}).length;
+  var done=EPISODES.filter(function(e){return heard(e.n);}).length;
+  document.getElementById('prog').textContent='Listened: '+done+' / '+EPISODES.length+'  -  '+avail+' available now';
+}
+function render(){
+  var html=EPISODES.map(function(e){
+    var coming=!e.audio;
+    var listenBtn = coming
+      ? '<span class="micbtn off" title="Episode coming soon">&#127897;&#65039;</span>'
+      : '<button class="micbtn on" onclick="play('+e.n+')" title="Listen to this episode">&#127897;&#65039;</button>';
+    var len = e.len?('<span class="eplen">'+e.len+'</span>') : '<span class="eplen">--</span>';
+    var badge = heard(e.n)?'<span class="badge">Listened</span>':'';
+    return '<div class="ep'+(coming?' coming':'')+'" id="ep'+e.n+'">'
+      +'<div class="epnum">EP '+e.n+'</div>'
+      +'<div class="epmain"><div class="eptitle">'+e.title+' '+badge+'</div><div class="eptopic">'+e.topic+'</div></div>'
+      +len
+      +'<div class="acts">'+listenBtn
+      +'<a class="btn quiz" href="'+e.quiz+'">Quiz</a>'
+      +'<label class="heard"><input type="checkbox" '+(heard(e.n)?'checked':'')+' onchange="setHeard('+e.n+',this.checked)">heard</label>'
+      +'</div></div>';
+  }).join('');
+  document.getElementById('list').innerHTML=html;
+  updateProg();
+}
+function play(n){
+  var e=EPISODES.find(function(x){return x.n===n;});
+  if(!e||!e.audio)return;
+  var row=document.getElementById('ep'+n);
+  if(row.querySelector('audio'))return;
+  var a=document.createElement('audio');a.className='player';a.controls=true;a.src=e.audio;
+  a.addEventListener('ended',function(){setHeard(n,true);});
+  row.appendChild(a);a.play();
+}
+render();
+</script>
 </body></html>
