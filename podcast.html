@@ -45,7 +45,7 @@ h1{font-size:22px;text-align:center;color:#fff;margin:4px 0 4px}
   <div class="sub">Three-host B787 study podcast - Pualani, Chester &amp; Otto. One episode per system, plus the cross-system Hotlist.</div>
   <div class="prog" id="prog"></div>
   <div id="list"></div>
-  <div class="note">Tick an episode once you've listened - it's saved on this device. A greyed mic means the episode is scripted and in production; it lights up once the audio is approved. "Quiz" opens the Systems Quiz for that topic.</div>
+  <div class="note">Tick an episode once you've listened - it's saved on this device. A mic appears once an episode audio is approved. Episodes without a mic are scripted and in production. "Quiz" opens the Systems Quiz for that topic.</div>
 </div>
 <script>
 var EPISODES=[
@@ -79,7 +79,7 @@ function render(){
   var html=EPISODES.map(function(e){
     var coming=!e.audio;
     var listenBtn = coming
-      ? '<span class="micbtn off" title="Episode coming soon">&#127897;&#65039;</span>'
+      ? ''
       : '<button class="micbtn on" onclick="play('+e.n+')" title="Listen to this episode">&#127897;&#65039;</button>';
     var len = e.len?('<span class="eplen">'+e.len+'</span>') : '<span class="eplen">--</span>';
     var badge = heard(e.n)?'<span class="badge">Listened</span>':'';
