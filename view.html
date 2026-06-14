@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B787 Handout Viewer</title>
+<style>
+  :root{--midnight:#01426A;--atlas:#0074C8;--green:#00805E;--good:#b1d887;--ink:#eaf3fb;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:"Segoe UI",Arial,Helvetica,sans-serif;background:#01172b;display:flex;flex-direction:column}
+  .bar{display:flex;align-items:center;gap:14px;background:var(--midnight);padding:9px 14px;flex:0 0 auto;flex-wrap:wrap}
+  .bar a.back{display:inline-flex;align-items:center;gap:6px;background:#01416e;color:#fff;text-decoration:none;font-size:13px;font-weight:700;padding:7px 14px;border-radius:6px;border:1px solid #0074C8}
+  .bar a.back:hover{background:#0074C8}
+  .bar .title{color:var(--good);font-size:14px;font-weight:700;letter-spacing:.04em;flex:1;min-width:120px}
+  .bar a.open{color:var(--good);font-size:12px;font-weight:700;text-decoration:none;border:1px solid var(--green);border-radius:6px;padding:7px 12px}
+  .bar a.open:hover{background:var(--green);color:#fff}
+  .frame{flex:1 1 auto;border:0;width:100%;background:#0a1b2c}
+  .fallback{color:#8fb3cf;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;text-align:center;padding:24px}
+</style>
+</head>
+<body>
+<div class="bar">
+  <a class="back" href="index.html">&#9664; B787 Study Portal</a>
+  <span class="title" id="title">Handout</span>
+  <a class="open" id="openlink" href="#" target="_blank" rel="noopener">Open PDF in new tab</a>
+</div>
+<iframe class="frame" id="frame" title="Handout PDF"></iframe>
+<script>
+  // Whitelist: only these PDFs may be embedded
+  const FILES={
+    "B787_Weather_Requirements.pdf":"Weather Requirements - Quick Reference",
+    "B787_Memory_Limitations.pdf":"Limitations - Memorize Set",
+    "B787_QRH_Memory_Items.pdf":"QRH Memory Items"
+  };
+  const p=new URLSearchParams(location.search);
+  const f=p.get("f");
+  const frame=document.getElementById("frame");
+  if(f && Object.prototype.hasOwnProperty.call(FILES,f)){
+    document.getElementById("title").textContent=FILES[f];
+    document.title="B787 "+FILES[f];
+    frame.src=f+"#view=FitH";
+    document.getElementById("openlink").href=f;
+  } else {
+    frame.outerHTML='<div class="fallback">Handout not found. <a href="index.html" style="color:#b1d887">Return to the study portal.</a></div>';
+    document.getElementById("openlink").style.display="none";
+  }
+</script>
+</body>
+</html>
