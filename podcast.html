@@ -45,7 +45,7 @@ h1{font-size:22px;text-align:center;color:#fff;margin:4px 0 4px}
   <div class="sub">Three-host B787 study podcast - Pualani, Chester &amp; Otto. One episode per system, plus the cross-system Hotlist.</div>
   <div class="prog" id="prog"></div>
   <div id="list"></div>
-  <div class="note">Tick an episode once you've listened - it's saved on this device. A mic appears once an episode audio is approved. Episodes without a mic are scripted and in production. "Quiz" opens the Systems Quiz for that topic.</div>
+  <div class="note">Tick an episode once you've listened - it's saved on this device. More episodes drop as they are produced. "Quiz" opens the Systems Quiz for that topic.</div>
 </div>
 <script>
 var EPISODES=[
@@ -71,12 +71,12 @@ function key(n){return 'fdn_heard_'+n;}
 function heard(n){return localStorage.getItem(key(n))==='1';}
 function setHeard(n,v){localStorage.setItem(key(n),v?'1':'0');render();}
 function updateProg(){
-  var avail=EPISODES.filter(function(e){return e.audio;}).length;
-  var done=EPISODES.filter(function(e){return heard(e.n);}).length;
-  document.getElementById('prog').textContent='Listened: '+done+' / '+EPISODES.length+'  -  '+avail+' available now';
+  var pub=EPISODES.filter(function(e){return e.audio;});
+  var done=pub.filter(function(e){return heard(e.n);}).length;
+  document.getElementById('prog').textContent='Listened: '+done+' / '+pub.length+' published';
 }
 function render(){
-  var html=EPISODES.map(function(e){
+  var html=EPISODES.filter(function(e){return e.audio;}).map(function(e){
     var coming=!e.audio;
     var listenBtn = coming
       ? ''
