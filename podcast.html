@@ -80,7 +80,8 @@ function render(){
     var coming=!e.audio;
     var listenBtn = coming
       ? ''
-      : '<button class="micbtn on" onclick="play('+e.n+')" title="Listen to this episode">&#127897;&#65039;</button>';
+      : '<button class="micbtn on" onclick="play('+e.n+')" title="Listen to this episode">&#127897;&#65039;</button>'
+        +'<button class="btn listen" onclick="play('+e.n+')" title="Play episode">&#9654; Play</button>';
     var len = e.len?('<span class="eplen">'+e.len+'</span>') : '<span class="eplen">--</span>';
     var badge = heard(e.n)?'<span class="badge">Listened</span>':'';
     return '<div class="ep'+(coming?' coming':'')+'" id="ep'+e.n+'">'
