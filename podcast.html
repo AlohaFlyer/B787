@@ -52,22 +52,22 @@ h1{font-size:22px;text-align:center;color:#fff;margin:4px 0 4px}
 <script>
 var EPISODES=[
  {n:1,group:"Systems",title:"The Hotlist",topic:"SFTD 1 & 2 - cross-system high-yield",len:"10:26",audio:"flight-deck-notes-ep1.mp3",quiz:"systems_quiz.html"},
- {n:2,group:"Systems",title:"Aircraft General",topic:"Dimensions, doors, power-up, displays",len:"14:40",audio:"flight-deck-notes-ep2.mp3",quiz:"systems_quiz.html"},
- {n:3,group:"Systems",title:"Electrical",topic:"No-bleed architecture, VFSGs, batteries, RAT",len:"10:54",audio:"flight-deck-notes-ep3.mp3",quiz:"systems_quiz.html"},
- {n:4,group:"Systems",title:"Hydraulics",topic:"L/C/R systems, EMPs, EDPs",len:"9:33",audio:"flight-deck-notes-ep4.mp3",quiz:"systems_quiz.html"},
- {n:5,group:"Systems",title:"Fuel",topic:"Tanks, pumps, CG, temps",audio:null,quiz:"systems_quiz.html"},
- {n:6,group:"Systems",title:"Engines",topic:"GEnx, start, thrust, indications",audio:null,quiz:"systems_quiz.html"},
- {n:7,group:"Systems",title:"APU",topic:"Start, fire protection, limits",audio:null,quiz:"systems_quiz.html"},
- {n:8,group:"Systems",title:"Fire Protection",topic:"Detection, bottles, cargo",audio:null,quiz:"systems_quiz.html"},
- {n:9,group:"Systems",title:"Air Systems",topic:"Bleed, packs, pressurization",audio:null,quiz:"systems_quiz.html"},
- {n:10,group:"Systems",title:"Anti-Ice & Rain",topic:"Engine & wing anti-ice, window heat",audio:null,quiz:"systems_quiz.html"},
- {n:11,group:"Systems",title:"Flight Controls",topic:"FBW laws, modes, surfaces",audio:null,quiz:"systems_quiz.html"},
- {n:12,group:"Systems",title:"Landing Gear & Brakes",topic:"Gear, antiskid, autobrakes, steering",audio:null,quiz:"systems_quiz.html"},
- {n:13,group:"Systems",title:"Warning Systems",topic:"EICAS, alerts, GPWS, TCAS",audio:null,quiz:"systems_quiz.html"},
- {n:14,group:"Systems",title:"Flight Instruments & Displays",topic:"PFD/ND, DUs, ISFD, IRS/ADRS",audio:null,quiz:"systems_quiz.html"},
- {n:15,group:"Systems",title:"Navigation & FMS",topic:"FMC, LNAV/VNAV, failures",audio:null,quiz:"systems_quiz.html"},
- {n:16,group:"Systems",title:"Communications",topic:"VHF, HF, SATCOM, ACARS",audio:null,quiz:"systems_quiz.html"},
- {n:17,group:"Systems",title:"HUD",topic:"Symbology, modes, limits",audio:null,quiz:"systems_quiz.html"}
+ {n:2,group:"Systems",title:"Aircraft General",topic:"Dimensions, doors, power-up, displays",len:"14:40",audio:"flight-deck-notes-ep2.mp3",quiz:"systems_quiz.html?system=Aircraft%20General"},
+ {n:3,group:"Systems",title:"Electrical",topic:"No-bleed architecture, VFSGs, batteries, RAT",len:"10:54",audio:"flight-deck-notes-ep3.mp3",quiz:"systems_quiz.html?system=Electrical"},
+ {n:4,group:"Systems",title:"Hydraulics",topic:"L/C/R systems, EMPs, EDPs",len:"9:33",audio:"flight-deck-notes-ep4.mp3",quiz:"systems_quiz.html?system=Hydraulics"},
+ {n:5,group:"Systems",title:"Fuel",topic:"Tanks, pumps, CG, jettison, NGS",len:"9:39",audio:"flight-deck-notes-ep5.mp3",quiz:"systems_quiz.html?system=Fuel"},
+ {n:6,group:"Systems",title:"Engines",topic:"GEnx, start, thrust, indications",audio:null,quiz:"systems_quiz.html?system=Engines"},
+ {n:7,group:"Systems",title:"APU",topic:"Start, fire protection, limits",audio:null,quiz:"systems_quiz.html?system=APU"},
+ {n:8,group:"Systems",title:"Fire Protection",topic:"Detection, bottles, cargo",audio:null,quiz:"systems_quiz.html?system=Fire%20Protection"},
+ {n:9,group:"Systems",title:"Air Systems",topic:"Bleed, packs, pressurization",audio:null,quiz:"systems_quiz.html?system=Air%20Systems"},
+ {n:10,group:"Systems",title:"Anti-Ice & Rain",topic:"Engine & wing anti-ice, window heat",audio:null,quiz:"systems_quiz.html?system=Anti-Ice"},
+ {n:11,group:"Systems",title:"Flight Controls",topic:"FBW laws, modes, surfaces",audio:null,quiz:"systems_quiz.html?system=Flight%20Controls"},
+ {n:12,group:"Systems",title:"Landing Gear & Brakes",topic:"Gear, antiskid, autobrakes, steering",audio:null,quiz:"systems_quiz.html?system=Landing%20Gear"},
+ {n:13,group:"Systems",title:"Warning Systems",topic:"EICAS, alerts, GPWS, TCAS",audio:null,quiz:"systems_quiz.html?system=Warnings"},
+ {n:14,group:"Systems",title:"Flight Instruments & Displays",topic:"PFD/ND, DUs, ISFD, IRS/ADRS",audio:null,quiz:"systems_quiz.html?system=Flight%20Instruments"},
+ {n:15,group:"Systems",title:"Navigation & FMS",topic:"FMC, LNAV/VNAV, failures",audio:null,quiz:"systems_quiz.html?system=Nav%20and%20FMS"},
+ {n:16,group:"Systems",title:"Communications",topic:"VHF, HF, SATCOM, ACARS",audio:null,quiz:"systems_quiz.html?system=Communications"},
+ {n:17,group:"Systems",title:"HUD",topic:"Symbology, modes, limits",audio:null,quiz:"systems_quiz.html?system=HUD"}
 ];
 function key(n){return 'fdn_heard_'+n;}
 function heard(n){return localStorage.getItem(key(n))==='1';}
