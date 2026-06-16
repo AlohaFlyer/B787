@@ -44,7 +44,7 @@ h1{font-size:22px;text-align:center;color:#fff;margin:4px 0 4px}
 <div class="wrap">
   <div class="mic">&#127897;&#65039;</div>
   <h1>787 Flight Deck Notes</h1>
-  <div class="sub">Three-host B787 study podcast - Pualani, Chester &amp; Otto. One episode per system, plus the cross-system Hotlist.</div>
+  <div class="sub">Three-host B787 study podcast - Pualani, Chester &amp; Otto. One episode per system, plus cross-system and operations episodes.</div>
   <div class="prog" id="prog"></div>
   <div id="list"></div>
   <div class="note">Tick an episode once you've listened - it's saved on this device. More episodes drop as they are produced. "Quiz" opens the Systems Quiz for that topic.<span class="src">Built from the current manuals - FCOM R10, FCTM R9, QRH R7, FOM 123.1, MEL R5 - and kept up to date as they revise.</span></div>
@@ -67,7 +67,8 @@ var EPISODES=[
  {n:14,group:"Systems",title:"Flight Instruments & Displays",topic:"PFD/ND, DUs, ISFD, IRS/ADRS",len:"11:32",audio:"flight-deck-notes-ep14.mp3",quiz:"systems_quiz.html?system=Flight%20Instruments"},
  {n:15,group:"Systems",title:"Navigation & FMS",topic:"FMC, LNAV/VNAV, failures",len:"11:35",audio:"flight-deck-notes-ep15.mp3",quiz:"systems_quiz.html?system=Nav%20and%20FMS"},
  {n:16,group:"Systems",title:"Communications",topic:"VHF, HF, SATCOM, ACARS",len:"9:44",audio:"flight-deck-notes-ep16.mp3",quiz:"systems_quiz.html?system=Communications"},
- {n:17,group:"Systems",title:"HUD",topic:"Symbology, modes, limits",len:"11:10",audio:"flight-deck-notes-ep17.mp3",quiz:"systems_quiz.html?system=HUD"}
+ {n:17,group:"Systems",title:"HUD",topic:"Symbology, modes, limits",len:"11:10",audio:"flight-deck-notes-ep17.mp3",quiz:"systems_quiz.html?system=HUD"},
+ {n:18,group:"Operations",title:"Weather",topic:"Takeoff mins, alternates, prohibitions",len:"10:16",audio:"flight-deck-notes-ep18.mp3",quiz:"weather.html"}
 ];
 function key(n){return 'fdn_heard_'+n;}
 function heard(n){return localStorage.getItem(key(n))==='1';}
