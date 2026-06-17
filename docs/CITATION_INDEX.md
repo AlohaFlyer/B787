@@ -6,6 +6,7 @@ This is the source of truth for which page cites which manual section.
 
 ## Page -> manuals (structured citation counts)
 
+- **aircraft_setup**: FCOM 3
 - **flows_quiz**: FCOM 142
 - **hot-seat**: QRH 10
 - **index**: FCOM 1, QRH 1
@@ -20,5 +21,4 @@ This is the source of truth for which page cites which manual section.
 
 ## Untagged pages (manual content but NO parseable section refs - manual review required)
 
-- **aircraft_setup**: mentions none - NO structured refs, cannot auto-trace
-- **view**: mentions ['QRH'] - NO structured refs, cannot auto-trace
+- **view**: mentions ['QRH'] - NO structured refs (PDF-viewer utility page, not study content - low risk)
