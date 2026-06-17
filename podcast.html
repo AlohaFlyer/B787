@@ -44,7 +44,7 @@ h1{font-size:22px;text-align:center;color:#fff;margin:4px 0 4px}
 <div class="wrap">
   <div class="mic">&#127897;&#65039;</div>
   <h1>787 Flight Deck Notes</h1>
-  <div class="sub">Three-host B787 study podcast - Pualani, Chester &amp; Otto. One episode per system, plus cross-system and operations episodes.</div>
+  <div class="sub">Three-host B787 study podcast - Pualani, Chester &amp; Otto. One episode per system, plus operations, review, and the Procedures (PFTD) series.</div>
   <div class="prog" id="prog"></div>
   <div id="list"></div>
   <div class="note">Tick an episode once you've listened - it's saved on this device. More episodes drop as they are produced. "Quiz" opens the Systems Quiz for that topic.<span class="src">Built from the current manuals - FCOM R10, FCTM R9, QRH R7, FOM 123.1, MEL R5 - and kept up to date as they revise.</span></div>
@@ -72,7 +72,15 @@ var EPISODES=[
  {n:19,group:"Operations",title:"Aircraft Setup",topic:"Power-up to pushback - flows, gates, callouts",len:"8:39",audio:"flight-deck-notes-ep19.mp3",quiz:"aircraft_setup.html"},
  {n:20,group:"Review",title:"Memory Items",topic:"All 10 QRH recall checklists, recited cold",len:"8:54",audio:"flight-deck-notes-ep20.mp3",quiz:"memory-items.html"},
  {n:21,group:"Review",title:"Limitations",topic:"FCOM L.10 memorize set - 21 items",len:"5:32",audio:"flight-deck-notes-ep21.mp3",quiz:"limitations.html"},
- {n:22,group:"Procedures",title:"Welcome to the PFTD Phase",topic:"How the phase works, AQP, and what the PV validates",len:"6:55",audio:"flight-deck-notes-ep22.mp3",quiz:"aircraft_setup.html"}
+ {n:22,group:"Procedures",title:"Welcome to the PFTD Phase",topic:"How the phase works, AQP, and what the PV validates",len:"6:55",audio:"flight-deck-notes-ep22.mp3",quiz:"aircraft_setup.html"},
+ {n:23,group:"Procedures",title:"PFTD 1 - Cold & Dark to Before Takeoff",topic:"Normal ground flows, FMS preflight, callouts, HUD",len:"5:47",audio:"flight-deck-notes-ep23.mp3",quiz:"aircraft_setup.html"},
+ {n:24,group:"Procedures",title:"PFTD 2 - Takeoff, Climb & Automation",topic:"FMA modes, altitude intervention, LNAV/VSD, mode reversion",len:"5:21",audio:"flight-deck-notes-ep24.mp3",quiz:"systems_quiz.html?system=Nav%20and%20FMS"},
+ {n:25,group:"Procedures",title:"PFTD 3 - Descent, Holding & ILS",topic:"Descent path, holds, RNAV arrival, FIX INFO, ILS capture",len:"5:17",audio:"flight-deck-notes-ep25.mp3",quiz:"systems_quiz.html?system=Nav%20and%20FMS"},
+ {n:26,group:"Procedures",title:"PFTD 4 - Starts, Non-Precision & Go-Around",topic:"Cross/ground starts, CDU restrictions, RNP AR, go-around",len:"5:20",audio:"flight-deck-notes-ep26.mp3",quiz:"systems_quiz.html?system=Nav%20and%20FMS"},
+ {n:27,group:"Procedures",title:"PFTD 5 - Diversion, Overweight & Jettison",topic:"Pacific divert CRM, overweight landing vs fuel jettison",len:"4:52",audio:"flight-deck-notes-ep27.mp3",quiz:"weather.html"},
+ {n:28,group:"Procedures",title:"PFTD 6 - Single Engine & Emergencies",topic:"V1 cut, RTO, driftdown, emer descent, elec emer, dual FMC",len:"6:01",audio:"flight-deck-notes-ep28.mp3",quiz:"memory-items.html"},
+ {n:29,group:"Procedures",title:"PFTD 7 - Non-Normals on the ECL",topic:"Electronic Checklist, consequential messages, IAN approach",len:"5:08",audio:"flight-deck-notes-ep29.mp3",quiz:"systems_quiz.html?system=Warnings"},
+ {n:30,group:"Procedures",title:"PFTD 8 - The Procedures Validation",topic:"What the PV evaluates and how to pass - the 5 tasks, CRM",len:"5:18",audio:"flight-deck-notes-ep30.mp3",quiz:"memory-items.html"}
 ];
 function key(n){return 'fdn_heard_'+n;}
 function heard(n){return localStorage.getItem(key(n))==='1';}
