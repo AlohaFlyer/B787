@@ -1,24 +1,22 @@
-# Manual Revision Process — B787 Study Portal
+# Manual Revision Process - B787 Study Portal
 
-How Ryan and Claude handle a new manual revision (e.g., FCOM R11). Trigger phrase:
-"<Manual> updated to <rev>" plus the new PDF in the project folder.
+How to fold a new manual revision (e.g., FOM 123.2) into the WHOLE portal reliably.
+Trigger: "<Manual> updated to <rev>" + the new PDF in "AS - Boeing 787/".
 
 ## Steps
-
-1. **Intake.** New PDF goes in "AS - Boeing 787/". Claude confirms revision number and date from the title page and the List of Effective Pages / Revision Record.
-2. **Diff.** Claude extracts the revision-highlights / change-record pages and the chapters listed for the affected pages in MANUAL_VERSIONS.md. Build a change list: section, old text, new text.
-3. **Dependency sweep.** From MANUAL_VERSIONS.md, identify every dependent page. For each page, grep its citation markers (see Page version registry) and re-verify EVERY quotation, number, procedure step, and quiz question that cites the changed manual:
-   - flows_quiz.html: re-extract NP.21, re-run flow-by-flow comparison (items, order, seats, checklist trigger points, d-field quotes, XREFS bodies).
-   - limitations.html: re-verify all limits against FCOM L.10 (number + units + condition).
-   - memory-items.html: QRH revisions require verbatim re-check of all starred-checklist memory items — zero paraphrase tolerance.
-   - systems_quiz.html: re-verify the question source map refs touched by the change list.
-4. **Update.** Apply corrections, bump each touched page Ver +0.1, update the index.html footer revtbl AND docs/MANUAL_VERSIONS.md (revision, date, last-vetted).
-5. **Commit.** Files under 100KB via GitHub MCP push_files; flows_quiz.html and systems_quiz.html via Chrome upload to github.com/AlohaFlyer/B787 (file_upload tool on the repo's upload page).
-6. **Verify live.** Fetch https://alohaflyer.github.io/B787/ pages after Pages rebuild (1-2 min); confirm version numbers and a spot-check of changed content.
-7. **Report.** Write a dated audit report (md) to the project folder listing everything changed and everything verified-unchanged. Update Claude project memory.
+1. **Intake.** New PDF in the project folder. Confirm revision + date from the title page / Revision Record.
+2. **Refresh the index.** `python3 build_scripts/citation_index.py` (regenerates docs/CITATION_INDEX.md + citation_index.json from the live pages, so the dependency map is never stale).
+3. **Diff.** Extract the manual's change-record pages -> list the changed sections.
+4. **Auto dependency sweep.** `python3 build_scripts/manual_diff.py <MANUAL> <changed sections...>`
+   -> prints the exact re-verify checklist (every page + item citing those sections). Example:
+   `python3 build_scripts/manual_diff.py FOM 5.4 8.2.5 9.2.1`
+5. **Re-verify each listed item** against the new manual (number + units + condition; memory items verbatim, zero paraphrase).
+6. **Untagged pages.** Always hand-check aircraft_setup.html (and view.html) - the tool cannot trace them until they carry ref tags.
+7. **Podcast.** If a changed section feeds an episode, edit the episode source/manifest, re-synth only changed segments via ElevenLabs MCP, re-master with build_scripts/master_ep_fast.sh, re-host. See PODCAST_BUILD_TOOLCHAIN.md.
+8. **Games.** hot-seat (QRH) and limit-or-bust (FCOM L.10) are tagged and appear in the sweep. jeopardy is FCOM-tagged. Re-verify their flagged items too.
+9. **Update.** Apply fixes, bump each touched page Ver +0.1, update index.html footer + docs/MANUAL_VERSIONS.md (rev/date/last-vetted), re-run citation_index.py.
+10. **Commit + verify live + audit report.** Small text via push_files; large pages (flows_quiz, systems_quiz) + index.html (base64 logos) via Chrome upload. Confirm live versions, spot-check changed content, write a dated audit md, update project memory.
 
 ## Working agreement
-
-- FCOM/QRH always outrank handouts, Win's sheets, and prior portal content.
-- Claude never invents manual content; anything unverifiable is flagged "verify in <source>".
-- Sandbox pipeline: clone repo to /tmp, pdftotext in page-range chunks, edit programmatically, node --check all script blocks before commit.
+- FCOM/QRH outrank handouts and prior content. Never invent manual content; flag unverifiable as "verify in <source>".
+- index.html must be re-hosted via Chrome upload (byte-exact) - its base64 logos corrupt if committed inline.
