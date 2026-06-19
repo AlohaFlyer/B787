@@ -44,7 +44,7 @@ h1{font-size:22px;text-align:center;color:#fff;margin:4px 0 4px}
 <div class="wrap">
   <div class="mic">&#127897;&#65039;</div>
   <h1>787 Flight Deck Notes</h1>
-  <div class="sub">Three-host B787 study podcast - Pualani, Chester &amp; Otto. One episode per system, plus operations, review, and the Procedures (PFTD) series.</div>
+  <div class="sub">Three-host B787 study podcast - Pualani, Chester &amp; Otto. One episode per system, plus operations, review, the Procedures (PFTD) series, and the Chair-Fly flow drills.</div>
   <div class="prog" id="prog"></div>
   <div id="list"></div>
   <div class="note">Tick an episode once you've listened - it's saved on this device. More episodes drop as they are produced. "Quiz" opens the Systems Quiz for that topic.<span class="src">Built from the current manuals - FCOM R10, FCTM R9, QRH R7, FOM 123.1, MEL R5 - and kept up to date as they revise.</span></div>
@@ -80,7 +80,8 @@ var EPISODES=[
  {n:27,group:"Procedures",title:"PFTD 5 - Diversion, Overweight & Jettison",topic:"Pacific divert CRM, overweight landing vs fuel jettison",len:"4:53",audio:"flight-deck-notes-ep27.mp3",quiz:"weather.html"},
  {n:28,group:"Procedures",title:"PFTD 6 - Single Engine & Emergencies",topic:"V1 cut, RTO, driftdown, emer descent, elec emer, dual FMC",len:"6:01",audio:"flight-deck-notes-ep28.mp3",quiz:"memory-items.html"},
  {n:29,group:"Procedures",title:"PFTD 7 - Non-Normals on the ECL",topic:"Electronic Checklist, consequential messages, IAN approach",len:"5:09",audio:"flight-deck-notes-ep29.mp3",quiz:"systems_quiz.html?system=Warnings"},
- {n:30,group:"Procedures",title:"PFTD 8 - The Procedures Validation",topic:"What the PV evaluates and how to pass - the 5 tasks, CRM",len:"5:18",audio:"flight-deck-notes-ep30.mp3",quiz:"memory-items.html"}
+ {n:30,group:"Procedures",title:"PFTD 8 - The Procedures Validation",topic:"What the PV evaluates and how to pass - the 5 tasks, CRM",len:"5:18",audio:"flight-deck-notes-ep30.mp3",quiz:"memory-items.html"},
+ {n:31,group:"Chair-Fly",title:"Aircraft Setup - Captain",topic:"Chair-fly cold & dark to cleared for takeoff - flow & checklist triggers, names, callouts",len:"11:03",audio:"flight-deck-notes-ep31.mp3",quiz:"aircraft_setup.html"}
 ];
 function key(n){return 'fdn_heard_'+n;}
 function heard(n){return localStorage.getItem(key(n))==='1';}
