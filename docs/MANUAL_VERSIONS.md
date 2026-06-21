@@ -11,7 +11,7 @@ The authoritative per-section dependency map is AUTO-GENERATED in docs/CITATION_
 | FCTM | R9 | 2026-04-01 | 2026-06-17 | systems_quiz, flows_quiz, podcast, index footer |
 | FOM | 124.2 | 2026-06-18 | 2026-06-21 | weather, wx-alternate, systems_quiz, limit-or-bust, podcast, index footer (NOT footer-only - corrected 2026-06-17) |
 | MEL | R5 | 2026-04-01 | 2026-06-17 | podcast, index footer |
-| Systems training decks | Jun 2026 | 2026-06-12 | systems_quiz (1,540 Q from Systems_extract/*.md) |
+| Systems training decks | Jun 2026 | 2026-06-12 | systems_quiz (1,515 Q from Systems_extract/*.md) |
 
 ## Coverage status (from citation_index.py, updated 2026-06-21)
 
