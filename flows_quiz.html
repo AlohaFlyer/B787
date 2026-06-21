@@ -243,28 +243,12 @@ const FLOWS = [
     "d": "[FCOM NP.21.1-2:]\n• OFF 30 seconds then ON. Verify the ON BAT light is extinguished\n• The 30-second OFF cycle clears the IRS memory before alignment begins\n• Assumes Electrical Power Up (SP.6) is complete"
    },
    {
-    "item": "STATUS display",
-    "act": "Check",
+    "item": "STATUS / EICAS displays (SYS)",
+    "act": "Check 3 fluids (HYD, OXY, OIL); CREW OXYGEN LOW blank",
     "role": "BOTH",
     "x": 124.0,
     "y": 218.0,
-    "d": "[FCOM NP.21.1:]\n• Verify that only expected messages are shown\n• Verify that the following are sufficient for flight: oxygen pressure, hydraulic quantity, engine oil quantity\n• Where to look: oxygen and hydraulic quantity on the STATUS display; engine oil quantity on the secondary engine display"
-   },
-   {
-    "item": "EICAS display",
-    "act": "Check",
-    "role": "BOTH",
-    "x": 120.0,
-    "y": 182.0,
-    "d": "[FCOM NP.21.1-2:]\n• Verify only expected alert and memo messages are shown\n• Unexpected messages require MEL check before dispatch\n• Ground conditioned air connected: refer to SP.2"
-   },
-   {
-    "item": "CREW OXYGEN LOW",
-    "act": "Verify blank",
-    "role": "BOTH",
-    "x": 148.0,
-    "y": 181.0,
-    "d": "[FCOM NP.21.1-2:]\n• Performed only after a crew change or maintenance action\n• Verify the CREW OXYGEN LOW alert message is blank on EICAS\n[FCTM:]\n• During preflight, check oxygen mask stowed and door closed\n• RESET/TEST: push and hold, verify yellow cross in flow indicator, release\n• Selector to 100%. (FCTM NP Introduction / Preflight Procedure)"
+    "d": "[FCOM NP.21.1-2:]\n• Click SYS (STATUS display): verify only expected messages are shown\n• Check the 3 fluids sufficient for flight: HYD (hydraulic qty), OXY (oxygen pressure), OIL (engine oil qty)\n  - oxygen and hydraulic quantity on the STATUS display; engine oil quantity on the secondary engine display\n• EICAS display: verify only expected alert and memo messages are shown; unexpected messages require MEL check before dispatch\n• Ground conditioned air connected: refer to SP.2\n• CREW OXYGEN LOW: verify the alert message is blank on EICAS (performed only after a crew change or maintenance action)\n[FCTM:]\n• During preflight, check oxygen mask stowed and door closed\n• RESET/TEST: push and hold, verify yellow cross in flow indicator, release\n• Selector to 100%. (FCTM NP Introduction / Preflight Procedure)"
    },
    {
     "item": "Maintenance Logbook",
