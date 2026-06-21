@@ -184,10 +184,15 @@
     <button id="modeList">Full Flows</button>
     <button id="posterBtn" title="View clean full-resolution cockpit poster">Poster</button>
   </div>
-  <div class="seat">
-    <button id="seatCA">CA</button>
+  <div class="seat" id="seatGroup">
+    <button id="seatCA" class="active">CA</button>
     <button id="seatFO">FO</button>
-    <button id="seatBoth" class="active">Both</button>
+    <button id="seatBoth">Both</button>
+  </div>
+  <div class="seat" id="dutyGroup">
+    <button id="dutyPF" class="active">PF</button>
+    <button id="dutyPM">PM</button>
+    <button id="dutyBoth">Both</button>
   </div>
 </div>
 
@@ -270,6 +275,14 @@ const FLOWS = [
     "d": "[FCOM NP.21.1-2:]\n• The captain, first officer, and IRO (if appropriate) review and verify together as a crew\n• Per FOM 12.4.12.1: review at least the last 10 pilot-entered discrepancies\n  - verify all MEL/CDL items are on the Dispatch Release"
    },
    {
+    "item": "Ground air / packs / recirc",
+    "act": "If GROUND AIR OFF: PACKs AUTO, LOWER RECIRC FAN ON",
+    "role": "BOTH",
+    "x": 300.0,
+    "y": 70.0,
+    "d": "[Company Flows / Ep31 notes:]\n• If ground conditioned air is OFF: PACK selectors AUTO, LOWER RECIRC FAN ON\n• Provides cabin conditioning from the packs when ground air is not connected\n• Timing note: depending on ramp setup and weather this may occur at a different point in the setup (kept on ground air longer, or packs handled in the FO overhead air conditioning flow)\n• Poster hotspot is approximate; nudge x/y if needed"
+   },
+   {
     "item": "Emergency equipment",
     "act": "Check",
     "role": "BOTH",
@@ -317,7 +330,15 @@ const FLOWS = [
     "role": "PF",
     "x": 151.0,
     "y": 216.0,
-    "d": "[FCOM NP.21.2:]\n• RTE page: enter FLT NO exactly as on Dispatch Release, select ROUTE REQUEST, LOAD. Verify/enter ORIGIN and DEST. Verify/enter route, ACTIVATE, execute RTE 1\n• DEPARTURES: select runway, departure routing, execute\n• ARRIVALS: select runway and arrival routing - do NOT load instrument approach before departure (prevents unwanted LNAV arming if TO/GA is pushed after takeoff)\n• POS REF 2: verify correct RNP for departure\n• ETOPS/ORCN: enter all ETPs from Dispatch Release on FIX INFO page\n  - both pilots independently verify full LAT/LONG of all unnamed oceanic waypoints\n• NAV RADIO page: tune the navigation radios as needed"
+    "d": "[FCOM NP.21.2:]\n• RTE page: enter FLT NO exactly as on Dispatch Release, select ROUTE REQUEST, LOAD. Verify/enter ORIGIN and DEST. Verify/enter route, ACTIVATE, execute RTE 1\n• DEPARTURES: select runway, departure routing, execute\n• ARRIVALS: select runway and arrival routing - do NOT load instrument approach before departure (prevents unwanted LNAV arming if TO/GA is pushed after takeoff)\n• POS REF 2: verify correct RNP for departure\n• ETOPS/ORCN: enter all ETPs from Dispatch Release on FIX INFO page\n  - both pilots independently verify full LAT/LONG of all unnamed oceanic waypoints\n    • Add a 410 nm circle around each EEP / adequate (ETOPS alternate) airport on the FIX INFO page\n• NAV RADIO page: tune the navigation radios as needed; also set up for the engine-failure procedure (raw-data backup for the EO escape routing)"
+   },
+   {
+    "item": "Comm radios",
+    "act": "Set",
+    "role": "PF",
+    "x": 300.0,
+    "y": 320.0,
+    "d": "[Ep31 notes / FOM comms:]\n• Tune ATC primary on VHF #1\n• 121.5 guard on VHF #2\n• Departure frequency on standby\n• Check HF radios: hold ~7 sec to settle, then tune\n• VHF C and HF R normally left in DATA for ACARS\n• Poster hotspot is approximate; nudge x/y if needed"
    },
    {
     "item": "Performance Data",
@@ -532,7 +553,7 @@ const FLOWS = [
     "item": "FLIGHT DIRECTOR / EFIS control panel",
     "act": "F/D ON; set minimums and baro",
     "role": "FO",
-    "d": "[FCOM NP.21.16:]\n• FLIGHT DIRECTOR switch — ON\n• Display select panel — Set\n• EFIS control panel — Set: MINIMUMS reference selector RADIO or BARO; MINIMUMS selector — set EO accel. altitude (MSL); BAROMETRIC reference selector IN or HPA; BAROMETRIC selector — set local altimeter setting\n• ND mode selector MAP, push ND mode select switch, MENU/map selections as needed, ND CENTER as needed, ND range 0.5/1/2/5 (displays airport map)\n• CAUTION: Do not use the Airport Map application as a primary navigation reference",
+    "d": "[FCOM NP.21.16:]\n• FLIGHT DIRECTOR switch — ON\n• Display select panel — Set\n• EFIS control panel — Set: MINIMUMS reference selector RADIO or BARO; MINIMUMS selector — set 1000 ft AFE (per Ep31 notes); BAROMETRIC reference selector IN or HPA; BAROMETRIC selector — set local altimeter setting\n• ND mode selector MAP, push ND mode select switch, MENU/map selections as needed, ND CENTER as needed, ND range 0.5/1/2/5 (displays airport map)\n• CAUTION: Do not use the Airport Map application as a primary navigation reference",
     "x": 156.0,
     "y": 139.3
    },
@@ -634,7 +655,7 @@ const FLOWS = [
     "role": "CA",
     "x": 97.0,
     "y": 157.0,
-    "d": "[FCOM NP.21.22:]\n• MINIMUMS reference selector — RADIO or BARO; MINIMUMS selector — set EO accel. altitude (MSL)\n• BAROMETRIC reference selector — IN or HPA; BAROMETRIC selector — set local altimeter setting\n• FLIGHT PATH VECTOR and METERS switches as needed\n• ND mode selector MAP, ND range 0.5/1/2/5 (airport map); CAUTION: do not use the Airport Map application as a primary navigation reference\n• ND WXR switch Off — verify weather radar indications are not shown on the ND or PFD mini-map; ND TFC and TERR switches as needed\n• Display select panel — Set: EICAS TRANSFER switch as needed"
+    "d": "[FCOM NP.21.22:]\n• MINIMUMS reference selector — RADIO or BARO; MINIMUMS selector — set 1000 ft AFE (per Ep31 notes)\n• BAROMETRIC reference selector — IN or HPA; BAROMETRIC selector — set local altimeter setting\n• FLIGHT PATH VECTOR and METERS switches as needed\n• ND mode selector MAP, ND range 0.5/1/2/5 (airport map); CAUTION: do not use the Airport Map application as a primary navigation reference\n• ND WXR switch Off — verify weather radar indications are not shown on the ND or PFD mini-map; ND TFC and TERR switches as needed\n• Display select panel — Set: EICAS TRANSFER switch as needed"
    },
    {
     "item": "Mode control panel",
@@ -651,6 +672,14 @@ const FLOWS = [
     "x": 52.0,
     "y": 232.0,
     "d": "Mask stowed, doors closed. RESET/TEST push and hold, verify yellow cross momentarily. Release. Selector 100%. Do not remove the mask during the test.\n[FCOM:]\n• Normal Procedures, NP.21.22-25"
+   },
+   {
+    "item": "Lights",
+    "act": "Set",
+    "role": "CA",
+    "x": 95.0,
+    "y": 90.0,
+    "d": "[FCOM NP.21.22-25 / Ep31:]\n• Set flight deck and instrument lighting as needed (dome, glareshield, panels, chart/map)\n• Most exterior and major interior lighting is set in the FO overhead flow\n• Poster hotspot is approximate; nudge x/y if needed"
    },
    {
     "item": "Brightness / sources",
@@ -709,12 +738,12 @@ const FLOWS = [
     "d": "Verify PARKING BRAKE SET message is shown.\n[FCOM:]\n• Normal Procedures, NP.21.22-25"
    },
    {
-    "item": "STABILIZER cutout switches",
-    "act": "Guards closed",
+    "item": "Stabilizer trim",
+    "act": "Set for takeoff (magenta = greenband)",
     "role": "CA",
     "x": 116.0,
     "y": 302.0,
-    "d": "[FCOM:]\n• Normal Procedures, NP.21.22-25"
+    "d": "[FCOM NP.21.25 / Ep31:]\n• Stabilizer trim set for takeoff; the magenta FMC-commanded value should match the green band\n• Final takeoff trim is set after the Load Closeout in the Before Start flow\n• Stabilizer cutout switch guards remain closed"
    },
    {
     "item": "FUEL CONTROL switches",
@@ -1060,7 +1089,7 @@ const FLOWS = [
     "role": "PM",
     "x": 100.0,
     "y": 357.0,
-    "d": "[FCOM NP.21.33:]\n• PM makes FA cabin PA: \"Flight attendants, prepare for departure\" - no less than 2 minutes prior to takeoff\n• Verify the CABIN READY message is shown on EICAS before takeoff\n• Per FOM: captain is responsible for verifying cabin is secure before takeoff",
+    "d": "[FCOM NP.21.33:]\n• PM makes FA cabin PA: \"Flight attendants should now be seated for takeoff\" - no less than 2 minutes prior to takeoff\n• Verify the CABIN READY message is shown on EICAS before takeoff\n• Per FOM: captain is responsible for verifying cabin is secure before takeoff",
     "brief": "TAKEOFF BRIEFING · update as needed",
     "briefWho": "pilot making the takeoff"
    },
@@ -1893,17 +1922,25 @@ let flowIdx = 0;
 let stepIdx = 0;
 let revealed = false;
 let showShape = false;
-let seat = "BOTH"; // CA | FO | BOTH
+let seat = "CA"; // CA | FO | BOTH
+let duty = "PF"; // PF | PM | BOTH
 
 function activeItems(f){
   // sequence items only (drilled); inactive ones are drawn greyed on the map
   return f.items.filter(it=>!isOff(it));
 }
 function isOff(it){
-  if(seat==="BOTH") return false;
-  if(it.role==="IRO") return true; // always shown greyed (observer items)
-  if(seat==="CA") return it.role==="FO";
-  return it.role==="CA";
+  if(it.role==="IRO") return true; // observer items always greyed
+  if(it.role==="BOTH") return false;
+  if(it.role==="CA" || it.role==="FO"){
+    if(seat==="BOTH") return false;
+    return it.role!==seat;
+  }
+  if(it.role==="PF" || it.role==="PM"){
+    if(duty==="BOTH") return false;
+    return it.role!==duty;
+  }
+  return false;
 }
 
 const fdiv = document.getElementById("filters");
@@ -2050,7 +2087,7 @@ function render(){
   const f = FLOWS[flowIdx];
   const items = activeItems(f);
   document.getElementById("tag").textContent = (f.phase ? f.phase + "  \u25b8  " : "") + f.n + "  [" + f.ref + "]";
-  document.getElementById("who").innerHTML = (f.who + " \u00b7 viewing: " + (seat==="BOTH"?"both seats":seat+" items")).replace(/</g,"&lt;") + (f.trig ? "<div class=\"trigbadge\">\ud83d\udd36 Triggered by: " + f.trig + "</div>" : "");
+  document.getElementById("who").innerHTML = (f.who + " \u00b7 viewing: " + (seat==="BOTH"?"both seats":seat) + " / " + (duty==="BOTH"?"PF+PM":duty)).replace(/</g,"&lt;") + (f.trig ? "<div class=\"trigbadge\">\ud83d\udd36 Triggered by: " + f.trig + "</div>" : "");
   
   if(items.length===0){
     document.getElementById("q").textContent = "No " + seat + " items in this flow. Switch seat or flow.";
@@ -2174,7 +2211,7 @@ document.addEventListener("keydown",e=>{
 // Seat toggle
 function setSeat(s, btn){
   seat = s; stepIdx = 0;
-  document.querySelectorAll(".seat button").forEach(x=>x.classList.remove("active"));
+  document.querySelectorAll("#seatGroup button").forEach(x=>x.classList.remove("active"));
   btn.classList.add("active");
   if(seat==="CA" && flowIdx===2) flowIdx = 3;
   if(seat==="FO" && flowIdx===3) flowIdx = 2;
@@ -2185,6 +2222,18 @@ function setSeat(s, btn){
 document.getElementById("seatCA").onclick = e=>setSeat("CA", e.target);
 document.getElementById("seatFO").onclick = e=>setSeat("FO", e.target);
 document.getElementById("seatBoth").onclick = e=>setSeat("BOTH", e.target);
+
+function setDuty(d, btn){
+  duty = d; stepIdx = 0;
+  document.querySelectorAll("#dutyGroup button").forEach(x=>x.classList.remove("active"));
+  btn.classList.add("active");
+  buildFlowBtns();
+  buildFullList();
+  render();
+}
+document.getElementById("dutyPF").onclick = e=>setDuty("PF", e.target);
+document.getElementById("dutyPM").onclick = e=>setDuty("PM", e.target);
+document.getElementById("dutyBoth").onclick = e=>setDuty("BOTH", e.target);
 
 // Full Flows mode
 const listDiv = document.getElementById("fullList");
