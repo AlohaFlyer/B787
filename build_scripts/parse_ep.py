@@ -8,37 +8,56 @@ Usage:
 
 Source format: paragraphs separated by blank lines, each "Speaker: text".
 Speakers: Pualani, Chester, Otto. Audio tags like [warm] are preserved.
-Applies the locked pronunciation map (hidden TTS spelling only; clean script keeps real words).
-NOTE: the old Otto -> AW-toh substitution is REMOVED. Otto is spoken as "Otto".
+Pronunciation is derived from flight-deck-notes.pls (the single source of truth),
+applied to the hidden TTS text only; clean scripts/portal keep proper spelling.
+Baking the .pls in here means any rebuild from clean source is auto-correct even
+though the synth path (ElevenLabs MCP) cannot attach a pronunciation dictionary.
+NOTE: Otto and Pualani are deliberately NOT substituted -> spoken plain (locked 2026-06-17).
 """
 import sys, json, re, os, hashlib
 
 SRC_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PLS_PATH = os.path.join(SRC_DIR, "flight-deck-notes.pls")
 VOICE = {
     "Pualani": "cgSgspJ2msm6clMCkdW9",   # Jessica
     "Chester": "nPczCjzI2devNBz1zQrb",   # Brian (Seattle, deep-warm)
     "Otto":    "jOEnNSVLOHUgmrNwfqQE",   # John
 }
-# word-level subs (case-insensitive, whole word). Order matters: do multiword first.
-SUBS = [
-    (r"\bPualani\b", "poo-ah-LAH-nee"),
-    (r"\b787\b", "seven-eight-seven"),
-    (r"\bEICAS\b", "eye-cass"),
-    (r"\bT-?CAS\b", "tee-cass"),
-    (r"\bG-?P-?W-?S\b", "gee-pee-double-u-ess"),
-    (r"\bLNAV\b", "el-nav"),
-    (r"\bVNAV\b", "vee-nav"),
-    (r"\bHUD\b", "hud"),
-    (r"\bCANC/?RCL\b", "cancel recall"),
-    (r"\bG/S\b", "glideslope"),
-    (r"\bSATCOM\b", "sat-com"),
-    (r"\bD-?ATIS\b", "D-ay-tiss"),
-    # Otto is intentionally NOT substituted (new standard: say "Otto").
-    # Letter-acronyms already hyphenated in source (P-F-D, A-G-L, I-L-S, F-M-C) are left as-is.
+
+# Locked spoken-forms NOT in the .pls, applied BEFORE the .pls subs (higher precedence).
+# Case-sensitive so lowercase words (e.g. "at", "sea", "rat") are never touched.
+# Pualani / Otto are deliberately absent -> they stay spelled plainly.
+LOCKED = [
+    (re.compile(r"\b787\b"), "seven-eight-seven"),
+    (re.compile(r"\bFCOM\b"), "F-com"),      # locked 2026-06-20 (not in .pls)
+    (re.compile(r"\bFCTM\b"), "F-C-T-M"),    # locked 2026-06-20 (not in .pls)
+    (re.compile(r"\bautothrottle\b", re.I), "auto throttle"),
+    (re.compile(r"\bA/T\b"), "auto throttle"),
+    (re.compile(r"\bCANC/?RCL\b"), "cancel recall"),
+    (re.compile(r"\bG/S\b"), "glideslope"),
+    (re.compile(r"\bD-ATIS\b"), "D-ay-tiss"),
+    (re.compile(r"\bT-CAS\b"), "tee cass"),  # hyphen variant (.pls covers plain TCAS)
 ]
+
+def load_pls(path):
+    """Parse the .pls lexicon into (compiled \\bGRAPHEME\\b, alias) subs, longest grapheme first."""
+    subs = []
+    if os.path.exists(path):
+        txt = open(path, encoding="utf-8").read()
+        for g, a in re.findall(r"<grapheme>(.*?)</grapheme>\s*<alias>(.*?)</alias>", txt, re.S):
+            g, a = g.strip(), a.strip()
+            if g:
+                subs.append((g, a))
+    subs.sort(key=lambda ga: len(ga[0]), reverse=True)  # KIAS before IAS, etc.
+    return [(re.compile(r"\b" + re.escape(g) + r"\b"), a) for g, a in subs]
+
+PLS_SUBS = load_pls(PLS_PATH)
+
 def apply_subs(t):
-    for pat, rep in SUBS:
-        t = re.sub(pat, rep, t)
+    for pat, rep in LOCKED:
+        t = pat.sub(rep, t)
+    for pat, rep in PLS_SUBS:
+        t = pat.sub(rep, t)
     return t
 
 def parse(path):
