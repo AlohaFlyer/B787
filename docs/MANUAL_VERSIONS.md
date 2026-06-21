@@ -28,4 +28,4 @@ Regenerated via build_scripts/ (parse_ep.py + master_ep_fast.sh). Per-episode ma
 the episode source .txt / manifests. See build_scripts/PODCAST_BUILD_TOOLCHAIN.md.
 
 ## Page version registry (bump +0.1 per edit)
-index 2.12 | flows_quiz 9.1 | hot-seat 1.3 | jeopardy 1.0 | limit-or-bust 1.4 | limitations 2.4 | memory-items 1.6 | systems_quiz 2.6 | weather 1.4 | wx-alternate 1.1 | aircraft_setup 1.4 | podcast.html data-driven
+index 2.12 | flows_quiz 9.1 | hot-seat 1.3 | jeopardy 1.0 | limit-or-bust 1.4 | limitations 2.4 | memory-items 1.6 | systems_quiz 2.6 | weather 1.5 | wx-alternate 1.1 | aircraft_setup 1.4 | podcast.html data-driven
