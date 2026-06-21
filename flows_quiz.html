@@ -187,12 +187,10 @@
   <div class="seat" id="seatGroup">
     <button id="seatCA" class="active">CA</button>
     <button id="seatFO">FO</button>
-    <button id="seatBoth">Both</button>
   </div>
   <div class="seat" id="dutyGroup">
     <button id="dutyPF" class="active">PF</button>
     <button id="dutyPM">PM</button>
-    <button id="dutyBoth">Both</button>
   </div>
 </div>
 
@@ -1906,8 +1904,8 @@ let flowIdx = 0;
 let stepIdx = 0;
 let revealed = false;
 let showShape = false;
-let seat = "CA"; // CA | FO | BOTH
-let duty = "PF"; // PF | PM | BOTH
+let seat = "CA"; // CA | FO
+let duty = "PF"; // PF | PM
 
 function activeItems(f){
   // sequence items only (drilled); inactive ones are drawn greyed on the map
@@ -1915,15 +1913,9 @@ function activeItems(f){
 }
 function isOff(it){
   if(it.role==="IRO") return true; // observer items always greyed
-  if(it.role==="BOTH") return false;
-  if(it.role==="CA" || it.role==="FO"){
-    if(seat==="BOTH") return false;
-    return it.role!==seat;
-  }
-  if(it.role==="PF" || it.role==="PM"){
-    if(duty==="BOTH") return false;
-    return it.role!==duty;
-  }
+  if(it.role==="BOTH") return false; // BOTH items always show
+  if(it.role==="CA" || it.role==="FO") return it.role!==seat;
+  if(it.role==="PF" || it.role==="PM") return it.role!==duty;
   return false;
 }
 
@@ -2205,7 +2197,6 @@ function setSeat(s, btn){
 }
 document.getElementById("seatCA").onclick = e=>setSeat("CA", e.target);
 document.getElementById("seatFO").onclick = e=>setSeat("FO", e.target);
-document.getElementById("seatBoth").onclick = e=>setSeat("BOTH", e.target);
 
 function setDuty(d, btn){
   duty = d; stepIdx = 0;
@@ -2217,7 +2208,6 @@ function setDuty(d, btn){
 }
 document.getElementById("dutyPF").onclick = e=>setDuty("PF", e.target);
 document.getElementById("dutyPM").onclick = e=>setDuty("PM", e.target);
-document.getElementById("dutyBoth").onclick = e=>setDuty("BOTH", e.target);
 
 // Full Flows mode
 const listDiv = document.getElementById("fullList");
