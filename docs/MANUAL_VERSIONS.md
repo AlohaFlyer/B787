@@ -9,11 +9,11 @@ The authoritative per-section dependency map is AUTO-GENERATED in docs/CITATION_
 | FCOM | R10 | 2026-04-01 | 2026-06-17 | flows_quiz (NP.21), limitations (L.10), systems_quiz, limit-or-bust (L.10), jeopardy, aircraft_setup (NP.21), podcast, index footer |
 | QRH | R7 | 2026-01-19 | 2026-06-17 | memory-items, hot-seat, podcast, index footer |
 | FCTM | R9 | 2026-04-01 | 2026-06-17 | systems_quiz, flows_quiz, podcast, index footer |
-| FOM | 123.1 | 2026-04-27 | 2026-06-17 | weather, wx-alternate, systems_quiz, limit-or-bust, podcast, index footer (NOT footer-only - corrected 2026-06-17) |
+| FOM | 124.2 | 2026-06-18 | 2026-06-21 | weather, wx-alternate, systems_quiz, limit-or-bust, podcast, index footer (NOT footer-only - corrected 2026-06-17) |
 | MEL | R5 | 2026-04-01 | 2026-06-17 | podcast, index footer |
 | Systems training decks | Jun 2026 | 2026-06-12 | systems_quiz (1,540 Q from Systems_extract/*.md) |
 
-## Coverage status (from citation_index.py, updated 2026-06-17)
+## Coverage status (from citation_index.py, updated 2026-06-21)
 
 TAGGED (auto-traceable via structured `ref:` / `[MANUAL ...]` markers):
 flows_quiz, limitations, memory-items, systems_quiz, weather, wx-alternate, hot-seat, limit-or-bust, jeopardy, aircraft_setup, podcast.
@@ -28,4 +28,4 @@ Regenerated via build_scripts/ (parse_ep.py + master_ep_fast.sh). Per-episode ma
 the episode source .txt / manifests. See build_scripts/PODCAST_BUILD_TOOLCHAIN.md.
 
 ## Page version registry (bump +0.1 per edit)
-index 2.10 | flows_quiz 8.5 | limitations 1.1 | memory-items 1.1 | systems_quiz 2.3 | aircraft_setup 1.4 | weather (ver in footer) | podcast.html data-driven
+index 2.12 | flows_quiz 9.1 | hot-seat 1.3 | jeopardy 1.0 | limit-or-bust 1.4 | limitations 2.4 | memory-items 1.6 | systems_quiz 2.6 | weather 1.4 | wx-alternate 1.1 | aircraft_setup 1.4 | podcast.html data-driven
