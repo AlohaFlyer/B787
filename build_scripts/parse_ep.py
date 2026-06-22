@@ -35,7 +35,11 @@ LOCKED = [
     (re.compile(r"\bA/T\b"), "auto throttle"),
     (re.compile(r"\bCANC/?RCL\b"), "cancel recall"),
     (re.compile(r"\bG/S\b"), "glideslope"),
-    (re.compile(r"\bD-ATIS\b"), "D-ay-tiss"),
+    (re.compile(r"\bD-ATIS\b"), "ay-tiss"),
+    (re.compile(r"\bEFIS\b"), "ee-fis"),         # locked 2026-06-22
+    (re.compile(r"\bTO/GA\b"), "Toga"),          # locked 2026-06-22
+    (re.compile(r"\bARINC\b"), "air-ink"),       # locked 2026-06-22
+    (re.compile(r"\bISFD\b"), "I-S-F-D"),        # locked 2026-06-22 (say full name first in script)
     (re.compile(r"\bT-CAS\b"), "tee cass"),  # hyphen variant (.pls covers plain TCAS)
 ]
 
