@@ -529,6 +529,7 @@ document.getElementById("reveal").onclick = ()=>{
   if(stepIdx >= items.length){ nextStep(); return; }
   document.getElementById("a").classList.add("shown");
   document.getElementById("a").style.cursor="pointer";
+  if(FLOWS[flowIdx].noflow){ document.getElementById("detail").classList.add("shown"); }
   // detailBtn always visible
   drawMap(document.getElementById("cockpitMap"), FLOWS[flowIdx], stepIdx+1, showShape);
   revealed = true;
