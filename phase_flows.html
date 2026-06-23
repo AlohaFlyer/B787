@@ -99,7 +99,7 @@ border-left:4px solid var(--accent);border-radius:5px;font-size:.78em;color:var(
 .empty{color:var(--muted);font-style:italic;padding:20px;}
 nav{flex:none;background:var(--nav);border-top:1px solid var(--line);
 padding:7px calc(8px + env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) calc(8px + env(safe-area-inset-left));
-overflow-x:auto;white-space:nowrap;display:flex;gap:6px;align-items:stretch;}
+overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;white-space:nowrap;display:flex;gap:6px;align-items:stretch;}
 .navlabel{font-size:9px;font-weight:800;color:var(--muted);align-self:center;margin-right:2px;letter-spacing:.4px;}
 nav .divider{width:2px;background:var(--line);margin:0 5px;border-radius:2px;}
 nav button{flex:none;border:1.5px solid transparent;background:var(--navbtn);color:var(--navink);font-weight:800;
@@ -721,40 +721,51 @@ function render(){
   fitToScreen();
 }
 function saveState(){ try{localStorage.setItem('b787state',JSON.stringify({phase:state.phase,seat:state.seat,duty:state.duty,appr:state.appr,cat:state.cat}));}catch(e){} }
-// Whole-card column packer: keeps every card intact, balances columns, fits font, compacts if needed.
+// Fixed 4-column layout. One consistent font for EVERY phase, derived from the densest phase
+// so the busiest page fits; sparse pages use the same font (white space at the end), never bigger.
+const FLOOR=11, MAXF=18;
+let GFONT=0, lastW=0, lastH=0;
+function cardsFor(pid){
+  const ph=PHASES.find(p=>p.id===pid); if(!ph)return [];
+  const ctx={n:1}; const out=[];
+  ph.sections.forEach(sec=>{ if(!apprVisible(sec.appr))return; const cite=sec.cite||ph.src;
+    const inner=sec.items.map(it=>renderItem(it,cite,ctx,ph.id)).join('');
+    out.push(`<div class="card"><div class="ch" style="--ec:${sec.c}"><span class="hn">${sec.h}</span><span class="cardcite">${cite}</span></div><div class="cb">${inner}</div></div>`);
+  });
+  return out;
+}
+function packInto(grid,cards,ncol,fontPx,W){
+  grid.style.display='flex'; grid.style.gap='11px'; grid.style.alignItems='flex-start'; grid.style.fontSize=fontPx+'px';
+  const colW=Math.max(120,Math.floor((W-(ncol-1)*11)/ncol));
+  grid.innerHTML='<div class="col" style="width:'+colW+'px;min-width:0"></div>';
+  const meas=grid.firstChild;
+  const nodes=cards.map(h=>{const t=document.createElement('template');t.innerHTML=h.trim();return t.content.firstElementChild;});
+  nodes.forEach(n=>meas.appendChild(n));
+  const hs=nodes.map(n=>n.offsetHeight+11);
+  const total=hs.reduce((a,b)=>a+b,0), target=total/ncol;
+  grid.innerHTML='';
+  const cols=[]; for(let i=0;i<ncol;i++){const c=document.createElement('div');c.className='col';c.style.cssText='width:'+colW+'px;min-width:0';grid.appendChild(c);cols.push(c);}
+  let ci=0,cw=0;
+  nodes.forEach((n,i)=>{ if(cw>0 && cw+hs[i]>target && ci<ncol-1){ci++;cw=0;} cols[ci].appendChild(n); cw+=hs[i]; });
+  let mx=0; cols.forEach(c=>{ if(c.offsetHeight>mx)mx=c.offsetHeight; });
+  return mx;
+}
+function bestFontFor(cards,ncol,avail,W,grid){ for(let f=MAXF;f>FLOOR;f--){ if(packInto(grid,cards,ncol,f,W)<=avail) return f; } return FLOOR; }
+function computeGFont(ncol,avail,W,grid){
+  const cand=['preflight','before-takeoff','after-takeoff','cruise','descent','approach','landing','memory','limitations','oceanic','etops','diversion'];
+  let g=MAXF;
+  for(const pid of cand){ const c=cardsFor(pid); if(!c.length)continue; const f=bestFontFor(c,ncol,avail,W,grid); if(f<g)g=f; }
+  return g;
+}
+function colsForWidth(W){ return W>=760?4 : W>=520?3 : W>=340?2 : 1; }
 function fitToScreen(){
   const grid=document.getElementById('grid'); if(!grid||!CARDS.length)return;
-  const main=document.getElementById('main');
-  const phh=document.querySelector('.phasehead'); if(!phh)return;
+  const main=document.getElementById('main'); const phh=document.querySelector('.phasehead'); if(!phh)return;
   const avail=main.clientHeight - phh.offsetHeight - 12; if(avail<=4)return;
   const W=grid.clientWidth||main.clientWidth;
-  const ncol=Math.max(1,Math.min(5,Math.min(CARDS.length,Math.floor(W/250))));
-  grid.style.display='flex'; grid.style.gap='11px'; grid.style.alignItems='flex-start';
-  function buildAt(fontPx,compact){
-    grid.style.fontSize=fontPx+'px';
-    grid.classList.toggle('compact',compact);
-    const colW=Math.max(140,Math.floor((W-(ncol-1)*11)/ncol));
-    grid.innerHTML='<div class="col" style="width:'+colW+'px;min-width:0"></div>';
-    const meas=grid.firstChild;
-    const nodes=CARDS.map(h=>{const t=document.createElement('template');t.innerHTML=h.trim();return t.content.firstElementChild;});
-    nodes.forEach(n=>meas.appendChild(n));
-    const hs=nodes.map(n=>n.offsetHeight+11);
-    const total=hs.reduce((a,b)=>a+b,0), target=total/ncol;
-    grid.innerHTML='';
-    const cols=[];
-    for(let i=0;i<ncol;i++){const c=document.createElement('div');c.className='col';c.style.cssText='width:'+colW+'px;min-width:0';grid.appendChild(c);cols.push(c);}
-    let ci=0,cw=0;
-    nodes.forEach((n,i)=>{ if(cw>0 && cw+hs[i]>target && ci<ncol-1){ci++;cw=0;} cols[ci].appendChild(n); cw+=hs[i]; });
-    let mx=0; cols.forEach(c=>{ if(c.offsetHeight>mx)mx=c.offsetHeight; });
-    return mx;
-  }
-  const FLOOR=14,MAXF=23;
-  let placed=false;
-  for(const compact of [false,true]){
-    for(let f=MAXF;f>=FLOOR;f-=1){ if(buildAt(f,compact)<=avail){ placed=true; break; } }
-    if(placed)break;
-  }
-  if(!placed) buildAt(FLOOR,true);
+  const ncol=colsForWidth(W);
+  if(!GFONT || Math.abs(W-lastW)>6 || Math.abs(avail-lastH)>6){ GFONT=computeGFont(ncol,avail,W,grid); lastW=W; lastH=avail; }
+  packInto(grid,CARDS,ncol,GFONT,W);
 }
 let _rt; function reflow(){clearTimeout(_rt);_rt=setTimeout(()=>{setHtop();fitToScreen();},120);}
 window.addEventListener('resize',reflow);
