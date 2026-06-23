@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="B787 Flows">
+<title>B787 Phase Flows</title>
+<style>
+:root{
+  --blue:#0074C8;--say:#c0392b;--trig:#e8590c;--cl:#7b2fb0;
+  --bg:#eef4f8;--card:#ffffff;--ink:#15314a;--muted:#5c728a;--line:#e6edf3;
+  --head:#01426A;--nav:#dfe8f0;--navbtn:#ffffff;--navink:#01426A;--accent:#01426A;
+  --limbg:#fff1c4;--limink:#7a5600;--qbg:#f1f6fb;
+}
+body.dark{
+  --bg:#0d1620;--card:#15212d;--ink:#e7eff7;--muted:#9bb1c4;--line:#26384a;
+  --head:#06243a;--nav:#101c28;--navbtn:#1b2a38;--navink:#cfe0ee;--accent:#3a93d8;
+  --limbg:#46380e;--limink:#ffd86b;--qbg:#0f1d29;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;height:100%;}
+body{font-family:'Helvetica Neue',-apple-system,Arial,sans-serif;color:var(--ink);background:var(--bg);
+display:flex;flex-direction:column;height:100vh;overflow:hidden;}
+header{background:var(--head);color:#fff;padding:8px 14px;display:flex;align-items:center;
+justify-content:space-between;flex-wrap:wrap;gap:8px;flex:none;}
+header .ttl{font-size:18px;font-weight:800;letter-spacing:.3px;}
+header .sub{font-size:10px;color:#bcd6ec;font-weight:600;margin-top:1px;}
+.ctrls{display:flex;gap:8px;align-items:center;}
+.toggle{display:flex;border-radius:8px;padding:3px;gap:2px;}
+.toggle.seat{background:rgba(0,0,0,.28);}
+.toggle.duty{background:rgba(0,45,33,.5);}
+.toggle button{border:0;background:transparent;color:#bcd6ec;font-weight:800;font-size:14px;
+padding:8px 17px;border-radius:6px;cursor:pointer;letter-spacing:.3px;}
+.toggle.seat button.on{background:#fff;color:#01426A;}
+.toggle.duty button{color:#9fe0cd;}
+.toggle.duty button.on{background:#37d9a8;color:#053b2c;}
+.themebtn{background:rgba(255,255,255,.14);border:0;color:#fff;font-size:17px;width:40px;height:40px;
+border-radius:8px;cursor:pointer;}
+.gate{flex:none;display:flex;align-items:center;gap:10px;background:var(--cl);color:#fff;padding:6px 14px;}
+.gate .lbl{font-size:10px;opacity:.85;font-weight:800;letter-spacing:.5px;}
+.gate .nm{font-size:14.5px;font-weight:800;letter-spacing:.2px;}
+.gate.none{display:none;}
+main{flex:1;overflow:auto;padding:10px 12px 8px;display:flex;flex-direction:column;min-height:0;}
+.phasehead{font-size:1.15em;font-weight:800;color:var(--ink);margin:0 2px 8px;display:flex;
+align-items:baseline;gap:10px;flex-wrap:wrap;flex:none;}
+.phasehead .src{font-size:.7em;font-weight:600;color:var(--muted);}
+.grid{font-size:15px;column-gap:11px;flex:1;min-height:0;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:9px;overflow:hidden;
+break-inside:avoid;margin:0 0 11px;display:inline-block;width:100%;box-shadow:0 1px 2px rgba(0,0,0,.05);}
+.card .ch{background:var(--head);color:#fff;font-weight:800;font-size:.85em;letter-spacing:.3px;
+display:flex;justify-content:space-between;align-items:center;gap:8px;border-left:6px solid var(--ec,#888);}
+.card .ch .hn{padding:6px 0 6px 9px;}
+.cardcite{font-size:.62em;font-weight:600;opacity:.82;white-space:nowrap;letter-spacing:.2px;padding-right:9px;}
+.cb{padding:5px 9px 7px;}
+.it{display:flex;gap:7px;align-items:flex-start;padding:4px 0;border-top:1px solid var(--line);}
+.it:first-child{border-top:none;}
+.stepn{flex:none;width:1.6em;height:1.6em;border-radius:50%;background:var(--line);color:var(--muted);
+font-size:.62em;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:.2em;}
+.it .body{flex:1;min-width:0;}
+.it .t{font-weight:800;font-size:.85em;}
+.it .s{font-size:.78em;color:var(--muted);margin-top:1px;}
+.it.fmc .stepn{background:#d7e9fb;color:#1d63b0;}.it.fmc .t{color:var(--blue);}
+.it.say .t{color:var(--say);}
+.sayb{color:var(--say);font-weight:800;margin-right:3px;}
+.it.say .stepn{background:#fbdcd7;color:var(--say);}
+.it.dim{opacity:.32;}
+.rtag{display:inline-block;font-size:.62em;font-weight:800;color:#fff;border-radius:7px;
+padding:1px 5px;margin-left:6px;vertical-align:middle;}
+.rtag.C{background:#01426A;}.rtag.F{background:#0a8fb0;}.rtag.PF{background:#00805E;}.rtag.PM{background:#5f3dc4;}
+.lim{background:var(--limbg);color:var(--limink);font-weight:800;border-radius:3px;padding:0 3px;}
+.trig{display:flex;gap:8px;align-items:center;background:rgba(232,89,12,.13);border:1px solid rgba(232,89,12,.4);
+border-left:5px solid var(--trig);color:var(--trig);font-weight:800;border-radius:6px;
+padding:6px 9px;margin:5px 0;font-size:.85em;}
+.trig .ic{font-size:1.05em;flex:none;}
+.cl{display:flex;gap:9px;align-items:center;background:rgba(123,47,176,.13);border:1px solid rgba(123,47,176,.42);
+border-left:6px solid var(--cl);color:var(--cl);font-weight:800;border-radius:6px;
+padding:8px 10px;margin:6px 0;font-size:.92em;}
+.cl.bold{background:rgba(123,47,176,.22);}
+.cl .ic{font-size:1.1em;flex:none;}
+.cl .w{display:block;color:var(--muted);font-style:italic;font-weight:600;font-size:.68em;margin-top:1px;}
+.book{background:rgba(120,130,140,.1);border-left:5px solid #6b7280;border-radius:6px;padding:5px 9px;margin:5px 0;}
+.book .t{font-weight:800;font-size:.85em;}.book .s{font-size:.78em;color:var(--muted);margin-top:1px;}
+.sub{color:#fff;font-weight:800;font-size:.72em;padding:3px 8px;border-radius:5px;margin:7px 0 3px;letter-spacing:.3px;}
+.note{font-size:.78em;color:var(--muted);font-style:italic;margin:3px 0;padding-left:2px;}
+.it.has-q{cursor:pointer;}
+.qbox{display:none;margin:5px 0 2px;padding:7px 9px;background:var(--qbg);border:1px solid var(--line);
+border-left:4px solid var(--accent);border-radius:5px;font-size:.78em;color:var(--ink);line-height:1.38;}
+.it.open .qbox{display:block;}
+.qbox .qsrc{display:block;font-weight:800;color:var(--accent);font-size:1em;margin-bottom:3px;letter-spacing:.2px;}
+.qbox .qt{font-style:italic;}
+.empty{color:var(--muted);font-style:italic;padding:20px;}
+nav{flex:none;background:var(--nav);border-top:1px solid var(--line);padding:7px 8px;overflow-x:auto;
+white-space:nowrap;display:flex;gap:6px;align-items:stretch;}
+.navlabel{font-size:9px;font-weight:800;color:var(--muted);align-self:center;margin-right:2px;letter-spacing:.4px;}
+nav .divider{width:2px;background:var(--line);margin:0 5px;border-radius:2px;}
+nav button{flex:none;border:1.5px solid transparent;background:var(--navbtn);color:var(--navink);font-weight:800;
+font-size:13px;padding:9px 14px;border-radius:18px;cursor:pointer;letter-spacing:.2px;}
+nav button.ab{color:var(--say);}
+nav button.on{background:var(--head);color:#fff;}
+nav button.ab.on{background:var(--say);color:#fff;}
+.arrow{position:fixed;top:50%;transform:translateY(-50%);width:42px;height:60px;border:0;cursor:pointer;
+background:var(--head);color:#fff;font-size:26px;font-weight:800;z-index:30;opacity:.85;
+box-shadow:0 2px 7px rgba(0,0,0,.3);}
+.arrow.prev{left:0;border-radius:0 10px 10px 0;}.arrow.next{right:0;border-radius:10px 0 0 10px;}
+.apprwrap{display:flex;gap:8px;align-items:center;}
+.toggle.appr{background:rgba(120,70,0,.45);}
+.toggle.appr button{color:#f3d4a2;}
+.toggle.appr button.on{background:#e8a13a;color:#3a2400;}
+.toggle.cat{background:rgba(120,70,0,.3);}
+.toggle.cat button{color:#f3d4a2;padding:8px 13px;}
+.toggle.cat button.on{background:#f3c477;color:#3a2400;}
+ul.bl{margin:2px 0 0;padding:0;list-style:none;}
+ul.bl li{font-size:.78em;color:var(--muted);line-height:1.28;padding-left:13px;position:relative;margin:1.5px 0;}
+ul.bl li::before{content:'•';position:absolute;left:3px;color:var(--accent);font-weight:800;}
+ul.bl li b{color:var(--ink);} .co{color:var(--say);}
+.exp{display:inline-block;color:var(--accent);font-size:.62em;font-weight:800;margin-left:6px;
+border:1.4px solid var(--accent);border-radius:5px;padding:0 5px;vertical-align:middle;opacity:.85;}
+.it.open .exp,.clwrap.open .exp{background:var(--accent);color:#fff;}
+.clwrap{margin:6px 0;}
+.cl.has-cl{cursor:pointer;margin:0;}
+.cl .cln{flex:1;}
+.clbody{display:none;border:1px solid rgba(123,47,176,.32);border-top:0;border-radius:0 0 7px 7px;
+background:var(--card);padding:3px 9px 6px;}
+.clwrap.open .clbody{display:block;}
+.cli{display:flex;align-items:baseline;gap:7px;font-size:.78em;padding:3px 0;border-top:1px solid var(--line);}
+.cli:first-child{border-top:0;}
+.cli .cii{font-weight:800;color:var(--ink);}
+.cli .civ{flex:1;color:var(--muted);}
+.cli.dim{opacity:.32;}
+/* compact mode: hide verbose detail on dense phases (keep callouts + open items) */
+.grid.compact .it:not(.say):not(.open) .s,
+.grid.compact .it:not(.say):not(.open) ul.bl,
+.grid.compact .note{display:none;}
+.rail{display:none;}
+.rail .navlabel{display:block;margin:7px 4px 3px;}
+.rail button{flex:none;border:1.5px solid transparent;background:var(--navbtn);color:var(--navink);
+font-weight:800;font-size:13.5px;padding:10px 11px;border-radius:9px;cursor:pointer;text-align:left;width:100%;letter-spacing:.2px;}
+.rail button.ab{color:var(--say);}
+.rail button.on{background:var(--head);color:#fff;}
+.rail button.ab.on{background:var(--say);color:#fff;}
+.rail{display:none !important;}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="ttl">B787 Phase Flows</div>
+    <div class="sub" id="srcsub"></div>
+  </div>
+  <div class="ctrls">
+    <div class="toggle seat" id="seat">
+      <button data-s="C" class="on">CA</button>
+      <button data-s="F">FO</button>
+    </div>
+    <div class="toggle duty" id="duty">
+      <button data-d="PF" class="on">PF</button>
+      <button data-d="PM">PM</button>
+    </div>
+    <div class="apprwrap" id="apprwrap" style="display:none">
+      <div class="toggle appr" id="appr">
+        <button data-a="ILS" class="on">ILS</button>
+        <button data-a="IAN">IAN</button>
+        <button data-a="RNPAR">RNP&nbsp;AR</button>
+      </div>
+      <div class="toggle cat" id="cat">
+        <button data-c="1" class="on">I</button>
+        <button data-c="2">II</button>
+        <button data-c="3">III</button>
+      </div>
+    </div>
+    <button class="themebtn" id="theme" title="Day / Night">&#9790;</button>
+  </div>
+</header>
+<div class="gate" id="gate"></div>
+<main id="main"></main>
+<nav id="nav"></nav>
+<nav id="rail" class="rail"></nav>
+<button class="arrow prev" id="prev" aria-label="Previous phase">&#8249;</button>
+<button class="arrow next" id="next" aria-label="Next phase">&#8250;</button>
+
+<script>
+const box=(t,s,r,call,q)=>({k:'box',t,s:s||'',r:r||'B',call:!!call,q:q||''});
+const fmc=(t,s,r,q)=>({k:'box',t,s:s||'',r:r||'B',fmc:true,q:q||''});
+const sub=(t,c)=>({k:'sub',t,c});
+const trig=(t,r)=>({k:'trig',t,r:r||'B'});
+const cl=(t,w,bold)=>({k:'cl',t,w:w||'',bold:!!bold});
+const book=(t,s)=>({k:'book',t,s:s||''});
+const note=(t)=>({k:'note',t});
+const S=(h,c,items,cite,appr)=>({h,c,items,cite:cite||'',appr:appr||'all'});
+
+const PHASES=[
+{id:'preflight',label:'Preflight',kind:'n',title:'PREFLIGHT',src:'FCOM NP.21.1-27 · PRC',sections:[
+  S('COCKPIT ENTRY','#334e68',[
+    box('ARRS · FFLAAP MD · Logbook','','B'),
+    box('DEAD AIRCRAFT - Elec Pwr Up (Read & Do)','Batt On · Hyd Pumps Off · Wipers Off · Gear Lever Dn · Alt Flap Swts Off · External/APU On (SP.6)','B'),
+    box('Prelim Preflt Flow (Capt or FO)','(I SEE HOP) Logbook · IRS, Status, EICAS, Eng oil, Hyd, O2, Park Brk · Gnd Air? (NP.21.1)','B',true,'IRS selectors ... OFF 30 seconds, then ON (verify ON BAT light extinguished). STATUS display ... Check - verify that only expected messages are shown. Verify sufficient for flight: Oxygen pressure, Hydraulic quantity, Engine oil quantity. EICAS display ... Check - verify only expected alert and memo messages are shown. Parking brake ... Set.'),
+    trig('Park brake SET → PF begins CDU setup / PM walk-around','B'),
+  ],'FCOM NP.21.1 · SP.6'),
+  S('COMM / CLEARANCE LOGON','#0a6c8f',[
+    box('COMM-ATC: Logon (Capt or FO)','LOGON TO KUSA (KSEA/CONUS Data Comm) · PHNL = PDC · auto-upload 30 min prior','B',true),
+    book('D-ATIS (press COMM)','FLIGHT INFORMATION > ATIS REQUEST · verify altimeter numeric = alpha · SP.5.1'),
+  ],'FCOM SP.5.1'),
+  S('CDU PREFLIGHT (PF) · NP.21.2-5','#01426A',[
+    note('Initial + Nav Data complete before flight-instrument check'),
+    sub('1 - INITIAL DATA','#0074C8'),
+    fmc('IDENT','MODEL, ENG RATING, cycle NAV database','PF','CDU IDENT page: Verify that the MODEL is correct. Verify that the ENG RATING is correct. Cycle the active NAV database to erase all previously pilot-entered data. Verify that the navigation database ACTIVE date range is current.'),
+    fmc('POS INIT','time; set inertial pos if boxed'),
+    sub('2 - NAV DATA','#00805E'),
+    fmc('RTE','FLT NO, ROUTE REQUEST, LOAD, ACTIVATE/EXEC'),
+    fmc('DEPARTURES','runway / HUD TKOF, dep routing, EXEC'),
+    fmc('POS REF 2','verify departure RNP'),
+    fmc('ARRIVALS','runway + arrival; no approach yet'),
+    fmc('FIX INFO','ETPs; 410 NM EEP circle (ETOPS)'),
+    fmc('NAV RADIO','tune nav radios as needed (EO departure / escape navaids)'),
+    sub('3 - PERF DATA','#E0A100'),
+    note('Perf Data complete before Before-Start Checklist'),
+    fmc('PERF INIT','ZFW · FUEL check (CDU=Release=EICAS) · RESERVES · CRZ ALT · COST INDEX · STEP 0','PF','If PERF INIT DATA is available: Select ACCEPT. Verify/enter the planned ZFW. Verify that the FUEL on the CDU, the Dispatch Release, and EICAS agree. Verify that the fuel is sufficient for flight. Verify/enter RESERVES (sum of hold and alternate). Verify/enter CRZ ALT. Verify/enter COST INDEX. Enter STEP SIZE 0.'),
+    sub('4 - WIND DATA','#0a8fb0'),
+    fmc('FMC COMM','WIND + DES + CLB forecasts, LOAD'),
+    sub('5 - LEGS VERIFICATION','#5A4AB7'),
+    fmc('LEGS','crosscheck legs vs flight plan'),
+    fmc('NAV DATA','INIT REF>INDEX>NAV DATA: paste wpt, compare LAT/LONG (ORCN/ETOPS dual)'),
+    sub('6 - REGISTER','#01426A'),
+    fmc('OPS CONTROL (COMPANY-FLIGHT INIT)','FLT NO · DATE (numeric day) · ORIG/DEST stations · CAPT/FO/RO IDs'),
+    book('REQUEST - Preliminary Performance (datalink)','for AeroData final perf · do not load FMS · need not print'),
+  ]),
+  S('ORCN / ETOPS PREFLIGHT (PRC)','#0a6c8f',[
+    box('Verify','MELs/CDLs affecting RNP / comms / ETOPS capability · Dispatch Release ETOPS status · critical-fuel analysis','B'),
+    box('Alternates','ETOPS alternate weather + NOTAMs · load flight plan in FD Pro · PDSC/PDC complete & valid','B'),
+    box('Program','EEP / EXP and ETP / CP per aircraft procedures · oceanic route verification (expanded lat/long)','B'),
+    box('HF','locate HF freqs + perform HF radio check (WWV/WWVH or VOLMET)','B'),
+  ],'PRC ORCN/ETOPS Card'),
+  S('PREFLIGHT COMPLETION','#2e7d5b',[
+    box('PM: Walk-around / Exterior Inspection','typically right after Preliminary Preflight (NP.21.6)','PM'),
+    box('CA flow (glareshield / forward)','EFIS · Display Select · MCP · Oxygen test · brightness · Air Data/Att · PFD/MFD · do Initial+Nav Data, verify IRS · Flight instruments + standby','C',false,'Preflight Procedure - Captain: EFIS control panel Set (minimums, baro, ND MAP). Display select panel Set. Mode control panel Set (FD ON, A/T ARM, AP disengage bar UP, bank limit AUTO). Oxygen Test and set, mask 100%. Forward / inboard / outboard brightness Mid. AIR DATA/ATTITUDE AUTO, PFD/MFD NORM. Do the Initial and Nav Data from the CDU and verify IRS alignment, then Flight instruments Check. Integrated standby flight display Set. (FCOM NP.21.22-24)'),
+    box('CA Lower Waterfall','Speedbrake/Thrust/Flap levers · Parking brake · Stab cutout · Fuel Control CUTOFF · Alt Flaps · WXR/XPDR/VHF · seat + rudder pedals · HUD','C',false,'Captain Lower Waterfall (down the aft pedestal/lower panel): Speedbrake DOWN, reverse + forward thrust levers Down/Closed, flap lever Set. Parking brake Set. Stabilizer cutout switches guards closed. FUEL CONTROL switches CUTOFF. Alternate Flaps panel Set (ARM Off, selector OFF). Left tuning and control panel: Weather Radar, Transponder, VHF. Audio control panel as needed. Seat and rudder pedals Adjust. HUD combiner Down. Seat belt and harness Adjust. Call PREFLIGHT CHECKLIST. (FCOM NP.21.24-25)'),
+    box('FO preflight flow (overhead waterfall)','Flight Control Surfaces · Heading Ref · PFC Disc · Electrical (Batt/IFE/Cabin/APU GEN/GEN CTRL) · APU · FD Door Power · Emer Lights · Window Heat · RAT · Hydraulic pumps · Seat Belts · Lighting · Ground Test · APU/Cargo fire · Engine (EEC/START) · Fuel Jettison · Fuel · Anti-ice','F',false,'Preflight Procedure - First Officer (overhead panel, top to bottom): FLIGHT CONTROL SURFACES (TAIL/WINGS NORM). HEADING REFERENCE NORM. PFC DISCONNECT guard closed. ELECTRICAL: BATTERY ON, IFE/PASS SEATS ON, CABIN/UTILITY ON, APU GENERATOR switches ON, GENERATOR CONTROL switches ON. APU selector START then ON as needed. L HUD BRIGHTNESS In, L WIPER OFF. FLIGHT DECK DOOR POWER ON. CCR RESET / EMERGENCY LIGHTS guards closed. SERVICE INTERPHONE OFF. WINDOW HEAT BACKUP + PRIMARY ON. RAM AIR TURBINE - do not push. HYDRAULIC: ENGINE PRIMARY pumps ON, CENTER + DEMAND pumps OFF. SEAT BELTS Set. Lighting panel Set. GROUND TEST NORM. APU and CARGO FIRE panels Set. ENGINE panel (EEC MODE NORM, START selectors NORM). FUEL JETTISON Set. FUEL panel (CROSSFEED OFF, pumps OFF). ANTI-ICE Set. (FCOM NP.21.12)'),
+    trig('HUD stowed/down = ready for checklist','B'),
+    cl('Preflight','cockpit preflight complete'),
+    box('ATC / Departure Clearance','FO obtains · Domestic = KUSA · HNL = Comm-Flt Info, Dept Clnc Req','F',false,'Departure Clearance ... Obtain (F/O). (FCOM NP.21.26)'),
+    box('MCP (takeoff pilot)','V2 · HDG/TRK · ALTITUDE · arm VNAV (LNAV as needed)','PF'),
+    box('Joint Verbal FMC Route Check','PF reads ATC clearance · PM crosschecks vs FMC RTE pages + flight plan · PF reads dist + fuel over dest (PROG 1/4), PM crosschecks','B',false,'PF reads the ATC clearance while the PM crosschecks against the FMC RTE pages and flight plan. PF reads the total distance and fuel over destination from PROG 1/4 while the PM crosschecks against the flight plan. (FCOM NP.21.26)'),
+  ],'FCOM NP.21.22-26'),
+  S('PERFORMANCE / TAKEOFF DATA','#b8860b',[
+    box('Takeoff Brief','Flaps, A/T, CG, V-Spds, Accel/Thrust hts · SID, Threats · Arm VNAV, LNAV?','B'),
+    box('LCO Verification','FO reads Flight #, UTC date, Tail #, Takeoff Weight from Load Closeout · CA verifies vs Dispatch Release','B',false,'The First Officer reads from the Load Closeout, and Captain verifies against the Dispatch Release, the following values: Flight number, UTC date, Tail number, Takeoff Weight (refer to FOM Dispatch Release Weight Tolerances). (FCOM NP.21.27)'),
+    box('CDU takeoff data (PF loads, PM verifies)','COMPANY-PERFORMANCE-TAKEOFF DATA: LOAD FMC · PERF INIT ACCEPT (verify ZFW) · TAKEOFF REF 1/2: flaps, assumed temp, CG, V1/VR/V2, set MCP V2 · THRUST LIM (no TO 1/TO 2)','PF'),
+    box('Pax Count Verify','FO reads LCO pax + jumpseat · CA verifies vs Flight Deck Report','B'),
+    box('Gate Agent / Station Mgr','Check fuel on board · Check EICAS','B'),
+    box('1L door close','FA confirms with the flight deck before closing the 1L (boarding) door (crew SOP)','B'),
+    box('Flight Attendant','Cabin secure · Doors in auto','B'),
+    box('EICAS','(4 / 6) · Nosewheel lockout','B'),
+  ]),
+]},
+
+{id:'before-start',label:'Before Start',kind:'n',title:'PUSH & START',src:'FCOM NP.21.26-30',sections:[
+  S('PUSH & START','#7a3b8f',[
+    box('Capt','Brakes set · Clr to disconnect External/Air? · Stby for Push Clnc','C',true),
+    box('Before Start Flow (FO)','FWD CARGO FLOW set · Flt deck door closed/locked · Exterior doors closed · Nose gear steering locked out (if pushback) · Hyd pumps AUTO · Fuel pumps ON · BEACON ON · CANCEL/RECALL · Trim SET (CA)','F',false,'FWD CARGO FLOW ... Set (HIGH for live animals/odorous cargo, otherwise LOW). Continue once cabin secure and walkaround complete (walkaround complete = clearance to pressurize hydraulics). Flight deck door ... Closed and locked. Exterior doors ... Verify closed. If pushback: Nose gear steering ... Verify locked out. HYDRAULIC panel ... Set (demand + center pumps AUTO). Fuel panel ... LEFT/RIGHT FUEL PUMP switches ON. BEACON ... ON. CANCEL/RECALL ... Push (verify only expected messages). Trim ... Set (greenband). (FCOM NP.21.28-29)'),
+    cl('Before Start','before-start flow complete; CA calls'),
+    trig('“Walk-Around Complete” cues FO Before-Start flow','B'),
+    box('Ramp Crew','Gnd→Flt Dk confirm brakes set? · Disconnect Ext/Air? · “Ready for Push”','C',true),
+    box('Call ATC for Push Clearance','','C',true),
+    box('Ramp Crew (push / start)','Cleared to Push (direction) · Cleared to Start (after p/back) · Push complete, set brakes','C',true),
+    box('Engine Start','engines may be started at the same time · obtain start clearance · “START ___ ENGINE”','B',false,'CAUTION: If OAT is above 40°C, do not attempt to start both engines at the same time. Note: The engines may not start if external power and the APU are both supplying electric power at the same time - one source must be selected off; the APU is the preferred source for engine start. (FCOM NP.21.30)'),
+    trig('After engines started → disconnect towbar, then headset','B'),
+  ]),
+]},
+
+{id:'before-taxi',label:'Before Taxi',kind:'n',title:'BEFORE TAXI',src:'FCOM NP.21.31',sections:[
+  S('BEFORE TAXI','#b03a2e',[
+    trig('After salute received from pushback escort','B'),
+    box('FO flow','All engine GEN OFF lights extinguished (4 generators ONline) · APU OFF · Engine anti-ice as needed · ground/equipment clear','F'),
+    box('Capt','Call “FLAPS ___” · Flight controls check','C',true),
+    box('PM','Secondary engine indications OFF · Recall check','PM'),
+    cl('Before Taxi','“Flaps ___” · 4 generators ONline'),
+    note('Transition CA,FO → PF,PM at completion of the Before Taxi checklist.'),
+  ]),
+]},
+
+{id:'before-takeoff',label:'Before Takeoff',kind:'n',title:'BEFORE TAKEOFF / TAKEOFF',src:'FCOM NP.21.33-35 · PRC Takeoff',sections:[
+  S('BEFORE TAKEOFF','#1864ab',[
+    box('PM','TAXI light ON · “Flight Attendants seated” PA ≥2 min prior · verify CABIN READY','PM'),
+    box('PF (takeoff pilot)','update takeoff brief · set WXR · VSD on · terrain as needed','PF'),
+    cl('Before Takeoff','cabin ready · CDU T/Off+LEGS · WX, TERR, TCAS · ND, TA/RA','bold'),
+  ]),
+  S('TAKEOFF CALLOUTS (PRC)','#01426A',[
+    box('Prior to hold-short - both','“Runway ___ confirmed”','B',true),
+    box('Crossing hold-short (PM)','Wing, L/R Runway Turnoff, Strobe lights ON · Transponder TA/RA','PM'),
+    box('Lined up - both','visually verify ND aircraft symbol on assigned runway + headings agree','B'),
+    box('Cleared for takeoff','PM: Landing lights ON · PF: thrust 40% N1 (stabilize), push TO/GA','B',true),
+    box('PM: “Thrust Set”','','PM',true),
+    box('@80 kt → PM: “80 Knots” / PF: “Check”','','B',true),
+    box('@VR → PM: “Rotate”','PF rotate toward 15° pitch','PM',true,'Verify 80 knots and call \"CHECK.\" Call \"80 KNOTS.\" Verify V1 speed; verify the automatic V1 callout or call \"V1.\" At VR, rotate toward 15° pitch attitude; at VR call \"ROTATE.\" (FCOM NP.21.34 / FCTM Standard Callouts)'),
+    box('PM: “Positive Rate” → PF: “Gear Up”','','B',true),
+    box('@200 ft → PF: “Autopilot On” (as needed)','above 400 ft: PF call for roll mode','PF',true),
+  ]),
+]},
+
+{id:'after-takeoff',label:'After Takeoff',kind:'n',title:'AFTER TAKEOFF / CLIMB',src:'FCOM NP.21.35-37',sections:[
+  S('AFTER TAKEOFF','#00805E',[
+    box('PF','at accel ht: “FLAPS ___” per retraction schedule · engage A/P above min alt · verify CLB thrust + altitude capture','PF',true),
+    box('PM','after flaps up: ENGINE ANTI-ICE AUTO · NOSE LANDING + TAXI lights OFF','PM'),
+    cl('After Takeoff','gear UP · flaps UP'),
+  ]),
+]},
+
+{id:'cruise',label:'Cruise / ETOPS',kind:'n',title:'CLIMB & CRUISE',src:'FCOM NP.21.37-38 · FOM 6 · PRC',sections:[
+  S('CLIMB & CRUISE','#0a8fb0',[
+    box('PM','verify RNP as needed','PM'),
+    box('At 10,000 ft MSL (PM)','L/R LANDING, RUNWAY TURNOFF, WING lights OFF · CABIN CHIME ×2 (3-sec pause) · clear unused navaids','PM'),
+    box('Above FL180 (PM)','seatbelt signs as needed · Seat Belt Advisory PA (FOM 3.100) · DEPARTURE REPORT (OUT/OFF, takeoff pilot)','PM'),
+    box('Above transition altitude','set altimeters to STANDARD','B'),
+    box('Fuel (PM)','FUEL IN CENTER → CTR pumps ON · FUEL LOW CENTER → CTR pumps OFF','PM'),
+    box('Before T/D','modify route for arrival/approach · VNAV DES speed = CI mach/300 unless ATC','B'),
+  ],'FCOM NP.21.37-38'),
+  S('ETOPS ENROUTE MONITORING (PRC)','#5A4AB7',[
+    box('Coordinate route changes','with Dispatch to stay within Max Diversion Distance (except WX deviations)','B'),
+    box('Report','Mach changes ≥ 0.02 · ETA changes ≥ 3 min (non-CPDLC)','B'),
+    box('Waypoint passage','confirm next wpt matches cleared route · fuel check · ATC position report · ~2 min after wpt: LNAV correct TO wpt + cross-track deviation','B'),
+    box('Fuel awareness','FOB vs critical fuel at CP/ETP (FOM 6.3.6); ETPs use 10,000 ft winds - a closer non-ETOPS field may be faster','B'),
+  ]),
+  S('OCEANIC POSITION REPORT (non-CPDLC)','#01426A',[
+    book('Format','Position “___” · Time “___” · “Flight Level ___” · “Estimating ___” (next) + time · “Next ___” · “Fuel ___” (if non-ACARS) · “Minus ___” temp · wind “___ diagonal ___” · sig WX (or “smooth”)'),
+    note('Report FULL lat/long, not the abbreviated FMS display.'),
+  ],'PRC ORCN Card'),
+]},
+
+{id:'descent',label:'Descent',kind:'n',title:'DESCENT',src:'FCOM NP.21.39',sections:[
+  S('DESCENT','#5A4AB7',[
+    box('Start','before descent below cruise alt; complete by 10,000 ft AFE','B'),
+    box('Review (both)','review alert/memo messages · review operational notes · Recall','B'),
+    box('Check landing performance','VREF on APPROACH REF page','B'),
+    box('Set minimums','MDA → BARO = MDA+50 (or MDA if note allows) · DA → BARO = DA · CAT II → RADIO=DH · CAT III → blank','B'),
+    box('PM','set NAV RADIO for approach · set AUTOBRAKE','PM'),
+    box('FMC crosscheck (both)','crosscheck FMC waypoints/speeds/alts vs chart (LNAV/VNAV)','B'),
+    box('Approach briefing','include: go-around near ground = manual GA thrust + possible config warning','B'),
+    cl('Descent','landing data VREF/Minimums · approach briefing complete'),
+  ]),
+]},
+
+{id:'approach',label:'Approach',kind:'n',title:'APPROACH',src:'FCOM NP.21.40',sections:[
+  S('APPROACH','#0074C8',[
+    box('Start','normally at transition level; complete before IAF / radar vectors / visual','B'),
+    box('PM','verify RNP · seatbelt signs ON before FL180 · “prepare cabin / be seated” PA by FL180','PM'),
+    box('At 10,000 ft AFE (PM)','L/R LANDING, RUNWAY TURNOFF, WING lights ON · CABIN CHIME ×2 (3-sec pause)','PM'),
+    box('Below transition level','set altimeters','B'),
+    box('PF','update arrival/approach · VSD on as needed · update brief','PF'),
+    cl('Approach','altimeters set'),
+  ]),
+]},
+
+{id:'landing',label:'Landing',kind:'n',title:'LANDING',src:'FCOM NP.21.42 / .52 · PRC',sections:[
+  S('LANDING (ILS / GLS)','#b03a2e',[
+    box('PF (final)','“FLAPS ___” per extension schedule · arm APP · intercept final course','PF',true),
+    box('PM: “LOCALIZER ALIVE”','then PM: “GLIDESLOPE ALIVE”','PM',true),
+    box('At G/S alive - PF','“GEAR DOWN” · “FLAPS 20” · speedbrake ARMED','PF',true),
+    box('At G/S capture - PF','“FLAPS ___” for landing · set missed-approach altitude on MCP','PF',true),
+    note('TECHNIQUE: keep PF on the LEGS page. A built/alternate missed approach shows the correct missed-approach altitude; even on a standard missed it stays correct and is faster than digging it out of the Jepp plate.'),
+    cl('Landing','speedbrake ARMED · gear DOWN · flaps set','bold'),
+  ],'FCOM NP.21.42 · PRC ILS','ILS'),
+  S('CAT II / III CALLOUTS','#5f3dc4',[
+    box('Autobrake MANDATORY','CAT II: RA mins = DH · CAT III: reset/blank mins','B'),
+    box('@500 ft AFE - PM','“Stable, [Autoland Status]” or “No Autoland, Go-Around” · PF “Checked” / “Go-Around”','PM',true),
+    box('@RA+100 - PM','“100 Above” · PF “Checked”','PM',true),
+    box('@DH - PM','“Minimums” · PF “Continue” / “Go Around” / “Landing”','PM',true),
+  ],'PRC · FCTM 5.19 / 6.21','ILScat'),
+  S('LANDING (IAN / VNAV)','#9c5800',[
+    box('PF (final)','“FLAPS ___” per extension schedule · arm APP · LNAV/HDG to intercept final course','PF',true,'IAN should be used only for approaches with a published GP angle on the LEGS page, a RWxx waypoint at the approach end, or a missed-approach waypoint before the runway (e.g., MXxx). Not authorized using QFE. (FCOM NP.21.45)'),
+    box('PM: “COURSE/LOCALIZER ALIVE”','verify final approach course captured','PM',true,'Call \"COURSE/LOCALIZER ALIVE.\" Verify that the localizer/final approach course is captured. (FCOM NP.21.45)'),
+    box('~2 NM before FAF - PF','“GEAR DOWN” · “FLAPS 20” · PM: “APPROACHING GLIDE PATH” · speedbrake ARMED','PF',true,'Approximately 2 NM before the final approach fix, PF calls \"GEAR DOWN\" and \"FLAPS 20\"; PM calls \"APPROACHING GLIDE PATH\" and sets gear DN and flaps 20. Set the speedbrake lever to ARMED. (FCOM NP.21.45)'),
+    box('At glide path capture - PF','“FLAPS ___” for landing · set missed-approach altitude on MCP','PF',true,'At glide path capture, call \"FLAPS ___\" as needed for landing. Set the missed approach altitude on the MCP. At the FAF verify the crossing altitude. If suitable visual reference at DA(H)/MDA(H)/MAP, disengage the autopilot per regulatory requirements. (FCOM NP.21.45 / .48)'),
+    cl('Landing','speedbrake ARMED · gear DOWN · flaps set','bold'),
+  ],'FCOM NP.21.45 / .48 · PRC','IAN'),
+  S('LANDING (RNP AR)','#7a1f6f',[
+    box('Pre-Approach','RNP ≥ 0.10 · wind/temp/altimeter limits · speed + altitude constraints (mods only per FCOM) · brief: restrictions, missed, engine failure, unable RNP','B',false,'This abridged procedure may only be used by crews completely familiar with the FCOM RNAV (RNP) AR procedure. Verify RNP ≥ 0.10. Verify wind, temperature, and local altimeter. Verify speed and altitude constraints (modifications only as described in the FCOM procedure). The approach briefing must include speed/altitude restrictions, missed approach, engine failure, and unable-RNP procedures. (PRC Abridged RNP AR)'),
+    box('POS REF 3 (PM)','VOR/DME NAV OFF · DME/DME NAV OFF · inhibit navaids per NOTAM','PM',false,'Select or verify VOR/DME NAV OFF and DME/DME NAV OFF on POS REF page 3 and inhibit other navaids as needed per NOTAM. (PM) (PRC Abridged RNP AR)'),
+    box('Approach','RNP PROGRESS verify RNP (PM) · VSD ON','B',false,'On the RNP PROGRESS page verify RNP for the approach (PM). Select VSD ON. (PRC Abridged RNP AR)'),
+    box('Landing config','TERR on map + ACT RTE LEGS (PF) · TRR/WXR on map (PM) · VNAV required FAF inbound','B',true,'Select TERR on map and ACT RTE LEGS page (PF). Select TRR or WXR on map (PM). VNAV is required from the FAF inbound. (PRC Abridged RNP AR)'),
+    box('Monitor NPS','max lateral (XTK): NPS amber or 1 × RNP · max vertical FAF to DA: 75 ft','B',false,'Maximum lateral deviation (XTK ERROR): NPS amber indication or 1 × RNP. Maximum vertical deviation FAF to DA: 75 ft. Monitor NPS. (PRC Abridged RNP AR)'),
+    cl('Landing','gear DOWN · flaps set · NPS monitored','bold'),
+  ],'PRC Abridged RNP AR · FCOM','RNPAR'),
+  S('LANDING ROLL','#1864ab',[
+    box('PM callouts','“Speedbrakes Up” · “Reversers Normal” · “60 Knots” (NP.21.52)','PM',true,'Verify that the SPEEDBRAKE lever is UP. Call \"SPEEDBRAKES UP.\" (If not UP, call \"SPEEDBRAKES NOT UP.\") When both REV indications are green, call \"REVERSERS NORMAL.\" By 60 KIAS, start movement of the reverse thrust levers to reach reverse idle before taxi speed. Call \"60 KNOTS.\" (FCOM NP.21.52)'),
+    box('PF (rollout)','reverse thrust as needed · disarm autobrake before taxi speed · disconnect A/P before turnoff','PF'),
+  ],'FCOM NP.21.52'),
+]},
+
+{id:'after-landing',label:'After Landing',kind:'n',title:'AFTER LANDING',src:'FCOM NP.21.53',sections:[
+  S('AFTER LANDING','#0b7285',[
+    trig('Clear of the active runway','B'),
+    box('Speedbrake','CA verify lever DOWN','C'),
+    box('PM After-Landing flow','APU START→ON · Anti-ice as needed · WX radar OFF · Autobrake OFF · Flaps UP · XPDR · Arrival Report','PM'),
+    note('After Landing is a FLOW, not a checklist (QRH R7).'),
+  ]),
+]},
+
+{id:'shutdown',label:'Shutdown',kind:'n',title:'SHUTDOWN',src:'FCOM NP.21.54',sections:[
+  S('SHUTDOWN','#5f3dc4',[
+    trig('Taxi complete','B'),
+    box('Shutdown flow','Parking brake SET (PF) · Electrical power SET (FO) · Fuel Control CUTOFF (CA) · Seat belts OFF · Hyd pumps OFF · Fuel pumps OFF · Beacon OFF · FD OFF · XPDR STBY · APU as needed','B'),
+    cl('Shutdown','CA calls after shutdown flow'),
+    book('SHUTDOWN CHECKLIST (QRH)','Hyd panel Set · Fuel pumps Off · Flaps UP · Parking brake ___ · Fuel Control CUTOFF · WX radar Off'),
+  ]),
+]},
+
+{id:'secure',label:'Secure',kind:'n',title:'SECURE',src:'FCOM NP.21.56',sections:[
+  S('SECURE','#334e68',[
+    box('Run any time flight deck left unattended','','B'),
+    box('FO','IRS OFF · BATTERY Off · Emergency lights Off · Packs Off','F'),
+    cl('Secure','IRS · Battery · Emer lights · Packs - Off'),
+  ]),
+]},
+
+// ---------------- NON-NORMAL ----------------
+{id:'go-around',label:'Go-Around',kind:'a',title:'GO-AROUND / MISSED APPROACH',src:'FCOM NP.21.51 · PRC',sections:[
+  S('GO-AROUND / MISSED APPROACH','#b03a2e',[
+    note('REQUIRED BRIEFING ITEM: advance thrust MANUALLY if near the ground / after touchdown. TO/GA is inhibited there and a flap config warning can sound.'),
+    box('PF: “Go-Around”','push TO/GA · “Flaps 20” (or 5/20, 1 eng) · advance thrust manually if near ground / after touchdown','PF',true,'Call \"GO AROUND\". Push the TO/GA switch. WARNING: TO/GA function is inhibited close to the ground and after touchdown. If the thrust levers do not respond when TO/GA is pushed, or if the go-around function is initiated after touchdown, advance the thrust levers manually to go-around thrust. Call \"FLAPS 20\" or \"FLAPS___\" as needed. (FCOM NP.21.51)'),
+    box('PM','set flap lever as directed · “Thrust Set”','PM',true),
+    box('PM: “Positive Rate” → PF: “Gear Up”','','B',true),
+    box('@200 ft → PF: “Autopilot On” (as needed)','@400 ft: PF select/verify roll mode','PF',true),
+    box('Accel ht','PF select speed for planned flap setting · retract flaps on schedule · verify CLB/CON thrust','B',true),
+    cl('After Takeoff','PF calls after flaps up'),
+  ]),
+]},
+
+{id:'diversion',label:'Diversion',kind:'a',title:'DIVERSION',src:'FOM 6.4 / 11.2.7 · PRC',sections:[
+  S('MECHANICAL ABNORMALITY DIVERSION (PRC)','#7a3b8f',[
+    box('1 - Complete the NNC','(EICAS checklist)','B'),
+    box('2 - Does the failure require diversion?','YES → DIVERT','B',true),
+    box('3 - If not required','are risks of continuing higher than risks of diverting? → Continue, or DIVERT (coordinate with SOCC)','B'),
+    box('Failures requiring diversion','insufficient fuel from higher burn · any “land at nearest suitable” NNC · fire/smoke continues · only two power sources remain · crew-determined significant adverse safety effect','B'),
+  ],'PRC Mech Abnml Diversion'),
+  S('DIVERSION DECISION','#0a6c8f',[
+    box('Engine failure (one inop)','14 CFR 121.565 - land at NEAREST SUITABLE airport in CA judgment','C'),
+    box('Captain','assign PF/PM per TEM · advise ATC, remind of type, request expeditious handling','C',true),
+    box('Maintain awareness','suitable airports · current diversion plan · weather + NOTAMs · coordinate Dispatch','B'),
+    box('180° turn near ETP','turn time NOT in flight-plan fuel/time calc - account for it','B'),
+    note('See Oceanic Contingency for the offset/turn mechanics when no ATC clearance.'),
+  ],'FOM 6.4 · 14 CFR 121.565'),
+]},
+
+{id:'etops',label:'ETOPS Divert',kind:'a',title:'ETOPS DIVERSION',src:'FOM 6.2-6.4 · PRC',sections:[
+  S('ETOPS DIVERSION','#0a6c8f',[
+    box('Diversion speed','engine-out: approved One-Engine-Inoperative Cruise Speed; CA may deviate after assessing fuel (FOM 6.4.5)','C'),
+    box('Pick the field','least time to fly at/near cruise alt; ETPs use 10,000 ft winds - a closer non-ETOPS field may be better (FOM 6.3.7)','B'),
+    box('Fuel','compare FOB vs critical-fuel scenario at CP/ETP; Dispatch may adjust alt/speed/route (FOM 6.3.6)','B'),
+    box('Coordinate','advise ATC + Dispatch; request expeditious handling','B'),
+  ],'FOM 6.4.5 · 6.3.7'),
+  S('ETOPS DECOMPRESSION','#b03a2e',[
+    box('1 - Offset','turn to offset from route (Special Procedures for In-Flight Contingencies)','B'),
+    box('2 - Emergency Descent','to 10,000 ft or MOCA/Grid MORA, whichever higher','B',true),
+    box('3 - Below FL290','proceed direct to nearest suitable airport','B'),
+    box('4 - When level','Flight-Plan one-engine diversion speed, or AS LRC for 2-engine decompression','B'),
+  ],'FOM 6.4.3'),
+]},
+
+{id:'oceanic',label:'Oceanic Contingency',kind:'a',title:'OCEANIC IN-FLIGHT CONTINGENCY',src:'FOM 5.7.4 · PRC · ICAO Doc 4444',sections:[
+  S('NO ATC CLEARANCE - CONTINGENCY','#01426A',[
+    box('Get a revised clearance first','if possible, before any deviation','B'),
+    box('1 - Turn ≥30°','left or right to a parallel same-direction track offset 5 NM','B',true,'The pilot shall leave the cleared track or ATS route by initially turning at least 30° to the right or to the left, in order to establish and maintain a parallel, same direction track or ATS route offset 5 nm. The aircraft should be below FL290 prior to diverting from the assigned clearance unless a revised ATC clearance has been obtained. (FOM 5.7.4.2)'),
+    box('Choose turn direction','vs track system · adjacent levels · alt airport · any SLOP · terrain','B'),
+    box('2 - Altitude','be below FL290 before diverting (unless cleared) · once on parallel track, take a 500 ft vertical offset','B',true),
+    box('3 - Squawk / lights / TCAS','7700 when able · all exterior lights ON · TCAS TA/RA','B',true),
+    box('4 - Broadcast','121.5 (backup 123.45): ID, condition, intentions, position/track, level · MAYDAY/PAN-PAN ×3','B',true),
+  ],'FOM 5.7.4.2 · ICAO 4444'),
+  S('WEATHER DEVIATION (PRC Pacific)','#0a8fb0',[
+    box('Request first','“WEATHER DEVIATION REQUIRED” (voice) or CPDLC lateral request · PAN-PAN ×3 if urgent','B',true),
+    box('If no clearance','deviate away from track system · broadcast 121.5 & 123.45 · TCAS · exterior lights ON','B'),
+    box('< 5 NM','maintain assigned flight level','B'),
+    box('≥ 5 NM','CLIMB +300 ft if SOUTH of track · DESCEND −300 ft if NORTH of track · keep trying for clearance','B',true),
+    note('MEMORY: “The South shall rise again” = SOUTH of track means rise (CLIMB +300).'),
+    note('FOM E/W table: EAST L=−300/R=+300, WEST L=+300/R=−300 (magnetic-track version).'),
+  ],'PRC · FOM 5.7.4.6'),
+  S('SLOP / FIR LOGON (PRC)','#00805E',[
+    box('SLOP','0.0-2.0 NM RIGHT of centerline only (0.1 incr) · no clearance needed · back to centerline by oceanic exit','B'),
+    box('KZAK Oakland','logon 45-15 min prior (not below 10,000 ft) · squawk 2000 · SELCAL = SF Radio · max uplink delay 300','B'),
+    box('Holding speeds','0-6,000 ft = 200 · 6,001-14,000 = 230 · 14,001+ = 265 KIAS','B'),
+  ],'PRC FIR/OCA · FOM 5.7.4.7'),
+]},
+
+{id:'depress',label:'Depress (West US)',kind:'a',title:'WESTERN US DEPRESS STRATEGY',src:'PRC',sections:[
+  S('WESTERN US DEPRESS STRATEGY','#b03a2e',[
+    box('1 - Descend to 18,000 ft MSL','track to nearest suitable airport (use PRC airport list)','B',true),
+    box('2 - Do NOT descend below highest MORA','between present position and selected diversion airport','B',true),
+    box('3 - Step down','progressively to next-highest MORA and 10,000 ft MSL as soon as possible','B'),
+    box('O2 / time','5 min from depress → descend FL180 or below · 45 min → FL100 or below','B'),
+    note('Recommended fields incl: KSLC, KLAS, KRNO, KBOI, KDEN, KSAN, KSEA, KSMF, KGJT, etc. (PRC list).'),
+  ]),
+]},
+
+{id:'rto',label:'Rejected T/O',kind:'a',title:'REJECTED TAKEOFF',src:'FCTM · QRH · PRC',sections:[
+  S('DECISION (Captain)','#b03a2e',[
+    box('Captain decides','sole responsibility · decide in time to start the maneuver by V1','C',true,'The Captain has the sole responsibility for the decision to reject the takeoff. Make the decision in time to start the rejected takeoff maneuver by V1. (FCTM / PRC Rejected Takeoff)'),
+    box('Capt: “STOP”','announce · start the RTO maneuver · assume control','C',true,'If the decision is to reject, the Captain clearly announces "STOP", immediately starts the rejected takeoff maneuver, and assumes control. If the First Officer is making the takeoff, the FO maintains control until the Captain makes a positive input to the controls. (PRC Rejected Takeoff)'),
+  ]),
+  S('CA RTO MANEUVER','#7a3b8f',[
+    box('Thrust levers','CLOSED','C',true,'Thrust levers CLOSED. (PRC Rejected Takeoff)'),
+    box('Autothrottles','DISENGAGED','C',true,'Autothrottles DISENGAGED. (PRC Rejected Takeoff)'),
+    box('Brakes','verify RTO or apply max manual','C',true,'Brakes - verify RTO or apply maximum manual braking. (PRC Rejected Takeoff)'),
+    box('Reverse thrust','apply','C',true,'Reverse thrust - apply. (PRC Rejected Takeoff)'),
+    box('Speedbrakes','verify EXTENDED','C',true,'Speedbrakes - verify extended. (PRC Rejected Takeoff)'),
+  ]),
+  S('PM / FO','#1864ab',[
+    box('FO: verify Captain’s actions','thrust CLOSED · A/T DISENGAGED · brakes RTO/max · reverse · speedbrakes extended','F',false,'FO: verify the Captain’s actions - Thrust Levers CLOSED, Autothrottles DISENGAGED, Brakes verify RTO or apply max manual, Reverse Thrust apply, Speedbrakes verify extended. (PRC Rejected Takeoff)'),
+    box('PM: “Speedbrakes Up”','or “Speedbrakes Not Up”','PM',true,'PM calls "SPEEDBRAKES UP" (or "SPEEDBRAKES NOT UP"). (PRC Rejected Takeoff)'),
+    box('PM: “Reversers Normal”','or “No Reverse Left/Right Engine” / “No Reverse”','PM',true,'PM calls "REVERSERS NORMAL" (or "NO REVERSE LEFT/RIGHT ENGINE" / "NO REVERSE"). (PRC Rejected Takeoff)'),
+  ]),
+  S('AFTER STOP','#334e68',[
+    box('Capt PA','“This is the Captain, remain seated, remain seated”','C',true,'After stopping, the Captain makes the PA "This is the Captain, remain seated, remain seated", then assesses for evacuation or further action. (PRC Rejected Takeoff)'),
+  ]),
+]},
+
+{id:'eng-fail-to',label:'Eng Fail T/O',kind:'a',title:'TAKEOFF - ENGINE FAILURE',src:'FCTM · PRC',sections:[
+  S('CONTINUE (at/after V1)','#b03a2e',[
+    box('At VR - PF rotates to 12-13°','smoothly · follow flight director','PF',true,'At or after V1 the takeoff is continued. At VR, rotate smoothly toward 12 to 13 degrees pitch attitude (lower than the all-engine 15 degrees) and follow the flight director. (FCTM / PRC Takeoff - Engine Failure)'),
+    box('PM: “Positive Rate” → PF: “Gear Up”','','B',true,'Verify a positive rate of climb and call "POSITIVE RATE" (PM); call "GEAR UP" (PF). (FCTM)'),
+  ]),
+  S('CLEAN UP / SECURE','#7a3b8f',[
+    box('@400 ft','PF call/verify roll mode · both pilots assess problem','B',true,'Above 400 ft RA, the PF calls or verifies a roll mode. Both pilots assess the problem and accomplish memory items as needed. (PRC Takeoff - Engine Failure)'),
+    box('@200 ft','PF: “Autopilot On” (as needed)','PF',true,'At 200 ft, PF "Autopilot On" as needed. (PRC Takeoff - Engine Failure)'),
+    box('Acceleration height','PF retract flaps on schedule','PF',true,'At acceleration height, retract flaps on schedule. (PRC Takeoff - Engine Failure)'),
+    box('Flaps up','PF verify clean up · verify CON thrust','PF',true,'After flaps up: verify clean up and verify CON (maximum continuous) thrust. (PRC Takeoff - Engine Failure)'),
+    box('PF: “Select Engine Out on CDU”','','PF',true,'PF: "Select Engine Out on CDU." (PRC Takeoff - Engine Failure)'),
+    cl('After Takeoff','gear UP · flaps UP'),
+    box('Run the engine NNC','accomplish the appropriate engine non-normal checklist','B',true,'Accomplish the appropriate engine non-normal checklist (PF: Checklist "___ NNC"). (PRC Takeoff - Engine Failure)'),
+  ]),
+]},
+
+{id:'emer-descent',label:'Emer Descent',kind:'a',title:'EMERGENCY DESCENT',src:'QRH 2.1 CABIN ALTITUDE',sections:[
+  S('CABIN ALTITUDE - MEMORY (QRH 2.1)','#b03a2e',[
+    box('1. Don the oxygen masks','','B',true,'CABIN ALTITUDE memory item (QRH 2.1): 1. Don the oxygen masks. 2. Establish crew communications. 3. Check the cabin altitude and rate.'),
+    box('2. Establish crew communications','','B',true,'2. Establish crew communications. (QRH 2.1 CABIN ALTITUDE)'),
+    box('3. Check cabin altitude and rate','','B',true,'3. Check the cabin altitude and rate. (QRH 2.1 CABIN ALTITUDE)'),
+    box('4. If cabin altitude uncontrollable','PASS OXYGEN switch ON (hold 1 sec) · without delay descend to lowest safe alt or 10,000 ft, whichever higher','B',true,'4. If the cabin altitude is uncontrollable: PASS OXYGEN switch push to ON and hold for 1 second. Without delay, descend to the lowest safe altitude or 10,000 feet, whichever is higher. (QRH 2.1 CABIN ALTITUDE)'),
+  ]),
+  S('TO DESCEND','#7a3b8f',[
+    box('Thrust levers','IDLE','B',true,'To descend: move the thrust levers to idle. (QRH 2.1 CABIN ALTITUDE)'),
+    box('Speedbrakes','EXTEND','B',true,'Extend the speedbrakes. (QRH 2.1 CABIN ALTITUDE)'),
+    box('If structural integrity in doubt','limit airspeed · avoid high maneuvering loads','B',true,'If structural integrity is in doubt, limit airspeed and avoid high maneuvering loads. (QRH 2.1 CABIN ALTITUDE)'),
+    box('Descend','VMO / MMO','B',true,'Descend at VMO / MMO. (QRH 2.1 CABIN ALTITUDE)'),
+    box('Notify','advise ATC · squawk 7700 as appropriate','B',false,'Advise ATC and squawk 7700 as appropriate; for high-terrain depressurization see the Western US Depress Strategy. (crew SOP)'),
+  ]),
+]},
+
+{id:'holding',label:'Holding',kind:'a',title:'HOLDING',src:'PRC Holding · AIM',sections:[
+  S('MAX HOLDING SPEEDS (KIAS)','#0a6c8f',[
+    box('0 - 6,000 ft','200','B',false,'Maximum holding airspeed 0 to 6,000 ft MSL: 200 KIAS. (PRC Holding References)'),
+    box('6,001 - 14,000 ft','230','B',false,'Maximum holding airspeed 6,001 to 14,000 ft MSL: 230 KIAS. (PRC Holding References)'),
+    box('14,001 ft and above','265','B',false,'Maximum holding airspeed 14,001 ft and above: 265 KIAS. (PRC Holding References)'),
+  ]),
+  S('ENTRY','#5A4AB7',[
+    box('Direct','fly to the fix, turn to the holding side, follow outbound','B',false,'Direct entry: upon reaching the fix, turn to the holding side and fly the outbound leg. (AIM)'),
+    box('Teardrop','outbound ~30° toward holding side, then turn inbound','B',false,'Teardrop entry: fly outbound on a track ~30 degrees offset toward the holding side, then turn inbound to the holding course. (AIM)'),
+    box('Parallel','outbound parallel on the non-holding side, turn back through the fix','B',false,'Parallel entry: fly outbound parallel to the holding course on the non-holding side, then turn back through the fix to intercept inbound. (AIM)'),
+  ]),
+  S('SETUP','#2e7d5b',[
+    box('FMC HOLD','build at present position or a fix · check EFC time','B',false,'Build the hold in the FMC at the present position or a fix; note the EFC (expect further clearance) time. (crew technique)'),
+    box('Speed / fuel','slow to holding speed before the fix · plan holding fuel','B',false,'Slow to holding speed before crossing the fix and manage holding fuel. (crew technique)'),
+  ]),
+]},
+
+{id:'memory',label:'Memory Items',kind:'a',title:'QRH MEMORY ITEMS (recite cold)',src:'QRH R7 - recall items',sections:[
+  S('CABIN ALTITUDE (QRH 2.1)','#b03a2e',[
+    box('Recall','masks · comms · check cabin alt/rate · if uncontrollable PASS OXY ON, descend','B',true,'1 Don the oxygen masks. 2 Establish crew communications. 3 Check the cabin altitude and rate. 4 If uncontrollable: PASS OXYGEN switch push to ON 1 sec; without delay descend to lowest safe alt or 10,000 ft; thrust idle, speedbrakes, VMO/MMO. (QRH 2.1)'),
+  ]),
+  S('ENGINE (QRH 7)','#7a3b8f',[
+    box('ABORTED ENGINE START L,R (7.1)','FUEL CONTROL (affected) CUTOFF','B',true,'ABORTED ENGINE START L, R: 1 FUEL CONTROL switch (affected side) CUTOFF. (QRH 7.1)'),
+    box('DUAL ENG FAIL/STALL (7.2)','Fuel Control both CUTOFF then RUN · RAT push & hold 1 sec','B',true,'DUAL ENG FAIL/STALL: 1 FUEL CONTROL switches (both) CUTOFF, then RUN. 2 RAM AIR TURBINE switch push and hold for 1 second. (QRH 7.2)'),
+    box('ENG AUTOSTART L,R (7.3)','FUEL CONTROL (affected) Confirm CUTOFF','B',true,'ENG AUTOSTART L, R: 1 FUEL CONTROL switch (affected side) Confirm CUTOFF. (QRH 7.3)'),
+    box('ENG LIMIT EXCEED L,R (7.4)','A/T ARM (affected) Confirm OFF · thrust lever retard until message blanks/idle','B',true,'ENG LIMIT EXCEED L, R: 1 A/T ARM switch (affected) Confirm OFF. 2 Thrust lever (affected) Confirm retard until ENG LIMIT EXCEED blanks or at idle. (QRH 7.4)'),
+    box('ENG SURGE L,R (7.7)','A/T ARM (affected) Confirm OFF · thrust lever retard until message blanks/idle','B',true,'ENG SURGE L, R: 1 A/T ARM switch (affected) Confirm OFF. 2 Thrust lever (affected) Confirm retard until ENG SURGE blanks or at idle. (QRH 7.7)'),
+    box('ENG SVR DAMAGE/SEP L,R (7.10)','A/T OFF · thrust Idle · Fuel Control CUTOFF · Eng fire switch Pull','B',true,'ENG SVR DAMAGE/SEP L, R: 1 A/T ARM (affected) Confirm OFF. 2 Thrust lever Confirm Idle. 3 FUEL CONTROL switch Confirm CUTOFF. 4 Engine fire switch Confirm Pull. (QRH 7.10)'),
+  ]),
+  S('FIRE / FLIGHT (QRH 8-10)','#01426A',[
+    box('FIRE ENG L,R (8.2)','in flight: A/T OFF · thrust Idle · Fuel Control CUTOFF · fire switch Pull · if stays, rotate & hold 1 sec','B',true,'FIRE ENG L, R (in flight): 2 A/T ARM (affected) Confirm OFF. 3 Thrust lever Confirm Idle. 4 FUEL CONTROL switch Confirm CUTOFF. 5 Engine fire switch Confirm Pull. 6 If FIRE ENG stays: rotate the fire switch to the stop and hold 1 second. (QRH 8.2)'),
+    box('STABILIZER (9.1)','STAB cutout switches both CUTOUT · do not exceed current airspeed','B',true,'STABILIZER: 1 STAB cutout switches (both) CUTOUT. 2 Do not exceed the current airspeed. (QRH 9.1)'),
+    box('AIRSPEED UNRELIABLE (10.1)','A/P disc · A/T both OFF · F/D both OFF · set pitch+thrust','B',true,'AIRSPEED UNRELIABLE: 1 Autopilot disconnect switch Push. 2 A/T ARM switches (both) OFF. 3 F/D switches (both) OFF. 4 Set gear-up pitch/thrust: flaps extended 10 deg / 85% N1; flaps up 4 deg / 70% N1. (QRH 10.1)'),
+  ]),
+]},
+
+{id:'limitations',label:'Limitations',kind:'a',title:'LIMITATIONS (FCOM L.10)',src:'FCOM L.10 · # = memorize',sections:[
+  S('# MEMORIZE','#b03a2e',[
+    box('Severe Turbulence Penetration','≥ 25,000 ft = 310 KIAS / .84M (lower) · below 25,000 ft = 290 KIAS','B',false,'# Severe Turbulent Air Penetration Speed: at and above 25,000 ft, 310 KIAS / 0.84 M whichever is lower; below 25,000 ft, 290 KIAS. (FCOM L.10.3)'),
+    box('Tailwind','max takeoff and landing tailwind 15 kts','B',false,'# Maximum Takeoff and Landing Tailwind Component: 15 knots. (FCOM L.10.2)'),
+    box('A/P engage after T/O','not below 200 ft AGL','B',false,'# Autopilot must not be engaged below 200 feet AGL after takeoff. (FCOM L.10.7)'),
+    box('A/P disconnect (no LAND 2/3)','disengage below 135 ft AGL','B',false,'# Without LAND 2 or LAND 3 annunciated, the autopilot must be disengaged below 135 feet AGL. (FCOM L.10.7)'),
+    box('A/P disconnect (LAND 2/3, GS > 3.25°)','disengage below 100 ft AGL','B',false,'# With LAND 2 or LAND 3 and glideslope angles greater than 3.25 degrees, the autopilot must be disengaged below 100 feet AGL. (FCOM L.10.7)'),
+    box('Autoland elevation','runways at or below 8,400 ft airport elevation','B',false,'# Autoland capability may only be used for operations into runways at or below 8,400 feet airport elevation. (FCOM L.10.7)'),
+    box('FLCH','do not use FLCH on final approach below 1,000 ft AFE','B',false,'# Do not use FLCH on final approach below 1,000 feet AFE. (FCOM L.10.8)'),
+    box('Engine start oil temp','greater than -40°C','B',false,'# For engine start, oil temperature must be greater than -40 degrees C. (FCOM L.10.8)'),
+    box('HF radio','do not operate HF radios when refueling','B',false,'# DO NOT operate HF radios when refueling. (FCOM L.10.2)'),
+    box('HUD takeoff crosswind','20 kts','B',false,'# AFM HUD Takeoff maximum crosswind component: 20 knots. (FCOM L.10.8)'),
+  ]),
+  S('SPEEDS','#0a6c8f',[
+    box('VMO / MMO','350 KIAS (SL) increasing to 360 KIAS at 16,500 ft · MMO 0.90 M','B',false,'VMO: 350 KIAS at pressure altitude zero, increasing linearly to 360 KIAS at 16,500 ft. MMO: 0.90 Mach. Not required to be memorized (placard). (AFM / FCOM L.10)'),
+    box('Landing gear','VLO/VLE = 270 KIAS / 0.82 M','B',false,'Maximum Landing Gear Operating and Extended Speed: 270 KIAS / 0.82 Mach. (FCOM 14.10.1)'),
+    box('Max demonstrated crosswind','takeoff 33 kts · landing 40 kts (not a limit)','B',false,'Maximum demonstrated crosswind (gust included): takeoff 33 kts, landing 40 kts. Note: not a limitation. (FCOM L.10.3)'),
+  ]),
+  S('FLAP PLACARD (KIAS)','#E0A100',[
+    box('Flaps 1 / 5 / 10','260 / 240 / 230','B',false,'Flap placard: Flaps 1 = 260, Flaps 5 = 240, Flaps 10 = 230 KIAS. (FCOM 9.10.9)'),
+    box('Flaps 15 / 17-18 / 20','220 / 215 / 210','B',false,'Flap placard: Flaps 15 = 220, Flaps 17/18 = 215, Flaps 20 = 210 KIAS. (FCOM 9.10.9)'),
+    box('Flaps 25 / 30','190 / 180','B',false,'Flap placard: Flaps 25 = 190, Flaps 30 = 180 KIAS. (FCOM 9.10.9)'),
+  ]),
+  S('WEIGHTS / ALTITUDE','#2e7d5b',[
+    box('Max Takeoff Weight','561,500 lbs','B',false,'Maximum Takeoff Weight: 561,500 lbs. (FCOM L.10.7 / AFM)'),
+    box('Max Landing Weight','425,000 lbs','B',false,'Maximum Landing Weight: 425,000 lbs. (FCOM L.10.7)'),
+    box('Max Zero Fuel Weight','400,000 lbs','B',false,'Maximum Zero Fuel Weight: 400,000 lbs. (FCOM L.10.7)'),
+    box('Max operating altitude','43,100 ft PA','B',false,'Maximum operating altitude: 43,100 feet PA. (FCOM L.10.2)'),
+    box('Max T/O & landing altitude','14,000 ft PA (High Alt ops above 8,000 ft)','B',false,'Maximum Takeoff and Landing altitude: 14,000 feet PA. Use High Altitude Airport Operations procedures above 8,000 feet. (FCOM L.10.2)'),
+  ]),
+]},
+];
+
+/* ============================================================
+   MAINTENANCE: to fold in a new manual revision, edit (1) VERSIONS
+   below, (2) the affected items in the PHASES data above, and
+   (3) the per-card cite / per-step quote. Nothing else changes.
+   ============================================================ */
+const VERSIONS='FCOM R10 · QRH R7 · FCTM R9 · FOM 124.2 · PRC 04/01/26';
+document.getElementById('srcsub').textContent=VERSIONS+' · tap a step for the exact quote';
+const QUOTES={"preflight|ARRS · FFLAAP MD · Logbook":"ARRS: personal walk-in mnemonic for checking the aircraft's required certificates / documents are aboard and valid (Airworthiness certificate, Registration, Radio station license). FFLAAP MD: flight-deck emergency equipment check - 2 Flashlights, 1 Fire Extinguisher, 4 Life Vests, 1 AVSAX & Gloves, 1 Crash Axe, 1 PBE, 4 O2 Masks, 4 Descent Devices. Then the Logbook (is the airplane awake or cold and dark?). Crew memory aids, not a published FCOM step list. (HAL B787 GenOps notes)","preflight|DEAD AIRCRAFT - Elec Pwr Up (Read & Do)":"Electrical Power Up: BATTERY switch ON. C1 and C2 ELEC pump selectors OFF. DEMAND pump selectors OFF. WIPER selectors OFF. Landing gear lever DN. ALTN FLAPS selector OFF. Electrical power Establish (external power if desired, otherwise APU). (FCOM SP.6.2)","preflight|COMM-ATC: Logon (Capt or FO)":"KSEA / CONUS Data Comm: log on with LOGON TO = KUSA to enable departure-clearance auto-upload approximately 30 minutes prior. PHNL uses a PDC rather than a CPDLC logon. (Company Data Comm procedure)","preflight|POS INIT":"CDU POS INIT page: Verify that the time is correct. If SET INERTIAL POS line is boxed, enter the present position on the SET INERTIAL POS line using the most accurate latitude and longitude. (FCOM NP.21.2)","preflight|RTE":"CDU RTE page: Enter FLT NO exactly as it appears on the Dispatch Release and select ROUTE REQUEST. Once ROUTE UPLINK appears, select LOAD. Verify/enter ORIGIN and DEST airport. Verify/enter the route. ACTIVATE and execute RTE 1. (FCOM NP.21.2)","preflight|DEPARTURES":"CDU DEPARTURES page: Select the runway or HUD TAKEOFF. Select departure routing. Execute the runway/HUD TAKEOFF and departure routing. Note: if a change in HUD TAKEOFF runway is needed, select both flight director switches OFF; after the new runway is executed, select the FD switches back ON. (FCOM NP.21.3)","preflight|POS REF 2":"POS REF page 2: Verify the correct RNP for the departure, as needed. (FCOM NP.21.3)","preflight|ARRIVALS":"CDU ARRIVALS page: Select runway. Select arrival routing. Note: Do not load an instrument approach before departure - this prevents unwanted automatic LNAV arming and activation if a TO/GA switch is pushed after takeoff. Execute the arrival routing and runway. (FCOM NP.21.3)","preflight|FIX INFO":"If the flight contains an ETOPS segment, on the FIX INFO page enter all ETPs from the Dispatch Release / Flight Plan and enter a 410 NM distance circle around the adequate airport used to define the EEP. (FCOM NP.21.3)","preflight|NAV RADIO":"NAV RADIO page: Tune the navigation radios as needed. (FCOM NP.21.4)","preflight|FMC COMM":"FMC COMM page: Select WIND, LOAD and execute. Select DES FORECAST, LOAD. Select CLB FORECAST, LOAD. Note: failure to enter enroute winds can result in flight plan time and fuel burn errors. (FCOM NP.21.4)","preflight|LEGS":"Verify that the route is correct on the RTE page. Check the LEGS pages as needed to ensure compliance with the flight plan. (FCOM NP.21.3)","preflight|NAV DATA":"Independent Legs Verification: for ORCN/ETOPS flights both the PF and PM independently verify the full lat/long of all unnamed oceanic waypoints. ARINC 424 check: select the waypoint on the LEGS page to the scratchpad, INIT REF, INDEX, NAV DATA, paste into IDENT, compare LATITUDE and LONGITUDE to the flight plan/clearance. (FCOM NP.21.4)","preflight|OPS CONTROL (COMPANY-FLIGHT INIT)":"COMPANY - FLIGHT INIT page: Verify or enter FLIGHT NUMBER. Enter SCHEDULED DATE (numeric day only) from the Dispatch Release. Verify/enter ORIGIN and DESTINATION STATION. Enter CAPT, F/O, and R/O employee numbers. (FCOM NP.21.5)","preflight|Verify":"Verify MELs/CDLs affecting RNP, communications, or ETOPS capabilities. Check the Dispatch Release for ETOPS status. Check the ETOPS critical fuel analysis. (PRC ORCN/ETOPS Reference Card)","preflight|Alternates":"Check ETOPS alternate weather and NOTAMs. Load the flight plan in FD Pro. Ensure the PDSC/PDC have been completed and remain valid. (PRC ORCN/ETOPS Reference Card)","preflight|Program":"Program EEP, EXP and ETP/CP per aircraft-specific procedures. Perform any oceanic-specific route-verification steps (e.g., expanded lat/long check). (PRC ORCN/ETOPS Reference Card)","preflight|HF":"Locate HF frequencies and perform an HF radio check, referencing the fleet-specific manual (e.g., WWV/WWVH or VOLMET). (PRC ORCN/ETOPS Reference Card)","preflight|PM: Walk-around / Exterior Inspection":"Exterior Inspection: before each flight the PM or IRO must verify the airplane is satisfactory for flight. This is typically performed immediately after completion of the Preliminary Preflight Procedure. Items at each location may be checked in any sequence. (FCOM NP.21.6)","preflight|Individual Cockpit Preflight":"Preflight Procedure - First Officer and Preflight Procedure - Captain: each pilot completes their own side-panel setup and flows (EFIS, MCP, oxygen test, displays, flight instruments, standby instruments). (FCOM NP.21.12 / NP.21.22)","preflight|MCP (takeoff pilot)":"MCP - Set (C, F/O). The pilot who will do the takeoff sets the MCP: Arm LNAV as needed. Arm VNAV. Set initial heading or track. Set initial altitude. (FCOM NP.21.26)","preflight|Takeoff Brief":"Taxi and Takeoff briefings - Complete (C, F/O). The pilot who will do the takeoff does the taxi and takeoff briefings. (FCOM NP.21.26)","preflight|CDU takeoff data (PF loads, PM verifies)":"CDU - Set (C, F/O). COMPANY-PERFORMANCE-TAKEOFF DATA page: Select LOAD FMC. CDU PERF INIT: Select ACCEPT, verify ZFW. CDU TAKEOFF REF 1/2: ACCEPT; verify/enter FLAPS, assumed temperature (THRUST), takeoff CG, and V1/VR/V2; set MCP IAS/MACH to V2. TAKEOFF REF 2/2: verify EO ACCEL HT, ACCEL HT, THR REDUCTION. THRUST LIM: verify OAT, select TO and CLB limits (HA operations do not allow TO 1 or TO 2). (FCOM NP.21.27)","preflight|Pax Count Verify":"Passenger Count Verification - Perform (C, F/O). The First Officer reads the passenger count and jumpseat numbers from the Load Closeout. The Captain verifies the numbers match the Flight Deck Report provided in JetPack or via alternate means. (FCOM NP.21.27)","preflight|Gate Agent / Station Mgr":"Operational coordination with the gate agent / station manager to confirm fuel on board and review EICAS prior to door close. (Crew SOP - not a published FCOM step.)","preflight|1L door close":"The Flight Attendant confirms with the flight deck before closing the 1L (main boarding) door. (Crew SOP.) Note: when a jet bridge is connected to the 1L door, the left angle-of-attack sensor must be carefully inspected during the walkaround. (FCOM NP.21.6)","preflight|Flight Attendant":"Continue this procedure once the cabin is secure and the walkaround check is complete. Note: \"Walkaround check complete\" constitutes clearance to pressurize the hydraulic systems. Verify exterior doors closed and slides armed (doors in auto). (FCOM NP.21.28)","preflight|EICAS":"Verify the EICAS display configuration and that only expected alert and memo messages are shown; check the nosewheel lockout indication if pushback is required. (Crew SOP / FCOM NP.21)","before-start|Capt":"Captain coordinates with the ground crew before pushback: brakes set, confirm clear to disconnect external power/air, and stand by for push clearance. (Ground coordination - FCOM Pushback or Towing, NP.21.30)","before-start|Ramp Crew":"Pushback or Towing: Ground handling personnel - Establish communications (C). The walkaround being complete is the trigger for the FO's before-start flow and clearance to pressurize hydraulics. (FCOM NP.21.28 / NP.21.30)","before-start|Call ATC for Push Clearance":"Obtain pushback/ramp clearance from ATC or ramp control per local procedure before commencing pushback. (Company / local procedure)","before-start|Ramp Crew (push / start)":"Pushback or Towing: TRANSPONDER MODE selector XPDR (F/O). Parking brake Set or release as directed by ground handling personnel. When pushback/towing is complete: Tow bar - Verify not connected (C); Nose gear steering - Verify not locked out (C). (FCOM NP.21.30)","before-taxi|FO flow":"Before Taxi Procedure (start after receiving the salute): Verify all engine generator OFF lights are extinguished (F/O). APU selector OFF. ENGINE ANTI-ICE selectors As needed. Verify ground personnel and equipment are clear. (FCOM NP.21.31)","before-taxi|Capt":"Call \"FLAPS ___\" as needed for takeoff (C). Flap lever Set takeoff flaps (F/O). Flight controls Check (C): make slow, deliberate inputs one direction at a time to full travel, verify freedom of movement and return to center; hold the rudder pedal disconnect switch during the rudder check. (FCOM NP.21.31)","before-taxi|PM":"Secondary Engine Indications Off (F/O). Recall Check (C, F/O): verify only expected alert and memo messages are shown. (FCOM NP.21.31)","before-takeoff|PM":"Set the TAXI light switch ON and RUNWAY TURNOFF lights as needed. No less than two minutes prior to takeoff, make the \"Flight Attendants should now be seated for takeoff\" PA. Verify the CABIN READY message is shown. (FCOM NP.21.33)","before-takeoff|PF (takeoff pilot)":"The pilot who will do the takeoff updates changes to the takeoff briefing as needed. Set the weather radar display as needed. Select VSD on as needed. Set the terrain display as needed. Call \"BEFORE TAKEOFF CHECKLIST.\" (FCOM NP.21.33)","before-takeoff|Prior to hold-short - both":"Prior to crossing the hold-short line, use all available resources to verify the runway and runway entry point. Resolve any inconsistencies prior to takeoff. Both pilots announce \"Runway ___ confirmed\" when verification is complete. (FCOM NP.21.34)","before-takeoff|Crossing hold-short (PM)":"When entering the departure runway, set the WING, L/R RUNWAY TURNOFF, and STROBE light switches to ON. Use other lights as needed. Set the transponder mode selector to TA/RA. (FCOM NP.21.34)","before-takeoff|Lined up - both":"When lined up on the departure runway, both pilots visually verify the aircraft symbol on the ND map display is on the assigned runway and that the aircraft and runway headings agree. (FCOM NP.21.34)","before-takeoff|Cleared for takeoff":"When cleared for takeoff, set all LANDING light switches to ON (PM). Advance the thrust levers to approximately 40% N1. Allow the engines to stabilize. Push the TO/GA switch. Verify that the correct takeoff thrust is set. (FCOM NP.21.34)","before-takeoff|PM: “Thrust Set”":"Monitor the engine instruments during the takeoff. Adjust takeoff thrust before 80 knots as needed. During strong headwinds, if the thrust levers do not advance to the planned takeoff thrust, manually advance them before 80 knots. Call \"THRUST SET.\" (FCOM NP.21.35)","before-takeoff|@80 kt → PM: “80 Knots” / PF: “Check”":"Verify 80 knots and call \"CHECK\" (PF). Call \"80 KNOTS\" (PM). After takeoff thrust is set, the Captain's hand must be on the thrust levers until V1. Verify V1 speed; verify the automatic V1 callout or call \"V1.\" (FCOM NP.21.35)","before-takeoff|PM: “Positive Rate” → PF: “Gear Up”":"At VR, rotate toward 15 degrees pitch attitude; at VR call \"ROTATE.\" Verify a positive rate of climb on the altimeter and call \"POSITIVE RATE\" (PM). Verify a positive rate and call \"GEAR UP\" (PF). Set the landing gear lever to UP (PM). (FCOM NP.21.35)","before-takeoff|@200 ft → PF: “Autopilot On” (as needed)":"At 200 ft, PF \"Autopilot On\" (as needed). Above 400 feet radio altitude, PF calls for a roll mode as needed; PM selects/verifies the roll mode and verifies VNAV engaged. Verify that climb thrust is set. (FCOM NP.21.35 / PRC Takeoff profile)","after-takeoff|PF":"Verify acceleration at the acceleration height. Call \"FLAPS ___\" according to the flap retraction schedule. Engage the autopilot when above the minimum altitude for autopilot engagement. Verify CLB thrust is set and verify altitude capture. (FCOM NP.21.35)","after-takeoff|PM":"After flap retraction is complete, set the ENGINE ANTI-ICE selectors to AUTO and the NOSE LANDING and TAXI light switches to OFF. Do the AFTER TAKEOFF checklist. (FCOM NP.21.35)","cruise|PM":"During climb or cruise, verify the RNP as needed. (FCOM NP.21.37)","cruise|At 10,000 ft MSL (PM)":"At 10,000 feet MSL, set the LEFT and RIGHT LANDING, RUNWAY TURNOFF, and WING light switches to OFF, and push the CABIN CHIME button twice. Note: a pause of at least three seconds must be observed between CABIN CHIME pushes. Clear any manually tuned NAVAIDs that are no longer needed. (FCOM NP.21.37)","cruise|Above FL180 (PM)":"Set the seatbelt signs as needed above FL180. Note: when the seat belt sign is turned off for the first time after takeoff, crews must make a Seat Belt Advisory PA (FOM 3.100). On the COMPANY - DEPARTURE REPORT page, verify or set the OUT TIME, OFF TIME, and TAKEOFF PILOT. (FCOM NP.21.37)","cruise|Above transition altitude":"When climbing above the transition altitude, set the altimeters to standard. (FCOM NP.21.37)","cruise|Fuel (PM)":"If the FUEL IN CENTER message shows, set both CENTER FUEL PUMP switches to ON. When the FUEL LOW CENTER message shows, set both CENTER FUEL PUMP switches to OFF. (FCOM NP.21.38)","cruise|Before T/D":"Before the top of descent, modify the active route as needed for the arrival and approach, and on the VNAV DES page set the descent speed to CI mach/300, unless a different speed is requested by ATC. (FCOM NP.21.38)","cruise|Coordinate route changes":"Coordinate changes to the planned route (except weather deviations) with Dispatch to ensure the aircraft remains within the Maximum Diversion Distance. (PRC ORCN/ETOPS Reference Card)","cruise|Report":"Report speed changes of Mach 0.02 or greater. Report ETA changes of 3 minutes or greater (non-CPDLC). (PRC ORCN/ETOPS Reference Card)","cruise|Waypoint passage":"Approaching each waypoint: confirm the next waypoint matches the cleared route; fuel check; ATC position report (non-CPDLC); approximately two minutes after the FMC sequences, crosscheck navigation (LNAV showing the correct TO waypoint and cross-track deviation). (PRC ORCN/ETOPS Reference Card)","cruise|Fuel awareness":"Arriving at the CP/ETP with FOB equal to or greater than the critical-fuel-scenario fuel is a dispatch requirement. ETPs are calculated using winds at 10,000 ft. Be continuously aware of the airport that would take the least time to fly to at or near cruise altitude. (FOM 6.3.6 / 6.3.7)","descent|Start":"Start the Descent Procedure before the airplane descends below the cruise altitude for arrival at destination. Complete the Descent Procedure by 10,000 feet AFE. (FCOM NP.21.39)","descent|Review (both)":"Review all alert and memo messages. Review all operational notes. Recall and review all alert and memo messages and operational notes. (FCOM NP.21.39)","descent|Check landing performance":"Check landing performance. Verify VREF on the APPROACH REF page (the PM enters VREF). (FCOM NP.21.39)","descent|Set minimums":"Set the RADIO/BARO minimums for the approach. MDA: set BARO to MDA + 50 (set BARO to MDA if a note allows authorized operators to use DA in lieu of MDA). DA: set BARO to the published DA. CAT II: set RADIO to DH. CAT III: reset (blank) minimums. (FCOM NP.21.39)","descent|PM":"Set the NAV RADIO page for the approach. Set the AUTOBRAKE selector to the needed setting. For CAT II/III, AUTOBRAKE must be set to a value that results in a factored landing distance not exceeding the landing distance available. (FCOM NP.21.39)","descent|FMC crosscheck (both)":"If LNAV or VNAV is used for the arrival/approach, both pilots crosscheck the FMC waypoint names, speeds, altitudes and sequences against the appropriate chart. (FCOM NP.21.39)","descent|Approach briefing":"Do the approach briefing. Note: the approach briefing must include a reminder that go-arounds on or near the ground require go-around thrust to be set manually and that a flap configuration warning can sound. Call \"DESCENT CHECKLIST.\" (FCOM NP.21.39)","approach|Start":"The Approach Procedure is normally started at transition level. Complete it before the IAF, the start of radar vectors to the final approach course, or the start of a visual approach. Do not manually build the approach or add waypoints to the selected FMC procedure. (FCOM NP.21.40)","approach|PM":"During arrival and approach, verify the RNP as needed. Set the seatbelt signs ON prior to descending below FL180. No later than FL180, make the \"Flight Attendants, please prepare the cabin for arrival and be seated for landing\" PA. (FCOM NP.21.40)","approach|At 10,000 ft AFE (PM)":"At 10,000 feet AFE, set the LEFT and RIGHT LANDING, RUNWAY TURNOFF, and WING light switches to ON, and push the CABIN CHIME button twice. Note: a pause of at least three seconds between CABIN CHIME pushes. (FCOM NP.21.40)","approach|Below transition level":"When descending below the transition level, set the altimeters. (FCOM NP.21.40)","approach|PF":"Update the arrival and approach as needed. Select VSD on as needed. Update the approach briefing as needed. Call \"APPROACH CHECKLIST.\" (FCOM NP.21.40)","landing|PF (final)":"Call \"FLAPS ___\" according to the flap extension schedule. When on localizer intercept heading, verify the navigation radios are tuned and identified and the deviation pointers are shown. Arm the APP mode. Use LNAV, HDG SEL/TRK SEL or HDG HOLD/TRK HOLD to intercept the final approach course as needed. (FCOM NP.21.42)","landing|PM: “LOCALIZER ALIVE”":"Call \"LOCALIZER ALIVE.\" Verify that the localizer is captured and verify the final approach course heading. Call \"GLIDESLOPE ALIVE.\" (FCOM NP.21.42)","landing|At G/S alive - PF":"At glideslope alive, call \"GEAR DOWN\" and \"FLAPS 20.\" The PM sets the landing gear lever to DN and the flap lever to 20. Set the speedbrake lever to ARMED. (FCOM NP.21.42)","landing|At G/S capture - PF":"At glideslope capture, call \"FLAPS ___\" as needed for landing. Set the missed approach altitude on the MCP. Call \"LANDING CHECKLIST.\" (FCOM NP.21.42)","landing|Autobrake MANDATORY":"Use of the autobrake system is MANDATORY for CAT II/III operations (FCTM 6.21). All CAT I callouts apply. Radio Altitude Minimums selector = DH for CAT II; reset (blank) minimums for CAT III. (PRC CAT II/III Standard Callouts)","landing|@500 ft AFE - PM":"At 500 ft AFE: PM calls \"Stable, [Autoland Status]\" or \"No Autoland, Go-Around\"; PF replies \"Checked\" or \"Go-Around.\" (PRC CAT II/III Standard Callouts)","landing|@RA+100 - PM":"At RA + 100 ft: PM calls \"100 Above\"; PF replies \"Checked.\" (* if the auto callout is inoperative.) (PRC CAT II/III Standard Callouts)","landing|@DH - PM":"At DH: PM calls \"Minimums\"; PF replies \"Continue,\" \"Go Around,\" or \"Landing.\" (PRC CAT II/III Standard Callouts)","landing|PF (rollout)":"Apply reverse thrust as needed. Before taxi speed, disarm the autobrake and use manual braking as needed. Before turning off the runway, disconnect the autopilot. (FCOM NP.21.52)","after-landing|Speedbrake":"The Captain positions or verifies that the SPEEDBRAKE lever is DOWN. (FCOM NP.21.53)","after-landing|PM After-Landing flow":"Set the APU selector to START, then ON, as needed. Set the ENGINE ANTI-ICE selectors to ON, if needed. Set the weather radar to off. Set the AUTOBRAKE selector OFF. Set the flap lever to UP. Set the transponder mode selector to XPDR. On the COMPANY - ARRIVAL REPORT page, verify or set the ON TIME, IN TIME, and LANDING PILOT. (FCOM NP.21.53)","shutdown|Shutdown flow":"Parking brake Set (PF). Electrical power Set (F/O). FUEL CONTROL switches CUTOFF (C). SEAT BELTS selector OFF. HYDRAULIC panel pumps OFF. FUEL PUMP switches OFF. BEACON OFF. FLIGHT DIRECTOR switches OFF. TRANSPONDER MODE selector STANDBY. Status messages Check. APU selector As needed. Call \"SHUTDOWN CHECKLIST.\" (FCOM NP.21.54)","secure|Run any time flight deck left unattended":"Run the Secure Procedure any time the flight deck will be left unattended. (FCOM NP.21.56)","secure|FO":"IRS selectors OFF. BATTERY switch Off. Emergency lights Off. Packs Off. (FCOM NP.21.56 / QRH SECURE)","go-around|PM":"Verify that the thrust is sufficient for the go-around or adjust as needed and call \"THRUST SET.\" Set the flap lever as directed by the PF. (FCOM NP.21.51)","go-around|PM: “Positive Rate” → PF: “Gear Up”":"Verify a positive rate of climb on the altimeter and call \"POSITIVE RATE\" (PM). Call \"GEAR-UP\" (PF). Set the landing gear lever to UP (PM). (FCOM NP.21.51)","go-around|@200 ft → PF: “Autopilot On” (as needed)":"At 200 ft, PF \"Autopilot On\" (as needed). Above 400 feet radio altitude, PF selects or verifies a roll mode. (FCOM NP.21.51 / PRC Go-Around profile)","go-around|Accel ht":"At acceleration height, set the speed to the maneuver speed for the planned flap setting and call \"FLAPS ___\" according to the flap retraction schedule. After flaps are set and at or above flap maneuvering speed, select FLCH or VNAV as needed. Verify that climb thrust is set. Call \"AFTER TAKEOFF CHECKLIST.\" (FCOM NP.21.51)","diversion|1 - Complete the NNC":"Complete the applicable Non-Normal Checklist (the EICAS checklist) before deciding on a diversion. (PRC Mechanical Abnormality Diversion Guidance)","diversion|2 - Does the failure require diversion?":"Does the failure require diversion? If YES, DIVERT (coordinate with SOCC). (PRC Mechanical Abnormality Diversion Guidance)","diversion|3 - If not required":"If diversion is not required, ask: are the risks of continuing higher than the risks of diverting? If yes, DIVERT (coordinate with SOCC); otherwise continue to destination. (PRC Mechanical Abnormality Diversion Guidance)","diversion|Failures requiring diversion":"Failures requiring diversion: insufficient fuel remaining due to higher fuel consumption following a component failure; any failure where the crew must land at the nearest suitable airport (QRH NNC \"Land at Nearest Suitable Airport\"); fire or smoke that continues; only two power sources remain (two main engine generators, or one main engine generator and both APU generators); any other situation the crew determines has a significant adverse effect on safety if the flight is continued. (PRC Mechanical Abnormality Diversion Guidance)","diversion|Engine failure (one inop)":"14 CFR 121.565 requires the Captain of a two-engine airplane with one engine inoperative to land at the nearest suitable airport where, in the Captain's judgment after considering all relevant factors, a safe landing can be made. (FOM 6.4.2)","diversion|Captain":"The Captain should assign PF/PM for landing based on Threat and Error Management (TEM) principles. If contingency procedures are employed as a result of an engine shutdown or system failure, the Captain should advise ATC as soon as practicable, remind ATC of the aircraft type, and request expeditious handling. (FOM 6.4.2 / 6.4.6)","diversion|Maintain awareness":"Flight crews will: maintain awareness of suitable airports; have a current diversion plan in mind; keep track of weather and NOTAMs at the diversion airport; be prepared to coordinate with Dispatch in the event of an actual diversion; and include the current diversion plan in the brief after a rest period. (FOM 6.4.1)","diversion|180° turn near ETP":"If a 180-degree turn is necessary near a fuel-critical ETP, be aware that the time to complete the turn is not factored into the fuel or time calculations by the flight planning system. (FOM 6.4.1)","etops|Diversion speed":"Engine-inoperative ETOPS fuel requirements are based on the approved One-Engine-Inoperative Cruise Speed, which should be followed in case of a diversion following an actual engine failure. The Captain has the authority to deviate from this planned speed profile after assessing the emergency and considering fuel remaining. (FOM 6.4.5)","etops|Pick the field":"Most diversions do not require a descent well below cruise altitude, so be continuously aware of the airport that would take the least time to fly to at or near cruise altitude. A closer suitable airport that is not a designated ETOPS alternate may be the better choice. (FOM 6.3.7)","etops|Fuel":"Arriving at the CP/ETP with FOB at or above the critical-fuel-scenario fuel is a dispatch requirement; if it appears FOB at the CP/ETP will be lower, there is no requirement to divert prior to the CP provided estimated fuel at destination is above arrival requirements, and the Dispatcher should evaluate changes to altitude, speed, enroute alternate, and routing. (FOM 6.3.6)","etops|Coordinate":"If the decision is made to divert, advise ATC as soon as practicable and request expeditious handling; coordinate with Dispatch (see Nearest Suitable Airport). (FOM 6.4.4 / 6.4.6)","etops|1 - Offset":"Turn to offset from the route using the Special Procedures for In-Flight Contingencies. (FOM 6.4.3)","etops|2 - Emergency Descent":"Perform an Emergency Descent to 10,000 ft or MOCA/Grid MORA, whichever is higher. (FOM 6.4.3)","etops|3 - Below FL290":"Below FL290, or sooner if cleared by ATC, proceed directly to the nearest suitable airport. (FOM 6.4.3)","etops|4 - When level":"When level, use the Flight Plan one-engine diversion speed, or (AS) Long Range Cruise (LRC) for a two-engine decompression. (FOM 6.4.3)","oceanic|Get a revised clearance first":"If an aircraft is unable to continue the flight in accordance with its ATC clearance, a revised clearance shall be obtained, whenever possible, prior to initiating any action. (FOM 5.7.4.2)","oceanic|Choose turn direction":"The direction of the turn should be based on one or more of: aircraft position relative to any organized track or ATS route system; direction of flights and flight levels allocated on adjacent tracks; direction to an alternate airport; any strategic lateral offset being flown; and terrain clearance. (FOM 5.7.4.2)","oceanic|2 - Altitude":"The aircraft should be below FL290 prior to diverting from the assigned clearance unless a revised ATC clearance has been obtained. Once established on a same-direction parallel route 5 nm offset, establish a 500-ft vertical offset and proceed as required by the situation. (FOM 5.7.4.2 / 5.7.4.3)","oceanic|3 - Squawk / lights / TCAS":"TCAS should operate in TA/RA mode whenever possible. Turn on all aircraft exterior lights. Keep the transponder on at all times and, when able, squawk 7700 as appropriate. (FOM 5.7.4.2)","oceanic|4 - Broadcast":"Establish communications with and alert nearby aircraft by broadcasting on the frequencies in use and on 121.5 MHz (backup 123.45 MHz): aircraft identification, the nature of the distress condition, intentions, position (including the ATS route designator or track code), and flight level. Use MAYDAY or PAN-PAN, preferably spoken three times. (FOM 5.7.4.2)","oceanic|Request first":"When weather deviation is required, request an ATC clearance: state \"WEATHER DEVIATION REQUIRED\" to indicate priority is desired, or request a deviation using a CPDLC lateral downlink message. If necessary use the urgency call \"PAN-PAN,\" preferably spoken three times. (FOM 5.7.4.4)","oceanic|If no clearance":"If unable to obtain ATC clearance: if possible, deviate away from the track system; broadcast on VHF 121.5 and 123.45 (call sign, flight level, position, and intentions); monitor TCAS; turn all exterior lights ON; deviate from course as required to avoid weather; and continue trying to obtain an ATC clearance. (PRC Oceanic References / FOM 5.7.4.6)","oceanic|< 5 NM":"For deviations less than 5 nm, maintain the assigned flight level. (FOM 5.7.4.6)","oceanic|≥ 5 NM":"For deviations of 5 nm or more without a clearance, when approximately 5 nm from track initiate a level change: PRC Pacific - climb +300 ft if south of track, descend -300 ft if north of track. FOM magnetic-track table: EAST (000-179 deg) L = descend 300, R = climb 300; WEST (180-359 deg) L = climb 300, R = descend 300. (FOM 5.7.4.6 / PRC)","oceanic|SLOP":"Use the Strategic Lateral Offset Procedure (SLOP) as standard practice in oceanic operations: fly 0.0-2.0 nm right of course only, in 0.1 nm increments; left of course is not authorized. No ATC clearance is required and ATC need not be advised; return to centerline by the oceanic exit point. (FOM 5.7.4.7)","oceanic|KZAK Oakland":"KZAK Oakland Oceanic FIR: log on 45-15 minutes prior to entry but not below 10,000 ft MSL if not auto-transferred. Squawk 2000. Max uplink delay 300. SELCAL check required with San Francisco Radio. SLOP 0-2 nm right. (PRC FIR/OCA Reference Cards)","oceanic|Holding speeds":"Oceanic holding speeds (KIAS): 0-6,000 ft = 200; 6,001-14,000 ft = 230; 14,001 ft and above = 265. (PRC FIR/OCA Reference Cards)","depress|1 - Descend to 18,000 ft MSL":"Initially descend to 18,000 ft MSL and track to the nearest suitable airport (use the PRC recommended-airport list). (PRC Western US Depress Strategy)","depress|2 - Do NOT descend below highest MORA":"Do not descend below the highest MORA between the present position and the selected diversion airport. (PRC Western US Depress Strategy)","depress|3 - Step down":"Progressively step down to the next-highest MORA and 10,000 ft MSL as soon as possible. (PRC Western US Depress Strategy)","depress|O2 / time":"Depressurization oxygen requirements: by 5 minutes from depressurization, descend to FL180 or below; by 45 minutes, descend to FL100 or below. (PRC Western US Depress Strategy)"};
+
+let state={phase:'preflight',seat:'C',duty:'PF',appr:'ILS',cat:1};
+// QRH normal checklists (item, response, role) for click-to-show with role greying
+const CHECKLISTS={
+ 'Preflight':[['Oxygen','Tested, 100%','B'],['Flight instruments','Heading / Altimeter','B'],['Parking brake','Set','C'],['FUEL CONTROL switches','CUTOFF','C'],['Logbook','Onboard','C']],
+ 'Before Start':[['Flight deck door','Closed and locked','F'],['Passenger signs','___','F'],['MCP','V2, HDG/TRK, ALTITUDE','PF'],['Takeoff speeds','V1, VR, V2','B'],['CDU preflight','Completed','B'],['Trim','___ Units, 0','C'],['Taxi and takeoff briefing','Completed','PF'],['BEACON','ON','F']],
+ 'Before Taxi':[['Anti-ice','___','F'],['Recall','Checked','B'],['Autobrake','RTO','F'],['Flight controls','Checked','C'],['Ground personnel and equipment','Clear','B']],
+ 'Before Takeoff':[['Flaps','___','PF'],['Cabin Crew','Advised','PM']],
+ 'After Takeoff':[['Landing gear','UP','PM'],['Flaps','UP','PM']],
+ 'Descent':[['Recall','Checked','B'],['Notes','Checked','B'],['Autobrake','___','PM'],['Landing data','VREF, Minimums','B'],['Approach briefing','Completed','PF']],
+ 'Approach':[['Altimeters','___','B']],
+ 'Landing':[['Speedbrake','ARMED','PF'],['Landing gear','DOWN','PF'],['Flaps','___','PF']],
+ 'Shutdown':[['Hydraulic panel','Set','F'],['Fuel pumps','Off','F'],['Flaps','UP','C'],['Parking brake','___','C'],['FUEL CONTROL switches','CUTOFF','C'],['Weather radar','Off','B']],
+ 'Secure':[['IRS','Off','F'],['Battery','Off','F'],['Emergency lights','Off','F'],['Packs','Off','F']]
+};
+function roleMatch(r){
+  if(!r||r==='B')return true;
+  if(r==='C')return state.seat==='C';
+  if(r==='F')return state.seat==='F';
+  if(r==='PF')return state.duty==='PF';
+  if(r==='PM')return state.duty==='PM';
+  return true;
+}
+function apprVisible(a){
+  if(!a||a==='all')return true;
+  if(a==='ILScat')return state.appr==='ILS'&&state.cat>=2;
+  return state.appr===a;
+}
+const RTAG={C:'CA',F:'FO',PF:'PF',PM:'PM'};
+function rtagHtml(r){ return RTAG[r]?`<span class="rtag ${r}">${RTAG[r]}</span>`:''; }
+const LIM=/(40°C|FL\d{3}|VREF\d*|RNP ?[0-9.]+|V1|VR|V2|MORA|MOCA|10,000 ft|18,000|FL180|FL100|300 ft|500 ft|400 ft|200 ft|75 ft|80 KIAS|60 KIAS|7700|121\.5|123\.45|5 nm|2 nm|1 × RNP|0\.10|30°)/g;
+function hl(s){ return s? s.replace(LIM,'<span class="lim">$1</span>') : ''; }
+function boldCO(s){ return s.replace(/[“"]([^”"]*)[”"]/g,'<b class="co">“$1”</b>'); }
+const STATES=/\b(ON|OFF|AUTO|SET|UP|DN|DOWN|CUTOFF|RUN|ARM|ARMED|RTO|STBY|STANDBY|XPDR|TA\/RA|NORM|CLOSED|OPEN)\b/g;
+function boldST(s){ return s.replace(STATES,'<b>$1</b>'); }
+function deco(s){ return s? hl(boldST(boldCO(s))) : ''; }
+function bullets(s){ if(!s)return ''; const p=s.split(' · '); if(p.length<2)return `<div class="s">${deco(s)}</div>`;
+  return `<ul class="bl">${p.map(x=>`<li>${deco(x)}</li>`).join('')}</ul>`; }
+const EXP='<span class="exp">&#9656;</span>';
+
+function renderItem(it,cite,ctx,pid){
+  if(it.k==='sub') return `<div class="sub" style="background:${it.c}">${it.t}</div>`;
+  if(it.k==='note') return `<div class="note">${deco(it.t)}</div>`;
+  if(it.k==='book') return `<div class="book"><div class="t">${it.t}</div>${bullets(it.s)}</div>`;
+  if(it.k==='trig'){ const dim=!roleMatch(it.r)?' dim':'';
+    return `<div class="trig${dim}"><span class="ic">&#9654;</span><span>${deco(it.t)}</span></div>`; }
+  if(it.k==='cl'){ const items=CHECKLISTS[it.t]||[];
+    const w=it.w?`<span class="w">when: ${deco(it.w)}</span>`:'';
+    const body=items.map(ci=>`<div class="cli${roleMatch(ci[2])?'':' dim'}"><span class="cii">${ci[0]}</span><span class="civ">${deco(ci[1])}</span>${rtagHtml(ci[2])}</div>`).join('')||'<div class="cli">(reference)</div>';
+    return `<div class="clwrap"><div class="cl${it.bold?' bold':''} has-cl"><span class="ic">&#10003;</span><span class="cln">${it.t} Checklist${w}</span>${EXP}</div><div class="clbody">${body}</div></div>`; }
+  if(it.k==='box'){ const match=roleMatch(it.r); const dim=match?'':' dim'; const n=ctx.n++;
+    const q=it.q || (typeof QUOTES!=='undefined' ? (QUOTES[pid+'|'+it.t]||'') : '');
+    const cls='it'+(it.call?' say':'')+(it.fmc?' fmc':'')+(q?' has-q':'')+dim;
+    const sayb=it.call?'<span class="sayb">&#10078;</span>':'';
+    const t=`<div class="t">${sayb}${deco(it.t)}${rtagHtml(it.r)}${q?EXP:''}</div>`;
+    const qb=q?`<div class="qbox"><span class="qsrc">${cite}</span><span class="qt">${q}</span></div>`:'';
+    return `<div class="${cls}"><div class="stepn">${n}</div><div class="body">${t}${bullets(it.s)}${qb}</div></div>`; }
+  return '';
+}
+function gateFor(ph){
+  const names=[];
+  ph.sections.forEach(s=>{ if(apprVisible(s.appr)) s.items.forEach(it=>{ if(it.k==='cl') names.push(it.t+' Checklist'); }); });
+  return [...new Set(names)];
+}
+function render(){
+  const ph=PHASES.find(p=>p.id===state.phase);
+  const main=document.getElementById('main');
+  const ctx={n:1};
+  let cards='';
+  ph.sections.forEach(sec=>{
+    if(!apprVisible(sec.appr))return;
+    const cite=sec.cite||ph.src;
+    const inner=sec.items.map(it=>renderItem(it,cite,ctx,ph.id)).join('');
+    cards+=`<div class="card"><div class="ch" style="--ec:${sec.c}"><span class="hn">${sec.h}</span><span class="cardcite">${cite}</span></div><div class="cb">${inner}</div></div>`;
+  });
+  main.innerHTML=`<div class="phasehead">${ph.title}<span class="src">${ph.src}</span></div><div class="grid" id="grid">${cards}</div>`;
+  const g=document.getElementById('gate'); const gn=gateFor(ph);
+  if(gn.length){ g.className='gate'; g.innerHTML=`<span class="lbl">GATE</span><span class="nm">&#10003; ${gn.join('  ·  ')}</span>`; }
+  else g.className='gate none';
+  // approach-type toggle visibility (only on Landing)
+  const showAppr=ph.id==='landing';
+  document.getElementById('apprwrap').style.display=showAppr?'flex':'none';
+  document.getElementById('cat').style.display=(showAppr&&state.appr==='ILS')?'flex':'none';
+  document.querySelectorAll('#nav button, #rail button').forEach(b=>b.classList.toggle('on',b.dataset.p===state.phase));
+  saveState();
+  fitToScreen();
+}
+function saveState(){ try{localStorage.setItem('b787state',JSON.stringify({phase:state.phase,seat:state.seat,duty:state.duty,appr:state.appr,cat:state.cat}));}catch(e){} }
+function fitToScreen(){
+  const grid=document.getElementById('grid'); if(!grid)return;
+  const main=document.getElementById('main');
+  const avail=main.clientHeight - document.querySelector('.phasehead').offsetHeight - 12; if(avail<=0)return;
+  const MAXC=Math.max(1,Math.min(5,Math.floor(grid.clientWidth/300)));
+  grid.style.columnCount=MAXC;
+  const FLOOR=14, MAXF=26;
+  function bestFit(){
+    grid.style.fontSize=FLOOR+'px';
+    if(grid.scrollHeight>avail) return {fs:FLOOR,fits:false};
+    let fs=FLOOR;
+    while(fs<MAXF){ grid.style.fontSize=(fs+0.5)+'px'; if(grid.scrollHeight>avail)break; fs+=0.5; }
+    return {fs:fs,fits:true};
+  }
+  grid.classList.remove('compact');
+  let r=bestFit();
+  if(!r.fits){ grid.classList.add('compact'); r=bestFit(); }
+  grid.style.fontSize=r.fs+'px';
+}
+let _rt; window.addEventListener('resize',()=>{clearTimeout(_rt);_rt=setTimeout(fitToScreen,120);});
+
+const NORMAL=PHASES.filter(p=>p.kind==='n'), ABN=PHASES.filter(p=>p.kind==='a');
+(function(){
+  let html='<span class="navlabel">NORMAL</span>';
+  NORMAL.forEach(p=>{ html+=`<button data-p="${p.id}">${p.label}</button>`; });
+  html+='<div class="divider"></div><span class="navlabel">NON-NORMAL</span>';
+  ABN.forEach(p=>{ html+=`<button class="ab" data-p="${p.id}">${p.label}</button>`; });
+  document.getElementById('nav').innerHTML=html;
+  document.getElementById('rail').innerHTML=html;
+  document.querySelectorAll('#nav button, #rail button').forEach(b=>b.addEventListener('click',()=>{
+    state.phase=b.dataset.p; render(); scrollActive(); }));
+})();
+function scrollActive(){
+  const n=document.querySelector('#nav button.on'); if(n&&n.scrollIntoView)n.scrollIntoView({inline:"center",block:"nearest"});
+  const r=document.querySelector('#rail button.on'); if(r&&r.scrollIntoView)r.scrollIntoView({block:"nearest"});
+}
+function step(dir){
+  const i=PHASES.findIndex(p=>p.id===state.phase);
+  const j=Math.min(PHASES.length-1,Math.max(0,i+dir));
+  state.phase=PHASES[j].id; render(); scrollActive();
+}
+document.getElementById('prev').addEventListener('click',()=>step(-1));
+document.getElementById('next').addEventListener('click',()=>step(1));
+document.querySelectorAll('#seat button').forEach(b=>b.addEventListener('click',()=>{
+  state.seat=b.dataset.s; document.querySelectorAll('#seat button').forEach(x=>x.classList.toggle('on',x===b)); render();
+}));
+document.querySelectorAll('#duty button').forEach(b=>b.addEventListener('click',()=>{
+  state.duty=b.dataset.d; document.querySelectorAll('#duty button').forEach(x=>x.classList.toggle('on',x===b)); render();
+}));
+document.querySelectorAll('#appr button').forEach(b=>b.addEventListener('click',()=>{
+  state.appr=b.dataset.a; document.querySelectorAll('#appr button').forEach(x=>x.classList.toggle('on',x===b)); render();
+}));
+document.querySelectorAll('#cat button').forEach(b=>b.addEventListener('click',()=>{
+  state.cat=+b.dataset.c; document.querySelectorAll('#cat button').forEach(x=>x.classList.toggle('on',x===b)); render();
+}));
+document.getElementById('main').addEventListener('click',e=>{
+  const q=e.target.closest('.it.has-q'); if(q){ q.classList.toggle('open'); fitToScreen(); return; }
+  const c=e.target.closest('.cl.has-cl'); if(c){ c.parentNode.classList.toggle('open'); fitToScreen(); }
+});
+const themeBtn=document.getElementById('theme');
+function setTheme(dark){ document.body.classList.toggle('dark',dark); themeBtn.innerHTML=dark?'&#9728;':'&#9790;';
+  try{localStorage.setItem('b787dark',dark?'1':'0');}catch(e){} }
+themeBtn.addEventListener('click',()=>setTheme(!document.body.classList.contains('dark')));
+let dk=false; try{dk=localStorage.getItem('b787dark')==='1';}catch(e){}
+setTheme(dk);
+// restore persisted phase + toggles
+try{const s=JSON.parse(localStorage.getItem('b787state')||'{}');
+  if(s.phase&&PHASES.find(p=>p.id===s.phase))state.phase=s.phase;
+  if(s.seat)state.seat=s.seat; if(s.duty)state.duty=s.duty; if(s.appr)state.appr=s.appr; if(s.cat)state.cat=+s.cat;
+}catch(e){}
+function syncToggles(){
+  document.querySelectorAll('#seat button').forEach(x=>x.classList.toggle('on',x.dataset.s===state.seat));
+  document.querySelectorAll('#duty button').forEach(x=>x.classList.toggle('on',x.dataset.d===state.duty));
+  document.querySelectorAll('#appr button').forEach(x=>x.classList.toggle('on',x.dataset.a===state.appr));
+  document.querySelectorAll('#cat button').forEach(x=>x.classList.toggle('on',+x.dataset.c===state.cat));
+}
+syncToggles();
+function setHtop(){ const h=document.querySelector('header'); if(h)document.documentElement.style.setProperty('--htop',h.offsetHeight+'px'); }
+setHtop(); window.addEventListener('resize',setHtop);
+render(); scrollActive();
+window.addEventListener('load',()=>{setHtop();fitToScreen();scrollActive();});
+</script>
+</body>
+</html>
