@@ -24,9 +24,14 @@ body.dark{
 html,body{margin:0;height:100%;}
 body{font-family:'Helvetica Neue',-apple-system,Arial,sans-serif;color:var(--ink);background:var(--bg);
 display:flex;flex-direction:column;height:100vh;overflow:hidden;}
-header{background:var(--head);color:#fff;padding:8px 14px;display:flex;align-items:center;
-justify-content:space-between;flex-wrap:wrap;gap:8px;flex:none;}
-header .ttl{font-size:18px;font-weight:800;letter-spacing:.3px;}
+header{background:var(--head);color:#fff;
+padding:calc(6px + env(safe-area-inset-top)) calc(14px + env(safe-area-inset-right)) 6px calc(14px + env(safe-area-inset-left));
+display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 10px;flex:none;}
+.hleft{display:flex;align-items:center;gap:10px;min-width:0;}
+.back{display:inline-flex;align-items:center;gap:4px;color:#eaf3fb;font-weight:800;font-size:12.5px;
+text-decoration:none;background:rgba(255,255,255,.16);padding:7px 11px;border-radius:8px;white-space:nowrap;}
+.back:active{background:rgba(255,255,255,.28);}
+header .ttl{font-size:17px;font-weight:800;letter-spacing:.3px;}
 header .sub{font-size:10px;color:#bcd6ec;font-weight:600;margin-top:1px;}
 .ctrls{display:flex;gap:8px;align-items:center;}
 .toggle{display:flex;border-radius:8px;padding:3px;gap:2px;}
@@ -39,7 +44,7 @@ padding:8px 17px;border-radius:6px;cursor:pointer;letter-spacing:.3px;}
 .toggle.duty button.on{background:#37d9a8;color:#053b2c;}
 .themebtn{background:rgba(255,255,255,.14);border:0;color:#fff;font-size:17px;width:40px;height:40px;
 border-radius:8px;cursor:pointer;}
-.gate{flex:none;display:flex;align-items:center;gap:10px;background:var(--cl);color:#fff;padding:6px 14px;}
+.gate{flex:none;display:flex;align-items:center;gap:10px;background:var(--cl);color:#fff;padding:6px calc(14px + env(safe-area-inset-right)) 6px calc(14px + env(safe-area-inset-left));}
 .gate .lbl{font-size:10px;opacity:.85;font-weight:800;letter-spacing:.5px;}
 .gate .nm{font-size:14.5px;font-weight:800;letter-spacing:.2px;}
 .gate.none{display:none;}
@@ -92,8 +97,9 @@ border-left:4px solid var(--accent);border-radius:5px;font-size:.78em;color:var(
 .qbox .qsrc{display:block;font-weight:800;color:var(--accent);font-size:1em;margin-bottom:3px;letter-spacing:.2px;}
 .qbox .qt{font-style:italic;}
 .empty{color:var(--muted);font-style:italic;padding:20px;}
-nav{flex:none;background:var(--nav);border-top:1px solid var(--line);padding:7px 8px;overflow-x:auto;
-white-space:nowrap;display:flex;gap:6px;align-items:stretch;}
+nav{flex:none;background:var(--nav);border-top:1px solid var(--line);
+padding:7px calc(8px + env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) calc(8px + env(safe-area-inset-left));
+overflow-x:auto;white-space:nowrap;display:flex;gap:6px;align-items:stretch;}
 .navlabel{font-size:9px;font-weight:800;color:var(--muted);align-self:center;margin-right:2px;letter-spacing:.4px;}
 nav .divider{width:2px;background:var(--line);margin:0 5px;border-radius:2px;}
 nav button{flex:none;border:1.5px solid transparent;background:var(--navbtn);color:var(--navink);font-weight:800;
@@ -104,7 +110,7 @@ nav button.ab.on{background:var(--say);color:#fff;}
 .arrow{position:fixed;top:50%;transform:translateY(-50%);width:42px;height:60px;border:0;cursor:pointer;
 background:var(--head);color:#fff;font-size:26px;font-weight:800;z-index:30;opacity:.85;
 box-shadow:0 2px 7px rgba(0,0,0,.3);}
-.arrow.prev{left:0;border-radius:0 10px 10px 0;}.arrow.next{right:0;border-radius:10px 0 0 10px;}
+.arrow.prev{left:env(safe-area-inset-left);border-radius:0 10px 10px 0;}.arrow.next{right:env(safe-area-inset-right);border-radius:10px 0 0 10px;}
 .apprwrap{display:flex;gap:8px;align-items:center;}
 .toggle.appr{background:rgba(120,70,0,.45);}
 .toggle.appr button{color:#f3d4a2;}
@@ -146,9 +152,12 @@ font-weight:800;font-size:13.5px;padding:10px 11px;border-radius:9px;cursor:poin
 </head>
 <body>
 <header>
-  <div>
-    <div class="ttl">B787 Phase Flows</div>
-    <div class="sub" id="srcsub"></div>
+  <div class="hleft">
+    <a class="back" href="index.html" title="Study Portal">&#9664; Portal</a>
+    <div class="htitle">
+      <div class="ttl">B787 Phase Flows</div>
+      <div class="sub" id="srcsub"></div>
+    </div>
   </div>
   <div class="ctrls">
     <div class="toggle seat" id="seat">
@@ -716,7 +725,7 @@ function fitToScreen(){
   const grid=document.getElementById('grid'); if(!grid)return;
   const main=document.getElementById('main');
   const avail=main.clientHeight - document.querySelector('.phasehead').offsetHeight - 12; if(avail<=0)return;
-  const MAXC=Math.max(1,Math.min(5,Math.floor(grid.clientWidth/300)));
+  const MAXC=Math.max(1,Math.min(5,Math.floor(grid.clientWidth/250)));
   grid.style.columnCount=MAXC;
   const FLOOR=14, MAXF=26;
   function bestFit(){
@@ -731,7 +740,10 @@ function fitToScreen(){
   if(!r.fits){ grid.classList.add('compact'); r=bestFit(); }
   grid.style.fontSize=r.fs+'px';
 }
-let _rt; window.addEventListener('resize',()=>{clearTimeout(_rt);_rt=setTimeout(fitToScreen,120);});
+let _rt; function reflow(){clearTimeout(_rt);_rt=setTimeout(()=>{setHtop();fitToScreen();},120);}
+window.addEventListener('resize',reflow);
+window.addEventListener('orientationchange',()=>setTimeout(()=>{setHtop();fitToScreen();},350));
+if(window.visualViewport)window.visualViewport.addEventListener('resize',reflow);
 
 const NORMAL=PHASES.filter(p=>p.kind==='n'), ABN=PHASES.filter(p=>p.kind==='a');
 (function(){
@@ -792,7 +804,7 @@ syncToggles();
 function setHtop(){ const h=document.querySelector('header'); if(h)document.documentElement.style.setProperty('--htop',h.offsetHeight+'px'); }
 setHtop(); window.addEventListener('resize',setHtop);
 render(); scrollActive();
-window.addEventListener('load',()=>{setHtop();fitToScreen();scrollActive();});
+window.addEventListener('load',()=>{setHtop();fitToScreen();scrollActive();setTimeout(()=>{setHtop();fitToScreen();},300);});
 </script>
 </body>
 </html>
