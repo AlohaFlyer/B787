@@ -54,7 +54,7 @@ align-items:baseline;gap:10px;flex-wrap:wrap;flex:none;}
 .phasehead .src{font-size:.7em;font-weight:600;color:var(--muted);}
 .grid{font-size:15px;column-gap:11px;flex:1;min-height:0;}
 .card{background:var(--card);border:1px solid var(--line);border-radius:9px;overflow:hidden;
-break-inside:avoid;margin:0 0 11px;display:inline-block;width:100%;box-shadow:0 1px 2px rgba(0,0,0,.05);}
+margin:0 0 11px;display:block;width:100%;box-shadow:0 1px 2px rgba(0,0,0,.05);}
 .card .ch{background:var(--head);color:#fff;font-weight:800;font-size:.85em;letter-spacing:.3px;
 display:flex;justify-content:space-between;align-items:center;gap:8px;border-left:6px solid var(--ec,#888);}
 .card .ch .hn{padding:6px 0 6px 9px;}
@@ -697,22 +697,22 @@ function gateFor(ph){
   ph.sections.forEach(s=>{ if(apprVisible(s.appr)) s.items.forEach(it=>{ if(it.k==='cl') names.push(it.t+' Checklist'); }); });
   return [...new Set(names)];
 }
+let CARDS=[];
 function render(){
   const ph=PHASES.find(p=>p.id===state.phase);
   const main=document.getElementById('main');
   const ctx={n:1};
-  let cards='';
+  CARDS=[];
   ph.sections.forEach(sec=>{
     if(!apprVisible(sec.appr))return;
     const cite=sec.cite||ph.src;
     const inner=sec.items.map(it=>renderItem(it,cite,ctx,ph.id)).join('');
-    cards+=`<div class="card"><div class="ch" style="--ec:${sec.c}"><span class="hn">${sec.h}</span><span class="cardcite">${cite}</span></div><div class="cb">${inner}</div></div>`;
+    CARDS.push(`<div class="card"><div class="ch" style="--ec:${sec.c}"><span class="hn">${sec.h}</span><span class="cardcite">${cite}</span></div><div class="cb">${inner}</div></div>`);
   });
-  main.innerHTML=`<div class="phasehead">${ph.title}<span class="src">${ph.src}</span></div><div class="grid" id="grid">${cards}</div>`;
+  main.innerHTML=`<div class="phasehead">${ph.title}<span class="src">${ph.src}</span></div><div class="grid" id="grid"></div>`;
   const g=document.getElementById('gate'); const gn=gateFor(ph);
   if(gn.length){ g.className='gate'; g.innerHTML=`<span class="lbl">GATE</span><span class="nm">&#10003; ${gn.join('  ·  ')}</span>`; }
   else g.className='gate none';
-  // approach-type toggle visibility (only on Landing)
   const showAppr=ph.id==='landing';
   document.getElementById('apprwrap').style.display=showAppr?'flex':'none';
   document.getElementById('cat').style.display=(showAppr&&state.appr==='ILS')?'flex':'none';
@@ -721,24 +721,40 @@ function render(){
   fitToScreen();
 }
 function saveState(){ try{localStorage.setItem('b787state',JSON.stringify({phase:state.phase,seat:state.seat,duty:state.duty,appr:state.appr,cat:state.cat}));}catch(e){} }
+// Whole-card column packer: keeps every card intact, balances columns, fits font, compacts if needed.
 function fitToScreen(){
-  const grid=document.getElementById('grid'); if(!grid)return;
+  const grid=document.getElementById('grid'); if(!grid||!CARDS.length)return;
   const main=document.getElementById('main');
-  const avail=main.clientHeight - document.querySelector('.phasehead').offsetHeight - 12; if(avail<=0)return;
-  const MAXC=Math.max(1,Math.min(5,Math.floor(grid.clientWidth/250)));
-  grid.style.columnCount=MAXC;
-  const FLOOR=14, MAXF=26;
-  function bestFit(){
-    grid.style.fontSize=FLOOR+'px';
-    if(grid.scrollHeight>avail) return {fs:FLOOR,fits:false};
-    let fs=FLOOR;
-    while(fs<MAXF){ grid.style.fontSize=(fs+0.5)+'px'; if(grid.scrollHeight>avail)break; fs+=0.5; }
-    return {fs:fs,fits:true};
+  const phh=document.querySelector('.phasehead'); if(!phh)return;
+  const avail=main.clientHeight - phh.offsetHeight - 12; if(avail<=4)return;
+  const W=grid.clientWidth||main.clientWidth;
+  const ncol=Math.max(1,Math.min(5,Math.min(CARDS.length,Math.floor(W/250))));
+  grid.style.display='flex'; grid.style.gap='11px'; grid.style.alignItems='flex-start';
+  function buildAt(fontPx,compact){
+    grid.style.fontSize=fontPx+'px';
+    grid.classList.toggle('compact',compact);
+    const colW=Math.max(140,Math.floor((W-(ncol-1)*11)/ncol));
+    grid.innerHTML='<div class="col" style="width:'+colW+'px;min-width:0"></div>';
+    const meas=grid.firstChild;
+    const nodes=CARDS.map(h=>{const t=document.createElement('template');t.innerHTML=h.trim();return t.content.firstElementChild;});
+    nodes.forEach(n=>meas.appendChild(n));
+    const hs=nodes.map(n=>n.offsetHeight+11);
+    const total=hs.reduce((a,b)=>a+b,0), target=total/ncol;
+    grid.innerHTML='';
+    const cols=[];
+    for(let i=0;i<ncol;i++){const c=document.createElement('div');c.className='col';c.style.cssText='width:'+colW+'px;min-width:0';grid.appendChild(c);cols.push(c);}
+    let ci=0,cw=0;
+    nodes.forEach((n,i)=>{ if(cw>0 && cw+hs[i]>target && ci<ncol-1){ci++;cw=0;} cols[ci].appendChild(n); cw+=hs[i]; });
+    let mx=0; cols.forEach(c=>{ if(c.offsetHeight>mx)mx=c.offsetHeight; });
+    return mx;
   }
-  grid.classList.remove('compact');
-  let r=bestFit();
-  if(!r.fits){ grid.classList.add('compact'); r=bestFit(); }
-  grid.style.fontSize=r.fs+'px';
+  const FLOOR=14,MAXF=23;
+  let placed=false;
+  for(const compact of [false,true]){
+    for(let f=MAXF;f>=FLOOR;f-=1){ if(buildAt(f,compact)<=avail){ placed=true; break; } }
+    if(placed)break;
+  }
+  if(!placed) buildAt(FLOOR,true);
 }
 let _rt; function reflow(){clearTimeout(_rt);_rt=setTimeout(()=>{setHtop();fitToScreen();},120);}
 window.addEventListener('resize',reflow);
@@ -780,8 +796,8 @@ document.querySelectorAll('#cat button').forEach(b=>b.addEventListener('click',(
   state.cat=+b.dataset.c; document.querySelectorAll('#cat button').forEach(x=>x.classList.toggle('on',x===b)); render();
 }));
 document.getElementById('main').addEventListener('click',e=>{
-  const q=e.target.closest('.it.has-q'); if(q){ q.classList.toggle('open'); fitToScreen(); return; }
-  const c=e.target.closest('.cl.has-cl'); if(c){ c.parentNode.classList.toggle('open'); fitToScreen(); }
+  const q=e.target.closest('.it.has-q'); if(q){ q.classList.toggle('open'); return; }
+  const c=e.target.closest('.cl.has-cl'); if(c){ c.parentNode.classList.toggle('open'); }
 });
 const themeBtn=document.getElementById('theme');
 function setTheme(dark){ document.body.classList.toggle('dark',dark); themeBtn.innerHTML=dark?'&#9728;':'&#9790;';
