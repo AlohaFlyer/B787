@@ -13,18 +13,18 @@ state. Each run: pick the first episode with status `queued`, build it end to en
 ## Pipeline (per episode, all tools available in a scheduled run)
 1. Research the topic in the manuals (grep the FCOM text extract; pdftotext the PRC/QRH/FCTM sections as needed). Confirm every number.
 2. Write `B787_Podcast_Ep<N>_<Topic>_ElevenLabs.txt` (clean script).
-3. `python3 build_scripts/parse_ep.py <script.txt> ep<N>` -> ep<N>/manifest.json (run from a local clone/copy of build_scripts; or replicate its trivial JSON build).
-4. For each manifest segment: `mcp__ElevenLabs__text_to_speech` model `eleven_v3`, voice_id per segment, stability 0.5 / similarity_boost 0.75 / style 0.18, output into `ep<N>/seg<NN>/` (master picks newest tts_*.mp3). TTS MUST go through the ElevenLabs MCP (API key lives there; cannot run from a plain script).
-5. Master: `bash build_scripts/master_ep_fast.sh <N> <out>/flight-deck-notes-ep<N>.mp3`. IMPORTANT: master_ep_fast.sh has a hardcoded `SRC=` path from an old session. Before running, set SRC to the CURRENT session Drive mount (the `AS - Boeing 787` path under /sessions/<this-session>/mnt/). Music bumpers: music_test/intro_v1.mp3 + outro_v1_hook.mp3 + outro_v2_ending.mp3. Recipe: per-seg mono/44100 +0.2s pad -> concat -> atempo=1.2 -> dynaudnorm -> bookend -> loudnorm I=-16:TP=-1.5 -> 96k mono.
-6. Upload the mp3 to github.com/AlohaFlyer/B787/upload/main via Chrome (binary; MCP can't take multi-MB). Submit the commit form via javascript_tool (querySelector submit .click()) - the pixel/ref click is flaky.
-7. Update podcast.html: add an entry to the EPISODES array (data-driven; edit, don't rebuild). Group "Review". Confirm length from the mastered mp3.
-8. Set this episode `done` in the ledger; commit the ledger + script.
-9. Self-debug: if master errors (missing seg, path), fix and rerun. If TTS quota hit, stop and report (Pro tier ~607k char/mo).
+3. `python3 build_scripts/parse_ep.py <script.txt> ep<N>` -> ep<N>/manifest.json (needs flight-deck-notes.pls in the project root for pronunciations). Patch AR -> A-R and GNSS -> G-N-S-S after, which the .pls misses.
+4. For each manifest segment: `mcp__ElevenLabs__text_to_speech` model `eleven_v3`, voice_id per segment, stability 0.5 / similarity_boost 0.75 / style 0.18, output_directory the Drive ep<N>/seg<NN>/ (master picks newest tts_*.mp3; the MCP names files tts_<word>_<ts>.mp3, which matches). TTS MUST go through the ElevenLabs MCP (API key lives there; cannot run from a plain script). Make the seg dirs first.
+5. Master: copy master_ep_fast.sh, set its `SRC=` to the CURRENT session Drive mount, then `bash master_ep_fast.sh <N> "<mount>/flight-deck-notes-ep<N>.mp3"`. Music bumpers: music_test/. Recipe: per-seg mono/44100 +0.2s pad -> concat -> atempo=1.2 -> dynaudnorm -> bookend -> loudnorm I=-16:TP=-1.5 -> 96k mono. Verify duration with ffprobe.
+6. Upload the mp3 to github.com/AlohaFlyer/B787/upload/main via Chrome (binary; MCP can't take multi-MB). Submit the commit form via javascript_tool (querySelector submit button .click()) - the pixel/ref click is flaky.
+7. Update podcast.html EPISODES array (schema {n,group,title,topic,len,audio,quiz}; group "Review"; len from ffprobe). Upload alongside the mp3 in the same Chrome commit (avoids needing the file content as an MCP arg).
+8. Set this episode `done` in the ledger; commit the ledger + script (bash cp the .txt into the Drive mount).
+9. Self-debug: if master errors (missing seg, path), fix and rerun. Check mcp__ElevenLabs__check_subscription first; Pro ~607k char/mo, ~345k remaining as of 2026-06-23.
 
-## Queue (ep numbers continue the catalogue; portal currently 32 eps)
+## Queue (ep numbers continue the catalogue; portal currently 33 eps)
 | Ep | Topic | Primary sources | Status |
 |----|-------|-----------------|--------|
-| 33 | RNAV RNP AR approaches: criteria, CDU setup, bug/brief, go-around | FCOM SP.4.10-4.12; PRC AR | script-done, audio-queued |
+| 33 | RNAV RNP AR approaches: criteria, CDU setup, bug/brief, go-around | FCOM SP.4.10-4.12; PRC AR | DONE 2026-06-23 (9:27) |
 | 34 | Rejected takeoffs (RTO): decision, high/low speed, callouts, actions | FCTM Ch3; FCOM NP.21.33-34 | queued |
 | 35 | V1 cut / engine failure on takeoff; V2 handling | FCTM Ch3; FCOM NP/PI; QRH | queued |
 | 36 | Captain authority and responsibilities (PIC) | FOM (authority/PIC); FAR | queued |
@@ -37,4 +37,4 @@ state. Each run: pick the first episode with status `queued`, build it end to en
 | 43 | Fuel jettison + overweight landing, captain considerations | FCOM 12.20 / SP; QRH | queued |
 
 ## Done log
-- (none yet; ep33 script staged at B787_Podcast_Ep33_RNP_AR_ElevenLabs.txt, audio pending first run)
+- 2026-06-23: Ep33 RNAV RNP AR shipped. flight-deck-notes-ep33.mp3 (9:27, 96k mono, 25 segments), live on podcast.html Review group. Built in-session (not via scheduler). Next queued: Ep34 RTO.
