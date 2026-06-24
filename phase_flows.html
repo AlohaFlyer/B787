@@ -124,6 +124,16 @@ nav button.ab.on{background:var(--say);color:#fff;}
 background:var(--head);color:#fff;font-size:26px;font-weight:800;z-index:30;opacity:.85;
 box-shadow:0 2px 7px rgba(0,0,0,.3);}
 .arrow.prev{left:env(safe-area-inset-left);border-radius:0 10px 10px 0;}.arrow.next{right:env(safe-area-inset-right);border-radius:10px 0 0 10px;}
+.morecue{position:fixed;z-index:24;width:42px;pointer-events:none;display:none;}
+.morecue.show{display:block;}
+.morecue.r{background:linear-gradient(to right,rgba(127,127,127,0),rgba(127,127,127,.22));}
+.morecue.l{background:linear-gradient(to left,rgba(127,127,127,0),rgba(127,127,127,.22));}
+.morecue .chev{position:absolute;top:14%;width:30px;height:30px;border-radius:50%;background:var(--accent);
+color:#fff;font-size:21px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 7px rgba(0,0,0,.35);}
+.morecue.r .chev{right:5px;animation:cueR 1.3s ease-in-out infinite;}
+.morecue.l .chev{left:5px;animation:cueL 1.3s ease-in-out infinite;}
+@keyframes cueR{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+@keyframes cueL{0%,100%{transform:translateX(0)}50%{transform:translateX(-5px)}}
 .apprwrap{display:flex;gap:8px;align-items:center;}
 .toggle.appr{background:rgba(120,70,0,.45);}
 .toggle.appr button{color:#f3d4a2;}
@@ -203,6 +213,8 @@ font-weight:800;font-size:13.5px;padding:10px 11px;border-radius:9px;cursor:poin
 <nav id="rail" class="rail"></nav>
 <button class="arrow prev" id="prev" aria-label="Previous phase">&#8249;</button>
 <button class="arrow next" id="next" aria-label="Next phase">&#8250;</button>
+<div class="morecue l" id="cueL"><span class="chev">&#8249;</span></div>
+<div class="morecue r" id="cueR"><span class="chev">&#8250;</span></div>
 
 <script>
 const box=(t,s,r,call,q)=>({k:'box',t,s:s||'',r:r||'B',call:!!call,q:q||''});
@@ -222,8 +234,7 @@ const PHASES=[
     box('Prelim Preflt Flow (Capt or FO)','(I SEE HOP) Logbook · IRS, Status, EICAS, Eng oil, Hyd, O2, Park Brk · Gnd Air? (NP.21.1)','B',true,'IRS selectors ... OFF 30 seconds, then ON (verify ON BAT light extinguished). STATUS display ... Check - verify that only expected messages are shown. Verify sufficient for flight: Oxygen pressure, Hydraulic quantity, Engine oil quantity. EICAS display ... Check - verify only expected alert and memo messages are shown. Parking brake ... Set.'),
     trig('Park brake SET → PF begins CDU setup / PM walk-around','B'),
   ],'FCOM NP.21.1 · SP.6'),
-  S('COMM / CLEARANCE LOGON','#0a6c8f',[
-    box('COMM-ATC: Logon (Capt or FO)','LOGON TO KUSA (KSEA/CONUS Data Comm) · PHNL = PDC · auto-upload 30 min prior','B',true),
+  S('D-ATIS / FLIGHT INFO','#0a6c8f',[
     book('D-ATIS (press COMM)','FLIGHT INFORMATION > ATIS REQUEST · verify altimeter numeric = alpha · SP.5.1'),
   ],'FCOM SP.5.1'),
   S('CDU PREFLIGHT (PF) · NP.21.2-5','#01426A',[
@@ -248,6 +259,7 @@ const PHASES=[
     fmc('NAV DATA','INIT REF>INDEX>NAV DATA: paste wpt, compare LAT/LONG (ORCN/ETOPS dual)'),
     sub('6 - REGISTER','#01426A'),
     fmc('OPS CONTROL (COMPANY-FLIGHT INIT)','FLT NO · DATE (numeric day) · ORIG/DEST stations · CAPT/FO/RO IDs'),
+    box('COMM-ATC: Logon (Capt or FO)','LOGON TO KUSA (KSEA/CONUS Data Comm) · PHNL = PDC · auto-upload 30 min prior','B',true),
     book('REQUEST - Preliminary Performance (datalink)','for AeroData final perf · do not load FMS · need not print'),
   ]),
   S('ORCN / ETOPS PREFLIGHT (PRC)','#0a6c8f',[
@@ -259,7 +271,7 @@ const PHASES=[
   S('PREFLIGHT COMPLETION','#2e7d5b',[
     box('PM: Walk-around / Exterior Inspection','typically right after Preliminary Preflight (NP.21.6)','PM'),
     box('CA flow (glareshield / forward)','EFIS · Display Select · MCP · Oxygen test · brightness · Air Data/Att · PFD/MFD · do Initial+Nav Data, verify IRS · Flight instruments + standby','C',false,'Preflight Procedure - Captain: EFIS control panel Set (minimums, baro, ND MAP). Display select panel Set. Mode control panel Set (FD ON, A/T ARM, AP disengage bar UP, bank limit AUTO). Oxygen Test and set, mask 100%. Forward / inboard / outboard brightness Mid. AIR DATA/ATTITUDE AUTO, PFD/MFD NORM. Do the Initial and Nav Data from the CDU and verify IRS alignment, then Flight instruments Check. Integrated standby flight display Set. (FCOM NP.21.22-24)'),
-    box('CA Lower Waterfall','Speedbrake/Thrust/Flap levers · Parking brake · Stab cutout · Fuel Control CUTOFF · Alt Flaps · WXR/XPDR/VHF · seat + rudder pedals · HUD','C',false,'Captain Lower Waterfall (down the aft pedestal/lower panel): Speedbrake DOWN, reverse + forward thrust levers Down/Closed, flap lever Set. Parking brake Set. Stabilizer cutout switches guards closed. FUEL CONTROL switches CUTOFF. Alternate Flaps panel Set (ARM Off, selector OFF). Left tuning and control panel: Weather Radar, Transponder, VHF. Audio control panel as needed. Seat and rudder pedals Adjust. HUD combiner Down. Seat belt and harness Adjust. Call PREFLIGHT CHECKLIST. (FCOM NP.21.24-25)'),
+    box('CA Lower Waterfall','Speedbrake/Thrust/Flap levers · Parking brake · Stab cutout · Fuel Control CUTOFF · Alt Flaps · WXR/XPDR/VHF · seat + rudder pedals · headset · HUD','C',false,'Captain Lower Waterfall (down the aft pedestal/lower panel): Speedbrake DOWN, reverse + forward thrust levers Down/Closed, flap lever Set. Parking brake Set. Stabilizer cutout switches guards closed. FUEL CONTROL switches CUTOFF. Alternate Flaps panel Set (ARM Off, selector OFF). Left tuning and control panel: Weather Radar, Transponder, VHF. Audio control panel as needed. Seat and rudder pedals Adjust. Headset On. HUD combiner Down. Seat belt and harness Adjust. Call PREFLIGHT CHECKLIST. (FCOM NP.21.24-25)'),
     box('FO preflight flow (overhead waterfall)','Flight Control Surfaces · Heading Ref · PFC Disc · Electrical (Batt/IFE/Cabin/APU GEN/GEN CTRL) · APU · FD Door Power · Emer Lights · Window Heat · RAT · Hydraulic pumps · Seat Belts · Lighting · Ground Test · APU/Cargo fire · Engine (EEC/START) · Fuel Jettison · Fuel · Anti-ice','F',false,'Preflight Procedure - First Officer (overhead panel, top to bottom): FLIGHT CONTROL SURFACES (TAIL/WINGS NORM). HEADING REFERENCE NORM. PFC DISCONNECT guard closed. ELECTRICAL: BATTERY ON, IFE/PASS SEATS ON, CABIN/UTILITY ON, APU GENERATOR switches ON, GENERATOR CONTROL switches ON. APU selector START then ON as needed. L HUD BRIGHTNESS In, L WIPER OFF. FLIGHT DECK DOOR POWER ON. CCR RESET / EMERGENCY LIGHTS guards closed. SERVICE INTERPHONE OFF. WINDOW HEAT BACKUP + PRIMARY ON. RAM AIR TURBINE - do not push. HYDRAULIC: ENGINE PRIMARY pumps ON, CENTER + DEMAND pumps OFF. SEAT BELTS Set. Lighting panel Set. GROUND TEST NORM. APU and CARGO FIRE panels Set. ENGINE panel (EEC MODE NORM, START selectors NORM). FUEL JETTISON Set. FUEL panel (CROSSFEED OFF, pumps OFF). ANTI-ICE Set. (FCOM NP.21.12)'),
     trig('HUD stowed/down = ready for checklist','B'),
     cl('Preflight','cockpit preflight complete'),
@@ -306,7 +318,7 @@ const PHASES=[
 
 {id:'before-takeoff',label:'Before Takeoff',kind:'n',title:'BEFORE TAKEOFF / TAKEOFF',src:'FCOM NP.21.33-35 · PRC Takeoff',sections:[
   S('BEFORE TAKEOFF','#1864ab',[
-    box('PM','TAXI light ON · “Flight Attendants seated” PA ≥2 min prior · verify CABIN READY','PM'),
+    box('PM','TAXI light ON · “Flight Attendants should now be seated for takeoff” PA ≥2 min prior · verify CABIN READY','PM'),
     box('PF (takeoff pilot)','update takeoff brief · set WXR · VSD on · terrain as needed','PF'),
     cl('Before Takeoff','cabin ready · CDU T/Off+LEGS · WX, TERR, TCAS · ND, TA/RA','bold'),
   ]),
@@ -355,6 +367,7 @@ const PHASES=[
 {id:'descent',label:'Descent',kind:'n',title:'DESCENT',src:'FCOM NP.21.39',sections:[
   S('DESCENT','#5A4AB7',[
     box('Start','before descent below cruise alt; complete by 10,000 ft AFE','B'),
+    box('Passing 18,000 ft (PM)','Cabin-prep PA: “Flight Attendants, please prepare the cabin for arrival and be seated for landing”','PM',true),
     box('Review (both)','review alert/memo messages · review operational notes · Recall','B'),
     box('Check landing performance','VREF on APPROACH REF page','B'),
     box('Set minimums','MDA → BARO = MDA+50 (or MDA if note allows) · DA → BARO = DA · CAT II → RADIO=DH · CAT III → blank','B'),
@@ -772,6 +785,15 @@ function fitToScreen(){
   const ncol=colsForWidth(W);
   if(!GFONT || Math.abs(W-lastW)>6 || Math.abs(avail-lastH)>6 || lastHide!==state.hideOther){ GFONT=computeGFont(ncol,avail,grid); lastW=W; lastH=avail; lastHide=state.hideOther; }
   applyCols(grid,CARDS,ncol,GFONT);
+  requestAnimationFrame(positionCues);
+}
+function positionCues(){
+  const m=document.getElementById('main'); const cl=document.getElementById('cueL'), cr=document.getElementById('cueR');
+  if(!m||!cl||!cr)return;
+  const r=m.getBoundingClientRect(); const max=m.scrollWidth-m.clientWidth; const over=max>6;
+  [cl,cr].forEach(c=>{ c.style.top=r.top+'px'; c.style.height=r.height+'px'; });
+  cr.classList.toggle('show', over && m.scrollLeft < max-4);
+  cl.classList.toggle('show', over && m.scrollLeft > 4);
 }
 let _rt; function reflow(){clearTimeout(_rt);_rt=setTimeout(()=>{setHtop();fitToScreen();},120);}
 window.addEventListener('resize',reflow);
@@ -853,8 +875,11 @@ function syncToggles(){
 syncToggles();
 function setHtop(){ const h=document.querySelector('header'); if(h)document.documentElement.style.setProperty('--htop',h.offsetHeight+'px'); }
 setHtop(); window.addEventListener('resize',setHtop);
+document.getElementById('main').addEventListener('scroll',positionCues,{passive:true});
+window.addEventListener('resize',positionCues);
+window.addEventListener('orientationchange',()=>setTimeout(positionCues,380));
 render(); scrollActive();
-window.addEventListener('load',()=>{setHtop();fitToScreen();scrollActive();setTimeout(()=>{setHtop();fitToScreen();},300);});
+window.addEventListener('load',()=>{setHtop();fitToScreen();scrollActive();setTimeout(()=>{setHtop();fitToScreen();positionCues();},300);});
 </script>
 </body>
 </html>
