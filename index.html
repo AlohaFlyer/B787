@@ -29,7 +29,7 @@
   .menu a:hover small,.menu a:active small{color:var(--breeze);}
   .menu a .arrow{font-size:22px;}
   footer{margin-top:auto;width:100%;max-width:560px;display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 16px 24px;}
-  footer .plane{width:360px;max-width:70%;height:auto;border-radius:6px;}
+  footer .plane{display:block;width:340px;max-width:78%;aspect-ratio:640/180;height:auto;border-radius:6px;}
   footer .revtbl{border-collapse:collapse;font-size:11px;color:var(--midnight);}
   footer .revtbl th{background:var(--midnight);color:#fff;font-weight:700;padding:4px 12px;text-align:left;}
   footer .revtbl td{padding:3px 12px;border-bottom:1px solid var(--breeze);}
@@ -68,7 +68,7 @@
   <a href="weather.html"><span>Weather<small>FOM weather and alternate planning, vetted, with 1-page PDF handout</small></span><span class="arrow">&#9654;</span></a>
 </nav>
 <footer>
-  <img class="plane" src="assets/alaska_787.svg" alt="Alaska Airlines Boeing 787">
+  <svg class="plane" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 180" role="img" aria-label="Boeing 787"><g fill="#2c6e9e"><path d="M24 92 Q40 84 90 82 L500 80 Q560 79 616 92 Q624 94 616 98 Q560 105 500 104 L90 102 Q40 100 24 96 Q20 94 24 92 Z"/><path d="M512 82 L486 36 L506 36 L556 82 Z"/><path d="M540 88 L606 74 L618 77 L566 92 Z"/><path d="M250 98 L368 152 L398 152 L320 98 Z"/><path d="M250 92 L356 150 L376 150 L300 92 Z" opacity="0.5"/><ellipse cx="332" cy="121" rx="28" ry="12"/></g><rect x="120" y="89" width="300" height="3" rx="1.5" fill="rgba(255,255,255,0.55)"/></svg>
   <table class="revtbl">
     <thead><tr><th>Manual</th><th>Rev</th><th>Date</th></tr></thead>
     <tbody>
