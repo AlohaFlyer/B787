@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B787 SV Practice Exam</title>
+<style>
+  :root{--midnight:#01416e;--atlas:#007cba;--blue:#00b2d6;--breeze:#bfe9f4;--ice:#E8F3FA;--good:#1f9d57;--bad:#c0392b;--gold:#b1d887;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Segoe UI",Arial,Helvetica,sans-serif;background:var(--ice);color:var(--midnight);min-height:100vh;}
+  a.back{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:var(--midnight);padding:5px 14px;border-radius:0 0 6px 6px;text-decoration:none;}
+  header.hd{background:var(--midnight);color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:6px;}
+  header.hd h1{margin:0;font-size:20px;letter-spacing:.5px;}
+  header.hd .src{font-size:12px;color:var(--breeze);}
+  .wrap{max-width:760px;margin:0 auto;padding:16px 16px 60px;}
+  .card{background:#fff;border:1px solid #d7e1ea;border-radius:10px;padding:18px;margin-bottom:16px;}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  label{font-size:13px;font-weight:700;}
+  select,button{font-family:inherit;font-size:15px;}
+  select{padding:9px 12px;border:2px solid var(--midnight);border-radius:6px;background:#fff;color:var(--midnight);font-weight:700;}
+  button.primary{background:var(--midnight);color:#fff;border:none;border-radius:6px;padding:11px 22px;font-weight:700;cursor:pointer;}
+  button.primary:hover{background:var(--atlas);}
+  button.ghost{background:#fff;color:var(--midnight);border:2px solid var(--midnight);border-radius:6px;padding:9px 16px;font-weight:700;cursor:pointer;}
+  button.ghost:hover{background:var(--ice);}
+  .bar{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;font-weight:700;margin-bottom:10px;flex-wrap:wrap;}
+  .bar .timer{font-variant-numeric:tabular-nums;background:var(--midnight);color:#fff;padding:4px 12px;border-radius:6px;}
+  .prog{height:8px;background:var(--breeze);border-radius:4px;overflow:hidden;margin-bottom:14px;}
+  .prog > div{height:100%;background:var(--atlas);width:0;transition:width .2s;}
+  .sys{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--atlas);padding:2px 10px;border-radius:10px;margin-bottom:10px;}
+  .q{font-size:18px;font-weight:700;line-height:1.45;margin:4px 0 14px;}
+  .ans{background:var(--ice);border-left:4px solid var(--atlas);border-radius:0 8px 8px 0;padding:12px 14px;font-size:15px;line-height:1.5;margin-bottom:14px;}
+  .ans .srcline{display:block;margin-top:8px;font-size:11px;color:#6f8aa0;font-weight:600;}
+  .grade{display:flex;gap:12px;}
+  .grade button{flex:1;border:none;border-radius:8px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;color:#fff;}
+  .grade .got{background:var(--good);}
+  .grade .miss{background:var(--bad);}
+  .center{text-align:center;}
+  .big{font-size:46px;font-weight:800;margin:6px 0;}
+  .pct.pass{color:var(--good);} .pct.fail{color:var(--bad);}
+  table.bd{border-collapse:collapse;width:100%;font-size:13px;margin-top:8px;}
+  table.bd th{background:var(--midnight);color:#fff;text-align:left;padding:5px 10px;}
+  table.bd td{padding:4px 10px;border-bottom:1px solid var(--breeze);}
+  table.bd tr:nth-child(even){background:var(--ice);}
+  .miss-item{border-bottom:1px solid var(--breeze);padding:10px 0;font-size:14px;}
+  .miss-item .mq{font-weight:700;} .miss-item .ma{color:#333;margin-top:3px;}
+  .note{font-size:12px;color:#6f8aa0;line-height:1.5;}
+  footer{text-align:right;font-size:11px;color:#6f8aa0;max-width:760px;margin:0 auto;padding:0 16px 24px;}
+</style>
+</head>
+<body>
+<a class="back" href="index.html">&#9664; B787 Study Portal</a>
+<header class="hd"><h1>SV PRACTICE EXAM</h1><span class="src">Systems Validation drill &middot; self-graded active recall</span></header>
+<div class="wrap">
+
+  <div id="setup" class="card">
+    <p class="note">The real Systems Validation is a 100-question open-book exam (Day 6). This is a self-graded
+    active-recall drill from the full vetted systems bank. Read each question, answer aloud, reveal, then
+    mark yourself honestly. Passing target shown is 80%.</p>
+    <div class="row" style="margin:14px 0 4px;">
+      <label for="count">Questions</label>
+      <select id="count"><option value="100">100 (full SV length)</option><option value="50">50</option><option value="25">25 (quick)</option></select>
+      <label for="sys">System</label>
+      <select id="sys"><option value="ALL">All systems</option></select>
+    </div>
+    <div class="row" style="margin:10px 0 4px;">
+      <label for="mode">Timer</label>
+      <select id="mode"><option value="up">Count up (untimed)</option><option value="120">Countdown 120 min (SV pace)</option><option value="90">Countdown 90 min</option></select>
+    </div>
+    <div class="row" style="margin-top:16px;"><button class="primary" id="start">Start exam</button>
+      <span id="poolnote" class="note"></span></div>
+  </div>
+
+  <div id="exam" class="card" style="display:none;">
+    <div class="bar">
+      <span id="counter">Q 1 / 100</span>
+      <span class="timer" id="timer">00:00</span>
+      <span id="score">0 correct</span>
+    </div>
+    <div class="prog"><div id="progfill"></div></div>
+    <span class="sys" id="qsys">System</span>
+    <div class="q" id="qtext">Question</div>
+    <div id="ansBlock" style="display:none;">
+      <div class="ans" id="atext">Answer</div>
+      <div class="grade"><button class="got" id="gGot">Got it &#10003;</button><button class="miss" id="gMiss">Missed &#10007;</button></div>
+    </div>
+    <div class="center" id="revealRow"><button class="primary" id="reveal">Show answer</button></div>
+    <div class="row" style="margin-top:16px;justify-content:space-between;">
+      <button class="ghost" id="quit">End &amp; score</button>
+      <button class="ghost" id="skip">Skip &#8594;</button>
+    </div>
+  </div>
+
+  <div id="result" class="card" style="display:none;">
+    <div class="center">
+      <div class="big pct" id="rpct">0%</div>
+      <div id="rline" style="font-weight:700;"></div>
+      <div class="note" id="rtime"></div>
+    </div>
+    <h3 style="margin:18px 0 4px;color:var(--midnight);font-size:15px;">By system</h3>
+    <table class="bd"><thead><tr><th>System</th><th>Correct</th><th>Asked</th><th>%</th></tr></thead><tbody id="rbody"></tbody></table>
+    <h3 style="margin:20px 0 4px;color:var(--midnight);font-size:15px;">Review missed (<span id="missn">0</span>)</h3>
+    <div id="missList"></div>
+    <div class="center" style="margin-top:20px;"><button class="primary" id="again">New exam</button></div>
+  </div>
+
+</div>
+<footer>Questions sourced from the portal Systems Quiz bank (FCOM/FCTM/FOM-vetted &amp; training decks) &middot; Ver 1.0</footer>
+
+<script>
+(function(){
+  var POOL=[], picked=[], idx=0, correct=0, graded=[], t0=0, tHandle=null, limitSec=0, mode="up";
+  var $=function(id){return document.getElementById(id);};
+  function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function fmt(s){s=Math.max(0,Math.floor(s));var m=Math.floor(s/60),x=s%60;return (m<10?'0':'')+m+':'+(x<10?'0':'')+x;}
+
+  fetch('sv_questions.json').then(function(r){return r.json();}).then(function(d){
+    POOL=d;
+    var sysSel=$('sys'), sys={};
+    d.forEach(function(o){sys[o.system]=(sys[o.system]||0)+1;});
+    Object.keys(sys).sort().forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=k+' ('+sys[k]+')';sysSel.appendChild(o);});
+    $('poolnote').textContent=POOL.length+' questions in bank';
+  }).catch(function(){$('poolnote').textContent='Could not load question bank (sv_questions.json).';});
+
+  function buildPool(){
+    var s=$('sys').value;
+    var src=(s==='ALL')?POOL.slice():POOL.filter(function(o){return o.system===s;});
+    return shuffle(src);
+  }
+  function startTimer(){
+    t0=Date.now();
+    tHandle=setInterval(function(){
+      var el=(Date.now()-t0)/1000;
+      if(mode==='up'){$('timer').textContent=fmt(el);}
+      else{var rem=limitSec-el;$('timer').textContent=fmt(rem);if(rem<=0){clearInterval(tHandle);finish();}}
+    },500);
+  }
+  function show(){
+    var q=picked[idx];
+    $('counter').textContent='Q '+(idx+1)+' / '+picked.length;
+    $('score').textContent=correct+' correct';
+    $('progfill').style.width=((idx)/picked.length*100)+'%';
+    $('qsys').textContent=q.system;
+    $('qtext').textContent=q.q;
+    $('atext').innerHTML=esc(q.a)+(q.src?'<span class="srcline">'+esc(q.src)+'</span>':'');
+    $('ansBlock').style.display='none';
+    $('revealRow').style.display='';
+  }
+  function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function grade(ok){graded.push({q:picked[idx],ok:ok});if(ok)correct++;next();}
+  function next(){idx++;if(idx>=picked.length){finish();return;}show();}
+
+  $('start').addEventListener('click',function(){
+    var n=parseInt($('count').value,10);
+    var pool=buildPool();
+    picked=pool.slice(0,Math.min(n,pool.length));
+    if(!picked.length){return;}
+    idx=0;correct=0;graded=[];
+    mode=$('mode').value;
+    if(mode!=='up'){limitSec=parseInt(mode,10)*60;mode='down';}
+    $('setup').style.display='none';$('result').style.display='none';$('exam').style.display='';
+    show();startTimer();
+  });
+  $('reveal').addEventListener('click',function(){$('ansBlock').style.display='';$('revealRow').style.display='none';});
+  $('gGot').addEventListener('click',function(){grade(true);});
+  $('gMiss').addEventListener('click',function(){grade(false);});
+  $('skip').addEventListener('click',function(){graded.push({q:picked[idx],ok:false});next();});
+  $('quit').addEventListener('click',finish);
+  $('again').addEventListener('click',function(){$('result').style.display='none';$('setup').style.display='';});
+
+  function finish(){
+    if(tHandle)clearInterval(tHandle);
+    $('exam').style.display='none';$('result').style.display='';
+    var asked=graded.length||1;
+    var pct=Math.round(correct/asked*100);
+    var pe=$('rpct');pe.textContent=pct+'%';pe.className='big pct '+(pct>=80?'pass':'fail');
+    $('rline').textContent=correct+' / '+asked+(pct>=80?'  PASS (≥80%)':'  below 80%');
+    var el=(Date.now()-t0)/1000;$('rtime').textContent='Time: '+fmt(el)+(mode==='down'?' of '+fmt(limitSec):'');
+    var by={};graded.forEach(function(g){var s=g.q.system;by[s]=by[s]||{c:0,n:0};by[s].n++;if(g.ok)by[s].c++;});
+    var tb=$('rbody');tb.innerHTML='';
+    Object.keys(by).sort().forEach(function(s){var o=by[s];var p=Math.round(o.c/o.n*100);
+      tb.innerHTML+='<tr><td>'+esc(s)+'</td><td>'+o.c+'</td><td>'+o.n+'</td><td>'+p+'%</td></tr>';});
+    var miss=graded.filter(function(g){return !g.ok;});
+    $('missn').textContent=miss.length;
+    var ml=$('missList');ml.innerHTML='';
+    miss.forEach(function(g){ml.innerHTML+='<div class="miss-item"><div class="mq">'+esc(g.q.q)+'</div><div class="ma">'+esc(g.q.a)+(g.q.src?' <span class="note">('+esc(g.q.src)+')</span>':'')+'</div></div>';});
+    if(!miss.length)ml.innerHTML='<div class="note">No missed questions. Clean run.</div>';
+  }
+})();
+</script>
+</body>
+</html>
