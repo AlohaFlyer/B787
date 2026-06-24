@@ -25,7 +25,7 @@ state. Each run: pick the first episode with status `queued`, build it end to en
 | Ep | Topic | Primary sources | Status |
 |----|-------|-----------------|--------|
 | 33 | RNAV RNP AR approaches: criteria, CDU setup, bug/brief, go-around | FCOM SP.4.10-4.12; PRC AR | DONE 2026-06-23 (9:27) |
-| 34 | Rejected takeoffs (RTO): decision, high/low speed, callouts, actions | FCTM Ch3; FCOM NP.21.33-34 | queued |
+| 34 | Rejected takeoffs (RTO): decision, high/low speed, callouts, actions | FCTM Ch3; FCOM NP.21.33-34 | DONE 2026-06-24 (13:29) |
 | 35 | V1 cut / engine failure on takeoff; V2 handling | FCTM Ch3; FCOM NP/PI; QRH | queued |
 | 36 | Captain authority and responsibilities (PIC) | FOM (authority/PIC); FAR | queued |
 | 37 | Go-around / missed approach procedures | FCOM NP.21.51; FCTM Ch5 | queued |
@@ -39,3 +39,4 @@ state. Each run: pick the first episode with status `queued`, build it end to en
 ## Done log
 - 2026-06-23: Ep33 RNAV RNP AR shipped. flight-deck-notes-ep33.mp3 (9:27, 96k mono, 25 segments), live on podcast.html Review group. Built in-session (not via scheduler). Next queued: Ep34 RTO.
 - 2026-06-24: Scheduler run b787-podcast-review-series regenerated and committed the Ep33 audio (re-synthesized 25 segments via ElevenLabs eleven_v3, mastered to 9:27 / 96k mono). Uploaded flight-deck-notes-ep33.mp3 (6,799,823 bytes) to repo, verified via API at commit 2d4f26d. podcast.html Ep33 entry and ledger status were already staged/done from 06-23; left as-is. Next queued: Ep34 RTO.
+- 2026-06-24: Ep34 Rejected Takeoff shipped. flight-deck-notes-ep34.mp3 (13:29, 96k mono, 36 segments), committed at 9,706,624 bytes (verified via API, commit 4d40c50). Sources confirmed against FCTM Ch3 (RTO Decision/Maneuver/Go-Stop, 3.24-3.27), QRH MAN.1.1-1.2 (reject criteria below/above 80 kt, the maneuver + callouts, captain considerations, evacuation), FCOM 14.20.4 (RTO autobrake: arms on ground, max braking if GS >85 kt & both levers idle; does not operate at/below 85 kt). Drafted 40 segments, then trimmed 4 redundant reinforcement segments to 36 to land 13:29 / 9.7 MB under the 10 MB Chrome file_upload cap. podcast.html EPISODES updated (Review group, quiz=memory-items.html) and committed via MCP (commit 3036e34). Script .txt cp'd into Drive folder. Next queued: Ep35 V1 cut / engine failure on takeoff.
