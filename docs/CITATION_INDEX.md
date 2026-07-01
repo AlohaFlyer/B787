@@ -16,6 +16,7 @@ This is the source of truth for which page cites which manual section.
 - **memory-items**: QRH 10
 - **podcast**: FCOM 2, FCTM 1, FOM 1, MEL 1, QRH 1
 - **systems_quiz**: FCOM 1442, FCTM 4, FOM 18, QRH 23
+- **triggers**: FCOM 10
 - **weather**: FOM 23
 - **wx-alternate**: FOM 4
 
