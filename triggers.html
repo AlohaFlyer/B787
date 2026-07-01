@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B787 Triggers Quizzer</title>
+<style>
+  :root{
+    --bg:#01172b; --panel:#062b46; --panel2:#0a3556; --line:#13486e;
+    --ink:#eaf3fb; --muted:#8fb3cf;
+    --mid:#01426A; --atlas:#0074C8; --breeze:#00C7E6; --green:#C0E585;
+    --amber:#f2a65a;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px 60px;}
+  .wrap{width:100%;max-width:700px}
+  header{display:flex;align-items:baseline;justify-content:space-between;
+    border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:18px;gap:12px}
+  h1{font-size:15px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin:0}
+  h1 .sub{color:var(--breeze);font-weight:600}
+  .src{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em}
+  .bar{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:14px;flex-wrap:wrap}
+  .bar .count{color:var(--ink)}
+  .track{flex:1;height:3px;background:var(--panel2);border-radius:2px;overflow:hidden;min-width:120px}
+  .fill{height:100%;width:0;background:var(--atlas);transition:width .25s}
+  .chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--breeze);border:1px solid var(--line);border-radius:3px;padding:3px 8px;align-self:flex-start}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    padding:24px 22px;min-height:240px;display:flex;flex-direction:column;gap:14px}
+  .prompt .lead{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .q{font-size:23px;line-height:1.25;font-weight:700;letter-spacing:.01em}
+  .readout{background:#02101f;border:1px solid #0c3a5e;border-left:3px solid var(--green);
+    border-radius:5px;padding:0 16px;font-size:14.5px;line-height:1.5;
+    opacity:0;max-height:0;overflow:hidden;transition:opacity .2s}
+  .readout.show{opacity:1;max-height:1200px;padding:14px 16px}
+  .spacer{flex:1}
+  .controls{display:flex;gap:10px;flex-wrap:wrap}
+  button{font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;border-radius:6px;
+    padding:11px 18px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);transition:.12s}
+  button:hover{border-color:var(--breeze)}
+  button:focus-visible{outline:2px solid var(--breeze);outline-offset:2px}
+  .primary{background:var(--atlas);color:#fff;border-color:var(--atlas)}
+  .primary:hover{filter:brightness(1.1)}
+  .ghost{background:transparent}
+  .mark{flex:1}
+  .knew{border-color:var(--green);color:var(--green)}
+  .knew:hover{background:rgba(192,229,133,.12)}
+  .rev{border-color:var(--amber);color:var(--amber)}
+  .rev:hover{background:rgba(242,166,90,.12)}
+  .foot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .foot button{padding:6px 12px;font-size:12px}
+  .hint{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;margin-top:18px;letter-spacing:.03em}
+  .summary{text-align:center;padding:38px 20px}
+  .summary .big{font-family:var(--mono);font-size:46px;color:var(--green);font-weight:700}
+  .summary .lbl{color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:24px}
+  .summary .stat{display:flex;justify-content:center;gap:32px;margin:18px 0 28px;font-family:var(--mono)}
+  .summary .stat div span{display:block;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+  .summary .stat .r{color:var(--amber)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  @media (max-width:480px){.q{font-size:19px}.readout{font-size:13.5px}}
+  .srcbtn{background:transparent;border:1px solid var(--atlas);color:var(--breeze);border-radius:5px;padding:10px 14px;font-weight:700;font-family:var(--sans);cursor:pointer}
+  .srcbtn:hover{background:var(--atlas);color:#fff}
+  .srcpanel{max-height:0;overflow:hidden;opacity:0;background:#01233b;border:1px solid var(--line);border-radius:6px;padding:0 16px;margin-top:10px;transition:max-height .2s,opacity .2s,padding .2s}
+  .srcpanel.show{max-height:320px;opacity:1;padding:14px 16px}
+  .srclabel{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .srcsub{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.45}
+  .cat{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+  .answer{font-family:var(--mono);font-size:20px;line-height:1.45;color:var(--green);font-weight:700}
+  .catrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .catbtn{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    padding:7px 12px;border-radius:4px;border:1px solid var(--line);background:transparent;color:var(--muted)}
+  .catbtn.on{border-color:var(--breeze);color:var(--breeze);background:rgba(0,199,230,.08)}
+  .mand{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#02233b;background:var(--amber);border-radius:3px;padding:2px 6px;margin-left:8px;font-weight:700;vertical-align:middle}
+</style>
+</head>
+<body>
+<div style="position:fixed;top:0;left:12px;z-index:9999;"><a href="index.html" style="display:inline-block;font-family:'Segoe UI',Arial,Helvetica,sans-serif;font-size:12px;font-weight:700;color:#fff;background:#01416e;padding:5px 14px;border-radius:0 0 6px 6px;text-decoration:none;">&#9664; B787 Study Portal</a></div>
+
+<div class="wrap">
+  <header>
+    <h1>B787 Triggers <span class="sub">// Event &rarr; Flow &rarr; Checklist</span></h1>
+    <span class="src">Trigger Map &middot; FCOM NP.21</span>
+  </header>
+  <div class="catrow" id="cats"></div>
+  <div id="app"></div>
+  <div class="hint">Say the answer aloud, then reveal &nbsp;&middot;&nbsp; Space / Enter = reveal then advance &nbsp;&middot;&nbsp; K = got it &nbsp;&middot;&nbsp; R = review &nbsp;&middot;&nbsp; Source = where it comes from</div>
+</div>
+
+<script>
+const DATA=[
+ // ------------- PHASE TRIGGERS -------------
+ {s:"Phase Triggers",q:"HUDs DOWN — what does it trigger?",a:"Preflight Checklist",ref:"Trigger Map",src:"Gate-to-takeoff trigger map (Charlie Morris whiteboard): HUDs Down → “Preflight Checklist.”"},
+ {s:"Phase Triggers",q:"Ground call “Circle check complete” — what does it trigger?",a:"Before Start Checklist",ref:"Trigger Map",src:"Trigger map: ground call (walk-around / circle check complete) → before-start flows → Before Start Checklist → clearance to push (F-C-C: Flows, Checklist, Clearance)."},
+ {s:"Phase Triggers",q:"Before Start Checklist complete — what comes next?",a:"Push clearance",ref:"Trigger Map",src:"Trigger map F-C-C: Flows → Checklist → Clearance to push."},
+ {s:"Phase Triggers",q:"Pin and salute — what does it trigger?",a:"Before Taxi flow (5 items) → Before Taxi Checklist",ref:"Trigger Map",src:"Trigger map: pushback salute / taxi light → Before Taxi flow → “Before Taxi Checklist.”"},
+ {s:"Phase Triggers",q:"Recite the 5 Before Taxi flow items",a:"1 Flaps &middot; 2 Weather &middot; 3 EICAS swap &middot; 4 Control check &middot; 5 Recall",ref:"SOP / Trigger Map",src:"Ryan's trigger list: flaps, weather, EICAS swap, control check, recall. Checklist items behind them: anti-ice, recall, autobrake RTO, flight controls, ground personnel clear (phase_flows, FCOM NP.21)."},
+ {s:"Phase Triggers",q:"Before Taxi Checklist complete — the next two actions?",a:"PM transfer of controls &middot; Taxi clearance",ref:"SOP / Trigger Map",src:"Ryan's trigger list: Before Taxi Checklist → PM transfer of controls and taxi clearance."},
+ {s:"Phase Triggers",q:"FA chime — what does it trigger?",a:"Before Takeoff Checklist — read to “Checklist Complete” (mandatory)",ref:"SOP / Trigger Map",src:"Trigger map: cabin ready → “Before Takeoff Checklist” → FLY! Before Takeoff is one of only two checklists that must be read through the “Checklist Complete” response (company SOP, class notes)."},
+ {s:"Phase Triggers",q:"Line Up and Wait — the 2 items?",a:"TA/RA &middot; say “Runway XX confirmed”",ref:"SOP / Trigger Map",src:"Ryan's trigger list: LUAW → transponder TA/RA, verbal runway confirmation."},
+ {s:"Phase Triggers",q:"Flaps up after takeoff — 3 items, then what?",a:"Nose light OFF &middot; Taxi light OFF &middot; Anti-ice AUTO → After Takeoff Checklist",ref:"SOP / Trigger Map",src:"Ryan's trigger list: after-takeoff flaps up → nose and taxi lights OFF, anti-ice AUTO → After Takeoff Checklist (FCOM NP.21.35: After Takeoff checklist after flap retraction)."},
+ {s:"Phase Triggers",q:"Climbing through 10,000 ft — the 4 items?",a:"Chime twice &middot; Landing lights OFF &middot; RWY turnoff lights OFF &middot; Logo light OFF",ref:"SOP / Trigger Map",src:"Ryan's trigger list, matching the 3 vetted 10,000-ft steps in the Flows Trainer plus the double chime."},
+ {s:"Phase Triggers",q:"Clearing the runway after landing — first action, then what?",a:"Speedbrake DOWN → After Landing flow (7 items)",ref:"SOP / Trigger Map",src:"Ryan's trigger list: clear of the runway → speedbrake DOWN is the trigger for the After Landing flow."},
+ {s:"Phase Triggers",q:"Recite the 7 After Landing flow items",a:"1 APU start &middot; 2 Anti-ice &middot; 3 WX radar OFF &middot; 4 Autobrake OFF &middot; 5 Flaps UP &middot; 6 Transponder &middot; 7 Arrival report",ref:"SOP / Trigger Map",src:"Ryan's trigger list: APU start, anti-ice, weather radar off, autobrake off, flaps up, transponder, arrival report."},
+ {s:"Phase Triggers",q:"Reverse: what trigger kicks off the Before Taxi flow?",a:"Pin and salute",ref:"Trigger Map",src:"Trigger map: pushback salute / taxi light → Before Taxi flow."},
+ {s:"Phase Triggers",q:"Reverse: what trigger calls for the Before Takeoff Checklist?",a:"FA chime (cabin ready)",ref:"SOP / Trigger Map",src:"Trigger map: cabin ready → Before Takeoff Checklist."},
+ {s:"Phase Triggers",q:"Reverse: what trigger calls for the Preflight Checklist?",a:"HUDs down",ref:"Trigger Map",src:"Trigger map: HUDs Down → Preflight Checklist."},
+ {s:"Phase Triggers",q:"Reverse: what is the trigger for the After Landing flow?",a:"Clear of the runway → Speedbrake DOWN",ref:"SOP / Trigger Map",src:"Ryan's trigger list: clearing the runway, speedbrake lever down, then the 7-item flow."},
+
+ // ------------- APPROACH SETUP -------------
+ {s:"Approach Setup",q:"Setting up an approach — recite the 5 steps",a:"ATIS &middot; Build &middot; Bug &middot; Brief &middot; Brakes",ref:"SOP / Technique",src:"Ryan's approach-setup mnemonic: ATIS, Build (the approach in the FMC), Bug (speeds/minimums), Brief, Brakes (autobrake)."},
+ {s:"Approach Setup",q:"Approach setup: what comes after Build?",a:"Bug",ref:"SOP / Technique",src:"ATIS → Build → Bug → Brief → Brakes."},
+ {s:"Approach Setup",q:"Approach setup: first step and last step?",a:"ATIS first &middot; Brakes last",ref:"SOP / Technique",src:"ATIS → Build → Bug → Brief → Brakes."},
+
+ // ------------- GO-AROUND BRIEF -------------
+ {s:"Go-Around Brief",q:"Mandatory brief item for a LOW-LEVEL go-around?",a:"“I will guard the throttles forward and call ‘Set Thrust’ — PM verifies thrust is set”",ref:"FCOM NP.21.51",src:"FCOM NP.21.51 WARNING: TO/GA function is inhibited close to the ground and after touchdown. If the thrust levers do not respond when TO/GA is pushed, or if the go-around is initiated after touchdown, advance the thrust levers manually to go-around thrust."},
+ {s:"Go-Around Brief",q:"Why must thrust be advanced manually on a low-level go-around?",a:"TO/GA is inhibited close to the ground and after touchdown",ref:"FCOM NP.21.51",src:"FCOM NP.21.51 WARNING: TO/GA function is inhibited close to the ground and after touchdown."},
+ {s:"Go-Around Brief",q:"Low-level go-around: PM's job after “Set Thrust”?",a:"Verify go-around thrust is set — call “Thrust Set”",ref:"FCOM NP.21.51",src:"Go-around procedure: PM sets flaps as directed and verifies thrust, calling “Thrust Set” (FCOM NP.21.51 / phase flows)."},
+
+ // ------------- CHECKLIST ORDER -------------
+ {s:"Checklist Order",q:"Recite all 10 normal checklists in order",a:"Preflight &middot; Before Start &middot; Before Taxi &middot; Before Takeoff &middot; After Takeoff &middot; Descent &middot; Approach &middot; Landing &middot; Shutdown &middot; Secure",ref:"FCOM NP.21",src:"FCOM NP normal procedures sequence, as laid out gate to gate in the Phase Flows page."},
+ {s:"Checklist Order",q:"First 5 checklists, in order?",a:"Preflight &middot; Before Start &middot; Before Taxi &middot; Before Takeoff &middot; After Takeoff",ref:"FCOM NP.21",src:"Ground and takeoff phase checklists."},
+ {s:"Checklist Order",q:"Last 5 checklists, in order?",a:"Descent &middot; Approach &middot; Landing &middot; Shutdown &middot; Secure",ref:"FCOM NP.21",src:"Arrival and termination phase checklists."},
+ {s:"Checklist Order",q:"Which checklist follows Before Taxi?",a:"Before Takeoff",ref:"FCOM NP.21",src:"… Before Taxi → Before Takeoff → After Takeoff …"},
+ {s:"Checklist Order",q:"Which checklist follows After Takeoff?",a:"Descent",ref:"FCOM NP.21",src:"No cruise checklist: After Takeoff → Descent."},
+ {s:"Checklist Order",q:"Which checklist follows Approach?",a:"Landing",ref:"FCOM NP.21",src:"… Descent → Approach → Landing …"},
+ {s:"Checklist Order",q:"Which checklist follows Landing?",a:"Shutdown",ref:"FCOM NP.21",src:"… Landing → Shutdown → Secure."},
+ {s:"Checklist Order",q:"Which TWO checklists must be read through “Checklist Complete”?",a:"Before Takeoff and Landing — mandatory",ref:"SOP (class notes)",src:"Company SOP per class notes: only the Before Takeoff and Landing checklists require the verbal “Checklist Complete” response, and it is mandatory for both."},
+];
+
+const CATS=["All","Phase Triggers","Approach Setup","Go-Around Brief","Checklist Order"];
+let cat="All";
+let order=[], idx=0, revealed=false, known=new Set(), review=new Set(), reviewMode=false, srcOpen=false;
+const app=document.getElementById("app");
+const catsEl=document.getElementById("cats");
+function renderCats(){
+  catsEl.innerHTML=CATS.map(c=>`<button class="catbtn${c===cat?' on':''}" onclick="setCat('${c}')">${c}</button>`).join('');
+}
+function setCat(c){cat=c;renderCats();start(false);}
+function pool(){return DATA.map((d,i)=>i).filter(i=>cat==="All"||DATA[i].s===cat);}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function start(reviewOnly){
+  reviewMode=reviewOnly;
+  order= reviewOnly ? shuffle([...review]) : shuffle(pool());
+  if(!reviewOnly){known=new Set();review=new Set();}
+  idx=0;revealed=false;srcOpen=false;render();
+}
+function render(){
+  if(idx>=order.length)return summary();
+  const d=DATA[order[idx]];
+  app.innerHTML=`
+    <div class="bar">
+      <span class="count">${idx+1} / ${order.length}</span>
+      <div class="track"><div class="fill" style="width:${(idx/order.length)*100}%"></div></div>
+      <span>${reviewMode?"REVIEW SET":cat.toUpperCase()}</span>
+    </div>
+    <div class="card">
+      <span class="chip">${d.ref}</span>
+      <div class="prompt">
+        <div class="cat">${d.s}${d.q.indexOf("Checklist Complete")>-1||d.a.indexOf("mandatory")>-1?'<span class="mand">Mandatory</span>':''}</div>
+        <div class="lead">Say it aloud, then reveal to check</div>
+        <div class="q">${d.q}</div>
+      </div>
+      <div class="readout${revealed?' show':''}"><div class="answer">${d.a}</div></div>
+      <div class="srcpanel${srcOpen?' show':''}"><div class="srclabel">Source &mdash; ${d.ref}</div><div class="srcsub" style="color:#cfe2f2;font-style:normal">${d.src}</div></div>
+      <div class="spacer"></div>
+      <div class="controls">
+        ${revealed?`
+          <button class="mark knew" onclick="grade(true)">Got it &nbsp;K</button>
+          <button class="mark rev" onclick="grade(false)">Review &nbsp;R</button>
+        `:`
+          <button class="primary" style="flex:1" onclick="reveal()">Reveal</button>
+        `}
+        <button class="srcbtn" onclick="toggleSrc()">${srcOpen?'Hide source':'Source'}</button>
+      </div>
+    </div>
+    <div class="foot">
+      <button class="ghost" onclick="start(false)">Restart set</button>
+      <span>got it ${known.size} &middot; review ${review.size}</span>
+    </div>`;
+}
+function reveal(){revealed=true;render()}
+function toggleSrc(){srcOpen=!srcOpen;render()}
+function grade(ok){const id=order[idx];if(ok){known.add(id);review.delete(id)}else{review.add(id)}idx++;revealed=false;srcOpen=false;render()}
+function summary(){
+  const total=reviewMode?order.length:pool().length;
+  const pct=total?Math.round((known.size/total)*100):0;
+  app.innerHTML=`
+    <div class="card"><div class="summary">
+      <div class="big">${pct}%</div>
+      <div class="lbl">known cold</div>
+      <div class="stat">
+        <div>${known.size}<span>got it</span></div>
+        <div class="r">${review.size}<span>to review</span></div>
+      </div>
+      <div class="controls" style="justify-content:center">
+        ${review.size?`<button class="primary" onclick="start(true)">Drill review only (${review.size})</button>`:''}
+        <button class="ghost" onclick="start(false)">Restart set</button>
+      </div>
+    </div></div>`;
+}
+document.addEventListener("keydown",e=>{
+  if(idx>=order.length)return;
+  if(e.code==="Space"||e.code==="Enter"){e.preventDefault();revealed?grade(true):reveal();}
+  else if(e.key==="k"||e.key==="K"){if(revealed)grade(true)}
+  else if(e.key==="r"||e.key==="R"){if(revealed)grade(false)}
+});
+renderCats();
+start(false);
+</script>
+
+<footer style="width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:8px;margin:28px auto 0;">
+<img src="B787_night.jpg" alt="Boeing 787" style="width:380px;max-width:60%;height:auto;border-radius:6px;">
+<a href="mailto:ryan.pettit@alaskaair.com?subject=B787%20Study%20Portal%20-%20Triggers%20Quizzer" style="font-size:11px;color:#b1d887;font-family:inherit;text-decoration:none;">ryan.pettit@alaskaair.com</a>
+<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 1.0</div>
+</footer>
+</body>
+</html>
