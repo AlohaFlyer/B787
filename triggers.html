@@ -64,9 +64,10 @@
   .srcbtn{background:transparent;border:1px solid var(--atlas);color:var(--breeze);border-radius:5px;padding:10px 14px;font-weight:700;font-family:var(--sans);cursor:pointer}
   .srcbtn:hover{background:var(--atlas);color:#fff}
   .srcpanel{max-height:0;overflow:hidden;opacity:0;background:#01233b;border:1px solid var(--line);border-radius:6px;padding:0 16px;margin-top:10px;transition:max-height .2s,opacity .2s,padding .2s}
-  .srcpanel.show{max-height:320px;opacity:1;padding:14px 16px}
+  .srcpanel.show{max-height:480px;opacity:1;padding:14px 16px}
   .srclabel{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
   .srcsub{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.45}
+  .flowol{margin:6px 0 0 20px;padding:0;font-family:var(--mono);font-size:13px;color:var(--green);line-height:1.7}
   .cat{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
   .answer{font-family:var(--mono);font-size:20px;line-height:1.45;color:var(--green);font-weight:700}
   .catrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
@@ -95,19 +96,19 @@ const DATA=[
  {s:"Phase Triggers",q:"HUDs DOWN — what does it trigger?",a:"Preflight Checklist",ref:"Trigger Map",src:"Gate-to-takeoff trigger map (Charlie Morris whiteboard): HUDs Down → “Preflight Checklist.”"},
  {s:"Phase Triggers",q:"Ground call “Circle check complete” — what does it trigger?",a:"Before Start Checklist",ref:"Trigger Map",src:"Trigger map: ground call (walk-around / circle check complete) → before-start flows → Before Start Checklist → clearance to push (F-C-C: Flows, Checklist, Clearance)."},
  {s:"Phase Triggers",q:"Before Start Checklist complete — what comes next?",a:"Push clearance",ref:"Trigger Map",src:"Trigger map F-C-C: Flows → Checklist → Clearance to push."},
- {s:"Phase Triggers",q:"Pin and salute — what does it trigger?",a:"Before Taxi flow (5 items) → Before Taxi Checklist",ref:"Trigger Map",src:"Trigger map: pushback salute / taxi light → Before Taxi flow → “Before Taxi Checklist.”"},
+ {s:"Phase Triggers",q:"Pin and salute — what does it trigger?",a:"Before Taxi flow (5 items) → Before Taxi Checklist",ref:"Trigger Map",src:"Trigger map: pushback salute / taxi light → Before Taxi flow → “Before Taxi Checklist.”",flow:{n:"Before Taxi flow (5 items)",i:["Flaps &mdash; set takeoff flaps","Weather &mdash; radar on, tilt set","EICAS swap &mdash; secondary engine indications","Control check &mdash; full and free","Recall &mdash; check for new EICAS messages"]}},
  {s:"Phase Triggers",q:"Recite the 5 Before Taxi flow items",a:"1 Flaps &middot; 2 Weather &middot; 3 EICAS swap &middot; 4 Control check &middot; 5 Recall",ref:"SOP / Trigger Map",src:"Ryan's trigger list: flaps, weather, EICAS swap, control check, recall. Checklist items behind them: anti-ice, recall, autobrake RTO, flight controls, ground personnel clear (phase_flows, FCOM NP.21)."},
  {s:"Phase Triggers",q:"Before Taxi Checklist complete — the next two actions?",a:"PM transfer of controls &middot; Taxi clearance",ref:"SOP / Trigger Map",src:"Ryan's trigger list: Before Taxi Checklist → PM transfer of controls and taxi clearance."},
  {s:"Phase Triggers",q:"FA chime — what does it trigger?",a:"Before Takeoff Checklist — read to “Checklist Complete” (mandatory)",ref:"SOP / Trigger Map",src:"Trigger map: cabin ready → “Before Takeoff Checklist” → FLY! Before Takeoff is one of only two checklists that must be read through the “Checklist Complete” response (company SOP, class notes)."},
  {s:"Phase Triggers",q:"Line Up and Wait — the 2 items?",a:"TA/RA &middot; say “Runway XX confirmed”",ref:"SOP / Trigger Map",src:"Ryan's trigger list: LUAW → transponder TA/RA, verbal runway confirmation."},
  {s:"Phase Triggers",q:"Flaps up after takeoff — 3 items, then what?",a:"Nose light OFF &middot; Taxi light OFF &middot; Anti-ice AUTO → After Takeoff Checklist",ref:"SOP / Trigger Map",src:"Ryan's trigger list: after-takeoff flaps up → nose and taxi lights OFF, anti-ice AUTO → After Takeoff Checklist (FCOM NP.21.35: After Takeoff checklist after flap retraction)."},
  {s:"Phase Triggers",q:"Climbing through 10,000 ft — the 4 items?",a:"Chime twice &middot; Landing lights OFF &middot; RWY turnoff lights OFF &middot; Logo light OFF",ref:"SOP / Trigger Map",src:"Ryan's trigger list, matching the 3 vetted 10,000-ft steps in the Flows Trainer plus the double chime."},
- {s:"Phase Triggers",q:"Clearing the runway after landing — first action, then what?",a:"Speedbrake DOWN → After Landing flow (7 items)",ref:"SOP / Trigger Map",src:"Ryan's trigger list: clear of the runway → speedbrake DOWN is the trigger for the After Landing flow."},
+ {s:"Phase Triggers",q:"Clearing the runway after landing — first action, then what?",a:"Speedbrake DOWN → After Landing flow (7 items)",ref:"SOP / Trigger Map",src:"Ryan's trigger list: clear of the runway → speedbrake DOWN is the trigger for the After Landing flow.",flow:{n:"After Landing flow (7 items)",i:["APU &mdash; start","Anti-ice &mdash; as required","Weather radar &mdash; OFF","Autobrake &mdash; OFF","Flaps &mdash; UP","Transponder &mdash; set","Arrival report"]}},
  {s:"Phase Triggers",q:"Recite the 7 After Landing flow items",a:"1 APU start &middot; 2 Anti-ice &middot; 3 WX radar OFF &middot; 4 Autobrake OFF &middot; 5 Flaps UP &middot; 6 Transponder &middot; 7 Arrival report",ref:"SOP / Trigger Map",src:"Ryan's trigger list: APU start, anti-ice, weather radar off, autobrake off, flaps up, transponder, arrival report."},
- {s:"Phase Triggers",q:"Reverse: what trigger kicks off the Before Taxi flow?",a:"Pin and salute",ref:"Trigger Map",src:"Trigger map: pushback salute / taxi light → Before Taxi flow."},
+ {s:"Phase Triggers",q:"Reverse: what trigger kicks off the Before Taxi flow?",a:"Pin and salute",ref:"Trigger Map",src:"Trigger map: pushback salute / taxi light → Before Taxi flow.",flow:{n:"Before Taxi flow (5 items)",i:["Flaps &mdash; set takeoff flaps","Weather &mdash; radar on, tilt set","EICAS swap &mdash; secondary engine indications","Control check &mdash; full and free","Recall &mdash; check for new EICAS messages"]}},
  {s:"Phase Triggers",q:"Reverse: what trigger calls for the Before Takeoff Checklist?",a:"FA chime (cabin ready)",ref:"SOP / Trigger Map",src:"Trigger map: cabin ready → Before Takeoff Checklist."},
  {s:"Phase Triggers",q:"Reverse: what trigger calls for the Preflight Checklist?",a:"HUDs down",ref:"Trigger Map",src:"Trigger map: HUDs Down → Preflight Checklist."},
- {s:"Phase Triggers",q:"Reverse: what is the trigger for the After Landing flow?",a:"Clear of the runway → Speedbrake DOWN",ref:"SOP / Trigger Map",src:"Ryan's trigger list: clearing the runway, speedbrake lever down, then the 7-item flow."},
+ {s:"Phase Triggers",q:"Reverse: what is the trigger for the After Landing flow?",a:"Clear of the runway → Speedbrake DOWN",ref:"SOP / Trigger Map",src:"Ryan's trigger list: clearing the runway, speedbrake lever down, then the 7-item flow.",flow:{n:"After Landing flow (7 items)",i:["APU &mdash; start","Anti-ice &mdash; as required","Weather radar &mdash; OFF","Autobrake &mdash; OFF","Flaps &mdash; UP","Transponder &mdash; set","Arrival report"]}},
 
  // ------------- APPROACH SETUP -------------
  {s:"Approach Setup",q:"Setting up an approach — recite the 5 steps",a:"ATIS &middot; Build &middot; Bug &middot; Brief &middot; Brakes",ref:"SOP / Technique",src:"Ryan's approach-setup mnemonic: ATIS, Build (the approach in the FMC), Bug (speeds/minimums), Brief, Brakes (autobrake)."},
@@ -115,7 +116,7 @@ const DATA=[
  {s:"Approach Setup",q:"Approach setup: first step and last step?",a:"ATIS first &middot; Brakes last",ref:"SOP / Technique",src:"ATIS → Build → Bug → Brief → Brakes."},
 
  // ------------- GO-AROUND BRIEF -------------
- {s:"Go-Around Brief",q:"Mandatory brief item for a LOW-LEVEL go-around?",a:"“I will guard the throttles forward and call ‘Set Thrust’ — PM verifies thrust is set”",ref:"FCOM NP.21.51",src:"FCOM NP.21.51 WARNING: TO/GA function is inhibited close to the ground and after touchdown. If the thrust levers do not respond when TO/GA is pushed, or if the go-around is initiated after touchdown, advance the thrust levers manually to go-around thrust."},
+ {s:"Go-Around Brief",q:"Mandatory brief item for a LOW-LEVEL go-around?",a:"“I will guard the throttles forward and call ‘Set Thrust’ — PM verifies thrust is set”",ref:"FCOM NP.21.51",src:"FCOM NP.21.51 WARNING: TO/GA function is inhibited close to the ground and after touchdown. If the thrust levers do not respond when TO/GA is pushed, or if the go-around is initiated after touchdown, advance the thrust levers manually to go-around thrust.",flow:{n:"Go-Around flow (FCOM NP.21.51)",i:["PF: &ldquo;Go-Around&rdquo; &mdash; push TO/GA &mdash; near ground/after touchdown ADVANCE THRUST MANUALLY","PF: &ldquo;Flaps 20&rdquo; (or 5/20 one-engine) &mdash; PM sets, verifies thrust: &ldquo;Thrust Set&rdquo;","PM: &ldquo;Positive Rate&rdquo; &rarr; PF: &ldquo;Gear Up&rdquo;","200 ft: autopilot as needed &middot; 400 ft: roll mode","Accel height: speed, flaps on schedule, CLB/CON","After Takeoff Checklist &mdash; PF calls after flaps up"]}},
  {s:"Go-Around Brief",q:"Why must thrust be advanced manually on a low-level go-around?",a:"TO/GA is inhibited close to the ground and after touchdown",ref:"FCOM NP.21.51",src:"FCOM NP.21.51 WARNING: TO/GA function is inhibited close to the ground and after touchdown."},
  {s:"Go-Around Brief",q:"Low-level go-around: PM's job after “Set Thrust”?",a:"Verify go-around thrust is set — call “Thrust Set”",ref:"FCOM NP.21.51",src:"Go-around procedure: PM sets flaps as directed and verifies thrust, calling “Thrust Set” (FCOM NP.21.51 / phase flows)."},
 
@@ -164,7 +165,7 @@ function render(){
         <div class="q">${d.q}</div>
       </div>
       <div class="readout${revealed?' show':''}"><div class="answer">${d.a}</div></div>
-      <div class="srcpanel${srcOpen?' show':''}"><div class="srclabel">Source &mdash; ${d.ref}</div><div class="srcsub" style="color:#cfe2f2;font-style:normal">${d.src}</div></div>
+      <div class="srcpanel${srcOpen?' show':''}"><div class="srclabel">Source &mdash; ${d.ref}</div><div class="srcsub" style="color:#cfe2f2;font-style:normal">${d.src}</div>${d.flow?`<div class="srclabel" style="margin-top:12px">The flow &mdash; ${d.flow.n}</div><ol class="flowol">${d.flow.i.map(x=>`<li>${x}</li>`).join("")}</ol>`:''}</div>
       <div class="spacer"></div>
       <div class="controls">
         ${revealed?`
@@ -214,7 +215,7 @@ start(false);
 <footer style="width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:8px;margin:28px auto 0;">
 <img src="B787_night.jpg" alt="Boeing 787" style="width:380px;max-width:60%;height:auto;border-radius:6px;">
 <a href="mailto:ryan.pettit@alaskaair.com?subject=B787%20Study%20Portal%20-%20Triggers%20Quizzer" style="font-size:11px;color:#b1d887;font-family:inherit;text-decoration:none;">ryan.pettit@alaskaair.com</a>
-<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 1.0</div>
+<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 1.1</div>
 </footer>
 </body>
 </html>
