@@ -35,8 +35,8 @@ Regenerated via build_scripts/ (parse_ep.py + master_ep_fast.sh). Per-episode ma
 the episode source .txt / manifests. See build_scripts/PODCAST_BUILD_TOOLCHAIN.md.
 
 ## Page version registry (bump +0.1 per edit)
-index 2.14 | flows_quiz 9.1 | hot-seat 1.3 | jeopardy 1.0 | limit-or-bust 1.4 | limitations 2.6 | memory-items 1.6 | triggers 1.0 | systems_quiz 2.6 | weather 1.5 | wx-alternate 1.1 | aircraft_setup 1.4 | cdu_preflight 1.0 | sv_exam 1.0 | phase_flows (see page footer) | podcast.html data-driven
+index 2.14 | flows_quiz 9.6 | hot-seat 1.3 | jeopardy 1.0 | limit-or-bust 1.4 | limitations 2.6 | memory-items 1.6 | triggers 1.0 | systems_quiz 2.6 | weather 1.5 | wx-alternate 1.1 | aircraft_setup 1.4 | cdu_preflight 1.0 | sv_exam 1.0 | phase_flows (see page footer) | podcast.html data-driven
 
 ## Open build items
-- Flows 3/4 FCOM-verbatim rebuild + 4 DRAFT stub flows (NP.21.30 Pushback/Towing, Cruise/ETOPS entry, NP.21.45 Landing-IAN, NP.21.48 Landing-VNAV) still pending in flows_quiz.html / phase_flows.html. Verbatim source staged in docs/FLOWS_REBUILD_SOURCE_NP21.md (FCOM R10).
+- 4 DRAFT stub flows (NP.21.30 Pushback/Towing, Cruise/ETOPS entry, NP.21.45 Landing-IAN, NP.21.48 Landing-VNAV) still pending in flows_quiz.html / phase_flows.html. Verbatim source staged in docs/FLOWS_REBUILD_SOURCE_NP21.md (FCOM R10). Flows 3 (CDU Preflight) and 4 (Preflight-FO) FCOM R10 verbatim audit CLOSED 2026-07-03 (flows_quiz Ver 9.6).
 - index.html footer photo: B787_night.jpg now committed as a real binary file and referenced via <img src> (replaced the truncated-base64 / SVG-placeholder saga; byte-verified md5 47bc434c…).
