@@ -7,12 +7,12 @@ This is the source of truth for which page cites which manual section.
 ## Page -> manuals (structured citation counts)
 
 - **aircraft_setup**: FCOM 3
-- **flows_quiz**: FCOM 142
+- **flows_quiz**: FCOM 166
 - **hot-seat**: QRH 10
-- **index**: FCOM 1, QRH 1
+- **index**: FCOM 2, QRH 1
 - **jeopardy**: FCOM 11
 - **limit-or-bust**: FCOM 29, FOM 1
-- **limitations**: FCOM 50
+- **limitations**: FCOM 46
 - **memory-items**: QRH 10
 - **podcast**: FCOM 11, FCTM 4, FOM 2, MEL 1, QRH 2
 - **systems_quiz**: FCOM 1442, FCTM 4, FOM 18, QRH 23
