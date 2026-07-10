@@ -275,15 +275,18 @@ const PHASES=[
     box('FO preflight flow (overhead waterfall)','Flight Control Surfaces · Heading Ref · PFC Disc · Electrical (Batt/IFE/Cabin/APU GEN/GEN CTRL) · APU · FD Door Power · Emer Lights · Window Heat · RAT · Hydraulic pumps · Seat Belts · Lighting · Ground Test · APU/Cargo fire · Engine (EEC/START) · Fuel Jettison · Fuel · Anti-ice','F',false,'Preflight Procedure - First Officer (overhead panel, top to bottom): FLIGHT CONTROL SURFACES (TAIL/WINGS NORM). HEADING REFERENCE NORM. PFC DISCONNECT guard closed. ELECTRICAL: BATTERY ON, IFE/PASS SEATS ON, CABIN/UTILITY ON, APU GENERATOR switches ON, GENERATOR CONTROL switches ON. APU selector START then ON as needed. L HUD BRIGHTNESS In, L WIPER OFF. FLIGHT DECK DOOR POWER ON. CCR RESET / EMERGENCY LIGHTS guards closed. SERVICE INTERPHONE OFF. WINDOW HEAT BACKUP + PRIMARY ON. RAM AIR TURBINE - do not push. HYDRAULIC: ENGINE PRIMARY pumps ON, CENTER + DEMAND pumps OFF. SEAT BELTS Set. Lighting panel Set. GROUND TEST NORM. APU and CARGO FIRE panels Set. ENGINE panel (EEC MODE NORM, START selectors NORM). FUEL JETTISON Set. FUEL panel (CROSSFEED OFF, pumps OFF). ANTI-ICE Set. (FCOM NP.21.12)'),
     trig('HUD stowed/down = ready for checklist','B'),
     cl('Preflight','cockpit preflight complete'),
-    box('ATC / Departure Clearance','FO obtains · Domestic = KUSA · HNL = Comm-Flt Info, Dept Clnc Req','F',false,'Departure Clearance ... Obtain (F/O). (FCOM NP.21.26)'),
+    trig('After Preflight Checklist → 3 items “C.R.B.”: Clearance · Route · Brief (crew gouge)','B'),
+    box('C - Clearance (ATC / Departure)','FO obtains · Domestic = KUSA · HNL = Comm-Flt Info, Dept Clnc Req','F',false,'Departure Clearance ... Obtain (F/O). (FCOM NP.21.26)'),
     box('MCP (takeoff pilot)','V2 · HDG/TRK · ALTITUDE · arm VNAV (LNAV as needed)','PF'),
-    box('Joint Verbal FMC Route Check','PF reads ATC clearance · PM crosschecks vs FMC RTE pages + flight plan · PF reads dist + fuel over dest (PROG 1/4), PM crosschecks','B',false,'PF reads the ATC clearance while the PM crosschecks against the FMC RTE pages and flight plan. PF reads the total distance and fuel over destination from PROG 1/4 while the PM crosschecks against the flight plan. (FCOM NP.21.26)'),
+    box('R - Route (Joint Verbal FMC Route Check)','PF reads ATC clearance · PM crosschecks vs FMC RTE pages + flight plan · PF reads dist + fuel over dest (PROG 1/4), PM crosschecks','B',false,'PF reads the ATC clearance while the PM crosschecks against the FMC RTE pages and flight plan. PF reads the total distance and fuel over destination from PROG 1/4 while the PM crosschecks against the flight plan. (FCOM NP.21.26)'),
+    box('B - Brief (Takeoff Brief)','Flaps, A/T, CG, V-Spds, Accel/Thrust hts · SID, Threats · Arm VNAV, LNAV?','B',false,'Taxi and Takeoff briefings - Complete (C, F/O). The pilot who will do the takeoff does the taxi and takeoff briefings. (FCOM NP.21.26)'),
   ],'FCOM NP.21.22-26'),
   S('PERFORMANCE / TAKEOFF DATA','#b8860b',[
-    trig('After Preflight Checklist → “CRB”: Clearance · Route verification · Brief, then Load Closeout + TPR (crew SOP sequence)','B'),
-    box('Takeoff Brief','Flaps, A/T, CG, V-Spds, Accel/Thrust hts · SID, Threats · Arm VNAV, LNAV?','B'),
-    box('LCO Verification','FO reads Flight #, UTC date, Tail #, Takeoff Weight from Load Closeout · CA verifies vs Dispatch Release','B',false,'The First Officer reads from the Load Closeout, and Captain verifies against the Dispatch Release, the following values: Flight number, UTC date, Tail number, Takeoff Weight (refer to FOM Dispatch Release Weight Tolerances). (FCOM NP.21.27)'),
-    box('TPR - Takeoff Performance Report (PF loads, PM verifies)','COMPANY-PERFORMANCE-TAKEOFF DATA: LOAD FMC · PERF INIT ACCEPT (verify ZFW) · TAKEOFF REF 1/2: flaps, assumed temp, CG, V1/VR/V2, set MCP V2 · THRUST LIM (no TO 1/TO 2)','PF',false,'TPR = Takeoff Performance Report (crew term for the AeroData takeoff performance uplink). CDU - Set (C, F/O). COMPANY-PERFORMANCE-TAKEOFF DATA page: Select LOAD FMC. CDU PERF INIT: Select ACCEPT, verify ZFW. CDU TAKEOFF REF 1/2: ACCEPT; verify/enter FLAPS, assumed temperature (THRUST), takeoff CG, and V1/VR/V2; set MCP IAS/MACH to V2. TAKEOFF REF 2/2: verify EO ACCEL HT, ACCEL HT, THR REDUCTION. THRUST LIM: verify OAT, select TO and CLB limits (HA operations do not allow TO 1 or TO 2). (FCOM NP.21.27)'),
+    trig('“The 4” before the Before Start Checklist: Performance · T/O Data · TPR · Load Closeout (crew gouge)','B'),
+    box('1 - Performance','COMPANY-PERFORMANCE-TAKEOFF DATA: LOAD FMC · PERF INIT ACCEPT (verify ZFW)','PF',false,'COMPANY-PERFORMANCE-TAKEOFF DATA page: Select LOAD FMC. CDU PERF INIT: Select ACCEPT, verify ZFW. (FCOM NP.21.27; the “Performance” item label is crew gouge)'),
+    box('2 - T/O Data','TAKEOFF REF 1/2: flaps, assumed temp, CG, V1/VR/V2 · set MCP V2 · TAKEOFF REF 2/2: accel hts, thr reduction · THRUST LIM (no TO 1/TO 2)','PF',false,'CDU TAKEOFF REF 1/2: ACCEPT; verify/enter FLAPS, assumed temperature (THRUST), takeoff CG, and V1/VR/V2; set MCP IAS/MACH to V2. TAKEOFF REF 2/2: verify EO ACCEL HT, ACCEL HT, THR REDUCTION. THRUST LIM: verify OAT, select TO and CLB limits (HA operations do not allow TO 1 or TO 2). (FCOM NP.21.27; the “T/O Data” item label is crew gouge)'),
+    box('3 - TPR','verify the loaded FMC takeoff data vs the Takeoff Performance Report','PF',false,'TPR = Takeoff Performance Report. Crew gouge: verify the FMC takeoff data entries against the Takeoff Performance Report. (Crew SOP)'),
+    box('4 - Load Closeout (LCO Verification)','FO reads Flight #, UTC date, Tail #, Takeoff Weight from Load Closeout · CA verifies vs Dispatch Release','B',false,'The First Officer reads from the Load Closeout, and Captain verifies against the Dispatch Release, the following values: Flight number, UTC date, Tail number, Takeoff Weight (refer to FOM Dispatch Release Weight Tolerances). (FCOM NP.21.27)'),
     box('Pax Count Verify','FO reads LCO pax + jumpseat · CA verifies vs Flight Deck Report','B'),
     box('Gate Agent / Station Mgr','Check fuel on board · Check EICAS','B'),
     box('1L door close','FA confirms with the flight deck before closing the 1L (boarding) door (crew SOP)','B'),
@@ -296,6 +299,7 @@ const PHASES=[
   S('PUSH & START','#7a3b8f',[
     trig('Ground calls CA: “Walkaround checks complete” → CA: “STANDBY” → cues FO Before Start flow','B'),
     box('Before Start Flow (FO)','FWD CARGO FLOW set · Flt deck door closed/locked · Exterior doors closed · Nose gear steering locked out (if pushback) · Hyd pumps AUTO · Fuel pumps ON · BEACON ON · CANCEL/RECALL · Trim SET (CA)','F',false,'FWD CARGO FLOW ... Set (HIGH for live animals/odorous cargo, otherwise LOW). Continue once cabin secure and walkaround complete (walkaround complete = clearance to pressurize hydraulics). Flight deck door ... Closed and locked. Exterior doors ... Verify closed. If pushback: Nose gear steering ... Verify locked out. HYDRAULIC panel ... Set (demand + center pumps AUTO). Fuel panel ... LEFT/RIGHT FUEL PUMP switches ON. BEACON ... ON. CANCEL/RECALL ... Push (verify only expected messages). Trim ... Set (greenband). (FCOM NP.21.28-29)'),
+    trig('CA calls the Before Start Checklist after “the 4” are done: Performance · T/O Data · TPR · Load Closeout','B'),
     cl('Before Start','before-start flow complete; CA calls'),
     box('Capt','Brakes set · Clr to disconnect External/Air? · Stby for Push Clnc','C',true),
     box('Ramp Crew','Gnd→Flt Dk confirm brakes set? · Disconnect Ext/Air? · “Ready for Push”','C',true),
@@ -312,7 +316,7 @@ const PHASES=[
 {id:'before-taxi',label:'Before Taxi',kind:'n',title:'BEFORE TAXI',src:'FCOM NP.21.31',sections:[
   S('BEFORE TAXI','#b03a2e',[
     trig('After salute received from pushback escort → CA taxi flow','B'),
-    box('CA taxi flow','WXR ON · TERR on PM side · EICAS · Flight controls check · Recall · “FLAPS ___” (T/O flaps)','C',false,'Crew SOP ordering of the Captain taxi-flow items. The flight-control check, recall check, and takeoff flap call are FCOM NP.21.31; FCOM NP.21.33 places WXR and terrain display setup in the Before Takeoff Procedure, so the WXR/TERR placement here (WXR on the CA side, TERR on the PM side) is crew SOP, re-verified at the Before Takeoff checklist.'),
+    box('CA taxi flow - “the 5” before the Before Taxi Checklist','1 WXR/TERR (WXR on CA side, TERR on PM side) · 2 EICAS · 3 Flight controls check · 4 “FLAPS ___” (T/O flaps) · 5 Recall','C',false,'Crew gouge: 5 items ahead of the Before Taxi Checklist - WXR/Terr, EICAS, Flight Controls Check, T/O Flaps, Recall. The flight-control check, recall check, and takeoff flap call are FCOM NP.21.31; FCOM NP.21.33 places WXR and terrain display setup in the Before Takeoff Procedure, so the WXR/TERR placement here (WXR on the CA side, TERR on the PM side) is crew SOP, re-verified at the Before Takeoff checklist.'),
     box('FO flow','All engine GEN OFF lights extinguished (4 generators ONline) · APU OFF · Engine anti-ice as needed · ground/equipment clear','F'),
     box('Capt','Call “FLAPS ___” · Flight controls check','C',true),
     box('PM','Secondary engine indications OFF · Recall check','PM'),
@@ -373,6 +377,7 @@ const PHASES=[
 
 {id:'descent',label:'Descent',kind:'n',title:'DESCENT',src:'FCOM NP.21.39',sections:[
   S('DESCENT','#5A4AB7',[
+    trig('“The gouge” - 6 items before the Descent Checklist: ATIS · Build · Bug · Brakes · Brief · RNP/Recall','B'),
     box('Start','before descent below cruise alt; complete by 10,000 ft AFE','B'),
     box('Passing 18,000 ft (PM)','Cabin-prep PA: “Flight Attendants, please prepare the cabin for arrival and be seated for landing”','PM',true),
     box('Review (both)','review alert/memo messages · review operational notes · Recall','B'),
@@ -564,13 +569,11 @@ const PHASES=[
     box('PM: “Positive Rate” → PF: “Gear Up”','','B',true,'Verify a positive rate of climb and call "POSITIVE RATE" (PM); call "GEAR UP" (PF). (FCTM)'),
   ]),
   S('CLEAN UP / SECURE','#7a3b8f',[
-    box('@400 ft','PF call/verify roll mode · both pilots assess problem','B',true,'Above 400 ft RA, the PF calls or verifies a roll mode. Both pilots assess the problem and accomplish memory items as needed. (PRC Takeoff - Engine Failure)'),
-    box('@200 ft','PF: “Autopilot On” (as needed)','PF',true,'At 200 ft, PF "Autopilot On" as needed. (PRC Takeoff - Engine Failure)'),
-    box('Acceleration height','PF retract flaps on schedule','PF',true,'At acceleration height, retract flaps on schedule. (PRC Takeoff - Engine Failure)'),
-    box('Flaps up','PF verify clean up · verify CON thrust','PF',true,'After flaps up: verify clean up and verify CON (maximum continuous) thrust. (PRC Takeoff - Engine Failure)'),
-    box('PF: “Select Engine Out on CDU”','','PF',true,'PF: "Select Engine Out on CDU." (PRC Takeoff - Engine Failure)'),
-    cl('After Takeoff','gear UP · flaps UP'),
+    box('@200 ft','PF: “Autopilot On” (as needed)','PF',true,'At 200 ft, PF "Autopilot On" as needed - the autopilot comes on at 200 ft, before the 400 ft roll-mode change. (PRC Takeoff - Engine Failure)'),
+    box('@400 ft','PF call/verify roll mode · PF: “What have we got?” → memory items','B',true,'Above 400 ft RA, the PF calls or verifies a roll mode. At 400 ft the PF asks "What have we got?" (crew SOP wording); both pilots assess the problem and accomplish memory items as needed. (PRC Takeoff - Engine Failure)'),
+    box('Acceleration height','Bug Up · Clean Up · CON · Check E/O on VNAV page','PF',true,'Crew gouge at acceleration height: Bug Up (set clean maneuver speed), Clean Up (retract flaps on schedule), CON (verify maximum continuous thrust after flaps up), Check E/O on the VNAV page (PF: "Select Engine Out on CDU"). Then run the emergency checklist and the After Takeoff checklist. (PRC Takeoff - Engine Failure / crew SOP)'),
     box('Run the engine NNC','accomplish the appropriate engine non-normal checklist','B',true,'Accomplish the appropriate engine non-normal checklist (PF: Checklist "___ NNC"). (PRC Takeoff - Engine Failure)'),
+    cl('After Takeoff','gear UP · flaps UP · AFTER the engine NNC'),
   ]),
 ]},
 
