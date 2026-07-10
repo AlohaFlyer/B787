@@ -280,9 +280,10 @@ const PHASES=[
     box('Joint Verbal FMC Route Check','PF reads ATC clearance · PM crosschecks vs FMC RTE pages + flight plan · PF reads dist + fuel over dest (PROG 1/4), PM crosschecks','B',false,'PF reads the ATC clearance while the PM crosschecks against the FMC RTE pages and flight plan. PF reads the total distance and fuel over destination from PROG 1/4 while the PM crosschecks against the flight plan. (FCOM NP.21.26)'),
   ],'FCOM NP.21.22-26'),
   S('PERFORMANCE / TAKEOFF DATA','#b8860b',[
+    trig('After Preflight Checklist → “CRB”: Clearance · Route verification · Brief, then Load Closeout + TPR (crew SOP sequence)','B'),
     box('Takeoff Brief','Flaps, A/T, CG, V-Spds, Accel/Thrust hts · SID, Threats · Arm VNAV, LNAV?','B'),
     box('LCO Verification','FO reads Flight #, UTC date, Tail #, Takeoff Weight from Load Closeout · CA verifies vs Dispatch Release','B',false,'The First Officer reads from the Load Closeout, and Captain verifies against the Dispatch Release, the following values: Flight number, UTC date, Tail number, Takeoff Weight (refer to FOM Dispatch Release Weight Tolerances). (FCOM NP.21.27)'),
-    box('CDU takeoff data (PF loads, PM verifies)','COMPANY-PERFORMANCE-TAKEOFF DATA: LOAD FMC · PERF INIT ACCEPT (verify ZFW) · TAKEOFF REF 1/2: flaps, assumed temp, CG, V1/VR/V2, set MCP V2 · THRUST LIM (no TO 1/TO 2)','PF'),
+    box('TPR - Takeoff Performance Report (PF loads, PM verifies)','COMPANY-PERFORMANCE-TAKEOFF DATA: LOAD FMC · PERF INIT ACCEPT (verify ZFW) · TAKEOFF REF 1/2: flaps, assumed temp, CG, V1/VR/V2, set MCP V2 · THRUST LIM (no TO 1/TO 2)','PF',false,'TPR = Takeoff Performance Report (crew term for the AeroData takeoff performance uplink). CDU - Set (C, F/O). COMPANY-PERFORMANCE-TAKEOFF DATA page: Select LOAD FMC. CDU PERF INIT: Select ACCEPT, verify ZFW. CDU TAKEOFF REF 1/2: ACCEPT; verify/enter FLAPS, assumed temperature (THRUST), takeoff CG, and V1/VR/V2; set MCP IAS/MACH to V2. TAKEOFF REF 2/2: verify EO ACCEL HT, ACCEL HT, THR REDUCTION. THRUST LIM: verify OAT, select TO and CLB limits (HA operations do not allow TO 1 or TO 2). (FCOM NP.21.27)'),
     box('Pax Count Verify','FO reads LCO pax + jumpseat · CA verifies vs Flight Deck Report','B'),
     box('Gate Agent / Station Mgr','Check fuel on board · Check EICAS','B'),
     box('1L door close','FA confirms with the flight deck before closing the 1L (boarding) door (crew SOP)','B'),
@@ -293,26 +294,31 @@ const PHASES=[
 
 {id:'before-start',label:'Before Start',kind:'n',title:'PUSH & START',src:'FCOM NP.21.26-30',sections:[
   S('PUSH & START','#7a3b8f',[
-    box('Capt','Brakes set · Clr to disconnect External/Air? · Stby for Push Clnc','C',true),
+    trig('Ground calls CA: “Walkaround checks complete” → CA: “STANDBY” → cues FO Before Start flow','B'),
     box('Before Start Flow (FO)','FWD CARGO FLOW set · Flt deck door closed/locked · Exterior doors closed · Nose gear steering locked out (if pushback) · Hyd pumps AUTO · Fuel pumps ON · BEACON ON · CANCEL/RECALL · Trim SET (CA)','F',false,'FWD CARGO FLOW ... Set (HIGH for live animals/odorous cargo, otherwise LOW). Continue once cabin secure and walkaround complete (walkaround complete = clearance to pressurize hydraulics). Flight deck door ... Closed and locked. Exterior doors ... Verify closed. If pushback: Nose gear steering ... Verify locked out. HYDRAULIC panel ... Set (demand + center pumps AUTO). Fuel panel ... LEFT/RIGHT FUEL PUMP switches ON. BEACON ... ON. CANCEL/RECALL ... Push (verify only expected messages). Trim ... Set (greenband). (FCOM NP.21.28-29)'),
     cl('Before Start','before-start flow complete; CA calls'),
-    trig('“Walk-Around Complete” cues FO Before-Start flow','B'),
+    box('Capt','Brakes set · Clr to disconnect External/Air? · Stby for Push Clnc','C',true),
     box('Ramp Crew','Gnd→Flt Dk confirm brakes set? · Disconnect Ext/Air? · “Ready for Push”','C',true),
     box('Call ATC for Push Clearance','','C',true),
-    box('Ramp Crew (push / start)','Cleared to Push (direction) · Cleared to Start (after p/back) · Push complete, set brakes','C',true),
-    box('Engine Start','engines may be started at the same time · obtain start clearance · “START ___ ENGINE”','B',false,'CAUTION: If OAT is above 40°C, do not attempt to start both engines at the same time. Note: The engines may not start if external power and the APU are both supplying electric power at the same time - one source must be selected off; the APU is the preferred source for engine start. (FCOM NP.21.30)'),
-    trig('After engines started → disconnect towbar, then headset','B'),
+    box('Push','Ramp: “Clear to release brakes?” → CA releases parking brake · pushback begins','C',true,'Parking brake ... Set or release as directed by ground handling personnel (C). CAUTION: Do not turn the nose wheel tiller during pushback or towing. CAUTION: Do not use airplane brakes to stop the airplane during pushback or towing. (FCOM NP.21.30)'),
+    box('Start clearance (during push)','CA receives clearance to start engines','C',true,'Start clearance ... Obtain (C). Start sequence ... Announce (C). The Engine Start procedure may be done during pushback or towing. (FCOM NP.21.30)'),
+    box('CA start-count decision','oil temp above -40°C AND OAT 40°C or below → tell ground “starting 2 engines” · hotter than 40°C OAT → start one at a time','C',true,'Crew SOP decision gate built from two source limits: # For engine start, oil temperature must be greater than -40 degrees C (FCOM L.10.8). CAUTION: If OAT is above 40°C, do not attempt to start both engines at the same time (FCOM NP.21.30). If both gates pass, CA advises the ground crew that both engines will be started together; otherwise start one at a time.'),
+    box('Engine Start','engines may be started at the same time · “START ___ ENGINE”','B',false,'CAUTION: If OAT is above 40°C, do not attempt to start both engines at the same time. Note: The engines may not start if external power and the APU are both supplying electric power at the same time - one source must be selected off; the APU is the preferred source for engine start. (FCOM NP.21.30)'),
+    box('Push complete','Ramp: “Clear to set brakes” → CA sets parking brake · CA: “Clear to disconnect, go to hand signals”','C',true,'When pushback or towing is complete: Tow bar ... Verify not connected (C). Nose gear steering ... Verify not locked out (C). (FCOM NP.21.30) The disconnect / hand-signals exchange is crew SOP.'),
+    trig('Pin shown + salute at the side → CA acknowledges ramp with the TAXI light → taxi flow (crew SOP)','C'),
   ]),
 ]},
 
 {id:'before-taxi',label:'Before Taxi',kind:'n',title:'BEFORE TAXI',src:'FCOM NP.21.31',sections:[
   S('BEFORE TAXI','#b03a2e',[
-    trig('After salute received from pushback escort','B'),
+    trig('After salute received from pushback escort → CA taxi flow','B'),
+    box('CA taxi flow','WXR ON · TERR on PM side · EICAS · Flight controls check · Recall · “FLAPS ___” (T/O flaps)','C',false,'Crew SOP ordering of the Captain taxi-flow items. The flight-control check, recall check, and takeoff flap call are FCOM NP.21.31; FCOM NP.21.33 places WXR and terrain display setup in the Before Takeoff Procedure, so the WXR/TERR placement here (WXR on the CA side, TERR on the PM side) is crew SOP, re-verified at the Before Takeoff checklist.'),
     box('FO flow','All engine GEN OFF lights extinguished (4 generators ONline) · APU OFF · Engine anti-ice as needed · ground/equipment clear','F'),
     box('Capt','Call “FLAPS ___” · Flight controls check','C',true),
     box('PM','Secondary engine indications OFF · Recall check','PM'),
     cl('Before Taxi','“Flaps ___” · 4 generators ONline'),
     note('Transition CA,FO → PF,PM at completion of the Before Taxi checklist.'),
+    box('PM (taxi clearance)','Obtain taxi clearance (after the PF/PM changeover)','PM',true,'After the Before Taxi checklist is complete and the crew transitions from CA,FO to PF,PM duties, the PM obtains the taxi clearance. (Crew SOP)'),
   ]),
 ]},
 
@@ -326,6 +332,7 @@ const PHASES=[
     box('Prior to hold-short - both','“Runway ___ confirmed”','B',true),
     box('Crossing hold-short (PM)','Wing, L/R Runway Turnoff, Strobe lights ON · Transponder TA/RA','PM'),
     box('Lined up - both','visually verify ND aircraft symbol on assigned runway + headings agree','B'),
+    box('Line up and wait - both','“Runway ___ Confirmed” · visually check AUTOBRAKE RTO · XPDR TA/RA','B',true,'Crew SOP: at line up and wait, both pilots state \"Runway ___ Confirmed\" and visually re-check AUTOBRAKE RTO and transponder TA/RA. Note: FCOM NP.21.34 places the \"Runway ___ confirmed\" verification prior to crossing the hold-short line and the TA/RA selection when entering the runway; this LUAW item is a crew SOP backstop re-check, not a replacement.'),
     box('Cleared for takeoff','PM: Landing lights ON · PF: thrust 40% N1 (stabilize), push TO/GA','B',true),
     box('PM: “Thrust Set”','','PM',true),
     box('@80 kt → PM: “80 Knots” / PF: “Check”','','B',true),
