@@ -564,7 +564,9 @@ const PHASES=[
 
 {id:'eng-fail-to',label:'Eng Fail T/O',kind:'a',title:'TAKEOFF - ENGINE FAILURE',src:'FCTM · PRC',sections:[
   S('CONTINUE (at/after V1)','#b03a2e',[
+    box('Before rotation - PF','rudder pressure from the good engine · maintain centerline · then rotate','PF',false,'Crew technique: after the failure at/after V1, the PF applies rudder pressure from the good-engine side, maintains centerline, then rotates. (Crew technique / class notes)'),
     box('At VR - PF rotates to 12-13°','smoothly · follow flight director','PF',true,'At or after V1 the takeoff is continued. At VR, rotate smoothly toward 12 to 13 degrees pitch attitude (lower than the all-engine 15 degrees) and follow the flight director. (FCTM / PRC Takeoff - Engine Failure)'),
+    box('Autobrake clicks off → TAP takes over','PF can release rudder pressure','PF',false,'Crew technique: when the PF hears the autobrake click off, TAP takes over the thrust-asymmetry rudder compensation and rudder pressure can be released. (Crew technique / class notes; verify the exact system name and ground/air logic in FCOM Flight Controls - Boeing documentation describes 787 thrust asymmetry compensation as TAC)'),
     box('PM: “Positive Rate” → PF: “Gear Up”','','B',true,'Verify a positive rate of climb and call "POSITIVE RATE" (PM); call "GEAR UP" (PF). (FCTM)'),
   ]),
   S('CLEAN UP / SECURE','#7a3b8f',[
