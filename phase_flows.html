@@ -316,9 +316,8 @@ const PHASES=[
 {id:'before-taxi',label:'Before Taxi',kind:'n',title:'BEFORE TAXI',src:'FCOM NP.21.31',sections:[
   S('BEFORE TAXI','#b03a2e',[
     trig('After salute received from pushback escort → CA taxi flow','B'),
-    box('CA taxi flow - “the 5” before the Before Taxi Checklist','1 WXR/TERR (WXR on CA side, TERR on PM side) · 2 EICAS · 3 Flight controls check · 4 “FLAPS ___” (T/O flaps) · 5 Recall','C',false,'Crew gouge: 5 items ahead of the Before Taxi Checklist - WXR/Terr, EICAS, Flight Controls Check, T/O Flaps, Recall. The flight-control check, recall check, and takeoff flap call are FCOM NP.21.31; FCOM NP.21.33 places WXR and terrain display setup in the Before Takeoff Procedure, so the WXR/TERR placement here (WXR on the CA side, TERR on the PM side) is crew SOP, re-verified at the Before Takeoff checklist.'),
+    box('CA taxi flow - “the 5” before the Before Taxi Checklist','1 WXR/TERR (WXR on CA side, TERR on PM side) · 2 EICAS · 3 Flight controls check · 4 “FLAPS ___” (T/O flaps) · 5 Recall','C',false,'Crew gouge: 5 items ahead of the Before Taxi Checklist - WXR/Terr, EICAS, Flight Controls Check, T/O Flaps, Recall. FCOM NP.21.31: Call "FLAPS ___" as needed for takeoff (C); Flap lever Set takeoff flaps (F/O); Flight controls Check (C) - make slow, deliberate inputs one direction at a time to full travel, verify freedom of movement and return to center, hold the rudder pedal disconnect switch during the rudder check; Recall Check (C, F/O). FCOM NP.21.33 places WXR and terrain display setup in the Before Takeoff Procedure, so the WXR/TERR placement here (WXR on the CA side, TERR on the PM side) is crew SOP, re-verified at the Before Takeoff checklist.'),
     box('FO flow','All engine GEN OFF lights extinguished (4 generators ONline) · APU OFF · Engine anti-ice as needed · ground/equipment clear','F'),
-    box('Capt','Call “FLAPS ___” · Flight controls check','C',true),
     box('PM','Secondary engine indications OFF · Recall check','PM'),
     cl('Before Taxi','“Flaps ___” · 4 generators ONline'),
     note('Transition CA,FO → PF,PM at completion of the Before Taxi checklist.'),
