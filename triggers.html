@@ -111,9 +111,9 @@ const DATA=[
  {s:"Phase Triggers",q:"Reverse: what is the trigger for the After Landing flow?",a:"Clear of the runway → Speedbrake DOWN",ref:"SOP / Trigger Map",src:"Ryan's trigger list: clearing the runway, speedbrake lever down, then the 7-item flow.",flow:{n:"After Landing flow (7 items)",i:["APU &mdash; start","Anti-ice &mdash; as required","Weather radar &mdash; OFF","Autobrake &mdash; OFF","Flaps &mdash; UP","Transponder &mdash; set","Arrival report"]}},
 
  // ------------- APPROACH SETUP -------------
- {s:"Approach Setup",q:"Setting up an approach — recite the 5 steps",a:"ATIS &middot; Build &middot; Bug &middot; Brief &middot; Brakes",ref:"SOP / Technique",src:"Ryan's approach-setup mnemonic: ATIS, Build (the approach in the FMC), Bug (speeds/minimums), Brief, Brakes (autobrake)."},
- {s:"Approach Setup",q:"Approach setup: what comes after Build?",a:"Bug",ref:"SOP / Technique",src:"ATIS → Build → Bug → Brief → Brakes."},
- {s:"Approach Setup",q:"Approach setup: first step and last step?",a:"ATIS first &middot; Brakes last",ref:"SOP / Technique",src:"ATIS → Build → Bug → Brief → Brakes."},
+ {s:"Approach Setup",q:"The gouge before the Descent Checklist — recite the 6 items",a:"ATIS &middot; Build &middot; Bug &middot; Brakes &middot; Brief &middot; RNP/Recall",ref:"SOP / Technique",src:"Ryan's descent/approach-setup gouge (6 items, updated Jul 2026): ATIS, Build (the approach in the FMC), Bug (speeds/minimums), Brakes (autobrake), Brief, RNP/Recall. Supersedes the earlier 5-step ATIS/Build/Bug/Brief/Brakes version."},
+ {s:"Approach Setup",q:"Descent gouge: what comes after Build?",a:"Bug",ref:"SOP / Technique",src:"ATIS → Build → Bug → Brakes → Brief → RNP/Recall."},
+ {s:"Approach Setup",q:"Descent gouge: first item and last item?",a:"ATIS first &middot; RNP/Recall last",ref:"SOP / Technique",src:"ATIS → Build → Bug → Brakes → Brief → RNP/Recall."},
 
  // ------------- GO-AROUND BRIEF -------------
  {s:"Go-Around Brief",q:"Mandatory brief item for a LOW-LEVEL go-around?",a:"“I will guard the throttles forward and call ‘Set Thrust’ — PM verifies thrust is set”",ref:"FCOM NP.21.51",src:"FCOM NP.21.51 WARNING: TO/GA function is inhibited close to the ground and after touchdown. If the thrust levers do not respond when TO/GA is pushed, or if the go-around is initiated after touchdown, advance the thrust levers manually to go-around thrust.",flow:{n:"Go-Around flow (FCOM NP.21.51)",i:["PF: &ldquo;Go-Around&rdquo; &mdash; push TO/GA &mdash; near ground/after touchdown ADVANCE THRUST MANUALLY","PF: &ldquo;Flaps 20&rdquo; (or 5/20 one-engine) &mdash; PM sets, verifies thrust: &ldquo;Thrust Set&rdquo;","PM: &ldquo;Positive Rate&rdquo; &rarr; PF: &ldquo;Gear Up&rdquo;","200 ft: autopilot as needed &middot; 400 ft: roll mode","Accel height: speed, flaps on schedule, CLB/CON","After Takeoff Checklist &mdash; PF calls after flaps up"]}},
@@ -215,7 +215,7 @@ start(false);
 <footer style="width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:8px;margin:28px auto 0;">
 <img src="B787_night.jpg" alt="Boeing 787" style="width:380px;max-width:60%;height:auto;border-radius:6px;">
 <a href="mailto:ryan.pettit@alaskaair.com?subject=B787%20Study%20Portal%20-%20Triggers%20Quizzer" style="font-size:11px;color:#b1d887;font-family:inherit;text-decoration:none;">ryan.pettit@alaskaair.com</a>
-<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 1.1</div>
+<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 1.2</div>
 </footer>
 </body>
 </html>
