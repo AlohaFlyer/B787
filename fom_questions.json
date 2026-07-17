@@ -1,1 +1,24 @@
-[{"id":"fom01-001","chapter":"1","chapterName":"1 Preface","q":"What is the regulatory classification of the FOM?","a":"It is classified as an FAA-accepted manual with approved content.","ref":"FOM 1.1.6","src":{"ref":"FOM 1.1.6 — Regulatory Classification","quote":"The FOM is classified as an FAA-accepted manual with approved content.","note":"The FOM is an accepted manual, but portions of its content are FAA-approved. Publication follows the FAA Approval/Acceptance Request Process defined in the Company Administrative Manual."}}]
+{
+ "rev": "124.2",
+ "generated": "FOM Rev 124.2 (Jun 18, 2026)",
+ "chapters": [
+  {"chapter": "1", "name": "1 Preface", "file": "fom_q/ch01.json", "count": 20},
+  {"chapter": "2", "name": "2 Operating-General", "file": "fom_q/ch02.json", "count": 20},
+  {"chapter": "3", "name": "3 Training & Currency", "file": "fom_q/ch03.json", "count": 18},
+  {"chapter": "4", "name": "4 Crew Administration", "file": "fom_q/ch04.json", "count": 16},
+  {"chapter": "5", "name": "5 Flight Operations", "file": "fom_q/ch05.json", "count": 22},
+  {"chapter": "6", "name": "6 ETOPS", "file": "fom_q/ch06.json", "count": 20},
+  {"chapter": "7", "name": "7 Comms & Reports", "file": "fom_q/ch07.json", "count": 18},
+  {"chapter": "8", "name": "8 Dispatch", "file": "fom_q/ch08.json", "count": 22},
+  {"chapter": "9", "name": "9 Weather", "file": "fom_q/ch09.json", "count": 20},
+  {"chapter": "10", "name": "10 CRM", "file": "fom_q/ch10.json", "count": 15},
+  {"chapter": "11", "name": "11 Emergency/Abnormal", "file": "fom_q/ch11.json", "count": 20},
+  {"chapter": "12", "name": "12 Fueling & Maintenance", "file": "fom_q/ch12.json", "count": 18},
+  {"chapter": "13", "name": "13 Passenger Relations", "file": "fom_q/ch13.json", "count": 15},
+  {"chapter": "14", "name": "14 HAZMAT", "file": "fom_q/ch14.json", "count": 21},
+  {"chapter": "15", "name": "15 Security (SSI)", "file": "fom_q/ch15.json", "count": 20},
+  {"chapter": "16", "name": "16 NRFO", "file": "fom_q/ch16.json", "count": 18},
+  {"chapter": "17", "name": "17 Freighter Ops", "file": "fom_q/ch17.json", "count": 12},
+  {"chapter": "18", "name": "18 Areas of Operation", "file": "fom_q/ch18.json", "count": 15}
+ ]
+}
