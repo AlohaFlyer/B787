@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FOM Quizzer - B787 Study Portal</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<meta name="theme-color" content="#01416e">
+<style>
+  :root{--midnight:#01416e;--atlas:#007cba;--blue:#00b2d6;--breeze:#bfe9f4;--ice:#E8F3FA;--good:#b1d887;--amber:#f0a030;--paper:#fff;--ink:#12303f;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Segoe UI",Arial,Helvetica,sans-serif;background:var(--ice);color:var(--ink);min-height:100vh;}
+  a.portal-bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:8px;background:var(--midnight);color:#fff;text-decoration:none;padding:10px 16px;font-weight:700;font-size:14px;letter-spacing:.02em;}
+  a.portal-bar:hover{background:var(--atlas);}
+  .wrap{max-width:640px;margin:0 auto;padding:16px 12px 40px;}
+  h1{color:var(--midnight);font-size:22px;margin:14px 4px 2px;}
+  .sub{color:#557;font-size:13px;margin:0 4px 14px;line-height:1.45;}
+  .filterbar{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 16px;}
+  .filter-btn{background:#fff;border:2px solid var(--midnight);color:var(--midnight);border-radius:20px;padding:6px 12px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .12s,color .12s;}
+  .filter-btn .cnt{font-weight:400;opacity:.8;margin-left:4px;}
+  .filter-btn.active{background:var(--midnight);color:#fff;}
+  .filter-btn.fdone{border-color:var(--good);background:var(--good);color:var(--midnight);}
+  .filter-btn.active.fdone{background:#7fae4f;color:#fff;}
+  .progwrap{margin:6px 4px 16px;}
+  .progline{display:flex;justify-content:space-between;font-size:12px;color:#557;margin-bottom:5px;font-weight:600;}
+  .track{height:8px;background:#cfe3ef;border-radius:6px;overflow:hidden;}
+  .fill{height:100%;background:var(--good);width:0;transition:width .2s;}
+  .card{background:var(--paper);border:2px solid var(--midnight);border-radius:12px;padding:18px 16px 16px;box-shadow:0 1px 4px rgba(1,65,110,.12);}
+  .chip{display:inline-block;background:var(--breeze);color:var(--midnight);border-radius:6px;padding:3px 9px;font-size:11.5px;font-weight:700;margin-bottom:12px;letter-spacing:.02em;}
+  .q{font-size:18px;font-weight:600;line-height:1.4;color:var(--ink);margin:2px 0 4px;}
+  .answer{margin-top:14px;padding-top:14px;border-top:1px dashed #b9d4e3;font-size:17px;line-height:1.45;color:var(--midnight);font-weight:600;display:none;}
+  .answer.show{display:block;}
+  .srcbtn{margin-top:14px;background:none;border:1.5px solid var(--atlas);color:var(--atlas);border-radius:7px;padding:7px 13px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;display:none;}
+  .srcbtn.show{display:inline-block;}
+  .srcbtn:hover{background:var(--atlas);color:#fff;}
+  .srcpanel{max-height:0;opacity:0;overflow:hidden;transition:max-height .25s,opacity .25s;margin-top:0;}
+  .srcpanel.show{max-height:600px;opacity:1;margin-top:12px;}
+  .srclabel{font-size:11.5px;font-weight:700;color:var(--atlas);text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px;}
+  .srcquote{background:var(--ice);border-left:3px solid var(--atlas);padding:9px 11px;font-size:13.5px;line-height:1.5;color:#243b47;border-radius:0 6px 6px 0;}
+  .srcnote{font-size:12.5px;color:#557;margin-top:7px;line-height:1.45;}
+  .actions{display:flex;gap:10px;margin-top:18px;}
+  .actions button{flex:1;border:none;border-radius:9px;padding:13px 8px;font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:filter .12s;}
+  .actions button:hover{filter:brightness(1.06);}
+  .reveal{background:var(--midnight);color:#fff;}
+  .got{background:var(--good);color:#1c3a12;display:none;}
+  .miss{background:var(--amber);color:#3a2503;display:none;}
+  .actions.revealed .reveal{display:none;}
+  .actions.revealed .got,.actions.revealed .miss{display:block;}
+  .kbd{font-size:11px;color:#7a94a3;text-align:center;margin-top:12px;}
+  .summary{background:var(--paper);border:2px solid var(--good);border-radius:12px;padding:26px 18px;text-align:center;}
+  .summary .big{font-size:46px;font-weight:800;color:var(--midnight);}
+  .summary p{color:#557;font-size:14px;margin:6px 0 18px;}
+  .summary button{background:var(--midnight);color:#fff;border:none;border-radius:9px;padding:12px 20px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;margin:4px;}
+  .msg{text-align:center;color:#557;padding:40px 10px;font-size:14px;}
+  footer{max-width:640px;margin:24px auto 0;padding:14px 16px 26px;text-align:center;color:#7a94a3;font-size:11px;}
+  footer a{color:var(--atlas);text-decoration:none;}
+  .ver{font-weight:700;color:#9fb3c0;margin-top:6px;}
+</style>
+</head>
+<body>
+<a class="portal-bar" href="index.html">&#9664; B787 Study Portal</a>
+<div class="wrap">
+  <h1>FOM Quizzer</h1>
+  <p class="sub">Flight Operations Manual, chapter by chapter. Pick a chapter, state your answer aloud, reveal, and grade yourself. Every question carries its FOM source. Mastered questions are remembered on this device.</p>
+  <div class="filterbar" id="filterbar"></div>
+  <div class="progwrap">
+    <div class="progline"><span id="progLabel">Mastered</span><span id="progCount">0 / 0</span></div>
+    <div class="track"><div class="fill" id="fill"></div></div>
+  </div>
+  <div id="stage"><div class="msg" id="msg">Loading FOM question bank&hellip;</div></div>
+  <div class="kbd">Space = reveal &middot; K = got it &middot; M = missed</div>
+</div>
+<footer>
+  FOM source: Hawaiian/Alaska B787 Flight Operations Manual. Study aid only; the current FOM is authoritative.<br>
+  <a href="mailto:ryan.pettit@alaskaair.com?subject=FOM%20Quizzer">ryan.pettit@alaskaair.com</a>
+  <div class="ver">Ver 1.0</div>
+</footer>
+<script>
+(function(){
+  var LS_KEY='fom_mastered_v1';
+  var QUESTIONS=[], state={filter:'All', queue:[], idx:0, revealed:false, mastered:loadMastered(), sessionGot:0, sessionMiss:0};
+
+  function loadMastered(){try{return new Set(JSON.parse(localStorage.getItem(LS_KEY)||'[]'));}catch(e){return new Set();}}
+  function saveMastered(){try{localStorage.setItem(LS_KEY,JSON.stringify([].concat(Array.from(state.mastered))));}catch(e){}}
+
+  function chapters(){
+    var seen=[], out=['All'];
+    QUESTIONS.forEach(function(q){if(seen.indexOf(q.chapterName)<0){seen.push(q.chapterName);}});
+    return out.concat(seen);
+  }
+  function pool(f){return f==='All'?QUESTIONS:QUESTIONS.filter(function(q){return q.chapterName===f;});}
+
+  function renderFilters(){
+    var bar=document.getElementById('filterbar'); bar.innerHTML='';
+    chapters().forEach(function(c){
+      var p=pool(c), m=p.filter(function(q){return state.mastered.has(q.id);}).length;
+      var b=document.createElement('button');
+      b.className='filter-btn'+(c===state.filter?' active':'')+(p.length&&m===p.length?' fdone':'');
+      b.innerHTML=esc(c)+'<span class="cnt">'+m+'/'+p.length+'</span>';
+      b.onclick=function(){setFilter(c);};
+      bar.appendChild(b);
+    });
+  }
+  function setFilter(c){state.filter=c;buildQueue();renderFilters();renderProg();renderCard();}
+
+  function buildQueue(){
+    var p=pool(state.filter).slice();
+    for(var i=p.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=p[i];p[i]=p[j];p[j]=t;}
+    var un=p.filter(function(q){return !state.mastered.has(q.id);});
+    var ma=p.filter(function(q){return state.mastered.has(q.id);});
+    state.queue=un.concat(ma); state.idx=0; state.revealed=false;
+    state.sessionGot=0; state.sessionMiss=0;
+  }
+
+  function renderProg(){
+    var p=pool(state.filter), m=p.filter(function(q){return state.mastered.has(q.id);}).length;
+    document.getElementById('progCount').textContent=m+' / '+p.length;
+    document.getElementById('fill').style.width=(p.length?(m/p.length*100):0)+'%';
+    document.getElementById('progLabel').textContent='Mastered'+(state.filter==='All'?'':' — '+state.filter);
+  }
+
+  function renderCard(){
+    var stage=document.getElementById('stage');
+    if(state.idx>=state.queue.length){return renderSummary();}
+    var q=state.queue[state.idx];
+    stage.innerHTML='';
+    var card=document.createElement('div'); card.className='card';
+    var s=q.src||{};
+    card.innerHTML=
+      '<span class="chip">'+esc(q.chapterName)+' &middot; '+esc(q.ref||'')+'</span>'+
+      '<div class="q">'+esc(q.q)+'</div>'+
+      '<div class="answer" id="ans">'+esc(q.a)+'</div>'+
+      '<button class="srcbtn" id="srcbtn">Source</button>'+
+      '<div class="srcpanel" id="srcpanel">'+
+        '<div class="srclabel">FOM Source &mdash; '+esc(s.ref||q.ref||'')+'</div>'+
+        '<div class="srcquote">&ldquo;'+esc(s.quote||'')+'&rdquo;</div>'+
+        (s.note?'<div class="srcnote">'+esc(s.note)+'</div>':'')+
+      '</div>'+
+      '<div class="actions" id="actions">'+
+        '<button class="reveal" id="revealBtn">Reveal answer</button>'+
+        '<button class="miss" id="missBtn">Missed</button>'+
+        '<button class="got" id="gotBtn">Got it</button>'+
+      '</div>';
+    stage.appendChild(card);
+    state.revealed=false;
+    document.getElementById('revealBtn').onclick=reveal;
+    document.getElementById('gotBtn').onclick=function(){grade(true);};
+    document.getElementById('missBtn').onclick=function(){grade(false);};
+    document.getElementById('srcbtn').onclick=function(){
+      document.getElementById('srcpanel').classList.toggle('show');
+    };
+  }
+  function reveal(){
+    if(state.revealed)return; state.revealed=true;
+    document.getElementById('ans').classList.add('show');
+    document.getElementById('srcbtn').classList.add('show');
+    document.getElementById('actions').classList.add('revealed');
+  }
+  function grade(ok){
+    var q=state.queue[state.idx];
+    if(ok){state.mastered.add(q.id);state.sessionGot++;}
+    else{state.mastered.delete(q.id);state.sessionMiss++;}
+    saveMastered(); renderFilters(); renderProg();
+    state.idx++; renderCard();
+  }
+  function renderSummary(){
+    var stage=document.getElementById('stage');
+    var p=pool(state.filter), m=p.filter(function(q){return state.mastered.has(q.id);}).length;
+    var pct=p.length?Math.round(m/p.length*100):0;
+    stage.innerHTML='<div class="summary"><div class="big">'+pct+'%</div>'+
+      '<p>'+esc(state.filter)+' &mdash; '+m+' of '+p.length+' mastered.<br>This round: '+state.sessionGot+' got it, '+state.sessionMiss+' missed.</p>'+
+      '<button id="againBtn">Drill this chapter again</button>'+
+      '<button id="allBtn">All chapters</button></div>';
+    document.getElementById('againBtn').onclick=function(){buildQueue();renderCard();renderProg();};
+    document.getElementById('allBtn').onclick=function(){setFilter('All');};
+  }
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+  document.addEventListener('keydown',function(e){
+    if(e.target&&/^(INPUT|TEXTAREA)$/.test(e.target.tagName))return;
+    if(e.code==='Space'){e.preventDefault(); state.revealed?null:reveal();}
+    else if(e.key==='k'||e.key==='K'){if(state.revealed)grade(true);}
+    else if(e.key==='m'||e.key==='M'){if(state.revealed)grade(false);}
+  });
+
+  fetch('fom_questions.json',{cache:'no-store'}).then(function(r){
+    if(!r.ok)throw new Error('HTTP '+r.status); return r.json();
+  }).then(function(data){
+    QUESTIONS=data;
+    var start='All';
+    try{
+      var p=new URLSearchParams(location.search).get('chapter');
+      if(p){var hit=chapters().find(function(x){return x.toLowerCase()===p.toLowerCase()||x.toLowerCase().indexOf(p.toLowerCase())===0;});if(hit)start=hit;}
+    }catch(e){}
+    state.filter=start; buildQueue(); renderFilters(); renderProg(); renderCard();
+  }).catch(function(err){
+    document.getElementById('msg').innerHTML='Could not load the question bank ('+esc(err.message)+').<br>If you are viewing this file directly, open it through the live site instead.';
+  });
+})();
+</script>
+</body>
+</html>
