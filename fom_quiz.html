@@ -7,14 +7,20 @@
 <link rel="icon" href="/favicon.ico" sizes="any">
 <meta name="theme-color" content="#01416e">
 <style>
-  :root{--midnight:#01416e;--atlas:#007cba;--blue:#00b2d6;--breeze:#bfe9f4;--ice:#E8F3FA;--good:#b1d887;--amber:#f0a030;--paper:#fff;--ink:#12303f;}
+  :root{--midnight:#01416e;--atlas:#007cba;--blue:#00b2d6;--breeze:#bfe9f4;--ice:#E8F3FA;--good:#b1d887;--amber:#f0a030;--red:#d9534f;--paper:#fff;--ink:#12303f;}
   *{box-sizing:border-box;}
   body{margin:0;font-family:"Segoe UI",Arial,Helvetica,sans-serif;background:var(--ice);color:var(--ink);min-height:100vh;}
   a.portal-bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:8px;background:var(--midnight);color:#fff;text-decoration:none;padding:10px 16px;font-weight:700;font-size:14px;letter-spacing:.02em;}
   a.portal-bar:hover{background:var(--atlas);}
   .wrap{max-width:640px;margin:0 auto;padding:16px 12px 40px;}
   h1{color:var(--midnight);font-size:22px;margin:14px 4px 2px;}
-  .sub{color:#557;font-size:13px;margin:0 4px 14px;line-height:1.45;}
+  .sub{color:#557;font-size:13px;margin:0 4px 12px;line-height:1.45;}
+  .modebar{display:flex;align-items:center;gap:10px;margin:0 4px 12px;flex-wrap:wrap;}
+  .gamebtn{border:2px solid var(--amber);background:#fff;color:#a9691a;border-radius:20px;padding:7px 14px;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;transition:background .12s,color .12s;}
+  .gamebtn.on{background:var(--amber);color:#3a2503;}
+  .gamehint{font-size:12px;color:#7a94a3;}
+  .timesel{font-size:12px;color:#557;}
+  .timesel select{font-family:inherit;font-size:12px;padding:2px 4px;border-radius:5px;border:1px solid #b9d4e3;}
   .filterbar{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 16px;}
   .filter-btn{background:#fff;border:2px solid var(--midnight);color:var(--midnight);border-radius:20px;padding:6px 12px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .12s,color .12s;}
   .filter-btn .cnt{font-weight:400;opacity:.8;margin-left:4px;}
@@ -25,11 +31,21 @@
   .progline{display:flex;justify-content:space-between;font-size:12px;color:#557;margin-bottom:5px;font-weight:600;}
   .track{height:8px;background:#cfe3ef;border-radius:6px;overflow:hidden;}
   .fill{height:100%;background:var(--good);width:0;transition:width .2s;}
+  .timerwrap{margin:0 4px 12px;display:none;}
+  .timerwrap.show{display:block;}
+  .timerrow{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:4px;}
+  .timerrow .t{color:var(--amber);}
+  .timertrack{height:10px;background:#f2dcc0;border-radius:6px;overflow:hidden;}
+  .timerfill{height:100%;background:var(--amber);width:100%;transition:width .1s linear;}
+  .timerfill.warn{background:var(--red);}
   .card{background:var(--paper);border:2px solid var(--midnight);border-radius:12px;padding:18px 16px 16px;box-shadow:0 1px 4px rgba(1,65,110,.12);}
+  .card.timeout{border-color:var(--red);}
   .chip{display:inline-block;background:var(--breeze);color:var(--midnight);border-radius:6px;padding:3px 9px;font-size:11.5px;font-weight:700;margin-bottom:12px;letter-spacing:.02em;}
   .q{font-size:18px;font-weight:600;line-height:1.4;color:var(--ink);margin:2px 0 4px;}
   .answer{margin-top:14px;padding-top:14px;border-top:1px dashed #b9d4e3;font-size:17px;line-height:1.45;color:var(--midnight);font-weight:600;display:none;}
   .answer.show{display:block;}
+  .toflag{color:var(--red);font-weight:800;font-size:13px;display:none;margin-top:10px;}
+  .toflag.show{display:block;}
   .srcbtn{margin-top:14px;background:none;border:1.5px solid var(--atlas);color:var(--atlas);border-radius:7px;padding:7px 13px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;display:none;}
   .srcbtn.show{display:inline-block;}
   .srcbtn:hover{background:var(--atlas);color:#fff;}
@@ -44,11 +60,15 @@
   .reveal{background:var(--midnight);color:#fff;}
   .got{background:var(--good);color:#1c3a12;display:none;}
   .miss{background:var(--amber);color:#3a2503;display:none;}
+  .next{background:var(--midnight);color:#fff;display:none;}
   .actions.revealed .reveal{display:none;}
   .actions.revealed .got,.actions.revealed .miss{display:block;}
+  .actions.timedout .reveal,.actions.timedout .got,.actions.timedout .miss{display:none;}
+  .actions.timedout .next{display:block;}
   .kbd{font-size:11px;color:#7a94a3;text-align:center;margin-top:12px;}
   .summary{background:var(--paper);border:2px solid var(--good);border-radius:12px;padding:26px 18px;text-align:center;}
   .summary .big{font-size:46px;font-weight:800;color:var(--midnight);}
+  .summary .gamescore{font-size:20px;font-weight:800;color:var(--amber);margin-top:4px;}
   .summary p{color:#557;font-size:14px;margin:6px 0 18px;}
   .summary button{background:var(--midnight);color:#fff;border:none;border-radius:9px;padding:12px 20px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;margin:4px;}
   .msg{text-align:center;color:#557;padding:40px 10px;font-size:14px;}
@@ -62,23 +82,41 @@
 <div class="wrap">
   <h1>FOM Quizzer</h1>
   <p class="sub">Flight Operations Manual, chapter by chapter. Pick a chapter, state your answer aloud, reveal, and grade yourself. Every question carries its FOM source. Mastered questions are remembered on this device.</p>
+  <div class="modebar">
+    <button class="gamebtn" id="gamebtn" type="button">&#127918; Game: Off</button>
+    <span class="timesel" id="timesel" style="display:none">Timer:
+      <select id="timelimit">
+        <option value="10">10s</option>
+        <option value="15">15s</option>
+        <option value="20" selected>20s</option>
+        <option value="30">30s</option>
+      </select>
+    </span>
+    <span class="gamehint" id="gamehint">Study mode &mdash; no clock.</span>
+  </div>
   <div class="filterbar" id="filterbar"></div>
+  <div class="timerwrap" id="timerwrap">
+    <div class="timerrow"><span>Time left</span><span class="t" id="timetext">20.0s</span></div>
+    <div class="timertrack"><div class="timerfill" id="timerfill"></div></div>
+  </div>
   <div class="progwrap">
     <div class="progline"><span id="progLabel">Mastered</span><span id="progCount">0 / 0</span></div>
     <div class="track"><div class="fill" id="fill"></div></div>
   </div>
   <div id="stage"><div class="msg" id="msg">Loading FOM question bank&hellip;</div></div>
-  <div class="kbd">Space = reveal &middot; K = got it &middot; M = missed</div>
+  <div class="kbd" id="kbd">Space = reveal &middot; K = got it &middot; M = missed</div>
 </div>
 <footer>
   FOM source: Hawaiian/Alaska B787 Flight Operations Manual. Study aid only; the current FOM is authoritative.<br>
   <a href="mailto:ryan.pettit@alaskaair.com?subject=FOM%20Quizzer">ryan.pettit@alaskaair.com</a>
-  <div class="ver">Ver 1.1</div>
+  <div class="ver">Ver 2.0</div>
 </footer>
 <script>
 (function(){
   var LS_KEY='fom_mastered_v1';
-  var QUESTIONS=[], state={filter:'All', queue:[], idx:0, revealed:false, mastered:loadMastered(), sessionGot:0, sessionMiss:0};
+  var QUESTIONS=[], state={filter:'All', queue:[], idx:0, revealed:false, mastered:loadMastered(),
+    sessionGot:0, sessionMiss:0, game:false, timeLimit:20, score:0, streak:0, bestStreak:0,
+    remaining:0, timerId:null, timedOut:false};
 
   function loadMastered(){try{return new Set(JSON.parse(localStorage.getItem(LS_KEY)||'[]'));}catch(e){return new Set();}}
   function saveMastered(){try{localStorage.setItem(LS_KEY,JSON.stringify([].concat(Array.from(state.mastered))));}catch(e){}}
@@ -104,19 +142,63 @@
   function setFilter(c){state.filter=c;buildQueue();renderFilters();renderProg();renderCard();}
 
   function buildQueue(){
+    stopTimer();
     var p=pool(state.filter).slice();
     for(var i=p.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=p[i];p[i]=p[j];p[j]=t;}
-    var un=p.filter(function(q){return !state.mastered.has(q.id);});
-    var ma=p.filter(function(q){return state.mastered.has(q.id);});
-    state.queue=un.concat(ma); state.idx=0; state.revealed=false;
-    state.sessionGot=0; state.sessionMiss=0;
+    if(state.game){
+      state.queue=p;
+    }else{
+      var un=p.filter(function(q){return !state.mastered.has(q.id);});
+      var ma=p.filter(function(q){return state.mastered.has(q.id);});
+      state.queue=un.concat(ma);
+    }
+    state.idx=0; state.revealed=false; state.timedOut=false;
+    state.sessionGot=0; state.sessionMiss=0; state.score=0; state.streak=0; state.bestStreak=0;
   }
 
   function renderProg(){
     var p=pool(state.filter), m=p.filter(function(q){return state.mastered.has(q.id);}).length;
-    document.getElementById('progCount').textContent=m+' / '+p.length;
-    document.getElementById('fill').style.width=(p.length?(m/p.length*100):0)+'%';
-    document.getElementById('progLabel').textContent='Mastered'+(state.filter==='All'?'':' — '+state.filter);
+    if(state.game){
+      document.getElementById('progLabel').textContent='Score';
+      document.getElementById('progCount').textContent=state.score+' pts · streak '+state.streak;
+      document.getElementById('fill').style.width=(state.queue.length?(state.idx/state.queue.length*100):0)+'%';
+    }else{
+      document.getElementById('progLabel').textContent='Mastered'+(state.filter==='All'?'':' — '+state.filter);
+      document.getElementById('progCount').textContent=m+' / '+p.length;
+      document.getElementById('fill').style.width=(p.length?(m/p.length*100):0)+'%';
+    }
+  }
+
+  function stopTimer(){if(state.timerId){clearInterval(state.timerId);state.timerId=null;}
+    var tw=document.getElementById('timerwrap');if(tw)tw.classList.remove('show');}
+
+  function startTimer(){
+    if(!state.game)return;
+    state.remaining=state.timeLimit; state.timedOut=false;
+    var tw=document.getElementById('timerwrap'); tw.classList.add('show');
+    updateTimerUI();
+    state.timerId=setInterval(function(){
+      state.remaining-=0.1;
+      if(state.remaining<=0){state.remaining=0;updateTimerUI();timeUp();}
+      else updateTimerUI();
+    },100);
+  }
+  function updateTimerUI(){
+    var pct=Math.max(0,state.remaining/state.timeLimit*100);
+    var f=document.getElementById('timerfill'); f.style.width=pct+'%';
+    f.className='timerfill'+(state.remaining<=Math.min(5,state.timeLimit*0.34)?' warn':'');
+    document.getElementById('timetext').textContent=state.remaining.toFixed(1)+'s';
+  }
+  function timeUp(){
+    clearInterval(state.timerId); state.timerId=null; state.timedOut=true;
+    state.streak=0; state.sessionMiss++;
+    state.revealed=true;
+    var ans=document.getElementById('ans'); if(ans)ans.classList.add('show');
+    var sb=document.getElementById('srcbtn'); if(sb)sb.classList.add('show');
+    var tf=document.getElementById('toflag'); if(tf)tf.classList.add('show');
+    var card=document.getElementById('card'); if(card)card.classList.add('timeout');
+    var act=document.getElementById('actions'); if(act){act.classList.remove('revealed');act.classList.add('timedout');}
+    renderProg();
   }
 
   function renderCard(){
@@ -124,12 +206,13 @@
     if(state.idx>=state.queue.length){return renderSummary();}
     var q=state.queue[state.idx];
     stage.innerHTML='';
-    var card=document.createElement('div'); card.className='card';
+    var card=document.createElement('div'); card.className='card'; card.id='card';
     var s=q.src||{};
     card.innerHTML=
       '<span class="chip">'+esc(q.chapterName)+' &middot; '+esc(q.ref||'')+'</span>'+
       '<div class="q">'+esc(q.q)+'</div>'+
       '<div class="answer" id="ans">'+esc(q.a)+'</div>'+
+      '<div class="toflag" id="toflag">&#9201; Time! Marked missed &mdash; here’s the answer.</div>'+
       '<button class="srcbtn" id="srcbtn">Source</button>'+
       '<div class="srcpanel" id="srcpanel">'+
         '<div class="srclabel">FOM Source &mdash; '+esc(s.ref||q.ref||'')+'</div>'+
@@ -140,44 +223,94 @@
         '<button class="reveal" id="revealBtn">Reveal answer</button>'+
         '<button class="miss" id="missBtn">Missed</button>'+
         '<button class="got" id="gotBtn">Got it</button>'+
+        '<button class="next" id="nextBtn">Next &#9654;</button>'+
       '</div>';
     stage.appendChild(card);
-    state.revealed=false;
+    state.revealed=false; state.timedOut=false;
     document.getElementById('revealBtn').onclick=reveal;
     document.getElementById('gotBtn').onclick=function(){grade(true);};
     document.getElementById('missBtn').onclick=function(){grade(false);};
+    document.getElementById('nextBtn').onclick=function(){state.idx++;renderCard();};
     document.getElementById('srcbtn').onclick=function(){
       document.getElementById('srcpanel').classList.toggle('show');
     };
+    renderProg();
+    startTimer();
   }
   function reveal(){
     if(state.revealed)return; state.revealed=true;
+    stopTimer();
     document.getElementById('ans').classList.add('show');
     document.getElementById('srcbtn').classList.add('show');
     document.getElementById('actions').classList.add('revealed');
   }
   function grade(ok){
+    if(state.timedOut)return;
     var q=state.queue[state.idx];
-    if(ok){state.mastered.add(q.id);state.sessionGot++;}
-    else{state.mastered.delete(q.id);state.sessionMiss++;}
+    if(ok){
+      state.mastered.add(q.id); state.sessionGot++;
+      if(state.game){
+        state.streak++; if(state.streak>state.bestStreak)state.bestStreak=state.streak;
+        var bonus=Math.round(state.remaining);
+        state.score+=10+bonus+(state.streak>=3?5:0);
+      }
+    }else{
+      state.mastered.delete(q.id); state.sessionMiss++;
+      if(state.game)state.streak=0;
+    }
     saveMastered(); renderFilters(); renderProg();
     state.idx++; renderCard();
   }
   function renderSummary(){
+    stopTimer();
     var stage=document.getElementById('stage');
-    var p=pool(state.filter), m=p.filter(function(q){return state.mastered.has(q.id);}).length;
-    var pct=p.length?Math.round(m/p.length*100):0;
-    stage.innerHTML='<div class="summary"><div class="big">'+pct+'%</div>'+
-      '<p>'+esc(state.filter)+' &mdash; '+m+' of '+p.length+' mastered.<br>This round: '+state.sessionGot+' got it, '+state.sessionMiss+' missed.</p>'+
-      '<button id="againBtn">Drill this chapter again</button>'+
-      '<button id="allBtn">All chapters</button></div>';
-    document.getElementById('againBtn').onclick=function(){buildQueue();renderCard();renderProg();};
-    document.getElementById('allBtn').onclick=function(){setFilter('All');};
+    if(state.game){
+      var total=state.sessionGot+state.sessionMiss;
+      stage.innerHTML='<div class="summary"><div class="gamescore">&#127918; '+state.score+' points</div>'+
+        '<div class="big">'+state.sessionGot+'/'+total+'</div>'+
+        '<p>'+esc(state.filter)+' &mdash; best streak '+state.bestStreak+'. Beat the clock: '+state.sessionGot+' right, '+state.sessionMiss+' missed/timed out.</p>'+
+        '<button id="againBtn">Play again</button>'+
+        '<button id="studyBtn">Back to study</button></div>';
+      document.getElementById('againBtn').onclick=function(){buildQueue();renderCard();renderProg();};
+      document.getElementById('studyBtn').onclick=function(){toggleGame(false);};
+    }else{
+      var p=pool(state.filter), m=p.filter(function(q){return state.mastered.has(q.id);}).length;
+      var pct=p.length?Math.round(m/p.length*100):0;
+      stage.innerHTML='<div class="summary"><div class="big">'+pct+'%</div>'+
+        '<p>'+esc(state.filter)+' &mdash; '+m+' of '+p.length+' mastered.<br>This round: '+state.sessionGot+' got it, '+state.sessionMiss+' missed.</p>'+
+        '<button id="againBtn">Drill this chapter again</button>'+
+        '<button id="allBtn">All chapters</button></div>';
+      document.getElementById('againBtn').onclick=function(){buildQueue();renderCard();renderProg();};
+      document.getElementById('allBtn').onclick=function(){setFilter('All');};
+    }
   }
+
+  function toggleGame(on){
+    state.game=(on===undefined?!state.game:on);
+    var btn=document.getElementById('gamebtn');
+    btn.textContent=(state.game?'🎮 Game: On':'🎮 Game: Off');
+    btn.className='gamebtn'+(state.game?' on':'');
+    document.getElementById('timesel').style.display=state.game?'':'none';
+    document.getElementById('gamehint').textContent=state.game
+      ? 'Beat the clock: answer before the timer runs out. Time left = bonus points.'
+      : 'Study mode — no clock.';
+    document.getElementById('kbd').textContent=state.game
+      ? 'Space = reveal (stops clock) · K = got it · M = missed'
+      : 'Space = reveal · K = got it · M = missed';
+    buildQueue(); renderFilters(); renderProg(); renderCard();
+  }
+
   function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
+  document.getElementById('gamebtn').onclick=function(){toggleGame();};
+  document.getElementById('timelimit').onchange=function(e){
+    state.timeLimit=parseInt(e.target.value,10)||20;
+    if(state.game){buildQueue();renderCard();renderProg();}
+  };
+
   document.addEventListener('keydown',function(e){
-    if(e.target&&/^(INPUT|TEXTAREA)$/.test(e.target.tagName))return;
+    if(e.target&&/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+    if(state.timedOut){if(e.code==='Space'||e.key==='Enter'){e.preventDefault();state.idx++;renderCard();}return;}
     if(e.code==='Space'){e.preventDefault(); state.revealed?null:reveal();}
     else if(e.key==='k'||e.key==='K'){if(state.revealed)grade(true);}
     else if(e.key==='m'||e.key==='M'){if(state.revealed)grade(false);}
@@ -198,8 +331,10 @@
     try{
       var p=new URLSearchParams(location.search).get('chapter');
       if(p){var hit=chapters().find(function(x){return x.toLowerCase()===p.toLowerCase()||x.toLowerCase().indexOf(p.toLowerCase())===0;});if(hit)start=hit;}
+      if(new URLSearchParams(location.search).get('game')==='1'){state.game=true;}
     }catch(e){}
-    state.filter=start; buildQueue(); renderFilters(); renderProg(); renderCard();
+    if(state.game){toggleGame(true);state.filter=start;buildQueue();renderFilters();renderProg();renderCard();}
+    else{state.filter=start; buildQueue(); renderFilters(); renderProg(); renderCard();}
   }).catch(function(err){
     document.getElementById('msg').innerHTML='Could not load the question bank ('+esc(err.message)+').<br>If you are viewing this file directly, open it through the live site instead.';
   });
