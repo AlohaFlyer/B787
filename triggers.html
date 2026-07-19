@@ -9,7 +9,7 @@
     --bg:#01172b; --panel:#062b46; --panel2:#0a3556; --line:#13486e;
     --ink:#eaf3fb; --muted:#8fb3cf;
     --mid:#01426A; --atlas:#0074C8; --breeze:#00C7E6; --green:#C0E585;
-    --amber:#f2a65a;
+    --amber:#f2a65a; --red:#ff6b6b;
     --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
     --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   }
@@ -70,11 +70,24 @@
   .flowol{margin:6px 0 0 20px;padding:0;font-family:var(--mono);font-size:13px;color:var(--green);line-height:1.7}
   .cat{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
   .answer{font-family:var(--mono);font-size:20px;line-height:1.45;color:var(--green);font-weight:700}
+  .techline{font-family:var(--mono);font-size:12.5px;line-height:1.45;color:var(--muted);margin-top:10px;padding-top:8px;border-top:1px dashed #0c3a5e}
+  .wholine{font-family:var(--mono);font-size:12.5px;line-height:1.45;color:var(--amber);margin-top:10px;padding-top:8px;border-top:1px dashed #0c3a5e}
+  .role{display:inline-block;margin-left:8px;padding:1px 7px;border:1px solid var(--line);border-radius:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;color:var(--amber);vertical-align:middle}
   .catrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
   .catbtn{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
     padding:7px 12px;border-radius:4px;border:1px solid var(--line);background:transparent;color:var(--muted)}
   .catbtn.on{border-color:var(--breeze);color:var(--breeze);background:rgba(0,199,230,.08)}
   .mand{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#02233b;background:var(--amber);border-radius:3px;padding:2px 6px;margin-left:8px;font-weight:700;vertical-align:middle}
+  .topnav{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+  .navbtn{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:7px 12px;border-radius:4px;border:1px solid var(--line);background:transparent;color:var(--muted);text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+  .navbtn.game{border-color:var(--atlas);color:#7fc4f0} .navbtn.game:hover{background:var(--atlas);color:#fff}
+  .navbtn.pod{border-color:var(--green);color:#9ad9b9} .navbtn.pod:hover{background:var(--green);color:#02233b}
+  .ghud{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+  .gclock{font-family:var(--mono);font-weight:700;font-size:18px;color:var(--green)}
+  .gclock.warn{color:var(--amber)} .gclock.crit{color:var(--red)}
+  .gtbar{height:6px;background:var(--panel2);border-radius:3px;overflow:hidden;margin:0 0 14px}
+  .gtfill{height:100%;width:100%;background:var(--green);transition:width .1s linear}
+  .gtfill.warn{background:var(--amber)} .gtfill.crit{background:var(--red)}
 </style>
 </head>
 <body>
@@ -85,6 +98,10 @@
     <h1>B787 Triggers <span class="sub">// Event &rarr; Flow &rarr; Checklist</span></h1>
     <span class="src">Trigger Map &middot; FCOM NP.21</span>
   </header>
+  <div class="topnav">
+    <button class="navbtn game" onclick="enterGame()">&#9654; Game (timed)</button>
+    <a class="navbtn pod" href="podcast.html">&#127911; Podcast: Phase Flow Walk</a>
+  </div>
   <div class="catrow" id="cats"></div>
   <div id="app"></div>
   <div class="hint">Say the answer aloud, then reveal &nbsp;&middot;&nbsp; Space / Enter = reveal then advance &nbsp;&middot;&nbsp; K = got it &nbsp;&middot;&nbsp; R = review &nbsp;&middot;&nbsp; Source = where it comes from</div>
@@ -93,22 +110,22 @@
 <script>
 const DATA=[
  // ------------- PHASE TRIGGERS -------------
- {s:"Phase Triggers",q:"HUDs DOWN — what does it trigger?",a:"Preflight Checklist",ref:"Trigger Map",src:"Gate-to-takeoff trigger map (Charlie Morris whiteboard): HUDs Down → “Preflight Checklist.”"},
- {s:"Phase Triggers",q:"Ground call “Circle check complete” — what does it trigger?",a:"Before Start Checklist",ref:"Trigger Map",src:"Trigger map: ground call (walk-around / circle check complete) → before-start flows → Before Start Checklist → clearance to push (F-C-C: Flows, Checklist, Clearance)."},
- {s:"Phase Triggers",q:"Before Start Checklist complete — what comes next?",a:"Push clearance",ref:"Trigger Map",src:"Trigger map F-C-C: Flows → Checklist → Clearance to push."},
- {s:"Phase Triggers",q:"Pin and salute — what does it trigger?",a:"Before Taxi flow (5 items) → Before Taxi Checklist",ref:"Trigger Map",src:"Trigger map: pushback salute / taxi light → Before Taxi flow → “Before Taxi Checklist.”",flow:{n:"Before Taxi flow (5 items)",i:["Flaps &mdash; set takeoff flaps","Weather &mdash; radar on, tilt set","EICAS swap &mdash; secondary engine indications","Control check &mdash; full and free","Recall &mdash; check for new EICAS messages"]}},
- {s:"Phase Triggers",q:"Recite the 5 Before Taxi flow items",a:"1 Flaps &middot; 2 Weather &middot; 3 EICAS swap &middot; 4 Control check &middot; 5 Recall",ref:"SOP / Trigger Map",src:"Ryan's trigger list: flaps, weather, EICAS swap, control check, recall. Checklist items behind them: anti-ice, recall, autobrake RTO, flight controls, ground personnel clear (phase_flows, FCOM NP.21)."},
- {s:"Phase Triggers",q:"Before Taxi Checklist complete — the next two actions?",a:"PM transfer of controls &middot; Taxi clearance",ref:"SOP / Trigger Map",src:"Ryan's trigger list: Before Taxi Checklist → PM transfer of controls and taxi clearance."},
- {s:"Phase Triggers",q:"FA chime — what does it trigger?",a:"Before Takeoff Checklist — read to “Checklist Complete” (mandatory)",ref:"SOP / Trigger Map",src:"Trigger map: cabin ready → “Before Takeoff Checklist” → FLY! Before Takeoff is one of only two checklists that must be read through the “Checklist Complete” response (company SOP, class notes)."},
- {s:"Phase Triggers",q:"Line Up and Wait — the 2 items?",a:"TA/RA &middot; say “Runway XX confirmed”",ref:"SOP / Trigger Map",src:"Ryan's trigger list: LUAW → transponder TA/RA, verbal runway confirmation."},
- {s:"Phase Triggers",q:"Flaps up after takeoff — 3 items, then what?",a:"Nose light OFF &middot; Taxi light OFF &middot; Anti-ice AUTO → After Takeoff Checklist",ref:"SOP / Trigger Map",src:"Ryan's trigger list: after-takeoff flaps up → nose and taxi lights OFF, anti-ice AUTO → After Takeoff Checklist (FCOM NP.21.35: After Takeoff checklist after flap retraction)."},
- {s:"Phase Triggers",q:"Climbing through 10,000 ft — the 4 items?",a:"Chime twice &middot; Landing lights OFF &middot; RWY turnoff lights OFF &middot; Logo light OFF",ref:"SOP / Trigger Map",src:"Ryan's trigger list, matching the 3 vetted 10,000-ft steps in the Flows Trainer plus the double chime."},
- {s:"Phase Triggers",q:"Clearing the runway after landing — first action, then what?",a:"Speedbrake DOWN → After Landing flow (7 items)",ref:"SOP / Trigger Map",src:"Ryan's trigger list: clear of the runway → speedbrake DOWN is the trigger for the After Landing flow.",flow:{n:"After Landing flow (7 items)",i:["APU &mdash; start","Anti-ice &mdash; as required","Weather radar &mdash; OFF","Autobrake &mdash; OFF","Flaps &mdash; UP","Transponder &mdash; set","Arrival report"]}},
- {s:"Phase Triggers",q:"Recite the 7 After Landing flow items",a:"1 APU start &middot; 2 Anti-ice &middot; 3 WX radar OFF &middot; 4 Autobrake OFF &middot; 5 Flaps UP &middot; 6 Transponder &middot; 7 Arrival report",ref:"SOP / Trigger Map",src:"Ryan's trigger list: APU start, anti-ice, weather radar off, autobrake off, flaps up, transponder, arrival report."},
- {s:"Phase Triggers",q:"Reverse: what trigger kicks off the Before Taxi flow?",a:"Pin and salute",ref:"Trigger Map",src:"Trigger map: pushback salute / taxi light → Before Taxi flow.",flow:{n:"Before Taxi flow (5 items)",i:["Flaps &mdash; set takeoff flaps","Weather &mdash; radar on, tilt set","EICAS swap &mdash; secondary engine indications","Control check &mdash; full and free","Recall &mdash; check for new EICAS messages"]}},
- {s:"Phase Triggers",q:"Reverse: what trigger calls for the Before Takeoff Checklist?",a:"FA chime (cabin ready)",ref:"SOP / Trigger Map",src:"Trigger map: cabin ready → Before Takeoff Checklist."},
- {s:"Phase Triggers",q:"Reverse: what trigger calls for the Preflight Checklist?",a:"HUDs down",ref:"Trigger Map",src:"Trigger map: HUDs Down → Preflight Checklist."},
- {s:"Phase Triggers",q:"Reverse: what is the trigger for the After Landing flow?",a:"Clear of the runway → Speedbrake DOWN",ref:"SOP / Trigger Map",src:"Ryan's trigger list: clearing the runway, speedbrake lever down, then the 7-item flow.",flow:{n:"After Landing flow (7 items)",i:["APU &mdash; start","Anti-ice &mdash; as required","Weather radar &mdash; OFF","Autobrake &mdash; OFF","Flaps &mdash; UP","Transponder &mdash; set","Arrival report"]}},
+ {s:"Phase Triggers",who:"CA commands, FO reads",q:"HUDs DOWN — what does it trigger?",a:"Preflight Checklist",ref:"Trigger Map",src:"Gate-to-takeoff trigger map (Charlie Morris whiteboard): HUDs Down → “Preflight Checklist.”"},
+ {s:"Phase Triggers",who:"CA calls, FO reads",q:"Ground call “Circle check complete” — what does it trigger?",a:"Before Start Checklist",ref:"Trigger Map",src:"Trigger map: ground call (walk-around / circle check complete) → before-start flows → Before Start Checklist → clearance to push (F-C-C: Flows, Checklist, Clearance)."},
+ {s:"Phase Triggers",who:"FCOM assigns no role to pushback clearance. FO obtains departure clearance; CA obtains start clearance + ground comms.",q:"Before Start Checklist complete — what comes next?",a:"Push clearance",ref:"Trigger Map",src:"Trigger map F-C-C: Flows → Checklist → Clearance to push."},
+ {s:"Phase Triggers",who:"Flow split CA/FO (item tags below). Checklist: CA calls, FO reads.",q:"Pin and salute — what does it trigger?",a:"Before Taxi flow (5 items) → Before Taxi Checklist",ref:"Trigger Map",src:"Trigger map: pushback salute / taxi light → Before Taxi flow → “Before Taxi Checklist.”",flow:{n:"Before Taxi flow (5 items)",i:["Flaps &mdash; set takeoff flaps <span class='role'>FO · CA calls</span>","Weather &mdash; radar on, tilt set <span class='role'>company item</span>","EICAS swap &mdash; secondary engine indications <span class='role'>FO</span>","Control check &mdash; full and free <span class='role'>CA</span>","Recall &mdash; check for new EICAS messages <span class='role'>CA · FO</span>"]}},
+ {s:"Phase Triggers",who:"Split CA/FO. See item tags.",q:"Recite the 5 Before Taxi flow items",a:"1 Flaps &middot; 2 Weather &middot; 3 EICAS swap &middot; 4 Control check &middot; 5 Recall",ref:"SOP / Trigger Map",src:"Ryan's trigger list: flaps, weather, EICAS swap, control check, recall. Checklist items behind them: anti-ice, recall, autobrake RTO, flight controls, ground personnel clear (phase_flows, FCOM NP.21)."},
+ {s:"Phase Triggers",who:"CA/FO → PF/PM transition happens here. Taxi clearance: PM.",q:"Before Taxi Checklist complete — the next two actions?",a:"PM transfer of controls &middot; Taxi clearance",ref:"SOP / Trigger Map",src:"Ryan's trigger list: Before Taxi Checklist → PM transfer of controls and taxi clearance."},
+ {s:"Phase Triggers",who:"PF calls, PM reads",q:"FA chime — what does it trigger?",a:"Before Takeoff Checklist — read to “Checklist Complete” (mandatory)",ref:"SOP / Trigger Map",src:"Trigger map: cabin ready → “Before Takeoff Checklist” → FLY! Before Takeoff is one of only two checklists that must be read through the “Checklist Complete” response (company SOP, class notes)."},
+ {s:"Phase Triggers",who:"PM sets TA/RA. Both pilots call “Runway confirmed.”",q:"Line Up and Wait — the 2 items?",a:"TA/RA &middot; say “Runway XX confirmed”",tech:"Technique: CA scans RTO, and TA/RA before saying “Runway XX confirmed.”",ref:"SOP / Trigger Map",src:"Ryan's trigger list: LUAW → transponder TA/RA, verbal runway confirmation."},
+ {s:"Phase Triggers",who:"PM does the 3 items. Checklist: PF calls, PM reads.",q:"Flaps up after takeoff — 3 items, then what?",a:"Nose light OFF &middot; Taxi light OFF &middot; Anti-ice AUTO → After Takeoff Checklist",ref:"SOP / Trigger Map",src:"Ryan's trigger list: after-takeoff flaps up → nose and taxi lights OFF, anti-ice AUTO → After Takeoff Checklist (FCOM NP.21.35: After Takeoff checklist after flap retraction)."},
+ {s:"Phase Triggers",who:"PM",q:"Climbing through 10,000 ft — the 4 items?",a:"Chime twice &middot; Landing lights OFF &middot; RWY turnoff lights OFF &middot; WING light OFF",ref:"SOP / Trigger Map",src:"Ryan's trigger list, matching the 3 vetted 10,000-ft steps in the Flows Trainer plus the double chime."},
+ {s:"Phase Triggers",who:"CA: speedbrake DOWN. PM: the 7-item flow (WX radar OFF = PF).",q:"Clearing the runway after landing — first action, then what?",a:"Speedbrake DOWN → After Landing flow (7 items)",ref:"SOP / Trigger Map",src:"Ryan's trigger list: clear of the runway → speedbrake DOWN is the trigger for the After Landing flow.",flow:{n:"After Landing flow (7 items)",i:["APU &mdash; start <span class='role'>PM</span>","Anti-ice &mdash; as required <span class='role'>PM</span>","Weather radar &mdash; OFF <span class='role'>PF</span>","Autobrake &mdash; OFF <span class='role'>PM</span>","Flaps &mdash; UP <span class='role'>PM</span>","Transponder &mdash; set <span class='role'>PM</span>","Arrival report <span class='role'>PM</span>"]}},
+ {s:"Phase Triggers",who:"PM. WX radar OFF is PF.",q:"Recite the 7 After Landing flow items",a:"1 APU start &middot; 2 Anti-ice &middot; 3 WX radar OFF &middot; 4 Autobrake OFF &middot; 5 Flaps UP &middot; 6 Transponder &middot; 7 Arrival report",ref:"SOP / Trigger Map",src:"Ryan's trigger list: APU start, anti-ice, weather radar off, autobrake off, flaps up, transponder, arrival report."},
+ {s:"Phase Triggers",who:"Event trigger, not a crew task",q:"Reverse: what trigger kicks off the Before Taxi flow?",a:"Pin and salute",ref:"Trigger Map",src:"Trigger map: pushback salute / taxi light → Before Taxi flow.",flow:{n:"Before Taxi flow (5 items)",i:["Flaps &mdash; set takeoff flaps <span class='role'>FO · CA calls</span>","Weather &mdash; radar on, tilt set <span class='role'>company item</span>","EICAS swap &mdash; secondary engine indications <span class='role'>FO</span>","Control check &mdash; full and free <span class='role'>CA</span>","Recall &mdash; check for new EICAS messages <span class='role'>CA · FO</span>"]}},
+ {s:"Phase Triggers",who:"Event trigger, not a crew task",q:"Reverse: what trigger calls for the Before Takeoff Checklist?",a:"FA chime (cabin ready)",ref:"SOP / Trigger Map",src:"Trigger map: cabin ready → Before Takeoff Checklist."},
+ {s:"Phase Triggers",who:"Event trigger, not a crew task",q:"Reverse: what trigger calls for the Preflight Checklist?",a:"HUDs down",ref:"Trigger Map",src:"Trigger map: HUDs Down → Preflight Checklist."},
+ {s:"Phase Triggers",who:"CA. Speedbrake DOWN.",q:"Reverse: what is the trigger for the After Landing flow?",a:"Clear of the runway → Speedbrake DOWN",ref:"SOP / Trigger Map",src:"Ryan's trigger list: clearing the runway, speedbrake lever down, then the 7-item flow.",flow:{n:"After Landing flow (7 items)",i:["APU &mdash; start <span class='role'>PM</span>","Anti-ice &mdash; as required <span class='role'>PM</span>","Weather radar &mdash; OFF <span class='role'>PF</span>","Autobrake &mdash; OFF <span class='role'>PM</span>","Flaps &mdash; UP <span class='role'>PM</span>","Transponder &mdash; set <span class='role'>PM</span>","Arrival report <span class='role'>PM</span>"]}},
 
  // ------------- APPROACH SETUP -------------
  {s:"Approach Setup",q:"The gouge before the Descent Checklist — recite the 6 items",a:"ATIS &middot; Build &middot; Bug &middot; Brakes &middot; Brief &middot; RNP/Recall",ref:"SOP / Technique",src:"Ryan's descent/approach-setup gouge (6 items, updated Jul 2026): ATIS, Build (the approach in the FMC), Bug (speeds/minimums), Brakes (autobrake), Brief, RNP/Recall. Supersedes the earlier 5-step ATIS/Build/Bug/Brief/Brakes version."},
@@ -144,7 +161,7 @@ function pool(){return DATA.map((d,i)=>i).filter(i=>cat==="All"||DATA[i].s===cat
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function start(reviewOnly){
   reviewMode=reviewOnly;
-  order= reviewOnly ? shuffle([...review]) : shuffle(pool());
+  order= reviewOnly ? [...review] : pool();
   if(!reviewOnly){known=new Set();review=new Set();}
   idx=0;revealed=false;srcOpen=false;render();
 }
@@ -164,7 +181,7 @@ function render(){
         <div class="lead">Say it aloud, then reveal to check</div>
         <div class="q">${d.q}</div>
       </div>
-      <div class="readout${revealed?' show':''}"><div class="answer">${d.a}</div></div>
+      <div class="readout${revealed?' show':''}"><div class="answer">${d.a}</div>${d.tech?`<div class="techline">${d.tech}</div>`:''}${d.who?`<div class="wholine">Who: ${d.who}</div>`:''}</div>
       <div class="srcpanel${srcOpen?' show':''}"><div class="srclabel">Source &mdash; ${d.ref}</div><div class="srcsub" style="color:#cfe2f2;font-style:normal">${d.src}</div>${d.flow?`<div class="srclabel" style="margin-top:12px">The flow &mdash; ${d.flow.n}</div><ol class="flowol">${d.flow.i.map(x=>`<li>${x}</li>`).join("")}</ol>`:''}</div>
       <div class="spacer"></div>
       <div class="controls">
@@ -202,7 +219,75 @@ function summary(){
       </div>
     </div></div>`;
 }
+
+/* ---- Timed Game (Hot Seat style) ---- */
+let gameOn=false,gQ=[],gI=0,gPass=0,gBonus=0,gRev=false,gTimer=null,gT0=0,gLock=false;
+const GTMAX=20000;
+let gBest=0; try{gBest=+localStorage.getItem('trig_best')||0}catch(e){}
+function enterGame(){gameOn=true;gQ=pool();gI=0;gPass=0;gBonus=0;gRound();}
+function exitGame(){gameOn=false;clearInterval(gTimer);start(false);}
+function gRound(){
+  clearInterval(gTimer);gRev=false;gLock=false;
+  if(gI>=gQ.length)return gOver();
+  const d=DATA[gQ[gI]];
+  app.innerHTML=`
+    <div class="bar">
+      <span class="count">inject ${gI+1} / ${gQ.length}</span>
+      <div class="track"><div class="fill" style="width:${(gI/gQ.length)*100}%"></div></div>
+      <span class="ghud">nailed <b>${gPass}</b> &middot; <b class="gclock" id="gclk">${(GTMAX/1000).toFixed(0)}s</b></span>
+    </div>
+    <div class="gtbar"><div class="gtfill" id="gtf"></div></div>
+    <div class="card">
+      <span class="chip">${d.ref}</span>
+      <div class="prompt"><div class="cat">${d.s}</div><div class="lead">Recite aloud before the clock runs out</div><div class="q">${d.q}</div></div>
+      <div id="gbody"></div>
+      <div class="spacer"></div>
+      <div class="controls" id="gctrl"><button class="primary" style="flex:1" onclick="gReveal()">Reveal &nbsp;(Space)</button><button class="srcbtn" onclick="exitGame()">Exit</button></div>
+    </div>
+    <div class="foot"><button class="ghost" onclick="exitGame()">Exit game</button><span>best ${gBest}</span></div>`;
+  const tf=document.getElementById('gtf'),clk=document.getElementById('gclk');
+  gT0=Date.now();
+  gTimer=setInterval(()=>{const left=GTMAX-(Date.now()-gT0);const pct=Math.max(0,left/GTMAX*100);
+    tf.style.width=pct+'%';tf.className='gtfill'+(pct<50?' warn':'')+(pct<22?' crit':'');
+    clk.textContent=Math.max(0,left/1000).toFixed(0)+'s';clk.className='gclock'+(pct<50?' warn':'')+(pct<22?' crit':'');
+    if(left<=0){clearInterval(gTimer);if(!gRev)gReveal(true);}},80);
+}
+function gReveal(timeout){
+  if(gRev)return;gRev=true;clearInterval(gTimer);
+  const d=DATA[gQ[gI]];
+  document.getElementById('gbody').innerHTML=`<div class="readout show"><div class="answer">${d.a}</div>${d.tech?`<div class="techline">${d.tech}</div>`:''}${d.who?`<div class="wholine">Who: ${d.who}</div>`:''}</div>`;
+  document.getElementById('gctrl').innerHTML=`<button class="mark knew" onclick="gGrade(true)">Nailed it &nbsp;K</button><button class="mark rev" onclick="gGrade(false)">Missed &nbsp;R</button>`;
+  if(timeout){const c=document.getElementById('gclk');if(c){c.textContent='0s';c.className='gclock crit';}}
+}
+function gGrade(ok){
+  if(gLock)return;gLock=true;
+  const left=Math.max(0,GTMAX-(Date.now()-gT0));
+  if(ok){gPass++;gBonus+=Math.round(left/1000);}
+  gI++;gRound();
+}
+function gOver(){
+  clearInterval(gTimer);
+  const pct=gQ.length?Math.round(gPass/gQ.length*100):0;const sc=gPass*10+gBonus;
+  if(sc>gBest){gBest=sc;try{localStorage.setItem('trig_best',gBest)}catch(e){}}
+  app.innerHTML=`
+    <div class="card"><div class="summary">
+      <div class="big">${pct}%</div><div class="lbl">nailed cold (${gPass}/${gQ.length})</div>
+      <div class="stat"><div>${sc}<span>score</span></div><div class="r">${gBonus}<span>time bonus</span></div></div>
+      <div class="controls" style="justify-content:center">
+        <button class="primary" onclick="enterGame()">New game</button>
+        <button class="ghost" onclick="exitGame()">Back to study</button>
+      </div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:10px">best ${gBest}</div>
+    </div></div>`;
+}
+
 document.addEventListener("keydown",e=>{
+  if(gameOn){
+    if(e.code==="Space"||e.code==="Enter"){e.preventDefault();gRev?gGrade(true):gReveal();}
+    else if(e.key==="k"||e.key==="K"){if(gRev)gGrade(true)}
+    else if(e.key==="r"||e.key==="R"){if(gRev)gGrade(false)}
+    return;
+  }
   if(idx>=order.length)return;
   if(e.code==="Space"||e.code==="Enter"){e.preventDefault();revealed?grade(true):reveal();}
   else if(e.key==="k"||e.key==="K"){if(revealed)grade(true)}
@@ -215,7 +300,7 @@ start(false);
 <footer style="width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:8px;margin:28px auto 0;">
 <img src="B787_night.jpg" alt="Boeing 787" style="width:380px;max-width:60%;height:auto;border-radius:6px;">
 <a href="mailto:ryan.pettit@alaskaair.com?subject=B787%20Study%20Portal%20-%20Triggers%20Quizzer" style="font-size:11px;color:#b1d887;font-family:inherit;text-decoration:none;">ryan.pettit@alaskaair.com</a>
-<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 1.2</div>
+<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 1.5</div>
 </footer>
 </body>
 </html>
