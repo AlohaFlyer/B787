@@ -1,4 +1,231 @@
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;&lt;head&gt;
-&lt;meta charset="UTF-8"&gt;&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-&lt;title&gt;787 Flight Deck Notes&lt;/title&gt;
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>787 Flight Deck Notes</title>
+<style>
+:root{--midnight:#01426A;--atlas:#0074C8;--green:#00805E;--good:#b1d887;--ink:#16313f;--ice:#E8F3FA;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",Arial,Helvetica,sans-serif;background:#01172b;color:#eaf3fb;min-height:100vh;display:flex;flex-direction:column}
+.bar{display:flex;align-items:center;gap:14px;background:var(--midnight);padding:9px 14px;flex-wrap:wrap}
+.bar a.back{display:inline-flex;align-items:center;gap:6px;background:#01416e;color:#fff;text-decoration:none;font-size:13px;font-weight:700;padding:7px 14px;border-radius:6px;border:1px solid #0074C8}
+.bar a.back:hover{background:#0074C8}
+.bar .title{color:var(--good);font-size:14px;font-weight:700;letter-spacing:.04em}
+.wrap{max-width:760px;margin:0 auto;padding:26px 16px 60px;width:100%}
+.mic{font-size:40px;text-align:center}
+h1{font-size:22px;text-align:center;color:#fff;margin:4px 0 4px}
+.sub{text-align:center;color:#8fb3cf;font-size:13px;margin-bottom:8px;line-height:1.5}
+.prog{text-align:center;color:var(--good);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;margin-bottom:16px}
+.tabs{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tab{font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.03em;background:transparent;border:1.5px solid;border-radius:8px;padding:8px 16px;cursor:pointer;transition:.12s}
+.tab .tcount{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;opacity:.8;margin-left:6px}
+.tab:hover{filter:brightness(1.18)}
+.grouphead{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;margin:14px 0 8px;padding-left:2px}
+.ep{border-radius:10px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;border:1px solid #13486e;border-left-width:4px}
+.ep.coming{opacity:.72}
+.epnum{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;color:#8fb3cf;min-width:34px;text-align:center}
+.epmain{flex:1 1 240px;min-width:200px}
+.eptitle{font-size:16px;font-weight:700;color:#fff}
+.epgroup{font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+.eptopic{font-size:12.5px;color:#8fb3cf;margin-top:2px}
+.eplen{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;color:#cfe2f2;white-space:nowrap}
+.acts{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.btn{font-size:12.5px;font-weight:700;text-decoration:none;border-radius:6px;padding:8px 12px;border:1px solid;cursor:pointer;background:transparent;font-family:inherit}
+.listen{border-color:var(--atlas);color:#7fc4f0}.listen:hover{background:var(--atlas);color:#fff}
+.listen[disabled]{border-color:#2a4761;color:#587;cursor:default}
+.quiz{border-color:var(--green);color:#9ad9b9}.quiz:hover{background:var(--green);color:#fff}
+.heard{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#8fb3cf;cursor:pointer;user-select:none}
+.heard input{width:16px;height:16px;accent-color:var(--green)}
+.badge{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#02233b;background:var(--good);border-radius:3px;padding:2px 6px;font-weight:700}
+.player{width:100%;margin-top:8px}
+.note{color:#8fb3cf;font-size:11.5px;text-align:center;margin-top:18px;line-height:1.5}
+.note .src{display:block;margin-top:8px;color:#6f93b0;font-size:11px}
+.micbtn{font-size:22px;line-height:1;background:none;border:none;cursor:pointer;padding:2px 4px;filter:grayscale(1) opacity(.35);transition:.12s}
+.micbtn.on{filter:none;}
+.micbtn.on:hover{transform:scale(1.15);}
+.micbtn.off{cursor:default;}
+</style></head>
+<body>
+<div class="bar"><a class="back" href="index.html">&#9664; B787 Study Portal</a><span class="title">787 Flight Deck Notes - Podcast</span></div>
+<div class="wrap">
+  <div class="mic">&#127897;&#65039;</div>
+  <h1>787 Flight Deck Notes</h1>
+  <div class="sub">Three-host B787 study podcast - Pualani, Chester &amp; Otto. One episode per system, plus operations, review, the Procedures (PFTD) series, and the Chair-Fly flow drills.</div>
+  <div class="prog" id="prog"></div>
+  <div class="tabs" id="tabs"></div>
+  <div id="list"></div>
+  <div class="note">Tick an episode once you've listened - it's saved on this device. More episodes drop as they are produced. "Quiz" opens the Systems Quiz for that topic.<span class="src">Built from the current manuals - FCOM R10, FCTM R9, QRH R7, FOM 124.2, MEL R5 - and kept up to date as they revise.</span></div>
+</div>
+<script>
+var EPISODES=[
+ {n:1,group:"Systems",title:"The Hotlist",topic:"SFTD 1 & 2 - cross-system high-yield",len:"12:12",audio:"flight-deck-notes-ep1.mp3",quiz:"systems_quiz.html"},
+ {n:2,group:"Systems",title:"Aircraft General",topic:"Dimensions, doors, power-up, displays",len:"10:07",audio:"flight-deck-notes-ep2.mp3",quiz:"systems_quiz.html?system=Aircraft%20General"},
+ {n:3,group:"Systems",title:"Electrical",topic:"No-bleed architecture, VFSGs, batteries, RAT",len:"11:02",audio:"flight-deck-notes-ep3.mp3",quiz:"systems_quiz.html?system=Electrical"},
+ {n:4,group:"Systems",title:"Hydraulics",topic:"L/C/R systems, EMPs, EDPs",len:"9:47",audio:"flight-deck-notes-ep4.mp3",quiz:"systems_quiz.html?system=Hydraulics"},
+ {n:5,group:"Systems",title:"Fuel",topic:"Tanks, pumps, CG, jettison, NGS",len:"9:53",audio:"flight-deck-notes-ep5.mp3",quiz:"systems_quiz.html?system=Fuel"},
+ {n:6,group:"Systems",title:"Engines",topic:"GEnx, start, thrust, indications",len:"11:23",audio:"flight-deck-notes-ep6.mp3",quiz:"systems_quiz.html?system=Engines"},
+ {n:7,group:"Systems",title:"APU",topic:"Start, fire protection, limits",len:"9:10",audio:"flight-deck-notes-ep7.mp3",quiz:"systems_quiz.html?system=APU"},
+ {n:8,group:"Systems",title:"Fire Protection",topic:"Detection, bottles, cargo",len:"8:41",audio:"flight-deck-notes-ep8.mp3",quiz:"systems_quiz.html?system=Fire%20Protection"},
+ {n:9,group:"Systems",title:"Air Systems",topic:"Bleed, packs, pressurization",len:"8:57",audio:"flight-deck-notes-ep9.mp3",quiz:"systems_quiz.html?system=Air%20Systems"},
+ {n:10,group:"Systems",title:"Anti-Ice & Rain",topic:"Engine & wing anti-ice, window heat",len:"8:49",audio:"flight-deck-notes-ep10.mp3",quiz:"systems_quiz.html?system=Anti-Ice"},
+ {n:11,group:"Systems",title:"Flight Controls",topic:"FBW laws, modes, surfaces",len:"9:14",audio:"flight-deck-notes-ep11.mp3",quiz:"systems_quiz.html?system=Flight%20Controls"},
+ {n:12,group:"Systems",title:"Landing Gear & Brakes",topic:"Gear, antiskid, autobrakes, steering",len:"9:43",audio:"flight-deck-notes-ep12.mp3",quiz:"systems_quiz.html?system=Landing%20Gear"},
+ {n:13,group:"Systems",title:"Warning Systems",topic:"EICAS, alerts, GPWS, TCAS",len:"9:20",audio:"flight-deck-notes-ep13.mp3",quiz:"systems_quiz.html?system=Warnings"},
+ {n:14,group:"Systems",title:"Flight Instruments & Displays",topic:"PFD/ND, DUs, ISFD, IRS/ADRS",len:"11:47",audio:"flight-deck-notes-ep14.mp3",quiz:"systems_quiz.html?system=Flight%20Instruments"},
+ {n:15,group:"Systems",title:"Navigation & FMS",topic:"FMC, LNAV/VNAV, failures",len:"11:47",audio:"flight-deck-notes-ep15.mp3",quiz:"systems_quiz.html?system=Nav%20and%20FMS"},
+ {n:16,group:"Systems",title:"Communications",topic:"VHF, HF, SATCOM, ACARS",len:"9:55",audio:"flight-deck-notes-ep16.mp3",quiz:"systems_quiz.html?system=Communications"},
+ {n:17,group:"Systems",title:"HUD",topic:"Symbology, modes, limits",len:"11:21",audio:"flight-deck-notes-ep17.mp3",quiz:"systems_quiz.html?system=HUD"},
+ {n:18,group:"Operations",title:"Weather",topic:"Takeoff mins, alternates, prohibitions",len:"10:26",audio:"flight-deck-notes-ep18.mp3",quiz:"weather.html"},
+ {n:19,group:"Operations",title:"Aircraft Setup",topic:"Power-up to pushback - flows, gates, callouts",len:"8:39",audio:"flight-deck-notes-ep19.mp3",quiz:"aircraft_setup.html"},
+ {n:20,group:"Review",title:"Memory Items",topic:"All 10 QRH recall checklists, recited cold",len:"9:49",audio:"flight-deck-notes-ep20.mp3",quiz:"memory-items.html"},
+ {n:21,group:"Review",title:"Limitations",topic:"FCOM L.10 memorize set - 21 items",len:"5:46",audio:"flight-deck-notes-ep21.mp3",quiz:"limitations.html"},
+ {n:22,group:"Procedures",title:"Welcome to the PFTD Phase",topic:"How the phase works, AQP, and what the PV validates",len:"6:57",audio:"flight-deck-notes-ep22.mp3",quiz:"aircraft_setup.html"},
+ {n:23,group:"Procedures",title:"PFTD 1 - Cold & Dark to Before Takeoff",topic:"Normal ground flows, FMS preflight, callouts, HUD",len:"5:47",audio:"flight-deck-notes-ep23.mp3",quiz:"aircraft_setup.html"},
+ {n:24,group:"Procedures",title:"PFTD 2 - Takeoff, Climb & Automation",topic:"FMA modes, altitude intervention, LNAV/VSD, mode reversion",len:"5:21",audio:"flight-deck-notes-ep24.mp3",quiz:"systems_quiz.html?system=Nav%20and%20FMS"},
+ {n:25,group:"Procedures",title:"PFTD 3 - Descent, Holding & ILS",topic:"Descent path, holds, RNAV arrival, FIX INFO, ILS capture",len:"5:18",audio:"flight-deck-notes-ep25.mp3",quiz:"systems_quiz.html?system=Nav%20and%20FMS"},
+ {n:26,group:"Procedures",title:"PFTD 4 - Starts, Non-Precision & Go-Around",topic:"Cross/ground starts, CDU restrictions, RNP AR, go-around",len:"5:20",audio:"flight-deck-notes-ep26.mp3",quiz:"systems_quiz.html?system=Nav%20and%20FMS"},
+ {n:27,group:"Procedures",title:"PFTD 5 - Diversion, Overweight & Jettison",topic:"Pacific divert CRM, overweight landing vs fuel jettison",len:"4:53",audio:"flight-deck-notes-ep27.mp3",quiz:"weather.html"},
+ {n:28,group:"Procedures",title:"PFTD 6 - Single Engine & Emergencies",topic:"V1 cut, RTO, driftdown, emer descent, elec emer, dual FMC",len:"6:01",audio:"flight-deck-notes-ep28.mp3",quiz:"memory-items.html"},
+ {n:29,group:"Procedures",title:"PFTD 7 - Non-Normals on the ECL",topic:"Electronic Checklist, consequential messages, IAN approach",len:"5:09",audio:"flight-deck-notes-ep29.mp3",quiz:"systems_quiz.html?system=Warnings"},
+ {n:30,group:"Procedures",title:"PFTD 8 - The Procedures Validation",topic:"What the PV evaluates and how to pass - the 5 tasks, CRM",len:"5:18",audio:"flight-deck-notes-ep30.mp3",quiz:"memory-items.html"},
+ {n:31,group:"Review",title:"Aircraft Setup - Captain",topic:"Chair-fly the full Captain panel setup at item level - every flow and panel item, power-up to the takeoff roll; the CDU build is its own episode",len:"12:26",audio:"flight-deck-notes-ep31.mp3",quiz:"aircraft_setup.html"},
+ {n:32,group:"Review",title:"Aircraft Setup - CDU - PF",topic:"Memorize the CDU build for the pilot flying - the page-flow spine: six groups between two datalink bookends",len:"6:47",audio:"flight-deck-notes-ep32.mp3",quiz:"cdu_preflight.html"},
+ {n:33,group:"Review",title:"RNAV RNP AR Approaches",topic:"AR criteria, CDU build, bug & brief, mandatory go-around - FCOM SP.4.10-4.12",len:"9:27",audio:"flight-deck-notes-ep33.mp3",quiz:"flows_quiz.html"},
+ {n:34,group:"Review",title:"Rejected Takeoff",topic:"Go/stop decision, 80-kt & V1 lines, the RTO maneuver & callouts, captain considerations - FCTM Ch3, QRH MAN.1, FCOM 14.20",len:"13:32",audio:"flight-deck-notes-ep34.mp3",quiz:"memory-items.html"},
+ {n:35,group:"Review",title:"V1 Cut & Engine Failure on Takeoff",topic:"V1 cut, engine-out rotation 12-13 deg, V2 to V2+15 climb band, flap retraction floor, derate vs ATM thrust - FCTM Ch3, FCOM",len:"12:12",audio:"flight-deck-notes-ep35.mp3",quiz:"memory-items.html"},
+ {n:36,group:"Review",title:"Captain Authority & PIC Responsibilities",topic:"Operational control, PIC authority without limitation, emergency authority & the reporting clock, chain of command, jumpseat authority - FOM Ch2 & Ch11, FAR 91.3 & 121.557",len:"13:41",audio:"flight-deck-notes-ep36.mp3",quiz:"memory-items.html"},
+ {n:37,group:"Review",title:"Go-Around & Missed Approach",topic:"GO AROUND/TO-GA flow & callouts, mandatory missed-approach conditions, LNAV engage gates, thrust margin, go-around after touchdown, engine-inop flaps & speeds - FCOM NP.21.51, FCTM Ch5",len:"13:40",audio:"flight-deck-notes-ep37.mp3",quiz:"memory-items.html"},
+ {n:38,group:"Review",title:"ILS & IAN Approaches",topic:"ILS localizer/glideslope flow & callouts, autoland-not-available, IAN concept (FAC & barometric glide path), config-timing difference, IAN roll/pitch mode pairings, APP-arm gate - FCOM NP.21.41-46 & 4.20.19, FCTM Ch5",len:"13:31",audio:"flight-deck-notes-ep38.mp3",quiz:"memory-items.html"},
+ {n:39,group:"Review",title:"PM Duties & Callouts - Approach to Shutdown",topic:"Standard callouts (climb/descent, ILS & non-ILS approach, minimums), stabilized 1000/500/touchdown-zone gates, deviation callouts, landing-roll & after-landing & shutdown PM flow - FCTM 1.17-1.25, FCOM NP.21.52-54",len:"13:40",audio:"flight-deck-notes-ep39.mp3",quiz:"memory-items.html"},
+ {n:40,group:"Review",title:"Holding & Missed-Approach Hold Setup",topic:"CDU HOLD page field by field, ICAO & FAA max holding speeds, 3-min speed reduction, FMC holding speed vs flaps 1, exit-hold & PROC HOLD auto-exit, HOLD AVAIL divert clock, missed-approach hold build - FCOM 11.43.33-36, FCTM 4.22-4.24, PRC Holding References",len:"11:19",audio:"flight-deck-notes-ep40.mp3",quiz:"memory-items.html"},
+ {n:41,group:"Review",title:"Enroute Diversions & CDU Setup",topic:"Divert decision & dispatch authority, nearest-suitable factors, 121.565 one-engine rule, FMC ALTN page & DIVERT NOW, engine-inop driftdown (ENG OUT / EO D/D), ETOPS diversion & speed strategy, declaring an emergency - FCOM 11.43.24-32, FCTM 4.12-4.13, FOM 6.4 & 11.2",len:"12:58",audio:"flight-deck-notes-ep41.mp3",quiz:"memory-items.html"},
+ {n:42,group:"Review",title:"EICAS Messages & the Divert-or-Continue Decision",topic:"Alert hierarchy & colors, CANC/RCL, takeoff message inhibits, the 5-step non-normal framework, the Electronic Checklist (sensed/closed-loop items, deferred items, item & checklist override, priority), troubleshooting discipline, nearest-suitable & divert-or-continue captain process - FCTM Ch1 & Ch8, FCOM Ch15 & Ch10",len:"13:20",audio:"flight-deck-notes-ep42.mp3",quiz:"memory-items.html"},
+ {n:43,group:"Review",title:"Fuel Jettison & Overweight Landing",topic:"MTOW vs MLW gap, the jettison system (auto fuel-to-remain at MLW, 8700-lb floor each main tank, no jettison on the ground, auto-stop), Fuel Jettison & FUEL AUTO JETTISON checklists, jettison considerations (4000 ft AGL evaporation, fuel drift), Overweight Landing NNC (flaps 20/25, 185-kt additive cap), overweight autolands not recommended, jettison vs burn-off vs land-now captain call, post-landing maintenance inspection - FCOM 12.20.7 & 12.10.2, QRH Overweight Landing & Fuel Jettison, FCTM Ch6 & Ch8",len:"11:31",audio:"flight-deck-notes-ep43.mp3",quiz:"memory-items.html"},
+ {n:44,group:"Procedures",title:"Triggers - Gate to Gate",topic:"Event, flow, checklist: the 10 phase triggers from HUDs down to clearing the runway, the before-taxi (5) and after-landing (7) flows, ATIS-Build-Bug-Brief-Brakes, the low-level go-around brief, and the two mandatory checklist-complete checklists - Trigger Map, FCOM NP.21",len:"10:16",audio:"flight-deck-notes-ep44.mp3",quiz:"triggers.html"},
+ {n:45,group:"Normal Procedures",title:"Normal Procedures (CA Flying) - Pt 1: Gate to the Runway",topic:"Powered at the gate through preflight, pushback, start and taxi to the runway - the trigger chain and Captain authority, flow shapes and mnemonics - FCOM NP.21",len:"22:08",audio:"flight-deck-notes-ep45.mp3",quiz:"triggers.html"},
+ {n:46,group:"Normal Procedures",title:"Normal Procedures (CA Flying) - Pt 2: Takeoff to Cruise",topic:"Takeoff roll, V1/rotate/positive-rate, the flap retraction schedule, the 10,000 ft flow, transition altitude, arrival setup before top of descent - FCOM NP.21",len:"3:34",audio:"flight-deck-notes-ep46.mp3",quiz:"triggers.html"},
+ {n:47,group:"Normal Procedures",title:"Normal Procedures (CA Flying) - Pt 3: Cruise to the Gate",topic:"Descent and approach, the ILS gear-flaps-speedbrake sequence, landing roll, the after-landing flow, shutdown and secure - FCOM NP.21",len:"11:39",audio:"flight-deck-notes-ep47.mp3",quiz:"triggers.html"},
+ {n:48,group:"FFS",title:"FFS 1 - LAX-LAX: Manual Flying, Protections & Landings",topic:"Chair-fly the FFS1 profile - manual SID, accel/decel & overspeed, steep turns, bank-angle protection, air turn back, hold, hand-flown RNAV STAR, ILS, autoland plus manual & crosswind landings - all with standard callouts. Source: FFS1 profile & briefing, ASA71 LAX-LAX",len:"9:31",audio:"flight-deck-notes-ep48.mp3",quiz:"flows_quiz.html"},
+ {n:49,group:"FFS",title:"FFS 2 - SFO: Stalls, Unreliable Airspeed & Emergency Descent",topic:"Chair-fly the FFS2 profile - airspeed-unreliable memory items, slow flight, approach-to-stall & full stall (normal vs direct mode) at FL390, turbulence, emergency descent, air turn back, fuel jettison, RNAV arrival, turning-base & ILS approach-to-stall, LOC 28R, and a raw-data ILS - with memory items & callouts. Source: FFS2 profile/briefing, HAL11 SFO-HNL",len:"11:12",audio:"flight-deck-notes-ep49.mp3",quiz:"memory-items.html"},
+ {n:50,group:"FFS",title:"FFS 3 - HNL: RTO, V1 Cut & System Failures",topic:"Chair-fly the FFS3 ETOPS APU-verification profile - TCAS RA, APU fire & air turn back, RNP/LDA 26L, jammed-stabilizer go-around & landing (memory items), rejected takeoff, V1 cut & engine relight with ECL duties, bounced landing, flap+slat fail, tire deflate, and evacuation - with memory items & callouts. Source: FFS3 profile/briefing, HAL2 HNL-LAX",len:"8:34",audio:"flight-deck-notes-ep50.mp3",quiz:"memory-items.html"},
+ {n:51,group:"FFS",title:"FFS 4 - SEA: V1 Cut & Single-Engine Work",topic:"Chair-fly the FFS4 single-engine capstone - NADP 1 departure, UPRT (nose-high / nose-low / high-bank), flight-control secondary mode, unreliable-airspeed memory items, dual hydraulics, RTO, then the V1 cut, single-engine ILS (no autopilot), single-engine go-around, visual pattern & landing, plus bounced and no-slat/no-flap - with the full single-engine callout choreography. Source: FFS4 profile/briefing, ASA29 SEA",len:"10:06",audio:"flight-deck-notes-ep51.mp3",quiz:"memory-items.html"},
+ {n:52,group:"Maneuvers",title:"Visual Approach",topic:"Discuss and fly the hand-flown visual - five-mile map scale with the field on the 2.5 ring, flaps 5 downwind, abeam-threshold gear down / flaps 20 / start the clock, 45-second base turn, flaps 30 &amp; ref speed, arm the ILS on autopilot, then hand-fly the 3-degree flight path on the HUD - FCTM Ch5",len:"5:48",audio:"flight-deck-notes-ep52.mp3",quiz:"flows_quiz.html"},
+ {n:53,group:"Maneuvers",title:"Engine Failure at V1",topic:"Discuss and fly the V1 cut &amp; single-engine air turn back at SEA - rudder to centerline, rotate to 12 deg, autopilot at 200 ft, mayday and a right turn at 7.5 DME to the SEA VOR, Eng Svr Damage/Sep memory items (QRH 7.10), clean up / CON / ENG OUT then the ECL, the Captain&#39;s return flow, flaps 20 landing and flaps 5 go-around",len:"8:14",audio:"flight-deck-notes-ep53.mp3",quiz:"memory-items.html"},
+ {n:54,group:"Maneuvers",title:"Rejected Takeoff",topic:"Discuss and fly the RTO - the Captain&#39;s go/stop decision by V1, below-80 vs above-80 reject criteria, the STOP maneuver and PM verification callouts, stop / parking brake / remain-seated, and evac and hot-brake considerations - QRH MAN.1, FCTM Ch3",len:"5:49",audio:"flight-deck-notes-ep54.mp3",quiz:"memory-items.html"},
+ {n:75,group:"LOFT",title:"LOFT 1 - LAX to LAS",topic:"No-APU ground-power engine start &amp; cross-start (MEL 49-11-01), Captain-to-marshaler brief, waypoint transition, the descent gouge, and the two mandatory Checklist Complete checklists - FOM Ch5 &amp; Ch12, FCOM Supplementary Procedures",len:"6:06",audio:"flight-deck-notes-ep75.mp3",quiz:"triggers.html"},
+ {n:76,group:"LOFT",title:"LOFT 2 - LAS to HNL",topic:"ETOPS APU Verification Flight decision tree (MEL 05-00-02), the cold-soak vs full-flight methods, PIC/Dispatch joint responsibility, oceanic CPDLC ops &amp; the critical-fuel entry point, gusty HNL arrival - FOM Ch2, Ch5, Ch6 &amp; Ch8",len:"7:22",audio:"flight-deck-notes-ep76.mp3",quiz:"triggers.html"},
+ {n:56,group:"Procedures",title:"Phase Flow Memory Walk",topic:"Gate-to-gate trigger chain in phase order as a garage-cockpit memory walk - every event, flow, and checklist with who owns it - FCOM NP.21",len:"TBD",audio:"flight-deck-notes-ep56.mp3",quiz:"triggers.html"},
+ {n:57,group:"FOM",title:"FOM Ch 1 - Preface",topic:"Manual overview & hierarchy, SMS pillars, Ready SAFE Go, PIC authority & chief pilot's backing",len:"28:13",audio:"flight-deck-notes-ep57.mp3",quiz:"fom_quiz.html?chapter=1%20Preface"},
+ {n:58,group:"FOM",title:"FOM Ch 2 - Operating - General",topic:"Operational control & PIC responsibility, PF/PM roles, EFB policy, required manuals, single-EFB ops",len:"29:31",audio:"flight-deck-notes-ep58.mp3",quiz:"fom_quiz.html?chapter=2%20Operating-General"},
+ {n:59,group:"FOM",title:"FOM Ch 3 - Training & Currency",topic:"High minimums Captain/FO, RNP AR authorization, autoland/HGS currency, recurrent training, seat substitute",len:"23:27",audio:"flight-deck-notes-ep59.mp3",quiz:"fom_quiz.html?chapter=3%20Training%20%26%20Currency"},
+ {n:60,group:"FOM",title:"FOM Ch 4 - Crew Administration",topic:"Deadheading, crew check-in & reporting for duty, fatigue management, Part 117 flight/duty limits and rest",len:"30:38",audio:"flight-deck-notes-ep60.mp3",quiz:"fom_quiz.html?chapter=4%20Crew%20Administration"},
+ {n:61,group:"FOM",title:"FOM Ch 5 - Flight Operations",topic:"RNP & narrow runway ops, oceanic/CPDLC procedures, cabin warning signs, holding & waypoint verification",len:"30:23",audio:"flight-deck-notes-ep61.mp3",quiz:"fom_quiz.html?chapter=5%20Flight%20Operations"},
+ {n:55,group:"FOM",title:"FOM Ch 6 - ETOPS",topic:"Preclude &amp; Protect, adequate airports &amp; ETOPS alternates, the 180-minute area &amp; the 787 rings, critical fuel, EEP/ETP, the two 4-hour PDSC clocks, PBCS/RCP/RSP - FOM Ch6, with real HNL/HND/SYD/AKL Pacific diversions",len:"16:12",audio:"flight-deck-notes-ep55.mp3",quiz:"fom_quiz.html?chapter=6%20ETOPS"},
+ {n:62,group:"FOM",title:"FOM Ch 7 - Comms & Reports",topic:"Standard communication practices, pilot reports, ASAP/FOQA, near-midair collision reporting",len:"27:38",audio:"flight-deck-notes-ep62.mp3",quiz:"fom_quiz.html?chapter=7%20Comms%20%26%20Reports"},
+ {n:63,group:"FOM",title:"FOM Ch 8 - Dispatch",topic:"Authorized ops/airports, alternates & ETOPS adequate airports, fuel requirements, MEL/CDL for dispatch, redispatch",len:"29:52",audio:"flight-deck-notes-ep63.mp3",quiz:"fom_quiz.html?chapter=8%20Dispatch"},
+ {n:64,group:"FOM",title:"FOM Ch 9 - Weather",topic:"Runway condition codes & RCAM, cold weather ops & icing, turbulence, thunderstorms, space weather",len:"28:08",audio:"flight-deck-notes-ep64.mp3",quiz:"fom_quiz.html?chapter=9%20Weather"},
+ {n:65,group:"FOM",title:"FOM Ch 10 - CRM",topic:"Alaska CRM skills & supportive behaviors, Threat and Error Management, anticipate/recognize/recover",len:"30:14",audio:"flight-deck-notes-ep65.mp3",quiz:"fom_quiz.html?chapter=10%20CRM"},
+ {n:66,group:"FOM",title:"FOM Ch 11 - Emergency/Abnormal",topic:"Delegation of duties, illness/injury onboard, MedLink, declaring an emergency, evacuation",len:"30:56",audio:"flight-deck-notes-ep66.mp3",quiz:"fom_quiz.html?chapter=11%20Emergency%2FAbnormal"},
+ {n:67,group:"FOM",title:"FOM Ch 12 - Fueling & Maintenance",topic:"Fueling with passengers onboard, fuel spills & non-approved vendors, fueling with one engine running",len:"27:48",audio:"flight-deck-notes-ep67.mp3",quiz:"fom_quiz.html?chapter=12%20Fueling%20%26%20Maintenance"},
+ {n:68,group:"FOM",title:"FOM Ch 13 - Passenger Relations",topic:"Exit row verification (CRO/FA/PIC pyramid), disability & service animal policy, lithium battery carriage rules, Fallen Soldier Program",len:"23:41",audio:"flight-deck-notes-ep68.mp3",quiz:"fom_quiz.html?chapter=13%20Passenger%20Relations"},
+ {n:69,group:"FOM",title:"FOM Ch 14 - HAZMAT",topic:"NOTOC eNOTOC (30/15-min rules), no-notification-required items, lithium battery UN numbers, Captain refusal authority, damaged/leaking dee gee response",len:"25:56",audio:"flight-deck-notes-ep69.mp3",quiz:"fom_quiz.html?chapter=14%20HAZMAT"},
+ {n:70,group:"FOM",title:"FOM Ch 15 - Security/SSI",topic:"ISC/GSC handoff at door close (15.1.8), Secure Flight Deck door timing, Known Crewmember SSSS restriction, weapons-on-duty & FAM notification rules, four passenger threat levels, IED PIES mnemonic",len:"23:01",audio:"flight-deck-notes-ep70.mp3",quiz:"fom_quiz.html?chapter=15%20Security%2FSSI"},
+ {n:71,group:"FOM",title:"FOM Ch 16 - NRFO",topic:"Three NRFO types (Part 121/91/121 Cargo), FA staffing ladder, Group 1 evaluation vs Group 2 test check flights, Positioning Flight vs Special Flight Permit Ferry, D084 & two-logbook-entry paperwork",len:"22:49",audio:"flight-deck-notes-ep71.mp3",quiz:"fom_quiz.html?chapter=16%20NRFO"},
+ {n:72,group:"FOM",title:"FOM Ch 18 - Areas of Operation",topic:"Otto's rating scale running gag, altimeter QNH/STD memory aid, disinsection & spray procedures (56-day residual, 5-min saturation, spurious-vs-real smoke warning), PBCS six-item mnemonic, A-CDM ground slot times (CTOT -5/+15)",len:"24:00",audio:"flight-deck-notes-ep72.mp3",quiz:"fom_quiz.html?chapter=18%20Areas%20of%20Operation"},
+ {n:73,group:"FOM",title:"FOM Ch 19-24 - Theaters of Operation",topic:"North America, Pacific, Caribbean, Atlantic, Europe & Asia in one flight - Rockies/Alps/Greenland decompression floors (18/18/15), NAT organized tracks & RCL timing, SAND weather-deviation memory aid, Heathrow holding, Korea DMZ buffer",len:"25:44",audio:"flight-deck-notes-ep73.mp3",quiz:"fom_quiz.html"},
+ {n:74,group:"Procedures",title:"IOE Prep - Line Ops & Captain Leadership",topic:"Demo-to-Solo 6-leg progression, Five Books/Five Jobs (FOM/QRH/FCOM-FCTM/MEL/Jepp 10-7), the Five P's, TPC threat-based departure brief, new-Captain command authority & CRM, ETOPS numbers, the 'let me confirm' rule",len:"25:04",audio:"flight-deck-notes-ep74.mp3",quiz:"fom_quiz.html"},
+];
+
+// Top-level nav tabs (order matters). Chair-Fly folds into Procedures.
+// Colors drawn from Alaska (atlas blue, green) and Hawaiian (Pualani purple, maile gold) palettes.
+var TABS=[
+ {key:"Systems",   label:"Systems",    groups:["Systems"],                accent:"#3a9ee0", card:"#062b46"},
+ {key:"Procedures",label:"Procedures", groups:["Procedures","Chair-Fly","Normal Procedures"], accent:"#a07bd6", card:"#1d1736"},
+ {key:"FFS",       label:"FFS",        groups:["FFS"],                    accent:"#e0687a", card:"#2c1218"},
+ {key:"Maneuvers", label:"Maneuvers",  groups:["Maneuvers"],              accent:"#e07b3a", card:"#301c0d"},
+ {key:"LOFT",      label:"LOFT",       groups:["LOFT"],                   accent:"#3ecf8e", card:"#0f2e22"},
+ {key:"Operations",label:"Operations", groups:["Operations"],              accent:"#2bb59a", card:"#052b25"},
+ {key:"FOM",       label:"FOM",        groups:["FOM"],                    accent:"#c58be0", card:"#241a33"},
+ {key:"Review",    label:"Review",     groups:["Review"],                 accent:"#e0a648", card:"#2c2310"}
+];
+function tabFor(group){
+  for(var i=0;i<TABS.length;i++){ if(TABS[i].groups.indexOf(group)>=0) return TABS[i]; }
+  return TABS[0];
+}
+var activeTab=localStorage.getItem('fdn_tab');
+if(!activeTab||!TABS.some(function(t){return t.key===activeTab;})) activeTab="Systems";
+function setTab(k){ activeTab=k; localStorage.setItem('fdn_tab',k); render(); }
+
+function key(n){return 'fdn_heard_'+n;}
+function heard(n){return localStorage.getItem(key(n))==='1';}
+function setHeard(n,v){localStorage.setItem(key(n),v?'1':'0');render();}
+function updateProg(){
+  var pub=EPISODES.filter(function(e){return e.audio;});
+  var done=pub.filter(function(e){return heard(e.n);}).length;
+  document.getElementById('prog').textContent='Listened: '+done+' / '+pub.length+' published';
+}
+function renderTabs(){
+  var html=TABS.map(function(t){
+    var count=EPISODES.filter(function(e){return e.audio && t.groups.indexOf(e.group)>=0;}).length;
+    var on=t.key===activeTab;
+    var style=on
+      ? 'background:'+t.accent+';border-color:'+t.accent+';color:#04121f'
+      : 'background:transparent;border-color:'+t.accent+';color:'+t.accent;
+    return '<button class="tab'+(on?' on':'')+'" style="'+style+'" onclick="setTab(\''+t.key+'\')">'
+      +t.label+'<span class="tcount">'+count+'</span></button>';
+  }).join('');
+  document.getElementById('tabs').innerHTML=html;
+}
+function render(){
+  renderTabs();
+  var meta=TABS.filter(function(t){return t.key===activeTab;})[0];
+  var eps=EPISODES.filter(function(e){return e.audio && meta.groups.indexOf(e.group)>=0;});
+  var html=eps.map(function(e){
+    var coming=!e.audio;
+    var gm=tabFor(e.group);
+    var listenBtn = coming ? ''
+      : '<button class="micbtn on" onclick="play('+e.n+')" title="Listen to this episode">&#127897;&#65039;</button>'
+        +'<button class="btn listen" onclick="play('+e.n+')" title="Play episode">&#9654; Play</button>';
+    var len = e.len?('<span class="eplen">'+e.len+'</span>') : '<span class="eplen">--</span>';
+    var badge = heard(e.n)?'<span class="badge">Listened</span>':'';
+    var grp = e.group?('<div class="epgroup" style="color:'+gm.accent+'">'+e.group+'</div>'):'';
+    return '<div class="ep'+(coming?' coming':'')+'" id="ep'+e.n+'" style="background:'+gm.card+';border-left-color:'+gm.accent+'">'
+      +'<div class="epnum">EP '+e.n+'</div>'
+      +'<div class="epmain">'+grp+'<div class="eptitle">'+e.title+' '+badge+'</div><div class="eptopic">'+e.topic+'</div></div>'
+      +len
+      +'<div class="acts">'+listenBtn
+      +'<a class="btn quiz" href="'+e.quiz+'">Quiz</a>'
+      +'<label class="heard"><input type="checkbox" '+(heard(e.n)?'checked':'')+' onchange="setHeard('+e.n+',this.checked)">heard</label>'
+      +'</div></div>';
+  }).join('');
+  document.getElementById('list').innerHTML=html;
+  updateProg();
+}
+function play(n){
+  var e=EPISODES.find(function(x){return x.n===n;});
+  if(!e||!e.audio)return;
+  var row=document.getElementById('ep'+n);
+  if(row.querySelector('audio'))return;
+  var a=document.createElement('audio');a.className='player';a.controls=true;a.src=e.audio;
+  a.addEventListener('ended',function(){setHeard(n,true);});
+  row.appendChild(a);a.play();
+}
+// deep-link: ?ep=N selects the right tab, scrolls to and highlights that episode
+(function(){
+  var m=(location.search||'').match(/[?&]ep=(\d+)/);
+  if(m){
+    var n=+m[1];
+    var e=EPISODES.find(function(x){return x.n===n;});
+    if(e){ var t=tabFor(e.group); activeTab=t.key; localStorage.setItem('fdn_tab',t.key); }
+  }
+  render();
+  if(m){
+    var row=document.getElementById('ep'+(+m[1]));
+    if(row){
+      row.scrollIntoView({behavior:'smooth',block:'center'});
+      row.style.outline='2px solid #7fc4f0'; row.style.outlineOffset='2px';
+    }
+  }
+})();
+</script>
+<!-- rev: 76 episodes; LOFT tab added (Ep75/76), 2026-07-21 -->
+</body></html>
