@@ -100,7 +100,7 @@
   </header>
   <div class="topnav">
     <button class="navbtn game" onclick="enterGame()">&#9654; Game (timed)</button>
-    <a class="navbtn pod" href="podcast.html">&#127911; Podcast: Phase Flow Walk</a>
+    <a class="navbtn pod" href="podcast.html?ep=44">&#127911; Podcast: Triggers Gate-to-Gate</a>
   </div>
   <div class="catrow" id="cats"></div>
   <div id="app"></div>
@@ -135,7 +135,7 @@ const DATA=[
  // ------------- GO-AROUND BRIEF -------------
  {s:"Go-Around Brief",q:"Mandatory brief item for a LOW-LEVEL go-around?",a:"“I will guard the throttles forward and call ‘Set Thrust’ — PM verifies thrust is set”",ref:"FCOM NP.21.51",src:"FCOM NP.21.51 WARNING: TO/GA function is inhibited close to the ground and after touchdown. If the thrust levers do not respond when TO/GA is pushed, or if the go-around is initiated after touchdown, advance the thrust levers manually to go-around thrust.",flow:{n:"Go-Around flow (FCOM NP.21.51)",i:["PF: &ldquo;Go-Around&rdquo; &mdash; push TO/GA &mdash; near ground/after touchdown ADVANCE THRUST MANUALLY","PF: &ldquo;Flaps 20&rdquo; (or 5/20 one-engine) &mdash; PM sets, verifies thrust: &ldquo;Thrust Set&rdquo;","PM: &ldquo;Positive Rate&rdquo; &rarr; PF: &ldquo;Gear Up&rdquo;","200 ft: autopilot as needed &middot; 400 ft: roll mode","Accel height: speed, flaps on schedule, CLB/CON","After Takeoff Checklist &mdash; PF calls after flaps up"]}},
  {s:"Go-Around Brief",q:"Why must thrust be advanced manually on a low-level go-around?",a:"TO/GA is inhibited close to the ground and after touchdown",ref:"FCOM NP.21.51",src:"FCOM NP.21.51 WARNING: TO/GA function is inhibited close to the ground and after touchdown."},
- {s:"Go-Around Brief",q:"Low-level go-around: PM's job after “Set Thrust”?",a:"Verify go-around thrust is set — call “Thrust Set”",ref:"FCOM NP.21.51",src:"Go-around procedure: PM sets flaps as directed and verifies thrust, calling “Thrust Set” (FCOM NP.21.51 / phase flows)."},
+ {s:"Go-Around Brief",who:"PM",q:"Low-level go-around: PM's job after “Set Thrust”?",a:"Verify go-around thrust is set — call “Thrust Set”",ref:"FCOM NP.21.51",src:"Go-around procedure: PM sets flaps as directed and verifies thrust, calling “Thrust Set” (FCOM NP.21.51 / phase flows)."},
 
  // ------------- CHECKLIST ORDER -------------
  {s:"Checklist Order",q:"Recite all 10 normal checklists in order",a:"Preflight &middot; Before Start &middot; Before Taxi &middot; Before Takeoff &middot; After Takeoff &middot; Descent &middot; Approach &middot; Landing &middot; Shutdown &middot; Secure",ref:"FCOM NP.21",src:"FCOM NP normal procedures sequence, as laid out gate to gate in the Phase Flows page."},
@@ -300,7 +300,7 @@ start(false);
 <footer style="width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:8px;margin:28px auto 0;">
 <img src="B787_night.jpg" alt="Boeing 787" style="width:380px;max-width:60%;height:auto;border-radius:6px;">
 <a href="mailto:ryan.pettit@alaskaair.com?subject=B787%20Study%20Portal%20-%20Triggers%20Quizzer" style="font-size:11px;color:#b1d887;font-family:inherit;text-decoration:none;">ryan.pettit@alaskaair.com</a>
-<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 1.5</div>
+<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 1.6</div>
 </footer>
 </body>
 </html>
