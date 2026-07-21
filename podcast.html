@@ -206,7 +206,23 @@ function play(n){
   a.addEventListener('ended',function(){setHeard(n,true);});
   row.appendChild(a);a.play();
 }
-render();
+// deep-link: ?ep=N selects the right tab, scrolls to and highlights that episode
+(function(){
+  var m=(location.search||'').match(/[?&]ep=(\d+)/);
+  if(m){
+    var n=+m[1];
+    var e=EPISODES.find(function(x){return x.n===n;});
+    if(e){ var t=tabFor(e.group); activeTab=t.key; localStorage.setItem('fdn_tab',t.key); }
+  }
+  render();
+  if(m){
+    var row=document.getElementById('ep'+(+m[1]));
+    if(row){
+      row.scrollIntoView({behavior:'smooth',block:'center'});
+      row.style.outline='2px solid #7fc4f0'; row.style.outlineOffset='2px';
+    }
+  }
+})();
 </script>
-<!-- rev: 74 episodes, IOE Prep (ep74) added, 2026-07-21 -->
+<!-- rev: 74 episodes; deep-link ?ep=N added, 2026-07-20 -->
 </body></html>
