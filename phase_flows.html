@@ -171,6 +171,22 @@ font-weight:800;font-size:13.5px;padding:10px 11px;border-radius:9px;cursor:poin
 .rail button.on{background:var(--head);color:#fff;}
 .rail button.ab.on{background:var(--say);color:#fff;}
 .rail{display:none !important;}
+
+.notesbtn{width:auto;min-width:60px;padding:0 12px;font-size:11px;font-weight:800;letter-spacing:.3px;
+height:40px;background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:8px;cursor:pointer;}
+.notesOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:60;padding:16px;
+overflow:auto;-webkit-overflow-scrolling:touch;}
+.notesOverlay.show{display:flex;justify-content:center;align-items:flex-start;}
+.notesPanel{background:var(--bg);color:var(--ink);max-width:640px;width:100%;border-radius:12px;
+padding:14px 14px 18px;box-shadow:0 8px 30px rgba(0,0,0,.4);margin-top:calc(10px + env(safe-area-inset-top));
+max-height:calc(100vh - 40px);overflow:auto;}
+.notesPanel h2{margin:0 0 10px;font-size:1.15em;color:var(--head);letter-spacing:.3px;}
+.notesPanel .card{margin-bottom:10px;}
+.notesPanel ol.cl-order{margin:2px 0 0;padding-left:22px;}
+.notesPanel ol.cl-order li{font-size:.88em;font-weight:700;padding:4px 0;border-bottom:1px solid var(--line);}
+.notesPanel ol.cl-order li:last-child{border-bottom:none;}
+.notesclose{display:block;margin:14px auto 0;background:var(--head);color:#fff;border:0;padding:9px 24px;
+border-radius:8px;font-weight:800;cursor:pointer;font-size:13px;letter-spacing:.3px;}
 </style>
 </head>
 <body>
@@ -183,6 +199,7 @@ font-weight:800;font-size:13.5px;padding:10px 11px;border-radius:9px;cursor:poin
     </div>
   </div>
   <div class="ctrls">
+    <button class="notesbtn" id="notesBtn" title="Quick Reference Notes">NOTES</button>
     <div class="toggle seat" id="seat">
       <button data-s="C" class="on">CA</button>
       <button data-s="F">FO</button>
@@ -207,6 +224,91 @@ font-weight:800;font-size:13.5px;padding:10px 11px;border-radius:9px;cursor:poin
     <button class="themebtn" id="theme" title="Day / Night">&#9790;</button>
   </div>
 </header>
+
+<div class="notesOverlay" id="notesOverlay">
+  <div class="notesPanel">
+    <h2>NOTES</h2>
+
+    <div class="card">
+      <div class="ch" style="border-left-color:#01426A"><span class="hn">CHECKLISTS &mdash; IN ORDER</span></div>
+      <div class="cb">
+        <ol class="cl-order">
+          <li>Pre-Flight</li>
+          <li>Before Start</li>
+          <li>Before Taxi</li>
+          <li>Before T/O</li>
+          <li>After T/O</li>
+          <li>Descent</li>
+          <li>Approach</li>
+          <li>Landing</li>
+          <li>Shutdown</li>
+          <li>Securing</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="ch" style="border-left-color:#5A4AB7"><span class="hn">PREFLIGHT CHECKLIST 3 (HUD)</span></div>
+      <div class="cb"><ul class="bl"><li>Clearance</li><li>Route</li><li>Brief</li></ul></div>
+    </div>
+
+    <div class="card">
+      <div class="ch" style="border-left-color:#00805E"><span class="hn">&lt; START CHECKLIST 4 (WALK AROUND)</span></div>
+      <div class="cb"><ul class="bl"><li>Perf</li><li>T/O Data</li><li>Final TPR</li><li>Load Closeout</li></ul></div>
+    </div>
+
+    <div class="card">
+      <div class="ch" style="border-left-color:#0a8fb0"><span class="hn">&lt; TAXI CHECKLIST 5 (PIN/SALUTE)</span></div>
+      <div class="cb"><ul class="bl"><li>Flaps</li><li>WXR</li><li>EICAS</li><li>Controls</li><li>Recall</li></ul></div>
+    </div>
+
+    <div class="card">
+      <div class="ch" style="border-left-color:#c0392b"><span class="hn">V1 CUT</span></div>
+      <div class="cb"><ul class="bl"><li>Bug Up</li><li>Clean Up</li><li>Con</li><li>Confirm E/O</li><li>Checklist/Checklist</li></ul></div>
+    </div>
+
+    <div class="card">
+      <div class="ch" style="border-left-color:#E0A100"><span class="hn">APPROACH SETUP</span></div>
+      <div class="cb"><ul class="bl"><li>ATIS</li><li>Build</li><li>Bug</li><li>Brakes</li><li>Brief</li><li>RNP/Recall</li></ul></div>
+    </div>
+
+    <div class="card">
+      <div class="ch" style="border-left-color:#7b2fb0"><span class="hn">EMERGENCY COMMS</span></div>
+      <div class="cb"><ul class="bl"><li>FO</li><li>ATC</li><li>FA (NTSB)</li><li>PAX (Mech Malf, Listen to FA)</li><li>Company</li></ul></div>
+    </div>
+
+    <div class="trig"><span class="ic">&#10148;</span> Final Flaps &#8594; Bug Ref Speed</div>
+    <div class="trig"><span class="ic">&#10148;</span> G/S Cap &#8594; Declutter HUD</div>
+    <div class="trig"><span class="ic">&#10148;</span> Go Around &#8594; Low Level Brief</div>
+
+    <div class="card">
+      <div class="ch" style="border-left-color:#334e68"><span class="hn">OODA LOOP</span></div>
+      <div class="cb"><ul class="bl"><li>Observe</li><li>Orient</li><li>Decide</li><li>Act</li></ul></div>
+    </div>
+
+    <div class="card">
+      <div class="ch" style="border-left-color:#2e7d5b"><span class="hn">CLEAR RUNWAY</span></div>
+      <div class="cb">
+        <ul class="bl">
+          <li>Speed Brake - DOWN</li>
+          <li>PM Flow
+            <ul class="bl" style="margin-top:4px;">
+              <li>APU - ON</li>
+              <li>Anti Ice</li>
+              <li>WXR - OFF</li>
+              <li>Brakes - OFF</li>
+              <li>Flaps - UP</li>
+              <li>XPDR</li>
+              <li>Arrival Report</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <button class="notesclose" id="notesClose">Close</button>
+  </div>
+</div>
 <div class="gate" id="gate"></div>
 <main id="main"></main>
 <nav id="nav"></nav>
@@ -860,6 +962,9 @@ const filtBtn=document.getElementById('filt');
 function setFilt(){ filtBtn.textContent=state.hideOther?'MINE':'BOTH'; filtBtn.classList.toggle('on',state.hideOther);
   filtBtn.title=state.hideOther?'Showing only my steps - tap to show both crew members':'Showing both crew members - tap to show only my steps'; }
 filtBtn.addEventListener('click',()=>{ state.hideOther=!state.hideOther; setFilt(); GFONT=0; render(); });
+document.getElementById('notesBtn').addEventListener('click',()=>{ document.getElementById('notesOverlay').classList.add('show'); });
+document.getElementById('notesClose').addEventListener('click',()=>{ document.getElementById('notesOverlay').classList.remove('show'); });
+document.getElementById('notesOverlay').addEventListener('click',(e)=>{ if(e.target.id==='notesOverlay') e.target.classList.remove('show'); });
 document.getElementById('main').addEventListener('click',e=>{
   const q=e.target.closest('.it.has-q'); if(q){ q.classList.toggle('open'); return; }
   const c=e.target.closest('.cl.has-cl'); if(c){ c.parentNode.classList.toggle('open'); }
