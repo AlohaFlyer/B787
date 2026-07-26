@@ -35,6 +35,8 @@ h1{font-size:22px;text-align:center;color:#fff;margin:4px 0 4px}
 .quiz{border-color:var(--green);color:#9ad9b9}.quiz:hover{background:var(--green);color:#fff}
 .heard{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#8fb3cf;cursor:pointer;user-select:none}
 .heard input{width:16px;height:16px;accent-color:var(--green)}
+.offlbl input{accent-color:var(--good)}
+.offlbl.busy{opacity:.6}
 .badge{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#02233b;background:var(--good);border-radius:3px;padding:2px 6px;font-weight:700}
 .player{width:100%;margin-top:8px}
 .note{color:#8fb3cf;font-size:11.5px;text-align:center;margin-top:18px;line-height:1.5}
@@ -53,7 +55,7 @@ h1{font-size:22px;text-align:center;color:#fff;margin:4px 0 4px}
   <div class="prog" id="prog"></div>
   <div class="tabs" id="tabs"></div>
   <div id="list"></div>
-  <div class="note">Tick an episode once you've listened - it's saved on this device. More episodes drop as they are produced. "Quiz" opens the Systems Quiz for that topic.<span class="src">Built from the current manuals - FCOM R10, FCTM R9, QRH R7, FOM 124.2, MEL R5 - and kept up to date as they revise.</span></div>
+  <div class="note">Tick an episode once you've listened - it's saved on this device. Tick "offline" to save the audio itself on this device for playback without a connection. More episodes drop as they are produced. "Quiz" opens the Systems Quiz for that topic.<span class="src">Built from the current manuals - FCOM R10, FCTM R9, QRH R7, FOM 124.2, MEL R5 - and kept up to date as they revise.</span></div>
 </div>
 <script>
 var EPISODES=[
@@ -116,7 +118,7 @@ var EPISODES=[
  {n:79,group:"Maneuvers",title:"Oceanic ITCZ Weather Deviation",topic:"Work the problem live - a southbound ITCZ buildup with CPDLC and voice both unanswered, Captain's emergency authority, Pan-Pan, the turn away from track, the direction-of-flight altitude offset table, blind broadcasts &amp; TCAS TA/RA, and the disciplined return to track - FOM 5.7.4.2, 5.7.4.4-4.7",len:"6:55",audio:"flight-deck-notes-ep79.mp3",quiz:"memory-items.html"},
  {n:75,group:"LOFT",title:"LOFT 1 - LAX to LAS",topic:"No-APU ground-power engine start &amp; cross-start (MEL 49-11-01), Captain-to-marshaler brief, waypoint transition, the descent gouge, and the two mandatory Checklist Complete checklists - FOM Ch5 &amp; Ch12, FCOM Supplementary Procedures",len:"6:06",audio:"flight-deck-notes-ep75.mp3",quiz:"triggers.html"},
  {n:76,group:"LOFT",title:"LOFT 2 - LAS to HNL",topic:"ETOPS APU Verification Flight decision tree (MEL 05-00-02), the cold-soak vs full-flight methods, PIC/Dispatch joint responsibility, oceanic CPDLC ops &amp; the critical-fuel entry point, gusty HNL arrival - FOM Ch2, Ch5, Ch6 &amp; Ch8",len:"7:22",audio:"flight-deck-notes-ep76.mp3",quiz:"triggers.html"},
- {n:56,group:"Procedures",title:"Phase Flow Memory Walk",topic:"Gate-to-gate trigger chain in phase order as a garage-cockpit memory walk - every event, flow, and checklist with who owns it - FCOM NP.21",len:"TBD",audio:"flight-deck-notes-ep56.mp3",quiz:"triggers.html"},
+ {n:56,group:"Procedures",title:"Phase Flow Memory Walk",topic:"Gate-to-gate trigger chain in phase order as a garage-cockpit memory walk - every event, flow, and checklist with who owns it - FCOM NP.21",len:"TBD",audio:null,quiz:"triggers.html"},
  {n:57,group:"FOM",title:"FOM Ch 1 - Preface",topic:"Manual overview & hierarchy, SMS pillars, Ready SAFE Go, PIC authority & chief pilot's backing",len:"28:13",audio:"flight-deck-notes-ep57.mp3",quiz:"fom_quiz.html?chapter=1%20Preface"},
  {n:58,group:"FOM",title:"FOM Ch 2 - Operating - General",topic:"Operational control & PIC responsibility, PF/PM roles, EFB policy, required manuals, single-EFB ops",len:"29:31",audio:"flight-deck-notes-ep58.mp3",quiz:"fom_quiz.html?chapter=2%20Operating-General"},
  {n:59,group:"FOM",title:"FOM Ch 3 - Training & Currency",topic:"High minimums Captain/FO, RNP AR authorization, autoland/HGS currency, recurrent training, seat substitute",len:"23:27",audio:"flight-deck-notes-ep59.mp3",quiz:"fom_quiz.html?chapter=3%20Training%20%26%20Currency"},
@@ -136,6 +138,9 @@ var EPISODES=[
  {n:72,group:"FOM",title:"FOM Ch 18 - Areas of Operation",topic:"Otto's rating scale running gag, altimeter QNH/STD memory aid, disinsection & spray procedures (56-day residual, 5-min saturation, spurious-vs-real smoke warning), PBCS six-item mnemonic, A-CDM ground slot times (CTOT -5/+15)",len:"24:00",audio:"flight-deck-notes-ep72.mp3",quiz:"fom_quiz.html?chapter=18%20Areas%20of%20Operation"},
  {n:73,group:"FOM",title:"FOM Ch 19-24 - Theaters of Operation",topic:"North America, Pacific, Caribbean, Atlantic, Europe & Asia in one flight - Rockies/Alps/Greenland decompression floors (18/18/15), NAT organized tracks & RCL timing, SAND weather-deviation memory aid, Heathrow holding, Korea DMZ buffer",len:"25:44",audio:"flight-deck-notes-ep73.mp3",quiz:"fom_quiz.html"},
  {n:74,group:"Procedures",title:"IOE Prep - Line Ops & Captain Leadership",topic:"Demo-to-Solo 6-leg progression, Five Books/Five Jobs (FOM/QRH/FCOM-FCTM/MEL/Jepp 10-7), the Five P's, TPC threat-based departure brief, new-Captain command authority & CRM, ETOPS numbers, the 'let me confirm' rule",len:"25:04",audio:"flight-deck-notes-ep74.mp3",quiz:"fom_quiz.html"},
+ {n:80,group:"Maneuvers",title:"Medical Emergency & MedLink Diversion",topic:"Work the phones, not the airplane - assessing whether a passenger medical event is immediately life-threatening, engaging MedLink through the cabin, conferencing Dispatch in parallel, Captain's final authority vs following MedLink's recommendation, and a normal diversion to Los Angeles with paramedics standing by - FOM 11.1.9",len:"6:58",audio:"flight-deck-notes-ep80.mp3",quiz:"memory-items.html"},
+ {n:81,group:"FFS",title:"FFS 11 - Chitose to Honolulu: Winter Ops & ORCN",topic:"Chair-fly the FFS11 LOFT winter-ops leg - dispatch brief, holdover time from final fluid application, gate vs remote-pad de-ice timing, icing conditions & engine anti-ice, SNOWTAM decode (millimeters to inches), RWYCC contaminated-runway takeoff performance, before-takeoff flap modification, static engine run-up, and the oceanic ETOPS crossing with Japan-specific visibility/holding-speed rules. Source: FFS 11 Brief 11MAY26, FOM 9.1.5-9.1.6, FCOM SP.16",len:"9:06",audio:"flight-deck-notes-ep81.mp3",quiz:"fom_quiz.html?chapter=9%20Weather"},
+ {n:82,group:"LOFT",title:"LOFT 3 - Kahului to Honolulu",topic:"A 25-minute interisland hop run gate-to-gate - logbook & load closeout with no shortcuts, level at 14,000 ft, the descent brief starting the moment you're level because there's no cruise phase to lean on, and waypoint transition procedure on the same two-minute trigger as a six-hour crossing - FCOM NP.21",len:"4:16",audio:"flight-deck-notes-ep82.mp3",quiz:"triggers.html"},
 ];
 
 // Top-level nav tabs (order matters). Chair-Fly folds into Procedures.
@@ -161,6 +166,41 @@ function setTab(k){ activeTab=k; localStorage.setItem('fdn_tab',k); render(); }
 function key(n){return 'fdn_heard_'+n;}
 function heard(n){return localStorage.getItem(key(n))==='1';}
 function setHeard(n,v){localStorage.setItem(key(n),v?'1':'0');render();}
+
+var OFFLINE_CACHE='fdn-offline-v1';
+function offlineKey(n){return 'fdn_offline_'+n;}
+function isOffline(n){return localStorage.getItem(offlineKey(n))==='1';}
+function toggleOffline(n,checked){
+  var e=EPISODES.find(function(x){return x.n===n;});
+  if(!e||!e.audio||!('caches' in window)){
+    if(!('caches' in window))alert('This browser does not support offline storage.');
+    render();
+    return;
+  }
+  var lbl=document.getElementById('offlbl'+n);
+  if(lbl)lbl.classList.add('busy');
+  if(checked){
+    caches.open(OFFLINE_CACHE).then(function(cache){
+      return fetch(e.audio).then(function(resp){
+        if(!resp.ok)throw new Error('download failed ('+resp.status+')');
+        return cache.put(e.audio,resp);
+      });
+    }).then(function(){
+      localStorage.setItem(offlineKey(n),'1');
+      render();
+    }).catch(function(err){
+      localStorage.setItem(offlineKey(n),'0');
+      alert('Could not save "'+e.title+'" offline: '+err.message+'. Check your connection and try again.');
+      render();
+    });
+  }else{
+    caches.open(OFFLINE_CACHE).then(function(cache){return cache.delete(e.audio);}).then(function(){
+      localStorage.setItem(offlineKey(n),'0');
+      render();
+    });
+  }
+}
+
 function updateProg(){
   var pub=EPISODES.filter(function(e){return e.audio;});
   var done=pub.filter(function(e){return heard(e.n);}).length;
@@ -191,6 +231,8 @@ function render(){
     var len = e.len?('<span class="eplen">'+e.len+'</span>') : '<span class="eplen">--</span>';
     var badge = heard(e.n)?'<span class="badge">Listened</span>':'';
     var grp = e.group?('<div class="epgroup" style="color:'+gm.accent+'">'+e.group+'</div>'):'';
+    var offlineBtn = coming ? '' :
+      '<label class="heard offlbl" id="offlbl'+e.n+'"><input type="checkbox" '+(isOffline(e.n)?'checked':'')+' onchange="toggleOffline('+e.n+',this.checked)">offline</label>';
     return '<div class="ep'+(coming?' coming':'')+'" id="ep'+e.n+'" style="background:'+gm.card+';border-left-color:'+gm.accent+'">'
       +'<div class="epnum">EP '+e.n+'</div>'
       +'<div class="epmain">'+grp+'<div class="eptitle">'+e.title+' '+badge+'</div><div class="eptopic">'+e.topic+'</div></div>'
@@ -198,6 +240,7 @@ function render(){
       +'<div class="acts">'+listenBtn
       +'<a class="btn quiz" href="'+e.quiz+'">Quiz</a>'
       +'<label class="heard"><input type="checkbox" '+(heard(e.n)?'checked':'')+' onchange="setHeard('+e.n+',this.checked)">heard</label>'
+      +offlineBtn
       +'</div></div>';
   }).join('');
   document.getElementById('list').innerHTML=html;
@@ -208,9 +251,24 @@ function play(n){
   if(!e||!e.audio)return;
   var row=document.getElementById('ep'+n);
   if(row.querySelector('audio'))return;
-  var a=document.createElement('audio');a.className='player';a.controls=true;a.src=e.audio;
+  var a=document.createElement('audio');a.className='player';a.controls=true;
   a.addEventListener('ended',function(){setHeard(n,true);});
-  row.appendChild(a);a.play();
+  row.appendChild(a);
+  if(('caches' in window) && isOffline(n)){
+    caches.open(OFFLINE_CACHE).then(function(cache){return cache.match(e.audio);}).then(function(resp){
+      if(!resp)throw new Error('not cached');
+      return resp.blob();
+    }).then(function(blob){
+      a.src=URL.createObjectURL(blob);
+      a.play();
+    }).catch(function(){
+      a.src=e.audio;
+      a.play();
+    });
+  }else{
+    a.src=e.audio;
+    a.play();
+  }
 }
 // deep-link: ?ep=N selects the right tab, scrolls to and highlights that episode
 (function(){
@@ -230,5 +288,5 @@ function play(n){
   }
 })();
 </script>
-<!-- rev: 79 episodes; Maneuvers tab gained Ep77-79 (APU fire, engine surge, ITCZ weather deviation diversions), 2026-07-24 -->
+<!-- rev: 82 episodes; Ep80 Medical Emergency (Maneuvers), Ep81 FFS 11 Winter Ops (FFS), Ep82 LOFT 3 (LOFT); offline-listening (Cache API) added; Ep56 audio set to null (missing file) - 2026-07-25 -->
 </body></html>
