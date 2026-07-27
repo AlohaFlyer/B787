@@ -145,7 +145,7 @@ ul.bl{margin:2px 0 0;padding:0;list-style:none;}
 ul.bl li{font-size:.78em;color:var(--muted);line-height:1.28;padding-left:13px;position:relative;margin:1.5px 0;}
 ul.bl li::before{content:'•';position:absolute;left:3px;color:var(--accent);font-weight:800;}
 ul.bl li b{color:var(--ink);} .co{color:var(--say);}
-    ul.bl ul.sub{list-style:none;margin:2px 0 3px 12px;padding:0;} ul.bl ul.sub li{position:relative;padding-left:12px;} ul.bl ul.sub li::before{content:"–";position:absolute;left:0;opacity:.65;}
+    ul.bl ul.sub{list-style:none;margin:2px 0 3px 12px;padding:0;} ul.bl ul.sub li{position:relative;padding-left:12px;font-size:.92em;font-weight:400;} ul.bl ul.sub li::before{content:"–";position:absolute;left:0;opacity:.65;}
 .exp{display:inline-block;color:var(--accent);font-size:.62em;font-weight:800;margin-left:6px;
 border:1.4px solid var(--accent);border-radius:5px;padding:0 5px;vertical-align:middle;opacity:.85;}
 .it.open .exp,.clwrap.open .exp{background:var(--accent);color:#fff;}
@@ -719,7 +719,7 @@ const STATES=/\b(ON|OFF|AUTO|SET|UP|DN|DOWN|CUTOFF|RUN|ARM|ARMED|RTO|STBY|STANDB
 function boldST(s){ return s.replace(STATES,'<b>$1</b>'); }
 function deco(s){ return s? hl(boldST(boldCO(s))) : ''; }
 function bullets(s){ if(!s)return ''; const p=s.split(' · '); if(p.length<2 && !s.includes(' » '))return `<div class="s">${deco(s)}</div>`;
-  return `<ul class="bl">${p.map(x=>{ if(x.includes(' » ')){ const pt=x.split(' » '); const kids=pt[1].split(' ; ').map(k=>`<li>${deco(k.trim())}</li>`).join(''); return `<li>${deco(pt[0].trim())}<ul class="sub">${kids}</ul></li>`; } return `<li>${deco(x)}</li>`; }).join('')}</ul>`; }
+  return `<ul class="bl">${p.map(x=>{ if(x.includes(' » ')){ const pt=x.split(' » '); const kids=pt[1].split(' ; ').map(k=>`<li>${deco(k.trim())}</li>`).join(''); return `<li>${deco(pt[0].trim()).replace(/\((\d+)\)/,'<b>($1)</b>')}<ul class="sub">${kids}</ul></li>`; } return `<li>${deco(x)}</li>`; }).join('')}</ul>`; }
 const EXP='<span class="exp">&#9656;</span>';
 
 function renderItem(it,cite,ctx,pid){
