@@ -145,6 +145,7 @@ ul.bl{margin:2px 0 0;padding:0;list-style:none;}
 ul.bl li{font-size:.78em;color:var(--muted);line-height:1.28;padding-left:13px;position:relative;margin:1.5px 0;}
 ul.bl li::before{content:'•';position:absolute;left:3px;color:var(--accent);font-weight:800;}
 ul.bl li b{color:var(--ink);} .co{color:var(--say);}
+    ul.bl ul.sub{list-style:none;margin:2px 0 3px 12px;padding:0;} ul.bl ul.sub li{position:relative;padding-left:12px;} ul.bl ul.sub li::before{content:"–";position:absolute;left:0;opacity:.65;}
 .exp{display:inline-block;color:var(--accent);font-size:.62em;font-weight:800;margin-left:6px;
 border:1.4px solid var(--accent);border-radius:5px;padding:0 5px;vertical-align:middle;opacity:.85;}
 .it.open .exp,.clwrap.open .exp{background:var(--accent);color:#fff;}
@@ -239,7 +240,7 @@ const S=(h,c,items,cite,appr)=>({h,c,items,cite:cite||'',appr:appr||'all'});
 const PHASES=[
 {id:'preflight',label:'Preflight',kind:'n',title:'PREFLIGHT',src:'FCOM NP.21.1-27 · PRC',sections:[
   S('COCKPIT ENTRY','#334e68',[
-    box('ARRS · FFLAAP MD · Logbook','ARRS: certs/docs aboard & valid (Airworthiness, Registration, Radio license) · FFLAAP MD: 2 Flashlights, 1 Fire Ext, 4 Life Vests, 1 AVSAX & Gloves, 1 Crash Axe, 1 PBE, 4 O2 Masks, 4 Descent Devices · Logbook: awake, or cold & dark? · Crew memory aids, not a published FCOM step list (HAL B787 GenOps notes)','B'),
+    box('ARRS · FFLAAP MD · Logbook','ARRS: certs/docs aboard & valid (3) » Airworthiness ; Registration ; Radio license · FFLAAP MD: (18) » 2 Flashlights ; 1 Fire Ext ; 4 Life Vests ; 1 AVSAX & Gloves ; 1 Crash Axe ; 1 PBE ; 4 O2 Masks ; 4 Descent Devices · Logbook: awake, or cold & dark? · Crew memory aids (HAL B787 GenOps notes)','B'),
     box('DEAD AIRCRAFT - Elec Pwr Up (Read & Do)','Batt On · Hyd Pumps Off · Wipers Off · Gear Lever Dn · Alt Flap Swts Off · External/APU On (SP.6)','B'),
     box('Prelim Preflt Flow (Capt or FO)','(I SEE HOP) Logbook · IRS, Status, EICAS, Eng oil, Hyd, O2, Park Brk · Gnd Air? (NP.21.1)','B',true,'IRS selectors ... OFF 30 seconds, then ON (verify ON BAT light extinguished). STATUS display ... Check - verify that only expected messages are shown. Verify sufficient for flight: Oxygen pressure, Hydraulic quantity, Engine oil quantity. EICAS display ... Check - verify only expected alert and memo messages are shown. Parking brake ... Set.'),
     trig('Park brake SET → PF begins CDU setup / PM walk-around','B'),
@@ -717,8 +718,8 @@ function boldCO(s){ return s.replace(/[“"]([^”"]*)[”"]/g,'<b class="co">�
 const STATES=/\b(ON|OFF|AUTO|SET|UP|DN|DOWN|CUTOFF|RUN|ARM|ARMED|RTO|STBY|STANDBY|XPDR|TA\/RA|NORM|CLOSED|OPEN)\b/g;
 function boldST(s){ return s.replace(STATES,'<b>$1</b>'); }
 function deco(s){ return s? hl(boldST(boldCO(s))) : ''; }
-function bullets(s){ if(!s)return ''; const p=s.split(' · '); if(p.length<2)return `<div class="s">${deco(s)}</div>`;
-  return `<ul class="bl">${p.map(x=>`<li>${deco(x)}</li>`).join('')}</ul>`; }
+function bullets(s){ if(!s)return ''; const p=s.split(' · '); if(p.length<2 && !s.includes(' » '))return `<div class="s">${deco(s)}</div>`;
+  return `<ul class="bl">${p.map(x=>{ if(x.includes(' » ')){ const pt=x.split(' » '); const kids=pt[1].split(' ; ').map(k=>`<li>${deco(k.trim())}</li>`).join(''); return `<li>${deco(pt[0].trim())}<ul class="sub">${kids}</ul></li>`; } return `<li>${deco(x)}</li>`; }).join('')}</ul>`; }
 const EXP='<span class="exp">&#9656;</span>';
 
 function renderItem(it,cite,ctx,pid){
