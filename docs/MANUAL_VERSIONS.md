@@ -35,7 +35,7 @@ Regenerated via build_scripts/ (parse_ep.py + master_ep_fast.sh). Per-episode ma
 the episode source .txt / manifests. See build_scripts/PODCAST_BUILD_TOOLCHAIN.md.
 
 ## Page version registry (bump +0.1 per edit)
-index 2.18 | flows_quiz 9.6 | hot-seat 1.3 | jeopardy 1.0 | limit-or-bust 1.4 | limitations 2.6 | memory-items 1.6 | triggers 1.6 | systems_quiz 2.6 | weather 1.6 | wx-alternate 1.2 | aircraft_setup 1.5 | cdu_preflight 1.0 | sv_exam 1.0 | phase_flows (see page footer) | podcast.html data-driven
+index 2.18 | flows_quiz 9.6 | hot-seat 1.3 | jeopardy 1.0 | limit-or-bust 1.4 | limitations 2.6 | memory-items 1.6 | triggers 1.6 | systems_quiz 2.7 | weather 1.6 | wx-alternate 1.2 | aircraft_setup 1.5 | cdu_preflight 1.0 | sv_exam 1.0 | phase_flows (see page footer) | podcast.html data-driven
 
 ## Open build items
 - 4 DRAFT stub flows (NP.21.30 Pushback/Towing, Cruise/ETOPS entry, NP.21.45 Landing-IAN, NP.21.48 Landing-VNAV) still pending in flows_quiz.html / phase_flows.html. Verbatim source staged in docs/FLOWS_REBUILD_SOURCE_NP21.md (FCOM R10). Flows 3 (CDU Preflight) and 4 (Preflight-FO) FCOM R10 verbatim audit CLOSED 2026-07-03 (flows_quiz Ver 9.6).
@@ -72,3 +72,27 @@ Still open after this sweep:
   22.2.1 Transition Areas, 23.18.1.13 LHR jumpseat, 23.19 Italy (new chapter).
 - FOM_REBUILD.md chapter page ranges are still keyed to 124.2 pagination; re-derive from the new
   PDF bookmarks.
+
+## Post-sweep follow-ups applied same night (2026-07-31)
+
+- systems_quiz.html Ver 2.7: 11 FOM citation errors corrected. None were caused by Rev 125. The
+  worst was sv-ground-078, which attributed "The exterior walkaround is performed by the pilot
+  monitoring or IRO" to FOM 5.2.22; that sentence appears in NO FOM revision. It is FCOM NP.21.5
+  wording, and FOM 5.2.22 is Parking Brake - Preflight. Also remapped: Load Closeout 5.2.20 ->
+  5.2.11.3, weight-tolerance crosscheck 8.5.8 -> 5.2.19, ACARS-inop 5.2.20.1 -> 5.2.19.1, OFCR
+  5.1.21.7 -> 5.1.23.7 (5.1.21 is GPS/GNSS), visual-approach 5.6.6 -> 5.6.6.1, 5-minute
+  contamination check 9.3.1 -> 9.2.2 Heavy Snow, contaminated-runway thrust to FOM 9.1.8. The
+  fabricated HAL F-809 "asterisked items / Captain carries a signed copy" detail was replaced with
+  the FOM 5.2.19.1 read-back list.
+- 7 new fom_q questions covering the highest-value 787 gaps from Rev 125: 5.6.22.3 TALPA landing
+  model, 5.4.4 sub-500 RVR, 5.2.20 + 15.2.6.1 IPSB, 15.2.6.6 galley Options 1 or 2, 8.5.2.1 787
+  Europe D-180, 22.2.1 Transition Areas, 23.18.1.13 LHR jumpseat + 23.19 Italy. Bank now 460 Q.
+- Inline base64 hero image removed from flows_quiz, hot-seat, jeopardy, limit-or-bust,
+  memory-items and systems_quiz, replaced with src="B787_night.jpg" (same photo, higher
+  resolution, renders identically at 380px). Combined with the weather pages this removed about
+  400 KB of duplicated base64. hot-seat, jeopardy, limit-or-bust and memory-items are now small
+  enough to commit through the GitHub API. flows_quiz (1.4 MB) and systems_quiz (692 KB) are
+  still too large and continue to need the Chrome upload path.
+- Build scripts fixed: manual_diff.py now matches section containment in BOTH directions and
+  finds citation_index.json in either location; citation_index.py now also regenerates
+  docs/CITATION_INDEX.md and drops manual revision numbers that were being parsed as sections.
