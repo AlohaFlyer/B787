@@ -29,7 +29,7 @@ front: music_test/intro_v1.mp3 (12.04s); close: music_test/outro_v1_hook.mp3 (7.
 Mastering: per-seg mono/44100 + 0.2s pad -> concat -> atempo=1.2 -> dynaudnorm -> bookend -> loudnorm I=-16:TP=-1.5 -> 96k mono.
 
 ## Manual revisions this set was built against
-FCOM R10 (Apr 1 2026), QRH R7 (Jan 19 2026), FCTM R9 (Apr 1 2026), FOM 124.2 (Jun 18 2026), MEL R5 (Apr 1 2026).
+FCOM R10 (Apr 1 2026), QRH R7 (Jan 19 2026), FCTM R9 (Apr 1 2026), FOM 125 (Jul 29 2026), MEL R5 (Apr 1 2026).
 
 ---
 ## parse_ep.py
