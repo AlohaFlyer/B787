@@ -4,7 +4,7 @@ How the FOM quizzer and FOM podcast series are built, and how to regenerate them
 when a new FOM revision drops. A normal revision is a **data-only** refresh: no engine
 code changes needed.
 
-Current build: FOM Rev **124.2** (Jun 18, 2026). **19 units, 452 questions.**
+Current build: FOM Rev **125** (Jul 29, 2026). **19 units, 452 questions.**
 
 Units in the quizzer/podcast: FOM chapters **1-16 and 18**, a combined **"19-24 Theaters"**
 unit, and a synthesized **"IOE Prep"** unit. **Chapter 17 (Freighter Ops) is intentionally
@@ -55,7 +55,7 @@ ID conventions inside a chapter file:
 revision, `manual_diff.py` shows which sections changed; only items whose `ref` sits in a
 changed section need re-verification. `src.quote` must be a real substring of the FOM text.
 
-## Chapter -> FOM page ranges (Rev 124.2, 893-pp PDF)
+## Chapter -> FOM page ranges (Rev 124.2 pagination, NOT re-derived for Rev 125 - see note)
 
 Re-derive from the new PDF's bookmarks each revision (pagination shifts).
 
