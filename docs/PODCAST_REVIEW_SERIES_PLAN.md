@@ -20,7 +20,7 @@ Future runs: trust the API/repo copy of this ledger, not the raw CDN cache.
 - Verbatim-accurate to the manuals. Cite FCOM/FCTM/PRC/QRH section numbers in the dialogue. Never invent numbers or steps. If a value cannot be confirmed in a manual, say "verify in <source>" rather than guess.
 - Voices: Pualani = `cgSgspJ2msm6clMCkdW9` (Jessica), Chester = `nPczCjzI2devNBz1zQrb` (Brian, Seattle), Otto = `jOEnNSVLOHUgmrNwfqQE` (John, say "Otto"). Pualani spelled poo-ah-LAH-nee in TTS text.
 - Format: clean .txt, paragraphs separated by blank lines, "Speaker: [tag] text". Thorough = ~25-40 segments / ~10-14 min.
-- Manuals this set is built against: FCOM R10 (Apr 1 2026), QRH R7 (Jan 19 2026), FCTM R9 (Apr 1 2026), FOM 124.2 (Jun 18 2026), MEL R5. Full FCOM text extract: run `pdftotext -layout "B787 Flight Crew Operating Manual (FCOM).pdf"` then grep. PRC = "PRC_787 (4).pdf". QRH/FCTM PDFs in the Drive folder.
+- Manuals this set is built against: FCOM R10 (Apr 1 2026), QRH R7 (Jan 19 2026), FCTM R9 (Apr 1 2026), FOM 125 (Jul 29 2026), MEL R5. Full FCOM text extract: run `pdftotext -layout "B787 Flight Crew Operating Manual (FCOM).pdf"` then grep. PRC = "PRC_787 (4).pdf". QRH/FCTM PDFs in the Drive folder.
 
 ## Pipeline (per episode, all tools available in a scheduled run)
 1. Research the topic in the manuals (grep the FCOM text extract; pdftotext the PRC/QRH/FCTM sections as needed). Confirm every number.
