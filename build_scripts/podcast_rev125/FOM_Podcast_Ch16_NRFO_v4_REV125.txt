@@ -156,4 +156,4 @@ Chester: [warm] Blue skies and good coffee.
 
 Otto: [dry] Sweet as. See you next chapter.
 
-SOURCES: Alaska Airlines / Hawaiian FOM Chapter 16 — Non-Routine Flight Operations (NRFO), Rev 125, dated 7/29/26. Sections cited: 16.1.1, 16.1.1.2, 16.1.1.3, 16.1.8.1, 16.1.8.2, 16.1.9.1, 16.1.11, 16.1.12.1, 16.1.12.2, 16.3.2, 16.3.2.1, 16.3.2.2, 16.4.1, 16.4.2, 16.4.2.1, 16.4.2.2. Ops Spec D084; 14 CFR 21.197, 91.533, 121.583.
+SOURCES: Alaska Airlines / Hawaiian FOM Chapter 16 — Non-Routine Flight Operations (NRFO), Rev 125, dated 7/29/26. Sections cited: 16.1.1, 16.1.1.2, 16.1.1.3, 16.1.8.1, 16.1.8.2, 16.1.9.1, 16.1.11, 16.1.12 (with .1/.2/.3 deleted by Rev 125, taught as deleted), 16.3.2, 16.3.2.1, 16.3.2.2, 16.4.1, 16.4.2, 16.4.2.1, 16.4.2.2. Ops Spec D084; 14 CFR 21.197, 91.533, 121.583.
