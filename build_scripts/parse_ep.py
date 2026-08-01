@@ -31,6 +31,9 @@ LOCKED = [
     (re.compile(r"\b787\b"), "seven-eight-seven"),
     (re.compile(r"\bFCOM\b"), "F-com"),      # locked 2026-06-20 (not in .pls)
     (re.compile(r"\bFCTM\b"), "F-C-T-M"),    # locked 2026-06-20 (not in .pls)
+    (re.compile(r"\bIPSB\b"), "I-P-S-B"),      # locked 2026-07-31 (FOM 125 secondary barrier)
+    (re.compile(r"\bCMAP\b"), "C-map"),        # locked 2026-07-31 (Crewmember Access Point)
+    (re.compile(r"\bFFA\b"), "F-F-A"),          # locked 2026-07-31
     (re.compile(r"\bautothrottle\b", re.I), "auto throttle"),
     (re.compile(r"\bA/T\b"), "auto throttle"),
     (re.compile(r"\bCANC/?RCL\b"), "cancel recall"),
