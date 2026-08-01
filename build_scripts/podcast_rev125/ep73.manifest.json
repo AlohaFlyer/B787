@@ -1,0 +1,680 @@
+[
+ {
+  "i": 3,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Aloha, and welcome back to seven-eight-seven Flight Deck Notes. I'm Pualani - poo-ah-LAH-nee - and today we pack one bag and fly around the whole planet without getting out of the seat. eff oh em Chapters 19 through 24: North America, Pacific, Caribbean, Atlantic, Europe, and Asia. Six theaters, one episode, one airplane."
+ },
+ {
+  "i": 4,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Six theaters, one episode. I'm Chester, live from Seattle, where it is raining sideways, the coffee is strong, and the Dreamliner gets built right up the road. I have peaked. This is the best day of my week and it's not close."
+ },
+ {
+  "i": 5,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And I'm Otto. Kiwi, skeptic, professionally unimpressed. My job today is to make sure nobody invents a flight level that doesn't exist. Six theaters in one sitting. Sweet as. Let's not crash into the details."
+ },
+ {
+  "i": 6,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] No crashing. That's rule one. Chester, you're wheels-up - take us to North America."
+ },
+ {
+  "i": 7,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Right. eff oh em Chapter 19, North America, which is just the United States and Canada. First airspace fact, eff oh em 19.2: the United States is divided into 22 Area Control Centers. Canada into three - the Southern, Northern, and Arctic Control Areas."
+ },
+ {
+  "i": 8,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Twenty-two centers. That's twenty-two different people to disappoint on one flight."
+ },
+ {
+  "i": 9,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[laughs] Efficient. Now, a seven-eight-seven-specific one people fumble. eff oh em 19.3.1.1, the Canadian Rockies decompression procedure. Lose pressurization inside one of those terrain polygons and in the seven-eight-seven you descend at vee em oh/em em oh to eighteen thousand feet - one-eight-thousand - hold eighteen thousand until you're clear of terrain, then continue down to ten thousand."
+ },
+ {
+  "i": 10,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[serious] And that eighteen thousand is the airplane talking. Do not borrow somebody else's floor - they fly different numbers. In the Rockies, the seven-eight-seven number is eighteen thousand. Full stop."
+ },
+ {
+  "i": 11,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] Say it twice. Eighteen thousand in the Rockies, seven-eight-seven."
+ },
+ {
+  "i": 12,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] Otto, I want a story on this one. Tell me about a time a decompression drill went sideways."
+ },
+ {
+  "i": 13,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Right. IOE, my first oceanic trip as a check kiwi. Sim, mind you - fictional, so nobody file a report. We're feet-dry over the Canadian Rockies, right in the polygons. Instructor pulls an outflow valve on us. My trainee grabs a floor out of muscle memory - some number he flew on a different jet in a past life - and starts leveling too low. I just say, quietly, \"eighteen thousand.\" He resets, holds one-eight-zero until clear of terrain, then down to ten. Clean. The debrief was one sentence."
+ },
+ {
+  "i": 14,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] One sentence?"
+ },
+ {
+  "i": 15,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[deadpan] \"Fly the airplane you're strapped to.\" He never grabbed the wrong floor again."
+ },
+ {
+  "i": 16,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] That's going on a hat. Two more North America gems. eff oh em 19.3.1.2 - Canada restricts you to 200 knots, or minimum clean maneuver speed, whichever is faster, below three thousand above field level within ten miles of a controlled airport. And weather, eff oh em 19.5.3, the Juneau Taku winds down the Gastineau Channel. Gusts of seventy-two miles an hour or greater, windshear, rotors. JAWS - the Juneau Area Wind System - throws you the alerts."
+ },
+ {
+  "i": 17,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] And up Anchorage way, eff oh em 19.5.1, Turnagain Arm turbulence - do not descend below fourteen thousand until you're over or abeam the airport. Stays you above the rotor."
+ },
+ {
+  "i": 18,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Fourteen thousand over Turnagain, seventy-two mile-an-hour Taku gusts. Alaska is just flexing at this point."
+ },
+ {
+  "i": 19,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[excited] Okay - my water now. The Pacific. eff oh em Chapter 20, and this is home. The no pack, the North Pacific route system. eff oh em 20.3.1: on certain routes between flight level three-four-zero and four-zero-zero, lateral route separation is twenty-three nautical miles, and to play in there you must be RCP240, RSP180, and RNP4."
+ },
+ {
+  "i": 20,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[nerdy] Twenty-three miles of lateral spacing. That is tight. And below flight level three-three-zero, or above four-one-zero, it opens up to fifty miles and you only need RNP10."
+ },
+ {
+  "i": 21,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Rajah dat. And the good news, same 20.3.1 - the seven-eight-seven is RCP240, RSP180, and RNP4 capable, unless an em ee el knocks you down a notch."
+ },
+ {
+  "i": 22,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] So the airplane's qualified. It's the paperwork that'll get you."
+ },
+ {
+  "i": 23,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[excited] Now let me tell you about a track crossing, because this is where the Pacific gets spicy. Fictional, but the numbers are real. Honolulu to Tokyo Haneda, HNL to HND, westbound in the seven-eight-seven, heavy with fuel. eff oh em 20.3.4, the pay cots - Pacific Organized Track System - runs between Japan and North America and Hawaii, built daily off the jet stream. San Francisco Radio hands me a pay cots track riding a gorgeous tailwind toward Japan, and that track ends on a no pack route - R220, east of NANAC, feeding me into the arrival. My first officer, brand new, goes, \"we're RNP10, we're golden.\""
+ },
+ {
+  "i": 24,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Are you golden?"
+ },
+ {
+  "i": 25,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] For the pay cots track, sure - on a pay cots track you must be RNP10 or RNP4 approved, that's the rule. But the second we join that no pack segment, we owe them the no pack numbers - RNP4, RCP240, RSP180. We checked the box, confirmed the airplane, slid onto R220 like butter. Tracks are at least fifty miles apart out there, but you still fly like the airplane next to you is exactly where he says he is."
+ },
+ {
+  "i": 26,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Because he is. That's the whole religion of oceanic. Everyone is precisely where they claim to be. Deeply unsettling if you think about it."
+ },
+ {
+  "i": 27,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] So don't think about it. Now - my favorite trap, and it's a Hawaii one. Altimetry. Tell me about a time... Chester, you had this one on a check ride, yeah?"
+ },
+ {
+  "i": 28,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[surprised] Oh, I walked right into it. Inbound to Honolulu, descending through the Oakland Oceanic FIR, and my check airman goes, \"at exactly what altitude is your altimeter already on two-nine-nine-two?\" And I said, cool as anything, \"eighteen thousand, standard transition, easy.\" Wrong."
+ },
+ {
+  "i": 29,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Wrong."
+ },
+ {
+  "i": 30,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] eff oh em 20.7.1. Within the Hawaiian Islands domestic area, yes - flight level one-eight-zero and above you set standard, two-nine-nine-two, cue en ee; below eighteen thousand, current, cue en aitch. But within all areas of the Oakland FIR, at or above five thousand five hundred feet, you set standard two-nine-nine-two."
+ },
+ {
+  "i": 31,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Fifty-five hundred. Not eighteen thousand."
+ },
+ {
+  "i": 32,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] Fifty-five hundred in the Oakland oceanic FIR. Write it on your hand. My check airman just looked at me and said -"
+ },
+ {
+  "i": 33,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Let me guess."
+ },
+ {
+  "i": 34,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[deadpan] \"Fly the airplane you're strapped to.\" She wants twenty-nine ninety-two at five-five-hundred coming into Hawaii. Give it to her."
+ },
+ {
+  "i": 35,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[laughs] Word for word."
+ },
+ {
+  "i": 36,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[excited] Two more Pacific ones, then I hand off. eff oh em 20.2.2 - cruise Mach gets reported at FIR entry, and any change of Mach zero-point-zero-two or greater from what you last reported has to go to air-ink. And lost comms in oceanic, eff oh em 20.4.4 - first memory aid of the day, everybody grab a pen."
+ },
+ {
+  "i": 37,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] Go on."
+ },
+ {
+  "i": 38,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] \"Seventy-seven hundred for one, seventy-six hundred for fifteen.\" Set transponder seven-seven-zero-zero for one minute, then switch to seven-six-zero-zero and stay there for fifteen minutes or the rest of the flight. Squawk 7700 for one, 7600 for fifteen."
+ },
+ {
+  "i": 39,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Seventy-seven for one, seventy-six for fifteen. Clean. Why the 7700 blip first?"
+ },
+ {
+  "i": 40,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[serious] Because replying on 7700 first bumps up the odds somebody catches your radio failure early. And in the clouds, you hold last assigned speed and flight level for twenty minutes after you miss a compulsory reporting point, then back to the filed flight plan."
+ },
+ {
+  "i": 41,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Now before we leave my ocean, do the South Pacific, because that's where I actually live. HNL to Auckland - HNL to AKL - in the seven-eight-seven. Fictional, numbers real. Down there, eff oh em 20.5, the jet stream stays active year-round and intensifies in the Southern Hemisphere winter, so I'm not surprised by chop the way a mainland kid would be. Pure open-ocean crossing. Two things I never skip: I report my cruise Mach at FIR entry per 20.2.2, and I fly slop the whole way."
+ },
+ {
+  "i": 42,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[nerdy] Define slop for the new folks."
+ },
+ {
+  "i": 43,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Strategic Lateral Offset. eff oh em 22.1.5 wrote it for the Atlantic but the oceanic procedure travels - see 5.7.4.7. You fly it as standard operating procedure for every oceanic crossing, entry point to exit point. Nudge yourself off the centerline a hair so that when everyone's \"exactly where they say,\" a small position error doesn't put two heavies in the same cubic foot of sky."
+ },
+ {
+  "i": 44,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And on a run like HNL-AKL or HNL-Papeete, HNL-PPT, or HNL-Sydney - that's a lot of water and not a lot of radar. slop is your friend."
+ },
+ {
+  "i": 45,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[deadpan] slop and a good book. The autopilot's flying anyway. Otto's got it."
+ },
+ {
+  "i": 46,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Otto flies the autopilot. Of course he does. Otto - Caribbean, take it away."
+ },
+ {
+  "i": 47,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Right. eff oh em Chapter 21, and I'll take it. Mexico, Central America, the islands, up to the north coast of South America, Bermuda. Speed first, eff oh em 21.3.3.2 - Mexico, max two-fifty knots at or below ten thousand in National airspace, and max two hundred within ten miles of any airport below three thousand feet ay gee el."
+ },
+ {
+  "i": 48,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[nerdy] And Central America runs its own transition numbers. eff oh em 21.3.4.2 - transition level is flight level two-zero-zero, transition altitude is nineteen thousand feet, unless charted otherwise."
+ },
+ {
+  "i": 49,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Flight level two hundred over, nineteen thousand under. And they don't do \"climb via\" or \"descend via\" in Central America - that's 21.3.4.3 - so don't sit there waiting for words that aren't coming."
+ },
+ {
+  "i": 50,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Otto, do the visual approach one. It's so specific."
+ },
+ {
+  "i": 51,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[laughs] Right. eff oh em 21.3.3.5 - Mexico prohibits visual approaches outside of ten nautical miles. Ask for one further out and you'll just be told to \"continue.\" And they don't respond to American slang, so you say the actual words - \"visual descent\" or \"visual approach\" - and those are two different things."
+ },
+ {
+  "i": 52,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[dry] Surely they'll figure out what you mean."
+ },
+ {
+  "i": 53,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[deadpan] They won't. And don't call me Shirley."
+ },
+ {
+  "i": 54,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] There it is. He held that one the whole episode. Chester - Atlantic. Chapter 22. This is the big one."
+ },
+ {
+  "i": 55,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] This is the big one. Define the sandbox first. eff oh em 22.1.1 - the North Atlantic High Level Airspace, the nat aitch el ay, is the volume between flight levels two-eight-five and four-two-zero inclusive, inside six oceanic control areas: Bodo, Gander, New York Oceanic East, Reykjavik, Santa Maria, and Shanwick."
+ },
+ {
+  "i": 56,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Two-eighty-five to four-twenty. Note that's wider than the are vee ess em band, which is two-ninety to four-ten. Don't confuse the two."
+ },
+ {
+  "i": 57,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Good catch. Now the seven-eight-seven dispatch nugget, eff oh em 22.1.10 - the seven-eight-seven can be dispatched with a single eye are you as long as at least one gee pee ess is operational. And after departure you only need a single aitch eff radio plus sat com data link. Baseline, though, is dual eye are ess, dual long-range nav, dual NDs, one gee pee ess, ay dee ess see, see pee dee el see, sat com data link, and two aitch eff radios or one aitch eff plus SATVOICE."
+ },
+ {
+  "i": 58,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Chester, tell me about a time you actually copied an oceanic clearance. The real thing, not the textbook."
+ },
+ {
+  "i": 59,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Oh, I love this. Fictional, numbers real. And it's a real seven-eight-seven route for us - the North Atlantic training crossing, westbound, Europe back toward Seattle. Here's the thing, eff oh em 22.7.1 and 22.7.4: except for Shanwick, oceanic clearances aren't issued in the nat anymore. New York East doesn't even want an RCL. Everyone else, the RCL is basically a heads-up. But westbound I'm about to enter Shanwick's oceanic area - so Shanwick still clears me for real. I send the RCL, I'm sitting there with my pen, and Shanwick comes back fast: \"cleared to destination, via ERAKA, flight level three-five-zero, Mach decimal eight-four, at sixty-one north contact Iceland Radio, at NADMA contact the next center, primary and secondary aitch eff to follow.\""
+ },
+ {
+  "i": 60,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And you wrote all of that down while flying the airplane."
+ },
+ {
+  "i": 61,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[laughs] Every word. And here's the gotcha I nearly ate - I had my hand on the altitude window, ready to climb the second I sent the RCL. My check airman put one finger on the glareshield: \"the RCL is a request, not a clearance. You fly your domestic clearance until they actually re-clear you before the oceanic entry point.\" I did not climb."
+ },
+ {
+  "i": 62,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[deadpan] Fly the airplane you're strapped to."
+ },
+ {
+  "i": 63,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] Fly the clearance you're actually holding. Same church. Now the Organized Track System, because that's where memory aid number two lives."
+ },
+ {
+  "i": 64,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] eff oh em 22.3.1 - the oh tee ess, published twice a day. Eastbound tracks, mostly at night, built by Gander. Westbound tracks, daytime, built by Shanwick. And the lettering: westbound from \"A,\" the most northerly, going down; eastbound from \"Z,\" the most southerly, going up."
+ },
+ {
+  "i": 65,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] So the memory aid, everybody: \"A is up north, Z is down south.\" Alpha high, Zulu low."
+ },
+ {
+  "i": 66,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And for who builds what - \"Gander goes east in the dark, Shanwick sends you west in the daylight.\" Both roughly match their letters. Close enough at three in the morning over the water."
+ },
+ {
+  "i": 67,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[laughs] I'll allow it. Validity at thirty west, still 22.3.1 - westbound eleven-thirty to nineteen hundred you tee see, eastbound zero-one-hundred to zero-eight-hundred you tee see."
+ },
+ {
+  "i": 68,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] And you squawk two thousand in nat airspace unless ay tee see says otherwise - 22.1.9."
+ },
+ {
+  "i": 69,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[nerdy] Then the RCL timing table, eff oh em 22.7.4. Chant it with me. Gander: sixty to ninety minutes before the oceanic entry point. Shanwick: thirty to ninety. Santa Maria: at least forty. Bodo: at least twenty."
+ },
+ {
+  "i": 70,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[excited] Sixty-ninety Gander, thirty-ninety Shanwick, forty Santa Maria, twenty Bodo."
+ },
+ {
+  "i": 71,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Now a nat contingency the training deck hammers - engine failure or drift-down in the tracks. You minimize your descent rate until you're some distance off the track, then expedite down to a feasible level. And unless the situation forces it, you keep flying parallel to the tracks until you're below the lowest usable oh tee ess flight level before you turn for your diversion."
+ },
+ {
+  "i": 72,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[nerdy] Why parallel first?"
+ },
+ {
+  "i": 73,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] Because the pee bee see ess tracks are only thirty miles apart laterally. Turn early and you drive straight through your neighbor's track at his altitude. Crews forget that one under task saturation. Parallel, get below the deck of the track system, then turn. That's straight off the nat aitch el ay training material, referencing eff oh em 5.7.4."
+ },
+ {
+  "i": 74,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And that ties to a weather one, which is my open-ocean story. Chester, hand me the deviation."
+ },
+ {
+  "i": 75,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] All yours, Pua."
+ },
+ {
+  "i": 76,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Okay. Transpacific, night, mid-ocean - think a Hawaii-Tokyo run out over nothing but black water. eff oh em 20.5.1 for the Pacific side, but the logic travels. A cell paints on the nose and I cannot raise ay tee see fast enough. Rule one: do NOT drag the eff em see route around. You use the eff em see lateral offset feature, pick an offset that clears the weather, and request that deviation - the clearance usually comes back \"up to\" what you asked for. And when you key the mic, you say the magic words: \"WEATHER DEVIATION REQUIRED.\" That's priority."
+ },
+ {
+  "i": 77,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] But you couldn't raise anyone. So?"
+ },
+ {
+  "i": 78,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] So I broadcast on 121-decimal-5 and 123-decimal-45 so my neighbors know I'm moving, and I fly the deviation logic straight off the training card. Less than five miles off track, I stay at altitude. But I needed more than five - so I change altitude three hundred feet, and here's the second memory aid: SAND. South Ascend, North Descend. I was deviating south, so I climbed three hundred. Cleared the cell, came back within five miles, dropped back to my assigned altitude, and told ay tee see the moment I was back on the centerline."
+ },
+ {
+  "i": 79,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[surprised] SAND. South Ascend, North Descend, three hundred feet."
+ },
+ {
+  "i": 80,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] SAND. And it rides right on top of slop, which, eff oh em 22.1.5, you fly as standard operating procedure for every oceanic crossing, entry point to exit point. Just not inside the transition areas - NOTA, SOTA, BOTA, GOTA. And if your chop is coming off another airplane's wake, the training deck says nudge your slop offset."
+ },
+ {
+  "i": 81,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] I feel the need... the need for a quarter-mile of offset. Wingman optional."
+ },
+ {
+  "i": 82,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Wingman optional. Chester - two more Atlantic. Terrain and magnetics."
+ },
+ {
+  "i": 83,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] eff oh em 22.2.3 - and note the number, because Rev 125 renumbered this whole area. 22.2.1 is now Transition Areas, 22.2.2 is now the Oceanic Entry Point, and the Northern Area of Magnetic Unreliability, the AMU, moved to 22.2.3. The AMU is everything within a thousand nautical miles of the Northern Magnetic Pole, and it takes in the Canadian Northern Domestic Airspace. Up there you navigate in true, not magnetic. Runways, tracks, winds, NAVAIDs - all true north. And if ay tee see hands you a heading in the AMU, you confirm - magnetic or true?"
+ },
+ {
+  "i": 84,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And practically, per the training deck and F-com SP.10.1, the Heading Reference switch goes NORM to TRUE, and you re-select HDG SEL after you flip it. Little things that bite you at three in the morning."
+ },
+ {
+  "i": 85,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] And the Greenland decompression, eff oh em 22.6 - the seven-eight-seven descends at vee em oh/em em oh to fifteen thousand feet, holds fifteen thousand until clear of terrain. And operations are flat-out prohibited in the red \"No Ops Area.\""
+ },
+ {
+  "i": 86,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] Now line up those seven-eight-seven floors, because this is a gorgeous trap. Rockies - eighteen thousand. Alps, coming up in Europe - eighteen thousand. Greenland - fifteen thousand."
+ },
+ {
+  "i": 87,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Mnemonic, everybody: \"Green means go lower.\" Greenland is the low one - fifteen. The two big ranges, Rockies and Alps, are eighteen. And why do we memorize the seven-eight-seven's own numbers?"
+ },
+ {
+  "i": 88,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[deadpan] Fly the airplane you're strapped to."
+ },
+ {
+  "i": 89,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[deadpan] He's learning. Fly the airplane you're strapped to."
+ },
+ {
+  "i": 90,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] There it is, in stereo. Chester - Europe. Chapter 23."
+ },
+ {
+  "i": 91,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] Chapter 23. Two flagship items. Voice first, eff oh em 23.13 - Europe uses eight-point-three-three kilohertz channel spacing across most of its airspace. Three times as many channels as the American twenty-five. You read the frequency back with all three decimals, exactly."
+ },
+ {
+  "i": 92,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Eight point three three. They'll ask \"confirm eight point three three,\" and you'd better be able to say \"affirm.\""
+ },
+ {
+  "i": 93,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[nerdy] Second, navigation - eff oh em 23.16.1 - ar nav 5, the old B-ar nav. Lateral accuracy plus or minus five nautical miles for at least ninety-five percent of the flight time. Enroute standard across ECAC airspace, and the seven-eight-seven is compliant unless something's degraded."
+ },
+ {
+  "i": 94,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And Chester, you have to do Heathrow. You love Heathrow."
+ },
+ {
+  "i": 95,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] I love Heathrow. And the numbers moved in Rev 125 - chapter 23.18 is now titled United Kingdom, with Heathrow sitting underneath it as 23.18.1. So: curfew, 23.18.1.2 - no arrivals or departures between twenty-three hundred and zero-six-hundred local. And the holding stacks, 23.18.1.5 - Bovingdon, Lambourne, Ockham, Biggin. Inside the Heathrow control area, max holding speed up to and including flight level one-four-zero is two hundred twenty knots."
+ },
+ {
+  "i": 96,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Two-twenty in the stack at Heathrow. And per 23.18.1.9 they say \"report established\" instead of \"cleared for approach,\" and per 23.18.1.6 they want a continuous descent - do not level off, or the airline eats a fine. Rev 125 also added 23.18.1.13 - jumpseaters are not authorized into or out of Heathrow unless operationally required. And there is a brand new chapter, 23.19, Italy, with Rome underneath it. Different words, same airplane."
+ },
+ {
+  "i": 97,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[laughs] Big deal. I've stacked over Ockham. I've got coffee. I can wait all day."
+ },
+ {
+  "i": 98,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[deadpan] You've had enough coffee to hold at Ockham without an airplane."
+ },
+ {
+  "i": 99,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Otto - bring us home. Asia."
+ },
+ {
+  "i": 100,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Chapter 24. Asia, specifically the Republic of Korea, run by KOCA - the Korea Office of Civil Aviation. eff oh em 24.2 - you avoid overflying the Demilitarized Zone, and there's a buffer that extends five nautical miles south of the DMZ. Stay out of it."
+ },
+ {
+  "i": 101,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[serious] Five miles south. That's not a suggestion."
+ },
+ {
+  "i": 102,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] It is not. And weather, eff oh em 24.2.1 - strong jet stream, watch for clear air turbulence along the west coast of Korea from flight level three-zero-zero to four-zero-zero. Winter brings haze and fog when it's calm; summer brings thunderstorms and typhoons."
+ },
+ {
+  "i": 103,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[nerdy] Three hundred to four hundred, CAT, west coast of Korea. Noted. And for us that's a real seven-eight-seven leg - Honolulu to Seoul, HNL to Incheon, comes down that same coast."
+ },
+ {
+  "i": 104,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] It does. And that, as they say, is the whole planet. Somebody set the autopilot. Otto's got it."
+ },
+ {
+  "i": 105,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Otto flies the autopilot. Every time. Recap, quick and clean. Chester, North America."
+ },
+ {
+  "i": 106,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Twenty-two centers in the US, eff oh em 19.2. The seven-eight-seven Rockies decompression floor is eighteen thousand, eff oh em 19.3.1.1. Two hundred knots below three thousand above field level within ten miles in Canada, 19.3.1.2."
+ },
+ {
+  "i": 107,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Pacific - no pack twenty-three-mile lateral, RCP240, RSP180, RNP4, eff oh em 20.3.1. pay cots to no pack picks up those same numbers, eff oh em 20.3.4. Oakland FIR altimeter goes standard at five thousand five hundred, eff oh em 20.7.1. And \"seventy-seven hundred for one, seventy-six hundred for fifteen,\" eff oh em 20.4.4."
+ },
+ {
+  "i": 108,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Caribbean - Mexico two-fifty below ten thousand, two hundred within ten miles low, eff oh em 21.3.3.2. Central America transition level two hundred, altitude nineteen thousand, eff oh em 21.3.4.2. No visuals outside ten miles in Mexico, 21.3.3.5."
+ },
+ {
+  "i": 109,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Atlantic - nat aitch el ay two-eighty-five to four-twenty, eff oh em 22.1.1. \"A up north, Z down south\" for the oh tee ess, eff oh em 22.3.1. RCL timing sixty-ninety Gander, thirty-ninety Shanwick, forty Santa Maria, twenty Bodo, eff oh em 22.7.4. And \"green means go lower\" - Greenland seven-eight-seven to fifteen thousand, eff oh em 22.6."
+ },
+ {
+  "i": 110,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Weather and offsets - SAND, South Ascend North Descend three hundred feet, and fly slop every oceanic crossing, eff oh em 20.5.1 and 22.1.5 with the nat training logic. Europe - eight-point-three-three kilohertz, eff oh em 23.13. ar nav 5, plus or minus five miles ninety-five percent of the time, eff oh em 23.16.1. Heathrow holding two-twenty up to flight level one-four-zero, eff oh em 23.18.1.5 in Rev 125."
+ },
+ {
+  "i": 111,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And Asia - DMZ buffer five miles south, eff oh em 24.2, Korean west-coast CAT three hundred to four hundred, 24.2.1. And in the nat training material: lose RNP4, you can still enter under RNP10 - unlimited with gee pee ess updating, eighteen hours on inertial. Lose comms after the oceanic entry, you hold route, level, and speed to the exit point."
+ },
+ {
+  "i": 112,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] That's the world in one episode. And remember - those decompression floors are fleet-specific. So fly the seven-eight-seven's numbers. Nobody else's."
+ },
+ {
+  "i": 113,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] Study hard. I feel the need - the need to review the RCL table one more time."
+ },
+ {
+  "i": 114,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[deadpan] I just want to tell you both good luck. We're all counting on you. And fly the airplane you're strapped to."
+ },
+ {
+  "i": 115,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Mahalo, everybody. Fly safe, and we'll catch you next episode."
+ }
+]

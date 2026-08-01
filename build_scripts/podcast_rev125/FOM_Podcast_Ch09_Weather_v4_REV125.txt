@@ -1,0 +1,184 @@
+787 FLIGHT DECK NOTES — FOM SERIES
+Chapter 9: Weather
+
+Pualani: [warm] Aloha, aloha, and welcome back to 787 Flight Deck Notes. I'm Pualani — that's poo-ah-LAH-nee — and if this is your first ride with us, come sit by me, we go take care of you. Today we go deep on Flight Operations Manual Chapter 9, Weather. Grab one coffee, buckle up, yeah? This whole chapter, brah, it's numbers on numbers on numbers.
+
+Chester: [excited] And I'm Chester, coming to you live from Seattle, where it is — you'll never guess — raining sideways into my coffee. Which makes me exactly the right man for a chapter that opens on wet and contaminated runways. Pualani, this is my Super Bowl. I stretched for this one.
+
+Otto: [dry] And I'm Otto. It's raining where Chester is. It is always raining where Chester is. Chur, everyone. Let's get moving before he tells us again that the 787 is the finest flying machine ever bolted together by human hands.
+
+Chester: [laughs] It objectively is, Otto. Composite barrel fuselage, bleedless architecture, the whole —
+
+Otto: [dry] And there it is. Fourteen seconds. That's a new record. I'm starting a clock this episode, folks. Every time Chester professes his love for the airplane, I mark the time. Fourteen seconds cold open.
+
+Pualani: [laughs] Okay, okay, rein 'em in. Here's our hook — three questions we going answer. One: when is a runway "wet" versus "contaminated," and why does one little eighth of an inch flip your whole takeoff? Two: how far you stay away from a thunderstorm, and how you don't go fly through severe turbulence like some malihini fresh off the boat? And three — the big one — when does the FOM just flat-out tell you, no, not today. Stick around, we get stories from Anchorage, Honolulu, and Seattle.
+
+Chester: [serious] Let's build it from the ground up. FOM nine-one-one-one, Runway Conditions. A runway is Dry when no more than 25 percent of the area being used is visibly damp or covered by frost, ice, compact snow, water, or slush. Now — and this matters — our 787 is Hawaiian-operated, so we fly the Hawaiian definitions, and they run stricter. Same section: a Hawaiian Wet runway is more than 25 percent of the area visibly damp, or covered by no more than one-eighth inch — that's three millimeters — of liquid water. Liquid water only. Not slush, not snow — water.
+
+Otto: [dry] Mark that difference. On the Hawaiian jet, "wet" means liquid water and nothing else. The moment you've got slush, dry snow, or wet snow out there — any depth at all — you are not wet, you are contaminated. Same section, Hawaiian Contaminated: frost, ice, compact snow, or more than one-eighth inch of liquid water, or any depth of slush, dry snow, or wet snow. Sweet as. Alaska mainline gets to play the one-eighth-inch game with loose snow and slush; on our airplane, frozen and slushy stuff skips the line and goes straight to contaminated.
+
+Pualani: [warm] And that's memory aid number one, Hawaiian-style — write 'em down. "An eighth is the fence — but only for water." Up to one-eighth inch of liquid water, three millimeters, you stay wet; over that, you're contaminated. But slush or snow? No fence at all — any depth and you contaminated. And frost, ice, or compact snow — contaminated, full stop. Water gets the fence; everything frozen or slushy jumps right over it. Say it with me next time you brief.
+
+Chester: [excited] Love it. And temperature tells dry snow from wet snow — section nine-one-one-two. Absent a descriptor, snow is dry at minus three Celsius or colder, and wet at minus two Celsius or warmer. Dry snow you blow off, it won't pack a snowball. Wet snow packs a solid ball, but water won't squeeze out of it.
+
+Otto: [dry] Minus three, dry. Minus two, wet. One degree between a snowball and a puff of powder. Physics is petty, and I respect it.
+
+Pualani: [laughs] Petty but precise. Now my favorite little trap — the Slippery When Wet NOTAM, nine-one-one-four. It's a continuous alert that says the moment this runway gets wet, it immediately degrades to three-three-three instead of five-five-five.
+
+Chester: [serious] Rubber deposits, usually, down in the touchdown zone. And here's the sneaky part — it stays visible even when the runway's bone dry. So don't let it spook you into thinking you're contaminated right now. It only bites when the runway is actually wet.
+
+Otto: [dry] Three-three-three, not five-five-five. It's the runway quietly telling you it's got trust issues. Believe it.
+
+Pualani: [warm] Braking action reports now — nine-one-two. A PIREP is a pilot's qualitative read: good, medium, poor, nil. Two hard rules, tattoo 'em on your brain. Airport personnel cannot issue braking action reports. And a PIREP must never be used to upgrade expected braking action — only downgrade.
+
+Chester: [excited] Only ever downgrade. So if somebody landed ahead of you and keyed up, "yeah, way better than the FICON" — too bad, you can't take the freebie. Downgrade only. And if the ATIS says "Braking Action Advisories in Effect," section nine-one-two-one, that's telling you braking action is medium or worse.
+
+Otto: [dry] Good news travels, but it never gets a vote on your performance page. Only bad news gets to speak. Democracy, she is dead.
+
+Pualani: [laughs] Ho, Otto going dark early today. And the Runway Condition Code — nine-one-six-one — runs zero for nil up to six for dry. And remember from nine-two-one: if the RWYCC is zero on any portion of the runway, or braking action is nil, you not going. Pau. Full stop.
+
+Chester: [serious] Okay — data selection, because this is exactly where crews trip on a line check. Section nine-one-eight. On a contaminated runway, reduced thrust using assumed temperature — labeled A-T or FLEX — is not authorized. You do not FLEX on a contaminated runway. Not ever. And here's the why: your data depends on contaminant type. Hard-packed stuff, ice or compact snow, that's an accelerate-and-stop concern. Loose stuff — slush, snow, water — that also adds drag when you're continuing the takeoff after an engine failure.
+
+Otto: [dry] No FLEXing on the ice. Which, spiritually, is also excellent life advice.
+
+Pualani: [warm] Chester, this is your yard. Tell 'em about Anchorage.
+
+Chester: [excited] Oh, you want the cold one. Tell me about a time. Picture it — I'm the check airman, right seat, line check into Anchorage, Papa-Alpha-November-Charlie, dead of a January morning. Chugach mountains all around us, minus temps well below standard, FICON on the runway reads three-three-three, packed snow the whole length. Sharp young FO, smooth as butter, sets up the takeoff and reaches for an assumed-temp FLEX because the numbers looked easy. Hand's already drifting toward the panel.
+
+Otto: [dry] Cue the ominous Alaskan wind.
+
+Chester: [excited] And I just said, real quiet, "What's under the wheels?" And you watched it land on his face — contaminated runway, nine-one-eight, no FLEX. He pulled his hand back, ran rated thrust, pulled the contaminated data for packed snow. Textbook save. Told me later that one question rewired how he briefs every takeoff. That's the whole game — it's not knowing it on the ground, it's catching it with your hand already moving.
+
+Pualani: [warm] Chee-hoo. And that's what IOE is for, yeah — building the reflex so the rule fires before the hand does.
+
+Otto: [dry] "The hand was already moving." Cracking title for your memoir, Chester. Volume one of forty.
+
+Pualani: [laughs] Okay, this is your danger-zone moment, Chester.
+
+Chester: [excited] It truly is — cue Kenny Loggins, highway to the danger zone. But seriously, folks — landing precipitation, nine-one-nine. On a smooth runway you must treat two categories of rain as contaminated with standing water and plan a RWYCC of two: moderate rain — that's plain R-A — and heavy rain — that's plus R-A. You may only fall back to RWYCC five with light rain, minus R-A, or on a skid-resistant runway in moderate rain.
+
+Otto: [dry] Smooth runway, real rain — RWYCC two. Not four. Not "eh, she'll be right." Two.
+
+Pualani: [warm] And the numbers that keep you honest on landing — nine-one-twelve. Latest Touchdown Point: take your landing distance, subtract it from the LDA, add a thousand feet for air-run. Brief that LTP when LDA is less than seven thousand feet, or braking action is less than good.
+
+Chester: [serious] And still under seven thousand — nine-one-twelve-three — do not use WET data for LDA less than seven thousand feet. And nine-one-twelve-two, that same short-field, less-than-good braking situation, you use the maximum selectable autobrake setting if it's available.
+
+Otto: [dry] Seven thousand feet is the magic gate. Under it — no wet data, max autobrakes, brief your latest touchdown point. Above it, you get to relax. Slightly. Marginally. Don't get comfortable.
+
+Pualani: [excited] Which brings us to memory aid number two, straight out of the FOM — nine-one-thirteen — "Can U StoP." C-U-S-P. C for Calculate: run all conditions through the landing tool, get your limiting condition. U for Understand: know your data, your assumptions, your runway report. S for Stabilize: on speed, on glideslope, plan to touch down by a thousand feet, in the touchdown zone no sooner than 500 feet, no later than the LTP — and if not, go around. And P for Professional.
+
+Chester: [warm] And the FOM actually says it, word for word — a slippery runway is not the time to try to grease one on. A professional puts safety ahead of style.
+
+Otto: [dry] Don't try to grease it on the ice to impress the jumpseat rider, Maverick. Nobody's pinning a medal on you. You'll just be the fella explaining a runway excursion to a very calm man with a clipboard.
+
+Pualani: [laughs] Surely you can't be serious about all these numbers, Otto.
+
+Otto: [dry] I am serious. And don't call me Shirley.
+
+Chester: [laughs] Every episode. Every single episode, and it still lands.
+
+Pualani: [warm] Chester — before we leave the wet stuff, you've got the Seattle story. The grooved-runway one.
+
+Chester: [excited] I do. Tell me about a time — and this one's home turf, Seattle-Tacoma, Kilo-Sierra-Echo-Alpha. Autumn atmospheric river, raining like the sky owed somebody money. We're inbound, and the FO calls the runway "wet, no big deal." And I said, hold on — pull up the Jepp, check the Additional Runway Information. Is it skid-resistant — grooved or PFC — or do we treat it Smooth? Because nine-one-nine says a Smooth runway in that heavy rain, plus R-A, is RWYCC two with standing water. A skid-resistant runway in moderate rain, we could hold RWYCC five.
+
+Otto: [dry] Big swing between a five and a two. That's the difference between a normal rollout and a "why is the far end getting closer so fast" rollout.
+
+Chester: [excited] Exactly. And the kicker — LDA on our runway that night was well over seven thousand, so we had room. But I made him say the whole logic out loud anyway: contaminant, RWYCC, wet-versus-contaminated data, no FLEX concerns because we're landing. Ran the numbers, RCAM in the PRC, briefed the limiting condition. Greased nothing. Planted it in the zone like nine-one-thirteen says.
+
+Pualani: [warm] Land like a professional. That's the P, every time.
+
+Otto: [dry] Twelve seconds, by the way. Chester said "the airplane just handled it beautifully" under his breath while I was talking. I heard it. The clock heard it.
+
+Chester: [laughs] I regret nothing.
+
+Pualani: [warm] Okay — the prohibited list, nine-two-one. This is the "you're not going" section and it's pure memory work, so lean in. Takeoffs and landings are prohibited when steady-state wind velocity is greater than 50 knots.
+
+Chester: [serious] Contaminated runway prep that leaves you a prepared width less than — for our jet, the 787 — 45 meters, which is 148 feet. That's the number. If they've plowed a lane, it's gotta be at least 45 meters wide or you don't go. Also prohibited: takeoffs, approaches, and landings when thunderstorms are reported at or near the airport, unless the runway and the whole flight path — including the missed approach — are clear.
+
+Otto: [dry] Forty-five meters, one-forty-eight feet, 787. Plow you a lane skinnier than that and you're a spectator. Bring snacks.
+
+Pualani: [warm] Takeoffs specifically are prohibited — same section — when contaminant depth is greater than one-half inch for wet snow, slush, or water, or greater than four inches for dry snow. And when steady-state tailwind exceeds 10 knots on a contaminated runway.
+
+Chester: [excited] Half an inch of the wet stuff, four inches of the dry fluffy stuff. And landings get prohibited when LDA is under seven thousand feet with braking less than good and the tailwind's greater than 5 knots, or you've got any inoperative thrust reverser, or the antiskid's out.
+
+Otto: [dry] Ten knots of tailwind for takeoff, five for landing, on a contaminated runway. The runway's junk and the wind's shoving you along — the FOM says quit while you're ahead.
+
+Pualani: [warm] Heavy snow, nine-two-two — here's memory aid number three, I call it "five in five." In heavy snow you anti-ice with undiluted Type Four fluid and complete a successful Contamination Check within five minutes of takeoff. Type Four preferred, Type Two if you must. Five in five — Type Four fluid, five-minute check.
+
+Otto: [dry] Pualani made a mnemonic and it actually rhymes. Frame it.
+
+Pualani: [laughs] I contain multitudes, Otto. High barometric pressure, nine-two-three — when pressure exceeds 31.00 inches of mercury, you set 31.00 for enroute below 18,000 feet MSL, and hold it until the final approach segment or beyond the affected area. On departure or missed approach, set 31.00 before any mandatory crossing altitude or 1500 feet AGL, whichever is lower.
+
+Chester: [serious] And if the airport can't even measure pressure above 31.00, they report it as "in excess of 31.00 inches of Hg," and operations there are limited to VFR conditions. High pressure, low drama — as long as you set the window.
+
+Pualani: [warm] Cold weather, nine-three. Fuel freeze, nine-three-two-three — fuel temp drifts toward total air temp at roughly three degrees C per hour, up to 12 in extreme conditions. To warm it back up, a 4000-foot descent below the tropopause buys you about seven degrees of TAT, and Mach point-oh-one buys about seven-tenths of a degree. In severe cases, descend as low as 25,000 feet.
+
+Otto: [dry] And it takes up to an hour for fuel temp to stabilize after any of that. So don't yo-yo the jet expecting instant warmth. Patience, or the wax crystals win. This matters on the long ones, by the way — the deep South Pacific and Asia legs, hours over cold ocean at altitude. That's where you actually watch that fuel temp.
+
+Chester: [serious] Now cold-temp altimetry, nine-three-three-one. When it's colder than ISA, true altitude is lower than indicated altitude. The jet is actually lower than the altimeter's telling you. And in the US, the approach chart drops a note right in the briefing strip when corrections apply. Pualani — you've got the one that made you a believer.
+
+Pualani: [warm] I do. Tell me about a time. Years back, deadheading in the jumpseat on the approach into Anchorage, Papa-Alpha-November-Charlie — one of those brutal clear winter nights, Chugach all around, temperature way, way below standard, blowing snow, black as the inside of a cow. Old salt in the left seat. And I watched him pull the cold-temp correction off the chart and bump every altitude on the approach. The FO — green, sharp, but green — goes, "Why bother? Altimeter's set, we're legal." And the captain just said, "Because the mountain doesn't read our altimeter."
+
+Otto: [dry] Ooh. Chills. And not just from the minus temperatures.
+
+Pualani: [warm] We crossed the step-down and I swear the terrain out my side felt closer than the numbers said it should be — because it was. True altitude lower than indicated, exactly like nine-three-three-one says. Without that correction we'd have been low over rocks in the dark and never known till it mattered. That night the cold-temp correction wasn't a chart note. It was the whole margin. Never skipped one since.
+
+Chester: [serious] "The mountain doesn't read our altimeter." That goes on the ready-room wall.
+
+Otto: [dry] Right up next to Chester's 787 wedding photos.
+
+Pualani: [excited] Icing intensity, nine-three-two-two. Moderate icing — even short encounters become potentially hazardous, so you use the anti-ice or you divert. Severe — the equipment can't keep up, immediate flight diversion is necessary. Trace and light mostly matter when you're stuck in it over an hour.
+
+Otto: [dry] Moderate: short exposure, big problem. Severe: your gear's losing the fight, leave. Simple as.
+
+Chester: [warm] Turbulence, nine-four-one. This is a bright, bold line — under no circumstances will a flight be operated intentionally through areas of validated severe or extreme turbulence. But here's the nuance people miss: moderate clear air turbulence in the climb or descent? You don't have to reroute around it. It's actually safer to transit those altitudes quickly with the cabin secured. And nine-four-one names the local troublemakers by name — Turnagain Arm at Anchorage, the Taku winds at Juneau, Santa Ana winds at Ontario.
+
+Otto: [dry] Turnagain Arm. Chester's beloved Anchorage has a wind named after a place that's basically saying "turn again, you should not be here." Never fly into validated severe on purpose. That's not skill. That's a maintenance write-up with passengers attached.
+
+Pualani: [warm] Thunderstorms, nine-five-five — here's the big avoidance number. Avoid by at least 20 miles any thunderstorm that's severe or gives an intense radar echo. And when you're on top in the clear, clear the tops by 5000 feet. If you can't clear by 5000, then you avoid the storm laterally by 20 nautical miles.
+
+Chester: [excited] Twenty miles from the nasty ones, 5000 feet over the top. And from nine-five-four, a return beyond 50 miles is a strong echo, and a steep rainfall gradient — green to red in a mile or less — that's your maximum-turbulence marker. Also, don't fly under a cumulonimbus overhang; if you have to, antenna up-tilt to hunt for hail.
+
+Otto: [dry] Green to red in a mile means don't go looking for the door in there. There is no door. There is only regret. And a word from the South Pacific — you cross the equator, the ITCZ throws up cells that'll dwarf anything Chester frets about in Seattle. Same rule, bigger canvas. Twenty miles. You detour, you don't debate.
+
+Pualani: [warm] Windshear, nine-five-six. Do not take off or continue an approach below 1000 feet AGL to a runway where ATC reported a Microburst Alert. And windshear and microburst advisories stay in effect for 20 minutes after they're issued. And this one's mine — the go-around at Kahului.
+
+Chester: [excited] Maui. Let's hear it.
+
+Pualani: [warm] Tell me about a time. Kahului, Oscar-Golf-Golf, hot trade-wind afternoon, showers stacking up over the West Maui mountains and building cells off the pali. We're cleared to land. About nine hundred feet, tower keys up: "Microburst Alert." And the airspeed tape just starts doing this ugly little dance — gaining, then bleeding.
+
+Otto: [dry] The dance you never want the tape to do.
+
+Pualani: [warm] Nine-five-six is crystal — below a thousand AGL with a microburst alert, you do not continue. And we were at nine hundred. So it wasn't even a debate. Called the go-around, firewalled 'em, flew the escape guidance, pitched to the cues, rode it up. Felt the airplane sag once in the shear and then just — climb out of it. Clean. We held for the advisory to expire — that's your 20 minutes — came around, landed on dry numbers into the trades.
+
+Otto: [dry] Go-around at nine hundred feet in a microburst over Maui. That, Pualani, is the one time I'll allow that the 787 is a decent machine.
+
+Chester: [laughs] Write it down. Otto said something nice about the airplane. Date and time.
+
+Pualani: [warm] And here's your bonus memory aid, the "double-two" for severe weather — 20 miles from the storm, 20 minutes on the advisory. Two and two.
+
+Otto: [dry] Two and two. Even I'll remember that one, and I forget my own coffee order.
+
+Pualani: [excited] Volcanic ash, nine-six-one — flights won't operate within 10 nautical miles of a volcano where an eruption is imminent or underway when significant ash emission is likely. And space weather, nine-seven-five — Alaska won't dispatch flights at latitudes above 78 degrees north with solar radiation at S3 or higher. A significant space weather event, per nine-seven-six-one, is Radio Blackout R3, Solar Radiation S3, or Geomagnetic storm G4 or greater.
+
+Chester: [warm] And SIGMETs — big Rev 125 change here. The old section nine-eight-three, SIGMET Message Format, with the issuing criteria and the worked examples, was deleted from the manual entirely. Those turbulence, icing and volcanic ash thresholds are no longer in the FOM. What nine-eight-one says now is that METAR, TAF and SIGMET information is found in the Jeppesen FD Pro application, and METAR codes can be expanded to plain English with a toggle button.
+
+Otto: [dry] Right. Recap. Before Chester proposes to the airplane again and we need a chaplain.
+
+Pualani: [laughs] Recap time. One — an eighth is the fence, but only for water: under one-eighth inch of liquid water it's wet; over that, or any depth of slush, snow, or frozen stuff, it's contaminated — that's the Hawaiian definition, the one our 787 flies. Two — braking PIREPs only downgrade, never upgrade, and airport folks can't issue them at all. Three — no FLEX on a contaminated runway, and under seven thousand feet LDA, no wet data, max autobrakes, brief your LTP. Run "Can U StoP."
+
+Chester: [serious] Four — the prohibited numbers: wind over 50 knots, RWYCC zero or nil anywhere, 787 prepared width under 45 meters, 148 feet. Takeoff's out at half an inch wet or four inches dry, tailwind over 10 on a contaminated runway. Heavy snow — five in five, Type Four, contamination check within five minutes.
+
+Otto: [dry] Five — the weather geometry: 20 miles from severe storms, 5000 feet over the tops. Windshear, a thousand feet AGL on a microburst alert, advisories good for 20 minutes — the double-two. Volcano, 10 miles. Colder than ISA, true altitude is lower than indicated — the mountain doesn't read your altimeter. And never, ever, into validated severe turbulence.
+
+Pualani: [warm] Three stories, three real places — packed snow into Anchorage, an atmospheric river into Seattle, a microburst over Maui. Same book, same numbers, whether you flying the North Pacific or the neighbor islands. Fly it by the numbers, brief it like a professional, and put safety ahead of style. Otto, take us out.
+
+Otto: [dry] I've got the airplane. Roger, roger. What's our vector, Victor. Clearance, Clarence. Final tally on the clock, folks — Chester professed his love for the 787 six times today. Personal best. And remember — the mountain doesn't read your altimeter. Mahalo, everyone.
+
+Chester: [laughs] You can be my wingman anytime, Otto.
+
+Otto: [dry] Negative, Ghost Rider. You can be mine.
+
+Pualani: [warm] A hui hou — until next time. Malama pono, everybody.
+
+SOURCES: Alaska/Hawaiian FOM Chapter 9 Weather (Rev 125, 7/29/26), sections 9.1.1.1, 9.1.1.2, 9.1.1.4, 9.1.2, 9.1.2.1, 9.1.6, 9.1.6.1, 9.1.8, 9.1.9, 9.1.12.1, 9.1.12.2, 9.1.12.3, 9.1.13, 9.2.1, 9.2.2, 9.2.3, 9.3.2.2, 9.3.2.3, 9.3.3.1, 9.4.1, 9.5.4, 9.5.5, 9.5.6, 9.6.1, 9.7.5, 9.7.6.1, 9.8.3.1.

@@ -1,0 +1,214 @@
+787 Flight Deck Notes — FOM Series
+Chapter 8: Dispatch
+
+Pualani: [warm] Howzit, everybody, and welcome back to 787 Flight Deck Notes. I'm Pualani — that's poo-ah-LAH-nee — and today we go deep on the paperwork that lets our widebody leave the gate. Chapter 8. Dispatch. Grab one coffee, grab one malasada, settle in, because this is the chapter that decides whether the Dreamliner pushes or sits.
+
+Chester: [excited] And I have been waiting all week for this one. Chester here, Seattle side, rain coming in sideways off the Sound, coffee in the cup, and a whole chapter of beautiful regulatory precision in front of me. This, my friends, is my Super Bowl.
+
+Otto: [dry] Chur. Otto here. A hundred and forty-six pages about when a plane is allowed to push back. Sweet as. I've cleared my whole afternoon and cancelled nothing, because I had nothing.
+
+Pualani: [laughs] Da man is skeptical already. Otto, I promise you — by the end of this episode you going love alternates. You going dream in ceilings and visibility.
+
+Otto: [dry] I already dream in ceilings and visibility. They're low, and I can't see a thing. Also — quick housekeeping — I'm the deadpan one, I run continuously, and legally I'm the only autopilot on this podcast cleared past three and a half hours. We'll get there. Carry on.
+
+Chester: [serious] Let's set the frame. FOM 8.1.1. Alaska is authorized for Domestic, Flag, and Supplemental operations, and Flight Dispatch releases the jet under Domestic or Flag rules as appropriate. And here's the money line, the one they love on a checkride — a flight is considered dispatched at the Point of Dispatch, which occurs when an OUT time is generated.
+
+Otto: [dry] So not brake release. Not wheels up. The clock the FAA cares about is the OUT time. Good to know before someone asks you on your oral and, as they say, your ego's writing checks your body can't cash.
+
+Pualani: [warm] Nice Top Gun, brah. And while we stay on the flavors of operation — quick one, FOM 8.1.1.4, Exemption 11047. That's the supplemental, non-scheduled corner — a charter to a field not on the regular list. To go without a destination alternate you need two separate usable runways at the ETA, and at least one of 'em with an operational instrument approach procedure. And the Dispatcher types the magic words on the release — FLT RELEASED UNDER EXEMPTION 11047.
+
+Chester: [serious] Same shape as everything in this chapter, notice — real runways, real approaches, and a specific sentence in all caps.
+
+Otto: [dry] Everything in Chapter 8 is a sentence in all caps typed onto a release. This is going to be a theme.
+
+Pualani: [warm] Okay — alternates. Chapter 8 lives and breathes alternates, so let's start with the most famous rule in the whole book. FOM 8.2.3, no alternate for destination. First memory aid of the day, write it on your hand — the one-two-three rule.
+
+Chester: [excited] One-two-three. Within the contiguous 48 or the Hawaiian Islands, if the forecast or reports at your ETA plus or minus one hour show conditions will be at least a 2000-foot ceiling and 3 statute miles visibility — no alternate required.
+
+Pualani: [warm] MEMORY AID number one. One hour, two thousand feet, three miles. One-two-three. Da kine just sticks, yeah?
+
+Otto: [dry] I hate that it works. One. Two. Three. It's like a nursery rhyme designed by lawyers. Tally: Pualani, one. Otto, nil.
+
+Pualani: [excited] Eh, Chester — tell 'em about your IOE. Tell 'em about a time the one-two-three rule actually earned its keep.
+
+Chester: [warm] Oh, this is good. Very first Initial Operating Experience leg on the 787. Right seat, brand new, sweating through my epaulets. LAX up to SEA, and Seattle's doing that thing Seattle does — marine layer sitting on the field like a wet blanket, everybody on frequency sounding nervous. My check airman, sharp lady, zero patience for hand-waving, she slides the release across and says, "SEA's forecast is 2500 and 4 at our ETA window. Do we carry an alternate?"
+
+Otto: [dry] And you, sweating, said?
+
+Chester: [serious] I said — no alternate required. Contiguous 48, ETA plus or minus an hour, 2500 ceiling beats 2000, 4 miles beats 3. One-two-three, we're clean. She just nodded. That nod paid for four years of ground school.
+
+Pualani: [laughs] Chee, look at you. Now — Alaska stay fussy about Alaska. For a State of Alaska destination, the plain weather numbers are not enough. FOM 8.2.3 says the airport also needs more than one operational runway — two separate and distinct surfaces, four runway ends, hard-surface with the appropriate weight-bearing capability, minimum of 100 feet wide, and at least 5500 feet of usable length.
+
+Otto: [dry] So a hundred feet wide, fifty-five hundred long, and it must be two actual runways — not one runway you're counting twice because you're feeling optimistic. Even our beautiful widebody needs somewhere real to put the wheels.
+
+Chester: [serious] And the Flag no-alternate case, still 8.2.3, references 14 CFR 121.621. Straight-in approach available? You need a ceiling at least 1500 feet above the lowest published instrument approach minimum, or 2000 feet above airport elevation, whichever is higher.
+
+Pualani: [warm] And if it's a circling approach, 1500 feet above the lowest circling MDA. Plus three miles visibility, or two miles more than the applicable minimum, whichever is greater.
+
+Otto: [serious] And here's the one everybody forgets on the line — FOM 8.2.2.1 — for any Flag flight planned more than six hours flight time on the Flight Plan, an alternate is required. Doesn't matter how gorgeous the destination forecast is. Over six hours, you carry an alternate. Full stop.
+
+Pualani: [excited] Shoots, that's a keeper. Six hours, you no can go bare. So an HNL down to Pago Pago, or a Honolulu across to Osaka — the forecast can be a postcard and you still carry the spare, because the clock alone put you over.
+
+Chester: [serious] Now — when you DO need alternate minimums, FOM 8.2.2.1 gives us the Derived Alternate table, and Pualani's got aid number two.
+
+Chester: [excited] Please. I genuinely love this table. It's a spreadsheet with a lawyer attached and I mean that as the highest compliment.
+
+Pualani: [warm] MEMORY AID number two. One facility — a single straight-in non-precision, a CAT I, or a circling maneuver — you add 400 to the height and 1 to the visibility. So — four-hundred-and-one. One navaid, four-oh-oh and one.
+
+Otto: [dry] And two facilities?
+
+Pualani: [warm] Two operational facilities serving two different suitable runways — two approach ends — you cut it down. Add 200 to the higher DA or MDA of the two approaches used, and add a half a mile, or 800 meters. So — one facility, four-oh-one; two facilities, two-hundred-and-a-half. More runways, less penalty.
+
+Otto: [dry] "Four-oh-one and one; two-oh-oh and a half." Right, that's actually clean. I'm annoyed again. That's twice now. Pualani, two. Otto, still nil.
+
+Chester: [serious] And note — the additive is applied only to the height value, rounded up to the next 100-foot value. Precision matters. You don't get to eyeball it.
+
+Pualani: [laughs] Chester in his happy place. Okay, second alternates. FOM 8.2.2.2.
+
+Chester: [serious] 14 CFR 121.619(a). You name a second alternate when the destination and the first alternate are both forecast to be marginal. And Alaska defines the alternate as marginal when either its ceiling OR its visibility is at alternate minimums.
+
+Otto: [dry] And the destination is marginal when its ceiling and/or visibility is at or below CAT I minimums for the runway and approach you're planning. Both marginal? You bring a spare's spare.
+
+Pualani: [warm] Now the exemption that gets people. FOM 8.2.2.3 — Exemption 20108.
+
+Chester: [excited] Domestic only. It lets you dispatch when the conditional language in the TAF or the METAR remarks says the destination or the first alternate might dip below minimums at ETA.
+
+Otto: [dry] And "conditional language" is specifically defined. FOM 8.2.2.3 — it means the change indicators TEMPO and PROB. That's it. TEMPO and PROB.
+
+Pualani: [warm] Think of 'em as the conditional couple — TEMPO and PROB, always showing up together when the weather might get iffy. And the big catch on 20108 — a second alternate airport must always be listed on the Dispatch Release. Always.
+
+Chester: [serious] Two more limits, both in 8.2.2.3 — it is not authorized for flag operations, and not for flights to international destinations operated under Domestic regulations. And the Dispatcher adds the statement, quote, FLT RELEASED UNDER EXEMPTION 20108.
+
+Otto: [dry] Surely they don't need a special sentence typed onto the release. [laughs] And don't call me Shirley — they absolutely do. In all caps. I told you it was a theme.
+
+Pualani: [laughs] Otto went there in the first half. Okay, one more corner of alternates — Canada, under A012, FOM 8.2.3. To go no-alternate into Canada you need more than one operational runway with two separate and distinct surfaces, two usable and independent IFR approach aids and procedures, standby electrical power, and a ceiling at least 1000 feet above the FAF altitude with 3 miles, or a 2000 ceiling and 6 miles.
+
+Chester: [serious] And a little trivia gem tucked in the note — the FAF altitude for most Vancouver approaches is 3000 feet. Plus, no risk of thunderstorms and no freezing precipitation, forecast or reported.
+
+Otto: [dry] Vancouver. Lovely city. Terrifyingly specific paperwork. Alright, everybody stretch — because now we do fuel, and fuel is where the exam lives.
+
+Chester: [excited] Finally. FOM 8.3.2.1 — Domestic fuel, 14 CFR 121.639. Enough to fly to the destination, then to the most distant alternate, then 45 minutes at last cruise altitude consumption rate.
+
+Otto: [dry] And if no alternate is required?
+
+Chester: [serious] Then it's destination plus 55 minutes at last cruise altitude consumption rate. Forty-five with an alternate. Fifty-five without.
+
+Pualani: [warm] Feel the need — the need for the right fuel number. Domestic — 45 and 55. Now Flag, FOM 8.3.2.2, 14 CFR 121.645, is a whole different animal.
+
+Otto: [dry] Flag stacks it up like a plate lunch. Fly to the destination, then burn 10% of the total time from departure to destination, then out to the most distant alternate if you need one, then 30 minutes at holding speed at 1500 feet above the destination or alternate.
+
+Chester: [serious] So the Flag signature is the ten-percent-of-total-time plus the 30 minutes at 1500 feet. That "30 at 1500" is how you tell Flag from Domestic in your sleep.
+
+Pualani: [excited] And then the international flavor — FOM 8.3.2.3, Special Fuel Reserves, the B043 program on the 787.
+
+Chester: [excited] This is our widebody's world. B043 — destination, then 10% of the planned time in oceanic or remote continental airspace — not total time, just the oceanic and remote part — then most distant alternate if required, then 45 minutes at normal cruising consumption, calculated at the flight's weight and altitude at top of descent.
+
+Otto: [dry] And here's the tell on the 787 release. The fuel summary lists "10% RSV" either way — but the differentiator prints right next to it. Standard flag prints "30 at 1500." B043 prints "45 at CRZ." So you read the reserve line and the paper tells you which rule you're flying. Sweet as.
+
+Pualani: [warm] Okay, Chester, this is the one I wanted. Tell 'em about a time redispatch actually saved the day. The fuel-save. And take us out of the hub — Honolulu to Haneda.
+
+Chester: [excited] Ohh, the HNL-HND save. Alright. Overwater, Honolulu to Tokyo-Haneda, 787, flag rules, effectively the whole leg is oceanic — so that 10% reserve is riding on a big chunk of Pacific, and 10% of a long crossing is a lot of gas you'd rather sell as payload. So Dispatch builds it as a planned redispatch. FOM 8.5.9. Two plans, one flight — the FAA-authorized way to trim that 10% requirement.
+
+Otto: [dry] Two plans, one flight. Original release to an intermediate destination, and a second plan from a redispatch waypoint out to the intended destination — Haneda. And the waypoint's got to be specified on the original release and common to both routes.
+
+Chester: [serious] Right. So we launch heavy but not stupid-heavy, because the reserve only has to cover the intermediate plan, not the whole way. We coast out past the islands, everything's nominal, and within two hours of the redispatch point Dispatch runs the fresh Flight Plan and the numbers are gorgeous. Pacific tailwind came in better than forecast.
+
+Pualani: [warm] And the timing rule everybody quotes — within two hours, but no later than 20 minutes prior to the waypoint, the destination alternate could be removed from the redispatch plan, because Haneda met the no-alternate requirements at our window.
+
+Chester: [excited] We concurred by ACARS before the point, redispatched to Haneda, and landed with exactly the reserves we're supposed to and not a drop of dead weight hauled across the ocean. That, Otto, is elegant. And here's a bit of trivia for the checkride — the FOM literally prints a redispatch sample at 8.5.9.2, and the route they chose for the textbook example is SEA to Lihue. Seattle to Lihue, in the book, forever.
+
+Otto: [dry] It is elegant. And I note — for planned redispatch to and from Hawaii, the flight still has to depart with an alternate for the intended destination. You don't leave the gate bare and hope. You leave covered and get to trim it enroute.
+
+Pualani: [warm] Exactly. And one more from 8.5.9.1 — if routing gets modified so you'll bypass the redispatch point, redispatch is still authorized without further planning as long as the route stays within 100 nautical miles of the planned route. Two hours, twenty minutes, a hundred miles. Those are your redispatch numbers.
+
+Otto: [dry] Two, twenty, a hundred. I'll allow it. That's a third clean mnemonic, Pualani. Tally check — Pualani, three. Otto, nil. This is becoming a rout.
+
+Pualani: [laughs] Chee-hoo. Okay, quick real-world one — FOM 8.3.1.2, departure fuel. If you want more gas, the Flight Crew should contact Dispatch at least 30 minutes prior to pushback.
+
+Chester: [serious] And both parties must agree before the extra fueling begins. But if you can't reach concurrence — the Captain has the final decision for fuel on board the aircraft.
+
+Otto: [dry] As it should be. The Captain's name is the one on the report if it goes pear-shaped. Speaking of pear-shaped — Pualani, tell 'em about your amendment-mid-taxi story. That one still makes me wince.
+
+Pualani: [warm] [laughs] Okay okay. Honolulu. We're on a 787, pushed back off the gate, engines turning, taxiing out for a westbound departure, and the ACARS chimes. Dispatch. A fast-moving front just put our first alternate in the tank, and they're swapping our alternate and bumping our required fuel. Right there on the taxiway at HNL.
+
+Chester: [serious] And per FOM 8.5.1.4, an alternate change and a required-fuel change are both on the amendment list. So that's not a shrug-and-go. That's a new or amended release.
+
+Otto: [dry] And 8.5.1.3 — if it becomes necessary to change the conditions of the release, the Dispatcher forwards an amended release, and the Captain acknowledges. Verbally over Company comms, or by acknowledging the ACARS message with the amended info, or a signed copy where paper's required.
+
+Pualani: [warm] So we stopped. We did not keep rolling. Captain read it, we confirmed the new fuel figure would still be covered, acknowledged the amendment by ACARS — and because the required fuel went up, we actually pulled out of the taxi flow and went back for gas. All the dispatch rules, 121.593 through 121.661 and 121.173, have to be met at the time of amendment. You don't get to be "close enough" on a taxiway at Honolulu.
+
+Otto: [dry] The unglamorous save. No hero music. No flyby. Just a crew that stopped rolling and read the fine print. That's the job.
+
+Pualani: [warm] Now some planning odds and ends that love to show up on tests. FOM 8.3.6 — autopilot inoperative. Otto, this one's yours by birthright.
+
+Otto: [dry] Ah. My chapter. Aircraft will not be dispatched for flights greater than 3.5 hours if all autopilot systems are inoperative — without approval from the Captain and Dispatcher.
+
+Chester: [laughs] Otto, explaining the autopilot rule, is a delight I did not know I needed.
+
+Otto: [dry] Somebody has to add altitude to this conversation. Three-point-five hours, all autopilots dead, you need Captain and Dispatcher sign-off. Under that? Off you go, hand-flying, building character. And no, you cannot inflate a substitute and prop it in the seat. I've asked. Legal was very clear. Don't call me Shirley.
+
+Pualani: [laughs] Okay, FOM 8.3.5, minimum flight attendants. For the 787, the FAA minimum for boarding and deplaning is 8, and for thru-flights it's "all assigned." Big cabin, big number. Know your ship.
+
+Otto: [dry] And FOM 8.3.10.2 — ARFF, rescue and firefighting. For passenger ops you can go one level lower than the aircraft's index at the destination — an Index C aircraft into an Index B field. But for an alternate, the floor is ARFF Index A, ICAO category 4.
+
+Chester: [serious] And a difference of more than one ARFF level at the destination needs DO approval before you operate in or out of there. That's your guardrail.
+
+Pualani: [warm] Good. Now weather for dispatch — FOM 8.4.1.4. This table gets misread constantly.
+
+Chester: [serious] Flight time under one hour — METAR and TAF, both, for dispatch. Flight time one hour or more — the TAF controls, METAR not controlling, for dispatch prior to departure.
+
+Otto: [dry] But enroute, if you're possibly changing destination, it's always METAR and TAF regardless of flight time. The METAR comes back into your life the moment you're airborne and reconsidering your choices. Which, over the South Pacific, is roughly hourly.
+
+Pualani: [excited] And winds — FOM 8.4.4. Maximum steady-state wind velocity for takeoff and landing is 50 knots. And for dispatch, you use steady-state wind velocity for the crosswind computation.
+
+Chester: [serious] Steady-state for the math — but 8.4.4 warns that a steady-state component near the crosswind limit with higher gusts should be considered unacceptable. The specific fleet crosswind numbers live in the fleet-specific manuals, not here.
+
+Otto: [dry] Fifty knots steady-state and you're already having a genuinely bad day. That's a "hit the brakes and he'll fly right by" kind of wind.
+
+Pualani: [laughs] Two Top Gun in one episode, we scoring. Eh Chester — quick one, you get a 1-2-3 story of your own tucked in Portland?
+
+Chester: [warm] I do, and it's the mirror image of my IOE. PDX, marine layer rolling up the Willamette, everybody expecting to carry an alternate. But the TAF at our ETA window sat at 2000 and 3 on the nose and forecast to lift. Contiguous 48, plus or minus an hour, 2000 ceiling, 3 miles — the one-two-three floor, exactly. So we went bare, legally, into the murk, and it lifted right as we broke out. Clean.
+
+Otto: [dry] The 1-2-3 rule holding the line in a Pacific Northwest marine layer. I refuse to be charmed. I am, a little, but I refuse.
+
+Pualani: [laughs] Couple quick hitters now that live in the weeds. FOM 8.4.1.5 — comparable values of RVR and ground visibility.
+
+Chester: [serious] When an approach prescribes RVR but RVR isn't reported for your runway, you convert. Half a mile of ground visibility equals 2400 or 2600 RVR. One statute mile equals 5000 or 5500 RVR. That table is your bridge — except for CAT II or CAT III, where you do not get to convert.
+
+Otto: [dry] And altimeters, FOM 8.4.2.5 — settings are rarely outside 28.00 to 32.00 inches of mercury. You can operate below 28 or above 32 only if the altimeter can be set and performance data is available. Otherwise, no. The mercury has opinions.
+
+Pualani: [warm] And missing weather, FOM 8.4.2.3 — dispatching to an international or military field that's missing ceiling, visibility, or present weather in the METAR. The TAF has to show at least 1000-foot ceiling and 3 miles, from one hour before to one hour after ETA, two alternates with complete METAR and TAF, and the MDA gets limited to 1000 feet AGL.
+
+Chester: [serious] No circle-to-land with missing ceiling and visibility, either. And departures are prohibited if freezing precipitation is forecast while those weather elements are missing.
+
+Otto: [dry] And on documents — FOM 8.5.1.1 — the certificate holder retains the Dispatch Release, the Flight Plan, and the weather package for three months. Three months. Somewhere, a server remembers your Tuesday.
+
+Pualani: [warm] And release timing, FOM 8.5.2.1 — Rev 125 rewrote this one, so take the new version. The release and ATS Flight Plan are made available 90 minutes prior to scheduled departure, except: inter-island Hawaii 70 minutes, South Korea departures 180, Amazon cargo 180, and — this is the new line and it's ours — seven-eight-seven and A330 Europe departures, 180 minutes. And while we're in Rev 125, 8.3.9 changed too: Dispatch shall perform a landing performance analysis when ANY contamination is anticipated at the destination or alternate, covering both the anticipated and the worst acceptable braking action for the planned landing weight.
+
+Chester: [serious] And don't forget the boss line — FOM 8.3.4, MEL and CDL for dispatch. The release references the MEL or CDL, the Dispatcher applies the penalties — weight, performance, or fuel — but the final decision to operate the flight lies with the Captain.
+
+Otto: [dry] Surely the Dispatcher decides. [dry] And no — the Captain decides. And don't call me Shirley.
+
+Pualani: [laughs] He recycled it a third time and I laughed a third time. I have no standards and I'm at peace. Okay — recap, before Otto pretends he wasn't riveted.
+
+Otto: [dry] I was riveted. Reluctantly. Continuously. Like a good autopilot.
+
+Pualani: [excited] MEMORY AID one — the one-two-three rule for no alternate, FOM 8.2.3 — one hour, 2000 feet, 3 miles.
+
+Chester: [serious] MEMORY AID two — alternate additives, FOM 8.2.2.1 — one facility, four-oh-one; two facilities, two-hundred-and-a-half.
+
+Otto: [dry] Exemption 20108 is Domestic-only, conditional language is TEMPO and PROB, and it always demands a second alternate on the release. And its charter cousin, 11047, wants two usable runways with one instrument approach.
+
+Chester: [serious] Fuel — Domestic, FOM 8.3.2.1 — 45 with an alternate, 55 without. Flag, 8.3.2.2 — 10% of total time plus 30 minutes at 1500 feet. B043 international on the 787, 8.3.2.3 — 10% of oceanic time plus 45 at cruise.
+
+Pualani: [warm] And the little ones — dispatch happens at the OUT time, 8.1.1. Contact Dispatch 30 minutes before push for extra fuel, 8.3.1.2. All autopilots out, 3.5 hours, 8.3.6. Fifty-knot steady-state wind cap, 8.4.4. Flag over six hours always needs an alternate, 8.2.2.1.
+
+Otto: [dry] And redispatch is flag-only, 8.5.9 — two hours, twenty minutes, a hundred miles. That's the chapter. Final tally — Pualani's mnemonics, four; my resistance, nil. And I picked the wrong week to doubt Pualani's mnemonics.
+
+Pualani: [laughs] Chee-hoo! That's Chapter 8, Dispatch. Study your numbers, trust your Dispatcher, and we'll catch you on the next 787 Flight Deck Notes. Malama pono.
+
+Chester: [warm] Fly safe. Fly precise.
+
+Otto: [dry] Sweet as. Otto, out. Autopilot disengaged.
+
+SOURCES: Alaska Airlines Flight Operations Manual, Chapter 8 — Dispatch (Rev 125, 7/29/26); sections 8.1.1, 8.1.1.4, 8.2.2.1, 8.2.2.2, 8.2.2.3, 8.2.3, 8.3.1.2, 8.3.2.1, 8.3.2.2, 8.3.2.3, 8.3.4, 8.3.5, 8.3.6, 8.3.10.2, 8.4.1.4, 8.4.1.5, 8.4.2.3, 8.4.2.5, 8.4.4, 8.5.1.1, 8.5.1.3, 8.5.1.4, 8.5.2.1, 8.5.9, 8.5.9.1, 8.5.9.2.

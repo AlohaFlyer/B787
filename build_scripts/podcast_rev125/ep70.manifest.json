@@ -1,0 +1,662 @@
+[
+ {
+  "i": 2,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Aloha, aloha, and welcome back to seven-eight-seven Flight Deck Notes. I'm Pualani — for the new folks, that's poo-ah-LAH-nee — and today we go holoholo through Flight Operations Manual Chapter 15. Security. Grab your coffee, buckle in the widebody, this one's got teeth."
+ },
+ {
+  "i": 3,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] And I'm Chester, coming to you from a gray, drizzly Seattle morning — coffee in hand, condensation on the window, a seven-eight-seven line humming somewhere across the water, exactly how Boeing intended."
+ },
+ {
+  "i": 4,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And I'm Otto. It's Chapter 15. It's long. It's the one chapter where the manual actually gets a little bit exciting. I've got the kettle on. Sweet as. Let's not muck about."
+ },
+ {
+  "i": 5,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] The kettle. Otto, you cannot brew a cuppa mid-episode, this is a security chapter."
+ },
+ {
+  "i": 6,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[deadpan] Watch me. Or don't. I'm the autopilot, Pua. I keep things level while you two flap about."
+ },
+ {
+  "i": 7,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[laughs] The autopilot wants a hot beverage. Noted. Let's see if the eff oh em lets him have it."
+ },
+ {
+  "i": 8,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Okay, Otto — since you're so level — set the table. Once we push back on the seven-eight-seven, who is actually in charge of security?"
+ },
+ {
+  "i": 9,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] Right. eff oh em 15.1.8. The Pilot-in-Command is designated as the In-Flight Security Coordinator — the ISC — for each flight. And here's the line to tattoo on your brain: once an aircraft door closes, security responsibility is transferred to the ISC."
+ },
+ {
+  "i": 10,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] That's the handoff. On the ground before that, the Ground Security Coordinator — the GSC — owns it. The GSC reviews the security picture with the Captain before departure, and the moment that door thunks shut, it's the Captain's airplane and the Captain's security."
+ },
+ {
+  "i": 11,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] I like a clean mnemonic for that. Ground before the door, ISC after. GSC hands to ISC. Say it with me next time you button up on the ramp at HNL: \"Door closed, it's mine now.\""
+ },
+ {
+  "i": 12,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Poetry. Genuinely. Put it on a plaque next to the kettle."
+ },
+ {
+  "i": 13,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Pua, tell me about a time this actually clicked for you — like, the ISC thing stopped being a definition and became real."
+ },
+ {
+  "i": 14,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Easy. Story a check airman told me, years back. Captain's out at the gate at HNL, GSC walks up, quiet, tells her there's a passenger who got into it with a gate agent — already de-escalated, but heads up. And fictional-Pua almost waves it off. But the check airman in the jumpseat goes, \"That's your security picture. Log it in your brain. Because the second that door closes, that's your problem, not the GSC's.\" And that's 15.1.8 in one sentence. The handoff isn't a formality. It's the moment the buck moves to you."
+ },
+ {
+  "i": 15,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And nobody hands the buck back. There's no receipt. You own it till the door opens again on the far end — Tokyo, Sydney, wherever the long night takes you."
+ },
+ {
+  "i": 16,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Speaking of the door. Can we talk about the door? Because this is the heart of the chapter, and honestly the heart of the airplane. eff oh em 15.2.6.1 — Secure Flight Deck. The Flight Deck Door shall be closed and locked from pushback — or engine start, if pushback isn't required — until the aircraft has been brought to a stop at its final position on the ramp and the engines are shut down."
+ },
+ {
+  "i": 17,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Push to shutdown. The whole time."
+ },
+ {
+  "i": 18,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And this is the big one for Rev 125, because the definition of a Secure Flight Deck changed. It is now a combination of a locked Flight Deck Door and, for aircraft so equipped, an Installed Physical Secondary Barrier — the I-P-S-B — between the cabin and the Flight Deck, for use when that door has to be opened."
+ },
+ {
+  "i": 19,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And here is the line that matters. Any time the Flight Deck Door is opened during the Secure Flight Deck period, on an aircraft with the I-P-S-B installed, the I-P-S-B shall be deployed before the Flight Deck Door is opened. Before. Not while. Not after."
+ },
+ {
+  "i": 20,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[excited] Barrier first, door second. That is the whole rule in four words. Say it out loud on the walk to the airplane."
+ },
+ {
+  "i": 21,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] And on the seven-eight-seven specifically — once the F-F-A or Flight Attendant is positioned in the Flight Deck entry way, the cabin observer deploys the I-P-S-B from the aft side of the barrier. Then the observer calls the Flight Deck to say the cabin is ready, and takes up a position by the first class bulkhead facing aft."
+ },
+ {
+  "i": 22,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] And when the door is shut again, the \"A\" Flight Attendant stows the I-P-S-B. Deploy before, stow after. Also worth knowing which section you are in — 15.2.6.7 is Flight Deck Door Operations With I-P-S-B and it applies in flight. On the ground you follow 15.2.6.6, Flight Deck Operations Without I-P-S-B."
+ },
+ {
+  "i": 23,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] So the same airplane, two different sections, depending on whether the wheels are turning. Tidy."
+ },
+ {
+  "i": 24,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] The whole time. And 15.2.6.1 gives us the only reasons that door opens during that Secure Flight Deck period. There are four. A contamination check or em ee el inspection. To let a crewmember attend to physiological needs. To deliver or remove meal service items. And with the Captain's specific approval."
+ },
+ {
+  "i": 25,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Four reasons. Not \"I fancy stretching my legs.\" Not \"the coffee's better up front.\" Not \"I want to say gidday to my mate in row two.\" Four."
+ },
+ {
+  "i": 26,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[excited] Memory aid time — this is the first one I want everybody to circle. Think of it as the door's guest list, and it's short. Contamination check, physiological needs, meal service, Captain's approval. I run it as \"Check, Comfort, Cart, Captain.\" Four C's, four reasons, straight out of 15.2.6.1."
+ },
+ {
+  "i": 27,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] Check, Comfort, Cart, Captain. That's clean. I'm stealing it. It's going on my kneeboard right under the drizzle stain."
+ },
+ {
+  "i": 28,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] She's good at those. Credit where it's due. Annoyingly good."
+ },
+ {
+  "i": 29,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Chur, Otto. I'll take annoyingly good."
+ },
+ {
+  "i": 30,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And note the carve-out in the same section — Secure Flight Deck procedures are not required during Part 91 operations. Non-revenue positioning, that kind of thing. But scheduled passenger flying on the seven-eight-seven? Push to shutdown, locked."
+ },
+ {
+  "i": 31,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Now, when that door does open — legitimately — how fast are we?"
+ },
+ {
+  "i": 32,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] eff oh em 15.2.6.1. Crewmembers should strive to limit the time the door is open to three seconds or less. Three seconds. The manual literally says the Flight Deck is most vulnerable when the door is open, so you shrink that window as small as it goes."
+ },
+ {
+  "i": 33,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] And still in 15.2.6.1 — if anyone perceives a threat while that door's open, any crewmember must loudly shout, quote, \"Door, Door, Door,\" to alert the others to immediately close the Flight Deck Door."
+ },
+ {
+  "i": 34,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[excited] There's memory aid number two, and it writes itself — \"Door, Door, Door.\" Three seconds, three doors. If you hear it, that door slams shut, no questions, no hesitation. It's the verbal fire alarm for the flight deck, straight from 15.2.6.6."
+ },
+ {
+  "i": 35,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] Otto, this feels like a \"tell me about a time\" one. You've flown the long Pacific legs. A door-discipline moment — one that stuck."
+ },
+ {
+  "i": 36,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Yeah. HNL to Haneda. Fictional, mind you, but the flavor's real. Nine-plus hours across the Pacific, dead of night, jumpseater riding up front, First Officer wants a cuppa and a comfort stop. So we run the whole 15.2.6.7 dance, the With I-P-S-B one, because we are in flight — interphone the \"A\" Flight Attendant, she clears the forward galley and the lav, verifies no passenger disturbance, arranges the galley per Options 1, 2, or 3, the way the seven-eight-seven wants it. Cabin observer's got eyes aft. Door opens. And right then some bloke three rows back stands up fast, reaching into the overhead. Now — probably nothing. Probably his jumper. But the observer doesn't gamble on \"probably.\" She shouts \"Door, Door, Door,\" the door's shut before the eff oh's even got the kettle going. Turns out it was a jumper. Didn't matter."
+ },
+ {
+  "i": 37,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Wait — so the eff oh never got the cuppa?"
+ },
+ {
+  "i": 38,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[deadpan] The eff oh never got the cuppa. Somewhere over the Pacific there is a cup of tea that was never made. I think about it often."
+ },
+ {
+  "i": 39,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[laughs] The tragedy of Chapter 15. A perfectly good brew, lost to door discipline."
+ },
+ {
+  "i": 40,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And you know what, though? Nobody's mad at you afterward for closing a door. That's the beautiful part. Worst case you re-run reentry. The point of the drill is you close first and sort it out through the cabin view port — or on the seven-eight-seven, the video surveillance system, not the other way round. You never lose money betting the door shut."
+ },
+ {
+  "i": 41,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] That's it exactly. Three seconds, \"Door, Door, Door,\" and the vulnerable window stays tiny. The tea is a small price."
+ },
+ {
+  "i": 42,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Speaking of two people up front — eff oh em 15.2.6.7 — retitled in Rev 125 to Flight Deck Door Operations With I-P-S-B. Under Opening the Flight Deck Door With Crew Exit, a minimum of two people must be in the Flight Deck when the door is closed. So if a pilot steps out, someone backfills. If a pilot and a jumpseater both need to leave, the \"A\" Flight Attendant, or a designee, comes in to hold the number at two."
+ },
+ {
+  "i": 43,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Never one. Two, always. It's the buddy system, but with a locked door and a lot more consequences than summer camp."
+ },
+ {
+  "i": 44,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Chester, your turn — tell me about a time a jumpseater got handled right. The two-person rule done properly."
+ },
+ {
+  "i": 45,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] So — Seattle, off-duty pilot in the jumpseat, and a brand-new First Officer, day two of IOE — Initial Operating Experience, for the folks not there yet. She's drinking from the firehose. Cruise settles down, the Captain needs to step out, and there's that jumpseater riding along. Green eff oh's brain goes, \"Okay, I'm alone now, that's fine.\" And the check airman observing leans in and quietly goes, \"Count the bodies. Who's the second person? The jumpseater. You're at two. But the second that jumpseater steps out too, you are not opening this door until the 'A' Flight Attendant is sitting in that seat.\" That's 15.2.6.7, cold. It's not about who's a pilot. It's about the number two."
+ },
+ {
+  "i": 46,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Count the bodies. That's the whole rule in three words. Two bodies, door closed, every time."
+ },
+ {
+  "i": 47,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[excited] I love an IOE beat, because that's exactly where this stuff gets wired in — early, with someone watching, before the habits set. You learn the number two on day two, you've got it for a career."
+ },
+ {
+  "i": 48,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And the note in 15.2.6.6 has a little gift — the Flight Attendant sitting up front to make the second-person count doesn't have to meet the flight-deck jumpseat facial hair policy. So the manual thought of that. Rare tenderness from a security chapter."
+ },
+ {
+  "i": 49,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] The eff oh em, showing feelings. Screenshot it."
+ },
+ {
+  "i": 50,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] Hey Otto — did the jumpseater in that story ever get his cuppa?"
+ },
+ {
+  "i": 51,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[deadpan] Different flight, Chester. But no. There's a pattern forming. I'm beginning to think Chapter 15 is a conspiracy against hot beverages."
+ },
+ {
+  "i": 52,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Now here's one people trip on — eff oh em 15.2.6.11. Medical personnel shall not be given access to the Flight Deck. Even a real medical event in the cabin. The door policy doesn't bend for it."
+ },
+ {
+  "i": 53,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Right. And who does have access during Secure Flight Deck time? Back to 15.2.6.1 — it's limited to Alaska Airlines crewmembers, Federal Inspectors, Secret Service, Federal Air Marshals, and those with specific authorization. That's the list. Your onboard doctor, however heroic, is not on it."
+ },
+ {
+  "i": 54,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] Now the one that makes the hair stand up. eff oh em 15.2.6.3, Keypad Control. If the Flight Crew receives a keypad activation warning signal, they must assume — without any other information from the Flight Attendants — that a Level 4 Hijack or Attempted Hijack is in progress in the passenger cabin."
+ },
+ {
+  "i": 55,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[serious] No benefit of the doubt. That keypad tone is not \"someone forgot the code.\" You assume the worst."
+ },
+ {
+  "i": 56,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And 15.2.6.3 also says the keypad shall not be used for normal entry, and the crew denies keypad entry attempts. Normal reentry is the interphone-and-visual dance inside 15.2.6.6 and 15.2.6.7 — note 15.2.6.8 is now the freighter section, not the keypad. The pilots also confirm the switch position with each other so they don't inadvertently unlock the door."
+ },
+ {
+  "i": 57,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] The keypad is the \"break glass\" option, and breaking the glass means hijack until proven otherwise. There's no \"oops\" reading of that tone. None."
+ },
+ {
+  "i": 58,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Okay, let's get out to the checkpoint. Chester, kay see em."
+ },
+ {
+  "i": 59,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] Known Crewmember, eff oh em 15.1.13.2 — and in Rev 125 that section is retitled Known Crewmember, kay see em, slash Crewmember Access Point, C-map. Great program. But the gotcha — a kay see em slash C-map participant with a boarding pass showing SSSS is not permitted to use kay see em slash C-map access points. Four S's means you go to the standard passenger checkpoint and get screened as directed."
+ },
+ {
+  "i": 60,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Four S's, four letters, you're not special that day. Regular line for you, mate. Take your shoes off like a civilian."
+ },
+ {
+  "i": 61,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] And 15.1.13.2 — you can't bring family, guests, or pets through kay see em or C-map either. It's you and your bags, that's it. No spouse, no dependents, no doggo."
+ },
+ {
+  "i": 62,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Weapons on duty — eff oh em 15.1.14. With the exception of a Flight Crewmember authorized as a Federal Flight Deck Officer, an eff eff dee oh, the carriage of firearms or other weapons while on duty or on Company property is prohibited. And Flight Crew are also prohibited from carrying chemical irritating agents — pepper spray, Mace."
+ },
+ {
+  "i": 63,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] So no, you cannot bring your own can of courage. Unless you're an eff eff dee oh, and that's a whole training pipeline, not a weekend hobby."
+ },
+ {
+  "i": 64,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Speaking of armed folks — Federal Air Marshals. Otto, the ID thing surprises people."
+ },
+ {
+  "i": 65,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] eff oh em 15.2.9.1. The FAM Team Lead provides their ID to the CSA and advises of additional team members. The CSA only needs to verify the Team Lead's ID. The Flight Crew need not check ID. If you're in doubt about identity, you contact Dispatch — by telephone. And the whole section is emphatic: do not transmit any communication regarding the FAM program via the radio."
+ },
+ {
+  "i": 66,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Covert is the point. You don't out them on the radio, you don't out them in the cabin. Discreet, every time."
+ },
+ {
+  "i": 67,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And there's a companion rule people forget — armed individuals who aren't FAMs or FFDOs. eff oh em 15.2.8. And there's a chart back in 15.2.7 that lays it out. An armed individual — usually a Law Enforcement Officer — checks in with the CSA, gets their credentials verified, and the CSA escorts them to the aircraft and introduces them to the Flight Crew."
+ },
+ {
+  "i": 68,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] Pua, that's a \"tell me about a time\" if I ever heard one. The armed-LEO notification done right — you've got the HNL hub view."
+ },
+ {
+  "i": 69,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Oh, I've got one. Fictional, but true to the ramp. HNL, boarding a long-haul. There's already a Federal Air Marshal continuing through on the airplane — quiet, covert, exactly as 15.2.9.1 wants. And now an armed Law Enforcement Officer is joining for the next segment, escorting under his own authority. So the gate agent does the ARMD check-in, verifies credentials, walks him down, introduces him to the Captain — nice and low-key. And here's the part from 15.2.8 that's the whole ballgame: because there are armed folks continuing through and armed folks joining, all notifications have to be made to the assigned crew and to every armed individual on board before the doors can close. Everybody who's carrying knows about everybody else who's carrying. Quietly. Nothing on the radio."
+ },
+ {
+  "i": 70,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] No surprises at ten thousand feet. That's the entire philosophy of 15.2.8 in one line. Before the door shuts, the map of who's armed is complete — and it's drawn in whispers, not on the radio."
+ },
+ {
+  "i": 71,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And the gate agent's the one drawing it — informing each armed individual where the others are, FAMs included, all as discreetly as possible. In that story it happened smooth, doors closed on time, and nobody in row fifteen ever knew a thing. That's the win. Invisible is the point."
+ },
+ {
+  "i": 72,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] That's the thing people miss — \"handled right\" doesn't look dramatic. It looks like nothing happened. Which is the goal."
+ },
+ {
+  "i": 73,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Alright, passengers behaving badly. This is where a lot of the real-world stuff lives. The big one first, Chester."
+ },
+ {
+  "i": 74,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] eff oh em 15.3.5, Passenger Removal Procedures. There's a warning in all caps and it's the whole philosophy: NEVER take off with a KNOWN passenger disturbance."
+ },
+ {
+  "i": 75,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Not \"probably shouldn't.\" Not \"use your judgment.\" Never. You sort it on the ground — at HNL, at Seattle, at ANC, wherever you're parked — where you've got police and a jet bridge, not a flight level and a problem."
+ },
+ {
+  "i": 76,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And before you ever escalate against a passenger, there's a mindset check I really want people to keep — the \"But For\" test, eff oh em 15.3.1. You ask yourself: \"But for this person's perceived race, ethnic heritage, or religious orientation, would I subject this individual to additional safety or security scrutiny?\" If the answer is no, you stop, because the action may violate Civil Rights Law."
+ },
+ {
+  "i": 77,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] That's a memory aid worth calling out on its own — the \"But For\" test. Two little words that keep your security decision anchored to behavior, not bias. Flight Attendants run it before notifying the Captain, and the Captain reviews it with them before acting. Straight out of 15.3.1."
+ },
+ {
+  "i": 78,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] Now the threat ladder. eff oh em 15.3.18 — there are four passenger threat levels. Level One, disruptive behavior, suspicious or threatening. Level Two, physically abusive behavior. Level Three, life-threatening behavior. Level Four, attempted breach of the Flight Deck or actual breach."
+ },
+ {
+  "i": 79,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] One, two, three, four — disruptive, physical, life-threatening, breach. It climbs. Each rung is worse than the last."
+ },
+ {
+  "i": 80,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And it ties straight into lockdown. eff oh em 15.3.13. Once the Flight Deck Door has been locked down in response to a Level 3 or Level 4 threat, the door shall not be reopened under any circumstances — you declare an emergency and land at the nearest suitable airport. And during Levels 3 and 4, the Flight Attendants will also lockdown the cabin."
+ },
+ {
+  "i": 81,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] No circumstances. Level 3 or 4, the door is welded shut in your mind. For a Level 1 or Level 2, per 15.3.13 you don't lift the lockdown until the Flight Attendants tell you the threat's resolved and there's no risk of it flaring back up. And mind the warning in there — the initial disturbance might be a decoy or a ruse for a bigger plot. Don't take the bait."
+ },
+ {
+  "i": 82,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Chester, this is where I always think of the movie line — the door stays closed."
+ },
+ {
+  "i": 83,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[laughs] I mean, Maverick would want to open it and improvise. Top Gun. Feel the need, the need for speed. But the eff oh em is the exact opposite of hot-dogging it. Level 4, you feel the need to keep that door locked and get on the ground. No inverted flyby of the tower."
+ },
+ {
+  "i": 84,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And whatever you do, don't ask the door if it's serious. Because it is serious. And don't call it Shirley."
+ },
+ {
+  "i": 85,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] There it is. Airplane! Knew you couldn't hold it in the whole episode."
+ },
+ {
+  "i": 86,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Never can. Surely you didn't expect me to."
+ },
+ {
+  "i": 87,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[laughs] Otto, looks like you picked the wrong week to keep a straight face."
+ },
+ {
+  "i": 88,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[deadpan] Looks like I picked the wrong week to give up hot beverages. Which, thanks to this chapter, I have."
+ },
+ {
+  "i": 89,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Transponder codes — quick and clean."
+ },
+ {
+  "i": 90,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] eff oh em 15.3.15.2. Code 7500 is the unique code used for hijacking. And 15.3.15.1 has the Note that catches people — do not use code 7700 during a hijacking. That procedure was eliminated from the common strategy. So 7700 is your general emergency, but not for a hijack."
+ },
+ {
+  "i": 91,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] 7500, hijack. 7700, keep it in your pocket for the hijack case. Don't cross the streams."
+ },
+ {
+  "i": 92,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And if Dispatch pings you on ay cars asking \"is this your intention\" on a 7500 — that's them confirming authenticity, per 15.3.15.2. And ay tee see will normally ask for confirmation of that 7500 only once, because they're worried you might be under duress."
+ },
+ {
+  "i": 93,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] Right. One question. Don't expect a chat about it. One and done."
+ },
+ {
+  "i": 94,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Last teaching block — prisoners. Otto, the ratios."
+ },
+ {
+  "i": 95,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] eff oh em 15.3.6.2. Only one high risk prisoner is allowed per flight, unless specifically approved in advance by tee ess ay, and each high risk prisoner must be accompanied by two or more armed LEOs, who can't be minding any other prisoners. Low risk — one LEO may control two low risk prisoners on flights up to four hours. Two LEOs for up to two low risk prisoners on flights over four hours."
+ },
+ {
+  "i": 96,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] Four hours is the hinge number there. Under four, one officer can take two. Over four, you need two officers. And on a HNL-to-Asia leg, believe me, you are well over four. That four-hour mark is the whole thing."
+ },
+ {
+  "i": 97,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Okay, recap time. Otto, keep me honest. What's the spine of Chapter 15?"
+ },
+ {
+  "i": 98,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] The Captain is the ISC — eff oh em 15.1.8 — and owns security once the door closes. The Secure Flight Deck door is locked from pushback to shutdown, 15.2.6.1, with only four reasons to open it."
+ },
+ {
+  "i": 99,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[excited] Which we remember as Check, Comfort, Cart, Captain. And when it's open — three seconds or less, and \"Door, Door, Door\" slams it shut, both from 15.2.6.1."
+ },
+ {
+  "i": 100,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Two people minimum in the flight deck, 15.2.6.7 — count the bodies, especially with a jumpseater. Medical personnel never get access, 15.2.6.11. A keypad activation warning means assume a Level 4 hijack, 15.2.6.3."
+ },
+ {
+  "i": 101,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] SSSS knocks you out of kay see em and C-map, 15.1.13.2. Only FFDOs carry firearms on duty, 15.1.14. FAMs stay off the radio, 15.2.9.1. And every armed individual gets notified before the doors close, 15.2.7 and 15.2.8."
+ },
+ {
+  "i": 102,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Never take off with a known disturbance, 15.3.5. Run the \"But For\" test first, 15.3.1. Four threat levels, 15.3.18, and Level 3 or 4 lockdown means the door does not reopen, 15.3.13."
+ },
+ {
+  "i": 103,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Squawk 7500 for a hijack, not 7700, per 15.3.15. And the prisoner ratios in 15.3.6.2 hinge on that four-hour mark."
+ },
+ {
+  "i": 104,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And one bonus for the bomb-components fans — the IED memory aid in eff oh em 15.2.15 is PIES. Power source, Initiator, Explosive main charge, Sensor. Not the pastry."
+ },
+ {
+  "i": 105,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] PIES. Chester, is that not the most Seattle-Boeing-nerd way to end a study block."
+ },
+ {
+  "i": 106,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] I love it. Study your PIES, keep your Check, Comfort, Cart, Captain, count the bodies, and remember — three seconds, \"Door, Door, Door.\""
+ },
+ {
+  "i": 107,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And if you're on IOE right now with a check airman in the jumpseat — this is the chapter where you look sharp. Count the bodies. Close the door. Don't call it Shirley."
+ },
+ {
+  "i": 108,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Otto. We're at the gate. Engines are shut down. Secure Flight Deck period is officially over, per 15.2.6.1. You may now, finally, make your tea."
+ },
+ {
+  "i": 109,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[deadpan] ...I've forgotten how. It's been nine hours and an entire chapter. I don't know who I am without the deferred cuppa."
+ },
+ {
+  "i": 110,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[laughs] Character development."
+ },
+ {
+  "i": 111,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] A hui hou, aviators. Fly safe, study smart, brew responsibly. That's seven-eight-seven Flight Deck Notes."
+ }
+]

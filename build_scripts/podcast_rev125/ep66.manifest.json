@@ -1,0 +1,584 @@
+[
+ {
+  "i": 2,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Aloha, aloha, and welcome back to seven-eight-seven Flight Deck Notes. I'm Pualani — poo-ah-LAH-nee for anybody brand new — and today we go deep into the chapter nobody ever wants to need and everybody had better know stone cold. eff oh em Chapter 11. Emergency and Abnormal. Chester, Otto, buckle up."
+ },
+ {
+  "i": 3,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Chester here, coming to you from a gray, drizzly Seattle afternoon, second cup of coffee, and a whole lot of respect for this chapter. This is the one where the Boeing airframe and good, boring, disciplined procedure quietly earn their keep."
+ },
+ {
+  "i": 4,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And I'm Otto. Chapter 11. Sweet as. Good news, the airplane genuinely wants to keep flying. Bad news, you still have to read. Heaps of reading. Honestly, looks like I picked the wrong week to quit reading."
+ },
+ {
+  "i": 5,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Otto. It's minute one."
+ },
+ {
+  "i": 6,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] I like to establish my regrets early."
+ },
+ {
+  "i": 7,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Okay, cold open, quick, so folks know why to stay. By the end you'll walk away with three memory aids locked stone cold — the fuel call, the en tee ess bee brief, and the FAST acronym — plus three line stories to hang them on. A Pacific decompression, a fuel hold into Honolulu, and a mid-ocean medical divert. Real stations, real numbers, fictional crews. Ready? Let's fly the airplane."
+ },
+ {
+  "i": 8,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And that is literally rule number one, eff oh em 11.3.1. Fly the Aircraft. One pilot must be flying at all times. Analyzing the problem and running the checklist are secondary to aircraft control, terrain clearance, and navigation. Aviate first, always."
+ },
+ {
+  "i": 9,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] It is the whole plot of Airplane, really. Somebody's got to fly the plane. And before anybody asks — yes, my name is Otto, yes, in that film the autopilot is an inflatable bloke named Otto, and no, I will not be taking questions about my inflation status."
+ },
+ {
+  "i": 10,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[dry] It's a fair question, though."
+ },
+ {
+  "i": 11,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] It is not."
+ },
+ {
+  "i": 12,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Surely you can't be serious. Let's start where a lot of abnormals begin — communications. eff oh em 11.1.4, lost comms, two-way radio failure. First move, Chester?"
+ },
+ {
+  "i": 13,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Squawk. Change the transponder to 7600. That flags the whole system that you've lost the radio. Then it forks. vee eff are conditions, or you get into vee eff are after the failure — you continue vee eff are and land as soon as practicable. Stuck in eye eff are — you fly the classic logic. Route: last clearance, then expected, then filed. Altitude: the highest of assigned, minimum, or expected."
+ },
+ {
+  "i": 14,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Route, altitude, leave the clearance limit. The same tune the eff ay ay's been humming for decades. Predictable is the entire point, so ay tee see can find you in the soup even when you've gone quiet."
+ },
+ {
+  "i": 15,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And here's the one people fumble, so tattoo it on. eff oh em 11.1.4.1 — entering the US ADIZ without radio contact. You do NOT sit on 7600. You use emergency authority and enter as close to your Flight Plan crossing position and time as possible, squawking 7700."
+ },
+ {
+  "i": 16,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Right. 7600 for the comm failure, 7700 to cross the ADIZ. Two codes, two jobs. Once you're inside, back to standard comm-failure procedures."
+ },
+ {
+  "i": 17,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Seven-six, seven-seven. One digit apart. Enormous difference in how much attention you attract. Bit like ordering one coffee versus fourteen. Chester would know."
+ },
+ {
+  "i": 18,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[dry] Fourteen is a normal Tuesday. Moving on."
+ },
+ {
+  "i": 19,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Okay — line story number one. Chester, tell me about a time a decompression actually went down. Not the textbook. The real thing."
+ },
+ {
+  "i": 20,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[reflective] So — fictional crew, honest numbers, real routing. Hawaiian seven-eight-seven, Honolulu to Tokyo Haneda, HNL to HND. Deep over the North Pacific, cruise, thirty-nine thousand, nothing under you but ocean for a thousand miles either way. Then a bang, a hiss, and the cabin altitude starts marching up. The captain's got her quick-don mask on before her brain fully catches up — because eff oh em 11.2.8 says those masks are designed to be donned with one hand within five seconds, and she has trained that reflex until it lives in her spinal cord."
+ },
+ {
+  "i": 21,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Five seconds. Because your time of useful consciousness up at thirty-nine is measured in a handful of breaths, not minutes."
+ },
+ {
+  "i": 22,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[reflective] Exactly. One hand on the mask, the other stays on the airplane. And here's the part v-one of us used to get wrong, so let me be precise. Out there over open ocean, there are no charted terrain polygons. eff oh em 11.2.9 — the polygons in Jeppesen FD Pro cover the mountain regions, the Alps, the Canadian Rockies, Greenland. Mid-Pacific, you're in open water, so the eff oh em sends you to the fleet-specific manual procedure. She descends, gets down toward a safe level, and once terrain and fuel are handled — and out there terrain is just the sea — they keep coming down toward eight thousand cabin altitude. eff oh em 11.1.8.4. That's the number that makes the adverse physiological reactions go away."
+ },
+ {
+  "i": 23,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And somewhere in row 30, a bloke who slept clean through the safety briefing is now extremely awake and extremely interested in that little yellow cup. Our friend. We'll be checking on him all episode."
+ },
+ {
+  "i": 24,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Now flip it, Chester — because the polygon procedure is real, it just belongs somewhere with rocks under it."
+ },
+ {
+  "i": 25,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Right. Take the same failure but on a mainland routing, HNL to Seattle, up over the Canadian Rockies. NOW you're inside a charted polygon, and eff oh em 11.2.9 says if a decompression occurs within any polygon, the region-specific procedure should be executed to comply with passenger oxygen supply requirements. Note the wording — Rev 125 changed that from shall to should, so it reads as strong guidance rather than a hard mandate. On the seven-eight-seven — and this is the fleet detail — each region has its own initial descent altitude. Not one magic number. Region-specific."
+ },
+ {
+  "i": 26,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And the polygons come in three flavors. Exit Any Direction — labeled \"Exit Any Dir,\" go wherever you like. Exit Toward Fix — fly toward the labeled fix to clear the terrain, you don't have to reach it, just point that way. And To Fix then Route — fly the fix, then the charted route. Click the polygon in FD Pro, it draws the escape path for you."
+ },
+ {
+  "i": 27,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And nobody — dispatch or pilots — ever runs a flight through a charted \"No Ops Area.\" That one's not a suggestion."
+ },
+ {
+  "i": 28,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] \"Exit any direction.\" My favorite instruction in all of aviation. Finally, freedom. Anyway — looks like our friend in row 30 picked the wrong week to quit breathing."
+ },
+ {
+  "i": 29,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] That's two wrong weeks, Otto."
+ },
+ {
+  "i": 30,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] I'm compiling a list."
+ },
+ {
+  "i": 31,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Okay — the heart of the chapter. Emergency authority. eff oh em 11.2.1. The \"you're the Captain, act like it\" section."
+ },
+ {
+  "i": 32,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] It reads clean. In a situation requiring immediate decision and action, the Captain may take any action considered necessary — including deviating from prescribed procedures, methods, weather minimums, and regulations, to the extent required in the interest of safety. And both the Captain and the Dispatcher hold that authority."
+ },
+ {
+  "i": 33,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] This is the part where the eff oh em basically quotes Maverick. You don't have time to think up there. If you think, you're dead. Top Gun, chapter and verse."
+ },
+ {
+  "i": 34,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] [laughs] I knew that was coming. And the nuance from that same 11.2.1 — you may USE emergency authority without DECLARING an emergency, if you don't need traffic or handling priority. But for safety and priority, advise ay tee see of your intentions as soon as you can. And do not hesitate to declare if the situation warrants it."
+ },
+ {
+  "i": 35,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Which flows straight into eff oh em 11.2.2, declaring an emergency. Immediately advise ay tee see and Dispatch. Workload high or time short? Ask ay tee see to notify the Company. And the eff oh em lists what pilots will consider an emergency: fire or smoke endangering the aircraft; can't definitely establish position; a component failure that jeopardizes safety of flight; an in-flight medical condition requiring a diversion; and a high probability of an emergency evacuation."
+ },
+ {
+  "i": 36,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] MAYDAY versus PAN-PAN, since we're in the neighborhood. eff oh em 11.2.2.1. Mayday, three times, reserved for life-threatening situations. Pan-Pan, three times, urgent but not immediately life-threatening. Pick the right one. It sets the tone for everybody listening on the frequency — including the tone in the cabin, if it leaks."
+ },
+ {
+  "i": 37,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And when you declare, eff oh em 11.2.2.3 gives you the emergency message contents. Nature of the emergency; number of passengers and crew, and infants; passengers needing special assistance and where they are; the haz mat contact number if you've got hazardous cargo; and fuel remaining in minutes."
+ },
+ {
+  "i": 38,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And on the haz mat number, one thing v-one glossed — it's fleet-specific. eff oh em 11.2.2.3. Alaska metal, it's 206-392-6465. But on the Hawaiian-operated seven-eight-seven, the number comes off the eNOTOC or the HAL 902 form. Pull it from the paperwork; don't recite the Seattle number out of muscle memory."
+ },
+ {
+  "i": 39,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Fuel remaining in minutes, though. Not pounds. Not kilos. Minutes. That's the number the responders on the ground can actually do arithmetic with."
+ },
+ {
+  "i": 40,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Which sets up line story number two. Otto — tell me about a time a normal fuel state slid into something else. Bring us home to Honolulu."
+ },
+ {
+  "i": 41,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[reflective] Right. Fictional crew, numbers honest, real hub. Transpacific inbound to HNL, back end of a long night, and the weather at Honolulu's gone pear-shaped — low ceilings, the arrival's backed up, everybody's in the hold and the stack is not moving. Now, transpac into an island, your alternates aren't exactly around the corner, so fuel gets very interesting very quickly. Our crew's watching it tick and they make the call EARLY — they tell ay tee see and Dispatch they're getting tight. And here's the key distinction, eff oh em 11.2.5 — minimum fuel is NOT an emergency. It's an advisory. It just says we can accept little or no delay, and you only declare it once you've committed to a specific airport, not while a divert is still live."
+ },
+ {
+  "i": 42,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And crucially, minimum fuel buys you exactly zero priority. It's a heads-up, not a siren. It's a weather report about your own tanks."
+ },
+ {
+  "i": 43,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[reflective] So they stay ahead of it. They coordinate the divert options with Dispatch before it gets ugly — because nobody wants to arrive at the alternate with less than thirty minutes on board. But the hold drags, the divert math eats fuel, and it becomes apparent they will touch down under a thirty-minute supply. That is a different animal entirely. eff oh em 11.2.6 — emergency fuel. The pee eye see keys up and declares — say it with me —"
+ },
+ {
+  "i": 44,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] MAYDAY, MAYDAY, MAYDAY, FUEL."
+ },
+ {
+  "i": 45,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Mayday, mayday, mayday, FUEL. That word \"fuel\" on the tail tells ay tee see precisely why you're declaring. And the thirty minutes is a defined number — holding fuel flow or higher, as configuration requires, at fifteen hundred feet above field elevation. Thirty is a floor, not a target. The pee eye see can and should choose more if a go-around or runway availability is in doubt."
+ },
+ {
+  "i": 46,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] So — minimum fuel, breathe, stay ahead of it. Emergency fuel, everybody on the field moves. One's an advisory. The other's a mayday. Sweet as. And frankly, looks like our crew picked the wrong week to quit topping off the tanks."
+ },
+ {
+  "i": 47,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Three. That's three wrong weeks."
+ },
+ {
+  "i": 48,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[dry] He's going to run out of things to quit before we run out of chapter."
+ },
+ {
+  "i": 49,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Never. I contain multitudes of regret."
+ },
+ {
+  "i": 50,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And that's memory aid number one, honestly word for word — MAYDAY MAYDAY MAYDAY FUEL. Now the engine. eff oh em 11.2.7. Engine shutdown in flight."
+ },
+ {
+  "i": 51,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Engine fails or is shut down in flight, you land at the nearest suitable airport, based on time considerations, where a safe landing can be made. As soon as possible the Captain notifies ay tee see and Dispatch and keeps the updates flowing. Safety report gets done."
+ },
+ {
+  "i": 52,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And eff oh em 11.2.7.1 has the line that ends every hangar-lawyer debate ever held. On a two-engine aircraft with one engine inoperative, NONE of these justify flying past the nearest suitable airport. Not that you've got the fuel to go farther. Not passenger convenience. Not where your maintenance base happens to sit. None of it."
+ },
+ {
+  "i": 53,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Picture it — a check airman gives you this in the box. One engine out, a closer field with a shorter but perfectly usable runway, and your comfy maintenance base ninety minutes ahead with fuel to spare. The extra fuel and the mechanics do not get a vote. You land at the nearest suitable, full stop."
+ },
+ {
+  "i": 54,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] It's a \"suitable,\" not just \"nearest,\" decision on paper — eff oh em 11.2.7.1 lists the factors: configuration, weight, systems, fuel remaining, enroute weather and minimum altitudes, terrain, runways and surface condition, approaches and lighting, rescue and firefighting, facilities for the passengers. But once you've identified one that's suitable, you do not sail past it for convenience."
+ },
+ {
+  "i": 55,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Nearest suitable. Not nearest comfortable. Not nearest with a decent flat white."
+ },
+ {
+  "i": 56,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[dry] There it is."
+ },
+ {
+  "i": 57,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] [laughs] Okay — line story number three, and it's the human one. Otto lives out in the South Pacific and Asia, so let's put it in his backyard. Otto, tell me about a time a leg turned into a medical divert. With MedLink."
+ },
+ {
+  "i": 58,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[reflective] Right. Fictional crew, real procedure, real stations. Two-plus hours out of Honolulu on a South Pacific leg, deep overwater, and a passenger goes down hard — chest pain, gray, sweating, the works. The A flight attendant is on it, gets the enhanced medical kit, and calls the flight deck. Now — MedLink. eff oh em 11.1.9. Emergency room physicians, twenty-four seven, genuine aviation experience."
+ },
+ {
+  "i": 59,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And on the Hawaiian seven-eight-seven, note who dials — eff oh em 11.1.9.3 spells it out. If there's an operational sat com handset in the cabin, the F/As call MedLink directly from back there, right next to the patient. If the cabin sat com isn't available, THEN the Flight Crew places the call — and on the seven-eight-seven, the Flight Crew conferences the F/As in on the cabin headset, so the person actually looking at the passenger is on the line either way."
+ },
+ {
+  "i": 60,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[reflective] And the number, memorize it — MedLink Inflight Medical Assistance, six-oh-two, two-eight-two, four-nine-one-zero. If you can't raise Dispatch, eff oh em 11.1.9.3 says the Captain may ring MedLink directly at that number. Ground Medical Assistance, if you need it, is six-oh-two, two-eight-two, six-six-one-three, or eight hundred, nine-six-one, four-eight-four-seven."
+ },
+ {
+  "i": 61,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And company policy is to follow MedLink's recommendation. But — eff oh em 11.1.9.1 — the Captain keeps final authority on any operational request. Flip side: if MedLink says a passenger is not fit to fly, the Captain will NOT override that."
+ },
+ {
+  "i": 62,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] So they can veto the passenger, you can't veto their veto. Command has limits. Humbling stuff. Very Goose-and-Maverick — talk to me, MedLink."
+ },
+ {
+  "i": 63,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] MedLink recommends a divert. eff oh em 11.1.9.4 — with MedLink and Dispatch, the Captain determines the medical diversion is necessary and coordinates diversion-airport preferences. And out where Otto's flying, \"nearest suitable with the right medical resources\" is a real conversation — that might be Pago Pago, down at NSTU, or if you're way up the ee tops track it could be Midway, Henderson Field, PMDY. You turn toward the field that has what THIS passenger actually needs, not just the closest dot."
+ },
+ {
+  "i": 64,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[reflective] And because it might require a diversion, MedLink loops Dispatch in, everybody's on the same page, and they declare — because an in-flight medical condition that requires a diversion is right there on the emergency list in eff oh em 11.2.2."
+ },
+ {
+  "i": 65,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And do NOT — do not — use the \"Medevac\" call sign prefix unless the flight was originally dispatched as an air ambulance. eff oh em 11.1.8, crystal clear. You're a passenger seven-eight-seven with a sick passenger, not an air ambulance. Wrong prefix, wrong week."
+ },
+ {
+  "i": 66,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Four."
+ },
+ {
+  "i": 67,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] The list grows."
+ },
+ {
+  "i": 68,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Good catch though. Now fire — the adrenaline one. Lithium batteries. eff oh em 11.1.10. Otto, you take the fight, you've clearly got the energy."
+ },
+ {
+  "i": 69,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] Right, this one I take dead seriously, no jokes in the middle of it. On the seven-eight-seven, a lithium battery fire must be controlled immediately. If it's on the flight deck, the device gets removed from the flight deck by any means available — gloves, blanket, whatever you've got. Then two steps, in order. One, fight the fire with a HALON extinguisher. Two, cool the device."
+ },
+ {
+  "i": 70,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And the water rule is subtle, so listen close. Water MAY be used to fight a lithium ION battery fire — but should NOT be used on a lithium METAL battery fire. For cooling afterward, water is preferred; and if you don't have water, any non-alcoholic liquid works — milk, fruit juice, even POG."
+ },
+ {
+  "i": 71,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] POG! Passion-orange-guava. Only in our galley, eh. The eff oh em literally lists it."
+ },
+ {
+  "i": 72,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Of course Hawaii wrote juice into a Boeing fire procedure. Somewhere in Everett an engineer is quietly weeping into a spreadsheet."
+ },
+ {
+  "i": 73,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And the timing people forget — eff oh em 11.1.10 says it may take fifteen or more minutes to completely cool the device. Fifteen. And do NOT use ice. Ice acts as an insulator. Insulate that device before it's fully cooled and any remaining cells that haven't gone into thermal runaway could ignite."
+ },
+ {
+  "i": 74,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Ice bad. Wildly counterintuitive, but there it is. It's not a mai tai. It's a battery. And if I'm honest — looks like whoever packed that spare in their carry-on picked the wrong week to quit charging things."
+ },
+ {
+  "i": 75,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Five! Otto, you have quit five things this episode."
+ },
+ {
+  "i": 76,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And every one of them was the wrong week. It's uncanny."
+ },
+ {
+  "i": 77,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Okay — memory aid number two, the big one. The en tee ess bee brief. eff oh em 11.2.11. How the pee eye see briefs the A flight attendant for an abnormal or emergency. Chester, walk the letters."
+ },
+ {
+  "i": 78,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] N-T-S-B. N — Nature of the emergency. T — Time to prepare, how long until landing. S — Special instructions, anything affecting the cabin or the evacuation scenario. B — Brace signal, how and when you'll give it if you need it."
+ },
+ {
+  "i": 79,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And the trap buried in 11.2.11 — the type of landing you brief is based on the likelihood of EVACUATION, not on what you declared with ay tee see. Normal landing, no evac prep. Emergency landing, the cabin prepares. You can declare an emergency with ay tee see and still brief a perfectly normal landing."
+ },
+ {
+  "i": 80,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] That decouples the two. The ay tee see declaration is about priority handling. The cabin brief is about whether people might have to get out. Different questions entirely."
+ },
+ {
+  "i": 81,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And the eff oh em gives clean examples. \"We've shut down an engine, we're returning to HNL, expect a normal landing, we'll land in fifteen minutes, emergency equipment standing by, any questions.\" Versus an unsafe gear indication where the gear could collapse — that's an emergency landing, prepare the cabin, brace command over the PA just prior to touchdown."
+ },
+ {
+  "i": 82,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Which flows into evacuation. eff oh em 11.2.12. Flight attendants are authorized to initiate an evacuation without the Captain's orders in an obvious life-threatening situation. And the Captain weighs whether staying aboard might actually be LESS hazardous than evacuating — because in an evac, injuries are likely. That's not a reflex, it's a judgment."
+ },
+ {
+  "i": 83,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[serious] And here's memory aid number three — FAST, eff oh em 11.2.12.1. When the cabin crew can't reach the Captain and life-threatening conditions exist, they may initiate. FAST. F — Flight deck incapacitated. A — Aircraft has impacted or is at a peculiar angle. S — Smoke and fire present. T — Threat of imminent danger."
+ },
+ {
+  "i": 84,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] FAST. Flight deck, Aircraft angle, Smoke and fire, Threat. Can't talk to the pointy end, and it's one of those — they go. And do not confuse a full evacuation with eff oh em 11.2.13, rapid deplaning at the gate. That's a precautionary egress out the boarding doors, belongings left behind, and you do NOT issue the evacuation command."
+ },
+ {
+  "i": 85,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Last one, very seven-eight-seven. eff oh em 11.2.14, the recorders. The see vee are and dee eff dee are normally stay on all the time. But on the seven-eight-seven, the dee eff dee are and see vee are stop recording ten minutes after engine shutdown. Know that number for your fleet — ten minutes."
+ },
+ {
+  "i": 86,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Ten minutes. Write it on the back of your hand. Preferably not in POG."
+ },
+ {
+  "i": 87,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] [laughs] Callback. And a quick IOE tie-in, because this is where it gets real. On your Initial Operating Experience, your line check airman is going to feed you exactly these — a min-fuel-that-becomes-emergency-fuel, a decompression, a medical divert. Not to trip you. To watch you fly the airplane first, then work the problem, then communicate. In that order."
+ },
+ {
+  "i": 88,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And that order IS the whole chapter. eff oh em 11.3.1. Fly the aircraft. Silence and reset the warnings once you've identified the malfunction. Announce the problem clearly. Time-critical actions. Get stable and safe. Assign pee eff and pee em — and the eff oh em suggests the Captain hand flying to the First Officer so the Captain can manage the problem. Form a plan. THEN communicate — ay tee see, Dispatch, Flight Attendants with the en tee ess bee brief, passengers in plain language, no scary pilot jargon."
+ },
+ {
+  "i": 89,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Fly, silence, announce, act, stabilize, assign, plan, communicate. It's long, but it's a ladder, and every rung is there because somebody once skipped it."
+ },
+ {
+  "i": 90,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Okay, recap, clean and quick. Fly the aircraft first, 11.3.1. Comms out, squawk 7600 — but 7700 to enter the ADIZ, 11.1.4 and point one. Emergency authority lets the Captain deviate as needed, 11.2.1 — use it without declaring if you want, but tell ay tee see your intentions."
+ },
+ {
+  "i": 91,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Fuel — minimum fuel is NOT an emergency and grants no priority, 11.2.5; emergency fuel is MAYDAY MAYDAY MAYDAY FUEL when you'll land under thirty minutes, 11.2.6, defined at holding fuel flow at fifteen hundred feet above field elevation. Engine out — nearest suitable, and nothing justifies flying past it, 11.2.7 and point one. Emergency descent, masks one hand five seconds, 11.2.8. And seven-eight-seven decompression is region-specific initial descent altitude over the polygons, fleet-manual over open ocean, 11.2.9."
+ },
+ {
+  "i": 92,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Three memory aids. MAYDAY MAYDAY MAYDAY FUEL. The en tee ess bee brief — Nature, Time, Special, Brace. And FAST for cabin-initiated evac. Learn those three cold and you're most of the way home."
+ },
+ {
+  "i": 93,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Lithium fire — HALON then cool, water on ion not metal, fifteen-plus minutes, no ice, 11.1.10. MedLink is 602-282-4910, F/As call from the cabin when sat com's available, otherwise the flight crew calls and conferences them in on the seven-eight-seven, 11.1.9. Recorders stop ten minutes after shutdown, 11.2.14. And the haz mat number's off the HAL 902 or eNOTOC on Hawaiian metal, 11.2.2.3. That's the chapter."
+ },
+ {
+  "i": 94,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And study your fleet-specific manuals for the actual procedures — the eff oh em points you to them for ditching, for evacuations, for the decompression descent numbers. This chapter is the policy scaffolding around those checklists, not a substitute for them."
+ },
+ {
+  "i": 95,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Big finish. Surely we're done."
+ },
+ {
+  "i": 96,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Don't call me Shirley. And Otto — final tally, you picked the wrong week to quit reading, quit breathing, quit topping off, quit the right callsign, and quit charging things."
+ },
+ {
+  "i": 97,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Looks like I picked the wrong week to quit picking the wrong week. But I never quit reading FOMs. That one's for keeps."
+ },
+ {
+  "i": 98,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Chur. Fly safe out there, everybody. Aviate, navigate, communicate — in that order. That's seven-eight-seven Flight Deck Notes."
+ }
+]

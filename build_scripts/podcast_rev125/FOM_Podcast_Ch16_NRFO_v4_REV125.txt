@@ -1,0 +1,159 @@
+787 Flight Deck Notes — FOM Series
+Chapter 16: Non-Routine Flight Operations (NRFO)
+Hosts: Pualani, Chester, Otto
+
+Pualani: [warm] Aloha, aloha, and welcome back to 787 Flight Deck Notes. I'm Pualani — poo-ah-LAH-nee for the newcomers — coming to you from the HNL hub, where the trade winds are up and there's a Dreamliner out my window doing absolutely nothing on the published schedule. Which today is a compliment.
+
+Chester: [excited] Which, statistically, is the best chapter in the whole book. I'm Chester, live from a gray Seattle drizzle with a fresh pour-over and — I'm not gonna lie — a freshly laminated section index. Chapter Sixteen is ferries, positioning, charters, and check flights. It's the part of the FOM where the Dreamliner gets flown by grown-ups doing weird, wonderful, fully-legal things.
+
+Otto: [dry] And I'm Otto. Non-Routine Flight Operations. So the entire chapter is "today we do something strange, on purpose, with paperwork." Sweet as. Ground rule, same as always — if it's not in the book, it doesn't come out of my mouth. Section numbers or it didn't happen.
+
+Pualani: [warm] That's the promise, ku'u hoa. And I'm setting a marker down early: everyone here loves a good shortcut. Otto especially. But this is a chapter where "she'll be right" gets you a violation, so anytime Otto tries to give us the kiwi summary, one of us reads him the long version. Deal?
+
+Otto: [dry] Slander. Accurate slander. Deal. Chester, set the table. What even is an NRFO?
+
+Chester: [serious] FOM 16.1.1. An NRFO is any flight operation that is not on the published schedule. And the book hands us exactly three flavors. One — flights that must be operated under Part 121. Two — flights that may be operated under Part 91. Three — flights operated under Part 121 Cargo Only. Three types. That is the entire taxonomy.
+
+Otto: [dry] Three. Not four. Not two-and-a-half. Three.
+
+Pualani: [warm] First memory aid, and it's a beach one, brah. Picture an outrigger canoe with three hulls. One-Twenty-One passenger. Ninety-One. And One-Twenty-One Cargo Only. Three hulls, three NRFO types. If your canoe only floats on one hull, you filed it wrong and you're swimming home from the reef.
+
+Chester: [laughs] I genuinely love that you turned three federal regulation Parts into a boat.
+
+Otto: [dry] It's Hawaii, Chester. Everything is either a boat or a shrimp truck. Right — to run an NRFO under Part 121, what's the gate?
+
+Chester: [serious] Still 16.1.1. Three conditions, all required. The aircraft is on the Operations Specifications. The aircraft is equipped and maintained according to the Alaska Airlines Maintenance Program. And the crew is fully qualified. Miss any one of those three and you do not have a Part 121 NRFO. You have a mistake with wings.
+
+Otto: [dry] A mistake with wings. Should be the name of a bar in Renton.
+
+Pualani: [warm] Now the cabin. This is where pilots get bitten. FOM 16.1.1.3, short and sweet — Flight Attendants are not required on a cargo-only NRFO.
+
+Otto: [dry] Reasonable. Nobody's running a beverage cart for a pallet of freight. "Chicken or pasta?" The pallet does not care. The pallet has transcended.
+
+Chester: [excited] But the moment humans are aboard, the rules split by Part. FOM 16.1.8.2, Part 91 — a Flight Attendant must be on board if more than nineteen passengers are carried. That's one-nine, nineteen. And Alaska policy is: anytime one FA is required, you use a full complement. No half-measures, no lonely single Flight Attendant.
+
+Pualani: [warm] Memory aid number two, and this one earns its poi. "Nineteen and under, no thunder." Nineteen passengers or fewer on a Part 91 non-revenue op — zero Flight Attendants required. The second you tip over nineteen, the thunder rolls and you need cabin crew.
+
+Otto: [dry] So the kiwi summary is: twenty mates, bring a hostie.
+
+Pualani: [warm] See, that's exactly what we agreed I'd catch. Long version, Chester?
+
+Chester: [serious] Long version. FOM 16.1.9.1 lays out the whole ladder for the all-passenger jet. Nineteen or less — zero. More than nineteen but less than fifty-one — one. More than fifty but less than one-oh-one — two. And more than a hundred passengers on board — two, plus one for each unit of fifty. That's in the notes under the table, and check airmen live in those notes.
+
+Otto: [dry] Fine. That is better than "bring a hostie." Marginally.
+
+Pualani: [warm] And one Part 91 detail people forget — 16.1.8.2 again. Passengers on a Part 91 flight without Flight Attendants are restricted to Alaska Air Group employees. Non-employees? You need authorization from the Director of Operations, FODO, or NRFO Management. No random ride-alongs.
+
+Otto: [dry] So you cannot bring your mate from the pub on the ferry flight. I've written it on my hand. In pen. Deeply.
+
+Chester: [laughs] Otto, the FAA formally thanks you for your restraint.
+
+Pualani: [warm] Now flip the coin. Part 121 NRFO, no Flight Attendants — who's even allowed up there? FOM 16.1.8.1.
+
+Chester: [serious] Right, and this one cites 14 CFR 121.583. When approved by the Director of Operations or the NRFO Management designee, you may carry — crewmembers, essential Company employees, an FAA Air Carrier Inspector performing official duties, an NTSB official performing official duties, and persons handling or essential to cargo on NRFO cargo-only flights. That's the whole list. Anybody else steps aboard and you're back to the full complement of Flight Attendants based on seating capacity.
+
+Otto: [dry] "FAA Air Carrier Inspector performing official duties." Note the fine print — official duties. Not the inspector on holiday. Not the inspector who fancied a scenic lap of Diamond Head. Official. Duties.
+
+Pualani: [warm] Okay. Story time, because a number you've never lived is a number you'll forget. This one's on my ramp. Chester, you flew right seat on it — tell me about the morning we did the check flight out of HNL.
+
+Chester: [excited] Oh, I've been waiting all episode. So — totally fictional, numbers straight from the book. Maintenance pulls a 787 into the HNL hangar and does a double-engine change. Two brand-new engines, both hung overnight. And per FOM 16.3.2.2, a 787 flight after a double-engine change is a Group 2 Maintenance Check Flight — the "test flight." This is not a line trip to Sydney. Dispatch gives us the pre-departure briefing, coordinates filing the ATC flight plan, and provides flight-following, and the whole thing operates under 14 CFR Part 91 — that's 16.3.2. Express purpose: verify airworthiness. Any deviation from that purpose is flat-out prohibited.
+
+Otto: [dry] So no sightseeing over Waikiki with two fresh donks. No lazy eight for the 'gram. Understood.
+
+Pualani: [warm] And before you even sniff the airplane, there's a gate, yeah? Walk them through the pre-flight ritual.
+
+Chester: [serious] Correct — 16.3.2.1. Final approval to conduct the flight, and the call on which group it is, comes from one of these — the Director of Operations, the Fleet Captain, or the Assistant Fleet Captain. Rev 125 changed that list; it used to name the Standards Part 119 Chief Pilot. Then, before we push, the PIC conducts an operational review of the flight profile, the operating environment, and the flight contingencies — and the book says that's with the Fleet Captain, Assistant Fleet Captain, or the Director of Operations, as appropriate. Not just one anointed person. Then a maintenance representative briefs me on exactly what they did and why. Two new engines, here's the paperwork, here's what we want to see.
+
+Otto: [dry] So the airplane gets a full pre-brief and a character reference before it's allowed out. More than most first officers get.
+
+Chester: [excited] And then the fun. Group 2 checks major systems to determine airworthiness, and it may require emergency, abnormal, or special procedures in flight — things you simply cannot verify on the ground. On a double-engine job, the card can include the stuff that makes the back-seat maintenance rep grin: a simulated single-engine profile, an actual in-flight shutdown and restart of an engine, maybe an approach toward the entry of a stall to confirm the low-speed regime. All of it listed, all of it deliberate, all of it under 16.3.2.2.
+
+Otto: [dry] "Deliberately shut down a perfectly good engine you just installed." Only in this chapter is that the responsible choice.
+
+Pualani: [warm] And that's the whole spirit of it, yeah? A check flight isn't cowboy hour. It's the opposite. Which sets up memory aid number three. "One is Evaluate, Two is Test." Group 1 is the "evaluation flight" — normal FCOM procedures, verifying a specific repair worked, no emergency or special procedures required. Group 2 is the "test flight" — major systems, specialized training, and it may need emergency, abnormal, or special procedures in flight. 16.3.2.2, both.
+
+Chester: [serious] And the crew line matters — this is where v-one of my brain used to oversimplify it. A Group 1 can be flown by a line Captain and a First Officer, but a "High-Minimums Captain" or a "Restricted First Officer" is prohibited from flying a Group 1. The book is blunt: a Group 1 is not a "test flight," the crew is not trained nor qualified to act as test pilots. Group 2 is different — it must be flown by a qualified Functional Check Pilot. But listen to the exact wording, because it's a favorite gotcha: at the discretion of the Company, the right seat may be a line First Officer, a qualified Functional Check Pilot, a qualified aircraft instructor, or a Check Pilot. So it's the pilot flying the test who's the Functional Check Pilot — the right seat isn't automatically a second test pilot.
+
+Otto: [dry] This is the part where somebody quotes Top Gun. I can feel it approaching from my six.
+
+Chester: [excited] I feel the need — the need to remember section sixteen-point-three-point-two-point-two.
+
+Otto: [dry] There it is. He held out almost six minutes. New personal best. And look — for the check ride, don't let your ego write a check your logbook can't cash. Group 2 on the 787 means a qualified Functional Check Pilot flying the test. Say it in your sleep.
+
+Pualani: [warm] So on the day — I'm on the ramp, Chester's strapped in the right seat, our Functional Check Pilot's flying, the maintenance rep's in the jumpseat with a clipboard he loves more than his children. Clean airplane, no revenue, off into the HNL departure. That's a Group 2. Now, Otto — your turn. Take us into the ferry world, because that's your specialty and Chester's about to have Boeing-nerd nirvana anyway.
+
+Chester: [excited] With genuine joy. FOM 16.4 — Positioning Flight and Special Flight Permit Ferry. Start clean with the Positioning Flight, 16.4.1. It's a flight with an airworthy aircraft, flown from one destination to another, operated under 14 CFR Part 91, with no revenue passengers or cargo. Maintenance, charter, scheduling — lots of reasons. Key word, underline it twice: airworthy.
+
+Otto: [dry] Airworthy. Hold that thought, because the next one is its evil twin.
+
+Chester: [serious] Exactly. The Special Flight Permit Ferry, 16.4.2. This section cites 14 CFR 21.197, and Maintenance Ops Spec D084 is the Special Flight Permit with Continuous Authorization to Conduct Ferry Flights. And here's the big idea — the Special Flight Permit is authorization to fly an aircraft that may not meet applicable airworthiness requirements. You are moving a jet that is, officially, not right, to a place where it can be made right.
+
+Pualani: [warm] Memory aid number four, and it's the one that sticks. "Positioning is Perfect, Permit is Poorly." Both start with P. A Positioning flight is a perfectly airworthy jet going somewhere empty. A Special Flight Permit Ferry is a jet that may NOT meet airworthiness — you're nursing it in to get it fixed. Perfect versus Poorly.
+
+Otto: [dry] Harsh. Memorable. On that permit ferry, 16.4.2 — MELs may be applied to flights on a Special Flight Permit. Certain MEL remarks and exceptions and operations procedures may not apply — except for ER operations, ETOPS, and flight-level restrictions, which still bite. ETOPS PDC/PDSC is not required. But aircraft fluid levels will be inspected and serviced as required. The jet's unwell; you still top up the fluids.
+
+Pualani: [warm] Story number two, because this is exactly the kind of thing a check airman turns into a scenario. Otto — tell me about a time you ferried a broken jet home across the Pacific.
+
+Otto: [dry] Fictional, numbers honest. Picture it — a 787 sitting at Tokyo-Haneda with a mechanical defect that Maintenance is deferring. It's not going back on the schedule; it needs to come home to the HNL maintenance base. Maintenance sets it up as a Special Flight Permit Ferry under Ops Spec D084. First rule I'm living by, from 16.4.2 — the flight shall not have passengers or cargo. Empty jet, empty holds. Just the crew and the maintenance folks, because the permit was issued without additional operational limitations, so it's limited to Flight Crew, Flight Attendants, and Maintenance Crew.
+
+Chester: [serious] And if the permit had been issued WITH an operational limitation — flight characteristics appreciably changed, or the operation in flight substantially affected — then it narrows further, to pilots and persons essential to the operation of the aircraft. Different flavor, tighter list. Same section, 16.4.2.
+
+Otto: [dry] Right. Now, because we're leaving Japan, there's a paperwork wrinkle Chester adores — 16.4.2.2. For a foreign-country ferry that isn't Canada, Dispatch obtains the Foreign Operations Permission from the originating country and every country the aircraft will overfly, and that gets handed to me with the Special Flight Permit. So Tokyo says yes, and the overflown states say yes, before I so much as taxi.
+
+Chester: [excited] And crew qualifications — this is the one people trip on. A Special Flight Permit Ferry does NOT require any special pilot crew qualifications. The Director of Operations, or a designee — Fleet Captain, an FCF Manager, or FODO — decides whether a line Captain can operate it or whether they want a Functional Check Pilot. And if Maintenance assigns the ferry directly to an FCF crew, a call to the FODO isn't even required. So a ferry is not automatically a test-pilot job — that's the check flight you're thinking of.
+
+Otto: [dry] Correct. Maintenance briefs me — the Captain briefing — on operational limitations, restrictions, and exactly what they did to prep the jet. MELs are applied. ETOPS PDC/PDSC, not required. Fluids, checked and serviced. And the line I recite like a mantra — the Flight Crew shall not perform any troubleshooting, operational validation, or non-standard activities during a Special Flight Permit Ferry. I move it. I do not test it. That's the whole difference between this and Chester's Group 2 this morning: he shuts down engines on purpose, I don't touch a thing.
+
+Pualani: [warm] So say the kiwi summary and let me stop you.
+
+Otto: [dry] The kiwi summary is: "she's crook, fly her home gently, don't fiddle."
+
+Pualani: [laughs] Denied. The FAA is not, and I cannot stress this enough, accepting "she's crook, don't fiddle" as an operational limitations briefing.
+
+Chester: [excited] And the paperwork — 16.4.2.1, my favorite corner of the entire book. Two Maintenance Logbook entries are required for a Special Flight Permit. Entry one: the Defect Description describes the mechanical defect that generated the need to move the aircraft, and the Resolution Description is a deferral referencing the Special Flight Permit to move it to another maintenance location. Entry two: the Defect Description states an inspection of the aircraft is required for the Special Flight Permit, and the Resolution Description states the aircraft is safe for the intended flight and the Flight Crew has been briefed. And that logbook — with the "aircraft released" statement and a copy of the ferry authorization — plus Ops Spec D084 off the EFB in Comply365, all rides on board.
+
+Otto: [dry] Two entries. Defect and deferral, then "inspected, safe, crew briefed." That's the honest kiwi summary of the paperwork, and I'll allow the book prefers every syllable.
+
+Pualani: [warm] Better. Before the recap, two housekeeping gems. First, pilot duties with no Flight Attendants — 16.1.11. When Flight Attendants are not on board, the Captain ensures the cabin duties normally done by the FAs are accomplished. And the book carries a literal WARNING — unsecured galley carts have caused significant aircraft damage and injury. Secure the carts, and keep the Flight Deck Door closed during critical phases of flight.
+
+Otto: [dry] A loose galley cart at rotation is a heat-seeking trolley. On an empty ferry it's just you, the maintenance rep, and eight hundred pounds of stainless steel deciding it also wants to fly. Do not be the reason it's in the next safety bulletin.
+
+Chester: [serious] Second gem — the military landing permits, 16.1.12. The Captain is responsible for knowledge of the limitations in the DD forms, and they live on the EFB in Comply365. And here's a Rev 125 change worth knowing: the subsections underneath — 16.1.12.1, point two and point three — were deleted. The named base lists are gone from the manual. What survives is the parent section: Alaska Airlines is issued DD Form 2401, the Civil Aircraft Landing Permit, and DD Form 2400, the Civil Aircraft Certificate of Insurance, by the US Air Force, the US Army, and the US Navy and Marine Corps. Use of a military installation is limited to what the approved DD Form 2401 actually authorizes, except in an emergency.
+
+Otto: [dry] Which means the old party trick is gone. There used to be a line about every US Army field worldwide except Bucholz Army Airfield. Rev 125 deleted it. So don't quote Bucholz at a check airman any more — it isn't in the book.
+
+Pualani: [laughs] Bucholz finally got left in peace. Deleted right out of the manual.
+
+Pualani: [warm] One more quick scenario, because this is the sneaky one your check airman saves for last. Chester — you're up in the northwest on this. Positioning flight, SEA to ANC, Part 91, no Flight Attendants aboard. A non-employee wanders up wanting to ride along. Yes or no?
+
+Chester: [serious] Default answer, no. 16.1.8.2 — passengers on a Part 91 flight without Flight Attendants are restricted to Alaska Air Group employees. To carry a non-employee you'd need authorization from the Director of Operations, FODO, or NRFO Management. And separately, remember the positioning-flight note back in 16.1.1.2: non-revenue passengers may be carried on Positioning Flights only when approved by the Director of Operations or the NRFO Management designee. Two locks on the same door.
+
+Otto: [dry] And the empty jet is still airworthy on that one — Positioning is Perfect. If it were Poorly, it'd be a permit ferry and your ride-along mate is off the manifest entirely. No passengers, full stop.
+
+Pualani: [warm] Okay — recap. Deep breath. NRFO: anything off the published schedule, three types, FOM 16.1.1 — Part 121, Part 91, Part 121 Cargo Only. Three hulls on the canoe.
+
+Chester: [serious] Flight Attendants — none required on cargo-only, 16.1.1.3. Part 91, more than nineteen passengers means an FA is required, 16.1.8.2 — nineteen and under, no thunder. The staffing ladder is 16.1.9.1: nineteen or less, zero; over nineteen to under fifty-one, one; over fifty to under one-oh-one, two; over a hundred, two plus one per unit of fifty. And the Part 121 no-FA persons list is 16.1.8.1.
+
+Otto: [dry] Ferries, 16.4. Positioning is Perfect — airworthy, Part 91, no revenue load. Permit Ferry is Poorly — Ops Spec D084, 21.197, may not meet airworthiness, no passengers or cargo, MELs may apply, ETOPS PDC/PDSC not required, two logbook entries per 16.4.2.1, and the crew does not troubleshoot. No special pilot quals required — the DO decides line Captain or Functional Check Pilot.
+
+Pualani: [warm] Check flights, 16.3.2.2 — One is Evaluate, Two is Test. Group 1, line Captain and FO, no high-minimums or restricted, not test pilots. Group 2, flown by a qualified Functional Check Pilot, right seat may be a line FO, FCP, instructor, or Check Pilot. And the number to tattoo on your kneeboard — a 787 after a double-engine change is a Group 2.
+
+Chester: [excited] And one word for our newest listeners — if you're heading into IOE, Initial Operating Experience, you're not launching test flights on day one. But your check airman will absolutely turn every one of these into a scenario at the gate. "Ferry with a deferred item out of Haneda — passengers?" Know the answer before the question lands.
+
+Otto: [dry] And I'll leave the autopilot in the back, arms folded, quietly judging. Surely you can't be serious about carrying passengers on a permit ferry.
+
+Pualani: [laughs] I am serious. And don't call the aircraft Shirley.
+
+Otto: [dry] Looks like I picked the wrong week to stop citing section numbers.
+
+Pualani: [warm] On that beautifully groan-worthy note — that's Chapter Sixteen, NRFO. Study the numbers, trust the book, and never the memory. And Otto — one last time, the kiwi summary of this whole chapter?
+
+Otto: [dry] Off-schedule, three types, cite your section, don't fiddle, do the paperwork. That one I'll stand behind.
+
+Pualani: [warm] Approved. Fly safe, a hui hou.
+
+Chester: [warm] Blue skies and good coffee.
+
+Otto: [dry] Sweet as. See you next chapter.
+
+SOURCES: Alaska Airlines / Hawaiian FOM Chapter 16 — Non-Routine Flight Operations (NRFO), Rev 125, dated 7/29/26. Sections cited: 16.1.1, 16.1.1.2, 16.1.1.3, 16.1.8.1, 16.1.8.2, 16.1.9.1, 16.1.11, 16.1.12.1, 16.1.12.2, 16.3.2, 16.3.2.1, 16.3.2.2, 16.4.1, 16.4.2, 16.4.2.1, 16.4.2.2. Ops Spec D084; 14 CFR 21.197, 91.533, 121.583.
