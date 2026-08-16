@@ -25,6 +25,7 @@ select{background:var(--card);color:var(--txt);border:1px solid var(--line);bord
 .meta{font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .coi{background:var(--green);color:#fff;border-radius:4px;padding:2px 7px;font-size:10px;letter-spacing:.5px}
 .dsk{background:#3d2438;color:#e8a7d0;border-radius:4px;padding:2px 7px;font-size:10px}
+.wlk{background:#2a3550;color:#a9b8e8;border-radius:4px;padding:2px 7px;font-size:10px}
 .q{font-size:21px;font-weight:600;margin:0 0 4px;line-height:1.35}
 .ans{color:var(--accent);font-weight:600;font-size:18px;line-height:1.45;margin:16px 0 4px}
 .src{background:#0a1a27;border-left:3px solid var(--atlas);border-radius:0 8px 8px 0;padding:12px 14px;margin-top:14px;font-size:14px}
@@ -51,12 +52,14 @@ footer{text-align:right;padding:14px 18px;color:var(--accent);font-size:11px}
 </header>
 
 <div id="bar">
+  <select id="topSel"></select>
   <select id="secSel"></select>
   <select id="filtSel">
-    <option value="answered">All (verified + routed)</option>
+    <option value="answered">All drill cards</option>
     <option value="verified">Manual-verified only</option>
     <option value="desktop">Routed to source (verify list)</option>
     <option value="coi">Critical Observable Items</option>
+    <option value="walk">Walkthrough items (do, don't recall)</option>
   </select>
   <button class="btn ghost" id="modeBtn">Game mode: OFF</button>
   <span id="timer" class="hidden">20</span>
@@ -65,7 +68,7 @@ footer{text-align:right;padding:14px 18px;color:var(--accent);font-size:11px}
 <div class="bank" id="bankInfo"></div>
 
 <div id="main"><div class="empty">Loading question bank...</div></div>
-<footer>Ver 1.4</footer>
+<footer>Ver 1.5</footer>
 
 <script>
 const GAME_SECS=20, BEST_KEY="ioe_best";
@@ -76,25 +79,52 @@ function esc(s){return (s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":
 fetch("ioe_questions.json").then(r=>r.json()).then(d=>{BANK=d;init();})
  .catch(()=>{document.getElementById("main").innerHTML='<div class="card"><p class="q">Question bank not loaded</p><p class="ans">ioe_questions.json is missing from the repo root.</p><p>This page is data-driven and works the moment that file lands beside it. Nothing here needs to change.</p></div>';});
 
+function fill(sel,vals,label){
+  sel.innerHTML='<option value="">'+label+'</option>'+vals.map(v=>`<option value="${esc(v)}">${esc(v.length>46?v.slice(0,46)+"...":v)}</option>`).join("");
+}
+
 function init(){
-  const secs=[...new Set(BANK.map(b=>b.sec+" "+b.secTitle))].sort();
-  const ss=document.getElementById("secSel");
-  ss.innerHTML='<option value="">All sections</option>'+secs.map(s=>`<option value="${esc(s.split(" ")[0])}">${esc(s.length>52?s.slice(0,52)+"...":s)}</option>`).join("");
-  ss.onchange=build; document.getElementById("filtSel").onchange=build;
+  fill(document.getElementById("topSel"),[...new Set(BANK.map(b=>b.topic))].sort(),"All topics");
+  fill(document.getElementById("secSel"),[...new Set(BANK.map(b=>b.sec+" "+b.secTitle))].sort(),"All workbook sections");
+  document.getElementById("topSel").onchange=build;
+  document.getElementById("secSel").onchange=build;
+  document.getElementById("filtSel").onchange=build;
   document.getElementById("modeBtn").onclick=toggleGame;
-  const v=BANK.filter(b=>b.status==="verified").length,d=BANK.filter(b=>b.status==="desktop").length;
-  document.getElementById("bankInfo").textContent=`${BANK.length} workbook questions. Short answer on the card, everything else behind Source. ${v} answered from FOM 125.1 / FCOM R10 / QRH R7 with a verbatim quote. ${d} routed to the exact manual to verify, never guessed.`;
+  const v=BANK.filter(b=>b.status==="verified").length,
+        d=BANK.filter(b=>b.status==="desktop").length,
+        w=BANK.filter(b=>b.kind==="walkthrough").length;
+  document.getElementById("bankInfo").textContent=`${BANK.length} workbook questions, ${BANK.length-w} to drill and ${w} walkthrough items you perform rather than recall. ${v} answered from FOM 125.1 / FCOM R10 / QRH R7 with a verbatim quote. ${d} routed to the exact manual, never guessed.`;
   build();
 }
 
+// keep the workbook's gate-to-gate order, but never show the same answer twice in a row
+function declump(list){
+  const out=[], held=[];
+  for(const c of list){
+    if(out.length && out[out.length-1].a===c.a){ held.push(c); continue; }
+    out.push(c);
+    for(let i=0;i<held.length;i++){
+      if(out[out.length-1].a!==held[i].a){ out.push(held.splice(i,1)[0]); i--; }
+    }
+  }
+  for(const c of held) out.push(c);
+  return out;
+}
+
 function build(){
-  const sec=document.getElementById("secSel").value, f=document.getElementById("filtSel").value;
+  const top=document.getElementById("topSel").value,
+        sec=document.getElementById("secSel").value,
+        f=document.getElementById("filtSel").value;
   deck=BANK.filter(b=>{
-    if(sec&&b.sec!==sec)return false;
+    if(top&&b.topic!==top)return false;
+    if(sec&&(b.sec+" "+b.secTitle)!==sec)return false;
+    if(f==="walk")return b.kind==="walkthrough";
+    if(b.kind==="walkthrough")return false;
     if(f==="verified")return b.status==="verified";
     if(f==="desktop")return b.status==="desktop";
     if(f==="coi")return !!b.coi;
     return true;});
+  deck=declump(deck);
   idx=0; score=0; played=0; render();
 }
 
@@ -121,7 +151,7 @@ function paint(){
 function render(){
   const m=document.getElementById("main");
   stopTimer(); revealed=false;
-  if(!deck.length){ m.innerHTML='<div class="empty">No questions match this filter.</div>'; document.getElementById("score").textContent=""; return; }
+  if(!deck.length){ m.innerHTML='<div class="empty">No cards match this filter.</div>'; document.getElementById("score").textContent=""; return; }
   if(idx>=deck.length){
     const pct=played?Math.round(score/played*100):0;
     let best=0; try{best=+(localStorage.getItem(BEST_KEY)||0);}catch(e){}
@@ -133,12 +163,13 @@ function render(){
     document.getElementById("score").textContent=""; return;
   }
   const c=deck[idx];
-  const tags=[`${esc(c.sec)}`, c.coi?'<span class="coi">CRITICAL OBSERVABLE</span>':"",
+  const tags=[`${esc(c.topic)}`, c.coi?'<span class="coi">CRITICAL OBSERVABLE</span>':"",
+    c.kind==="walkthrough"?'<span class="wlk">WALKTHROUGH</span>':"",
     c.status==="desktop"?'<span class="dsk">VERIFY AT SOURCE</span>':""].filter(Boolean).join(" ");
   m.innerHTML=`<div class="card">
     <div class="meta">${tags} <span>${idx+1} / ${deck.length}</span></div>
     <p class="q">${esc(c.q)}</p>
-    <div class="meta">${esc(c.secTitle)}${c.group?" &middot; "+esc(c.group):""}</div>
+    <div class="meta">${esc(c.sec)} ${esc(c.secTitle)}${c.group?" &middot; "+esc(c.group):""}</div>
     <div id="ansWrap" class="hidden"></div>
     <div id="srcWrap" class="hidden"></div>
     <div class="row" id="ctl"></div></div>`;
