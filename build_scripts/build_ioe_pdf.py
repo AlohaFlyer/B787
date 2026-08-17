@@ -40,10 +40,13 @@ def esc(s):
     return html.escape(s or '', quote=False)
 
 
+GOLD_SKIP = {'ioe-002', 'ioe-006', 'ioe-048', 'ioe-027', 'ioe-300', 'ioe-078', 'ioe-081'}
+
+
 def is_gold(c):
     """A fact worth knowing cold: short, verified, and it carries a number."""
-    return (c['status'] == 'verified' and re.search(r'\d', c['a'])
-            and len(c['a'].split()) <= 6)
+    return (c['status'] == 'verified' and c['id'] not in GOLD_SKIP
+            and re.search(r'\d', c['a']) and len(c['a'].split()) <= 9)
 
 
 S = dict(
@@ -241,6 +244,8 @@ def main():
 
     # ---- Numbers to Know ----
     gold = [c for c in cards if is_gold(c)]
+    trank = {t: i for i, t in enumerate(TOPIC_ORDER)}
+    gold.sort(key=lambda c: trank.get(c['topic'], 99))
     st.append(PageBreak())
     st.append(Paragraph('Numbers to Know', S['h1']))
     st.append(Paragraph('The facts on these cards worth knowing cold before the first leg.', S['h2']))
