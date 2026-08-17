@@ -129,7 +129,7 @@ def source_block(c, width):
     if c['note']:
         rows.append(Paragraph(esc(c['note']), S['note']))
     if (c.get('icao') or '').strip():
-        rows.append(Paragraph('ICAO DIFFERENCE, REFERENCE ONLY. COMPANY PROCEDURE GOVERNS', S['icaoh']))
+        rows.append(Paragraph('NAT DOC 007, REFERENCE ONLY. COMPANY PROCEDURE GOVERNS', S['icaoh']))
         rows.append(Paragraph(esc(c['icao']), S['icao']))
     if c['qOrig'] and c['qOrig'].strip() != c['q'].strip():
         rows.append(Paragraph('Workbook wording: %s' % esc(c['qOrig']), S['orig']))
@@ -291,6 +291,21 @@ def main():
             sb = source_block(c, W)
             if sb is not None:
                 blk.append(sb)
+            st.append(KeepTogether(blk))
+
+    natcards = [c for c in cards if (c.get('icao') or '').strip()]
+    if natcards:
+        st.append(PageBreak())
+        st.append(topic_band('North Atlantic: NAT Doc 007 Notes', len(natcards), W))
+        st.append(Paragraph(
+            'Every place NAT Doc 007, the ICAO North Atlantic Operations and Airspace Manual '
+            'V.2026-1, speaks to a question in this workbook. The company manuals govern in '
+            'every case; these are the ICAO references behind them, collected for review '
+            'before a North Atlantic crossing. Each note also appears on its card.', S['body']))
+        for c in natcards:
+            blk = [Paragraph(esc(c['q']), S['q']),
+                   Paragraph(esc(c['a']), S['ans'] if c['status'] == 'verified' else S['ansr']),
+                   Paragraph(esc(c['icao']), S['icao'])]
             st.append(KeepTogether(blk))
 
     doc.multiBuild(st)
