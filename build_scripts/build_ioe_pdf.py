@@ -118,7 +118,7 @@ def main():
                           topMargin=0.72*inch, bottomMargin=0.62*inch,
                           title='B787 IOE Workbook Answered',
                           author='B787 Captain Study Project',
-                          subject='787/A321/A330 Fleets OE Workbook V3, 787 content only',
+                          subject='B787 OE Workbook V3',
                           creator='B787 Captain Study Project',
                           keywords='B787, IOE, OE Workbook, FOM, FCOM, QRH')
     W = doc.width
@@ -149,8 +149,7 @@ def main():
     st.append(Paragraph('B787 IOE Workbook', S['h1']))
     st.append(Paragraph('Answered, in flashcard form', S['h2']))
     st.append(Paragraph(
-        'Source: 787/A321/A330 Fleets OE Workbook, Version 3, June 2026. '
-        '787 content only; Airbus-only questions removed.', S['lead']))
+        'Source: B787 OE Workbook, Version 3, June 2026.', S['lead']))
 
     rows = [
         ['Workbook questions', str(len(cards))],
