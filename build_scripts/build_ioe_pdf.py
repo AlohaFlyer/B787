@@ -50,6 +50,10 @@ S = dict(
                            textColor=GREY, leftIndent=10, spaceBefore=2),
     tag   = ParagraphStyle('tag', fontName='Helvetica-Bold', fontSize=7, leading=9,
                            textColor=GREY, spaceBefore=0, spaceAfter=1),
+    icao  = ParagraphStyle('icao', fontName='Helvetica', fontSize=8.5, leading=11,
+                           textColor=colors.HexColor('#6B4E12'), leftIndent=10, spaceBefore=4),
+    icaoh = ParagraphStyle('icaoh', fontName='Helvetica-Bold', fontSize=7.5, leading=10,
+                           textColor=colors.HexColor('#8A5A12'), leftIndent=10, spaceBefore=6),
     orig  = ParagraphStyle('orig', fontName='Helvetica-Oblique', fontSize=7.5, leading=10,
                            textColor=GREY, leftIndent=10, spaceBefore=2),
     h1    = ParagraphStyle('h1', fontName='Helvetica-Bold', fontSize=21, leading=25,
@@ -84,6 +88,9 @@ def source_block(c, width):
         rows.append(Paragraph('&ldquo;%s&rdquo;' % esc(c['quote']), S['quote']))
     if c['note']:
         rows.append(Paragraph(esc(c['note']), S['note']))
+    if (c.get('icao') or '').strip():
+        rows.append(Paragraph('ICAO DIFFERENCE, REFERENCE ONLY. COMPANY PROCEDURE GOVERNS', S['icaoh']))
+        rows.append(Paragraph(esc(c['icao']), S['icao']))
     if c['qOrig'] and c['qOrig'].strip() != c['q'].strip():
         rows.append(Paragraph('Workbook wording: %s' % esc(c['qOrig']), S['orig']))
     if not rows:
@@ -111,7 +118,9 @@ def main():
                           topMargin=0.72*inch, bottomMargin=0.62*inch,
                           title='B787 IOE Workbook Answered',
                           author='B787 Captain Study Project',
-                          subject='787/A321/A330 Fleets OE Workbook V3, 787 content only')
+                          subject='787/A321/A330 Fleets OE Workbook V3, 787 content only',
+                          creator='B787 Captain Study Project',
+                          keywords='B787, IOE, OE Workbook, FOM, FCOM, QRH')
     W = doc.width
 
     def deco(canv, d):
@@ -146,10 +155,11 @@ def main():
     rows = [
         ['Workbook questions', str(len(cards))],
         ['Answered from the manuals', str(nv)],
-        ['Routed to source to verify', str(nd)],
+        ['Not answered in our manuals', str(nd)],
         ['Critical Observable Items', str(ncoi)],
         ['Drill cards / walkthrough items', '%d / %d' % (len(cards) - nw, nw)],
         ['Manuals used', 'FOM Rev 125.1 (8/12/26), FCOM R10, QRH R7'],
+        ['Reference', 'ICAO NAT Doc 007 V.2026-1, where our manuals are silent'],
         ['Compiled', 'August 16, 2026'],
     ]
     t = Table([[Paragraph(a, S['cell']), Paragraph(b, S['cellb'])] for a, b in rows],
@@ -171,9 +181,10 @@ def main():
         'section, a verbatim quote where one exists, a note, and the workbook\'s own wording of the '
         'question where it differed.', S['body']))
     st.append(Paragraph(
-        'An answer in amber has no source in the FOM, FCOM or QRH. It names the manual, card or '
-        'system that holds it, or says plainly that no requirement is published. Those were routed, '
-        'never guessed. Most need FCTM R9, MEL R5, the PRC, FD Pro, Comply365 or the OpSpecs.', S['body']))
+        'An answer in amber is not published anywhere in the FOM, FCOM or QRH. It names the manual, '
+        'card or system that holds it, or says plainly that no requirement exists. Nothing was '
+        'guessed. Most of these sit in the FCTM, the MEL, the Pilot Reference Cards, FD Pro, '
+        'Comply365 or the OpSpecs.', S['body']))
     st.append(Paragraph(
         'Two questions ask for the flight deck door entry code and the crew rest door lock '
         'combination. Those are deliberately not recorded. They are security sensitive under FOM '
