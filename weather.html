@@ -99,7 +99,7 @@
 <div class="wrap">
   <header>
     <h1>B787 Weather <span class="sub">// Requirements</span></h1>
-    <span class="src">FOM Rev 125</span>
+    <span class="src">FOM Rev 125.1</span>
   </header>
   <div class="handrow"><a class="handout" href="view.html?f=B787_Weather_Requirements.pdf" target="_blank" rel="noopener">&#128196; Open 1-page handout (PDF)</a><a class="gamelink" href="wx-alternate.html">&#127918; GAME</a></div>
   <div id="app"></div>
@@ -171,14 +171,14 @@ const DATA=[
 
  {cat:"Second Alternate",ref:"FOM 8.2.2.2",q:"When is a second (marginal) alternate required?",
   a:["Destination ceiling (if required) and/or visibility is <b>at or below CAT I minimums</b> for the intended runway/approach, AND the first alternate is <b>at alternate minimums</b> (ceiling OR visibility).","Also for a flag/supplemental flight to an <b>international airport missing METAR info</b> (both alternates need a complete METAR and TAF)."],
-  src:"Marginal: Destination airport weather has a ceiling (if required) AND/OR the visibility is at or below CAT I minimums for the intended runway and approach to be used. Alternate airport weather is marginal when either the ceiling OR visibility is at alternate minimums. A second alternate is required for a flag or supplemental flight if dispatching to an international airport that is missing information in the METAR per Ops Spec A010(e). Both destination alternates must have a complete METAR and TAF. See DOM 3.000 - Missing Weather at Origin or Destination outside the United States/Territories/Military Airports (added in Rev 125.1)."},
+  src:"Marginal: Destination airport weather has a ceiling (if required) AND/OR the visibility is at or below CAT I minimums for the intended runway and approach to be used. Alternate airport weather is marginal when either the ceiling OR visibility is at alternate minimums. A second alternate is required for a flag or supplemental flight if dispatching to an international airport that is missing information in the METAR per Ops Spec A010(e). Both destination alternates must have a complete METAR and TAF."},
 
  {cat:"Approach",ref:"FOM 5.6.11",q:"When may you begin the final approach segment? What if a below-min report arrives after?",
   a:["Reported weather must be <b>at or above</b> the approach visibility mins. Do not begin the final approach segment unless the latest RVR, visibility, or ceiling (if required) is at or above authorized mins.","If a <b>below-min report arrives after</b> the final segment has begun, you may continue to <b>DA/DH or MDA</b>."],
   src:"The reported weather at the destination must be at or above the visibility minimums prescribed for the approach. Do not begin the final approach segment of an instrument approach procedure unless the latest reported RVR, visibility, or ceiling (if required) is at or above the authorized minimums. If a weather report is obtained after the final approach segment of an instrument approach has been initiated, and it indicates below minimum conditions, the pilot may continue the approach to DA/DH or MDA."},
 
  {cat:"Approach",ref:"FOM 5.6.11",q:"Which RVR is controlling, and what is the approach visibility floor?",
-  a:["<b>TDZ RVR controls</b> (Mid and Rollout are advisory; Mid may substitute if TDZ unavailable).","RVR greater than 6000 is advisory only. <b>Visibility below 1/2 sm is not authorized</b> for approach minimums."],
+  a:["<b>Non-Precision and CAT I: TDZ RVR controls</b> (Mid and Rollout are advisory; Mid may substitute if TDZ unavailable). CAT II/III: all required RVR values on the approach briefing card apply.","RVR greater than 6000 is advisory only. <b>Visibility below 1/2 sm is not authorized</b> for approach minimums."],
   src:"TDZ RVR reports are controlling. Mid RVR and Rollout RVR reports (if available) are advisory. Mid RVR report may be substituted for the TDZ RVR if the TDZ RVR report is not available. RVR values greater than 6000 are advisory only. Visibility values below 1/2 sm are not authorized and shall not be used for approach minimums."},
 
  {cat:"Prohibited",ref:"FOM 9.2.1",q:"Takeoff/landing prohibited: wind, crosswind, braking action?",

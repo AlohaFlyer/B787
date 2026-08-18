@@ -50,7 +50,7 @@ footer{text-align:right;padding:14px 18px;color:var(--accent);font-size:11px}
 <header>
   <h1>B787 IOE Workbook Trainer</h1>
   <a class="btn ghost" href="index.html">Home</a>
-  <a class="btn" id="pdfLink" href="B787_IOE_Workbook_Answered.pdf" target="_blank" rel="noopener">Full Workbook PDF</a>
+  <a class="btn" id="pdfLink" href="view.html?f=B787_IOE_Workbook_Answered.pdf">Full Workbook PDF</a>
 </header>
 
 <div id="bar">
@@ -71,7 +71,7 @@ footer{text-align:right;padding:14px 18px;color:var(--accent);font-size:11px}
 <div class="bank" id="bankInfo"></div>
 
 <div id="main"><div class="empty">Loading question bank...</div></div>
-<footer>Ver 1.8</footer>
+<footer>Ver 1.9</footer>
 
 <script>
 const GAME_SECS=20, BEST_KEY="ioe_best";
@@ -215,7 +215,7 @@ async function saveOffline(){
   b.textContent="Saving...";
   try{
     const c=await caches.open("ioe-offline-v1");
-    await c.addAll(["ioe.html","ioe_questions.json","B787_IOE_Workbook_Answered.pdf"]);
+    await c.addAll(["ioe.html","ioe_questions.json","B787_IOE_Workbook_Answered.pdf","view.html"]);
     b.textContent="Saved offline"; b.classList.add("on");
     try{localStorage.setItem("ioe_offline","1");}catch(e){}
   }catch(e){ b.textContent="Save failed"; }
