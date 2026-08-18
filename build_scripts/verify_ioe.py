@@ -4,7 +4,8 @@ import json, re, io, sys, unicodedata, argparse, statistics
 
 SRC = '/tmp/ioe/ioe_questions.json'
 MAN = {k: io.open('/tmp/ioe/man/%s.txt' % k, encoding='utf-8', errors='replace').read()
-       for k in ('FOM', 'FCOM', 'QRH', 'NAT007', 'FCTM', 'MEL')}
+       for k in ('FOM', 'FCOM', 'QRH', 'NAT007', 'FCTM', 'MEL',
+                 'AIM', 'JEPP_LEGEND', 'FDPRO', 'SUREWX')}
 
 
 def norm(s):
