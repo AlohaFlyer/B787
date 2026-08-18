@@ -35,7 +35,7 @@ Regenerated via build_scripts/ (parse_ep.py + master_ep_fast.sh). Per-episode ma
 the episode source .txt / manifests. See build_scripts/PODCAST_BUILD_TOOLCHAIN.md.
 
 ## Page version registry (bump +0.1 per edit)
-index 2.19 | flows_quiz 9.7 | hot-seat 1.3 | jeopardy 1.0 | limit-or-bust 1.4 | limitations 2.7 | memory-items 1.6 | triggers 1.6 | systems_quiz 2.7 | weather 1.7 | wx-alternate 1.2 | aircraft_setup 1.5 | cdu_preflight 1.0 | sv_exam 1.0 | ioe 1.9 | phase_flows 2.7 | podcast.html data-driven
+index 2.19 | flows_quiz 9.7 | hot-seat 1.3 | jeopardy 1.0 | limit-or-bust 1.4 | limitations 2.8 | memory-items 1.7 | triggers 1.6 | systems_quiz 2.7 | weather 1.8 | wx-alternate 1.2 | aircraft_setup 1.5 | cdu_preflight 1.0 | sv_exam 1.0 | ioe 1.9 | phase_flows 2.7 | podcast.html data-driven
 
 ## Open build items
 - 4 DRAFT stub flows (NP.21.30 Pushback/Towing, Cruise/ETOPS entry, NP.21.45 Landing-IAN, NP.21.48 Landing-VNAV) still pending in flows_quiz.html / phase_flows.html. Verbatim source staged in docs/FLOWS_REBUILD_SOURCE_NP21.md (FCOM R10). Flows 3 (CDU Preflight) and 4 (Preflight-FO) FCOM R10 verbatim audit CLOSED 2026-07-03 (flows_quiz Ver 9.6).
@@ -112,3 +112,13 @@ Flagged, not applied (advisory MEL conditioning, for a future pass): takeoff-alt
 below-RVR-500 items conditioned by MEL 05-10-01A/B and 31-61-14B; fuel temp floor -7 C with
 MEL 29-11-09; MZFW reduction with MEL 28-22-02B; FCTM 7.8 Western US depressurization strategy.
 ioe.html 1.9: workbook PDF now opens through view.html with portal navigation.
+
+## Advisory notes applied (2026-08-18, same-day follow-up)
+All items flagged in the sweep are now in the pages, behind Source panels or as MEL/FCTM notes:
+weather 1.8 (LLM downgrade drives takeoff alternate; HUD LVTO deferral kills below-RVR-500;
+expired nav database bars RNP/RNAV for alternates; 1/2 sm floor scoped to visibility values;
+HMC bullet rewritten per FOM 3.15/3.16 Exemption 5549); limitations 2.8 (MEL 29-11-09 fuel temp
+-7 C floor, MEL 28-22-02 center tank W&B, MEL 22-11-07 and 05-10-01A autoland dispatch, FCTM 3.11
+rolling takeoff advisory); memory-items 1.7 (FCTM 7.8 Western US depress strategy and oxygen
+endurance profile on CABIN ALTITUDE, FCTM 3.36 memory-item gating on FIRE ENG). Every number
+re-verified against the manual text before writing.
