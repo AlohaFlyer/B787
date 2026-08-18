@@ -58,8 +58,8 @@ footer{text-align:right;padding:14px 18px;color:var(--accent);font-size:11px}
   <select id="secSel"></select>
   <select id="filtSel">
     <option value="answered">All drill cards</option>
-    <option value="verified">Answered from our manuals</option>
-    <option value="desktop">Not in our manuals</option>
+    <option value="verified">Answered from a published source</option>
+    <option value="desktop">No published source, ask the check airman</option>
     <option value="coi">Critical Observable Items</option>
     <option value="walk">Walkthrough items, perform not recall</option>
   </select>
@@ -71,7 +71,7 @@ footer{text-align:right;padding:14px 18px;color:var(--accent);font-size:11px}
 <div class="bank" id="bankInfo"></div>
 
 <div id="main"><div class="empty">Loading question bank...</div></div>
-<footer>Ver 1.7</footer>
+<footer>Ver 1.8</footer>
 
 <script>
 const GAME_SECS=20, BEST_KEY="ioe_best";
@@ -98,7 +98,7 @@ function init(){
   const v=BANK.filter(b=>b.status==="verified").length,
         d=BANK.filter(b=>b.status==="desktop").length,
         w=BANK.filter(b=>b.kind==="walkthrough").length;
-  document.getElementById("bankInfo").textContent=`${BANK.length} workbook questions, ${BANK.length-w} to drill and ${w} walkthrough items you perform rather than recall. ${v} answered from FOM 125.1 / FCOM R10 / QRH R7 with a verbatim quote. ${d} are not answered anywhere in our manuals, and say so.`;
+  document.getElementById("bankInfo").textContent=`${BANK.length} workbook questions, ${BANK.length-w} to drill and ${w} walkthrough items you perform rather than recall. ${v} answered with a verbatim quote from the company manuals (FOM, FCOM, QRH, FCTM, MEL) or, where those are silent, FAA and Jeppesen material. ${d} have no published source and say to ask the check airman.`;
   build();
 }
 
@@ -170,7 +170,7 @@ function render(){
   const c=deck[idx];
   const tags=[`${esc(c.topic)}`, c.coi?'<span class="coi">CRITICAL OBSERVABLE</span>':"",
     c.kind==="walkthrough"?'<span class="wlk">WALKTHROUGH</span>':"",
-    c.status==="desktop"?'<span class="dsk">NOT IN OUR MANUALS</span>':""].filter(Boolean).join(" ");
+    c.status==="desktop"?'<span class="dsk">ASK THE CHECK AIRMAN</span>':""].filter(Boolean).join(" ");
   m.innerHTML=`<div class="card">
     <div class="meta">${tags} <span>${idx+1} / ${deck.length}</span></div>
     <p class="q">${esc(c.q)}</p>
