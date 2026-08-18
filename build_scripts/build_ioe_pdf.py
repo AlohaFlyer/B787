@@ -58,7 +58,7 @@ S = dict(
                            textColor=GREY, spaceBefore=0, spaceAfter=1),
     coi   = ParagraphStyle('coi', fontName='Helvetica-Bold', fontSize=7, leading=9,
                            textColor=GREEN, spaceBefore=0, spaceAfter=1),
-    q     = ParagraphStyle('q', fontName='Helvetica-Bold', fontSize=10.5, leading=13.5,
+    q     = ParagraphStyle('q', fontName='Helvetica-Bold', fontSize=12.5, leading=16,
                            textColor=MIDNIGHT, spaceBefore=9, spaceAfter=1),
     ans   = ParagraphStyle('ans', fontName='Helvetica-Bold', fontSize=11, leading=14,
                            textColor=GREEN, spaceBefore=2, spaceAfter=3),
