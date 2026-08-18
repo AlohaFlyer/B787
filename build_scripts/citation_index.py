@@ -9,7 +9,7 @@ so it never goes stale. Patterns captured:
 import re, json, sys, glob, os
 MANUALS = ["FCOM","QRH","FCTM","FOM","MEL"]
 PAGES = ["index","flows_quiz","limitations","memory-items","systems_quiz","podcast",
-         "aircraft_setup","weather","wx-alternate","jeopardy","hot-seat","limit-or-bust","triggers","view"]
+         "aircraft_setup","weather","wx-alternate","jeopardy","hot-seat","limit-or-bust","triggers","view","phase_flows","fom_quiz","cdu_preflight","sv_exam","ioe"]
 # a section token like L.10.2, NP.21.3, 5.4.2, 7.1, 123.621
 SECT = r"[A-Z]{0,3}\.?\d+(?:\.\d+)*(?:\.\d+)*"
 pat_quoted = re.compile(r'ref:"\s*([^"]+?)\s*"')
