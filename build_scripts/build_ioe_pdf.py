@@ -10,7 +10,8 @@ from reportlab.lib.units import inch
 from reportlab.lib import colors
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame, Paragraph,
-                                Spacer, Table, TableStyle, KeepTogether, PageBreak)
+                                Spacer, Table, TableStyle, KeepTogether, PageBreak,
+                                CondPageBreak)
 from reportlab.platypus.tableofcontents import TableOfContents
 
 SRC = os.environ.get('IOE_JSON', 'ioe_questions.json')
@@ -53,13 +54,13 @@ S = dict(
     topic = ParagraphStyle('topic', fontName='Helvetica-Bold', fontSize=15, leading=18,
                            textColor=colors.white),
     grp   = ParagraphStyle('grp', fontName='Helvetica-Bold', fontSize=9, leading=12,
-                           textColor=ATLAS, spaceBefore=10, spaceAfter=2),
+                           textColor=ATLAS, spaceBefore=10, spaceAfter=2, keepWithNext=1),
     tag   = ParagraphStyle('tag', fontName='Helvetica-Bold', fontSize=7, leading=9,
-                           textColor=GREY, spaceBefore=0, spaceAfter=1),
+                           textColor=GREY, spaceBefore=0, spaceAfter=1, keepWithNext=1),
     coi   = ParagraphStyle('coi', fontName='Helvetica-Bold', fontSize=7, leading=9,
-                           textColor=GREEN, spaceBefore=0, spaceAfter=1),
+                           textColor=GREEN, spaceBefore=0, spaceAfter=1, keepWithNext=1),
     q     = ParagraphStyle('q', fontName='Helvetica-Bold', fontSize=12.5, leading=16,
-                           textColor=MIDNIGHT, spaceBefore=9, spaceAfter=1),
+                           textColor=MIDNIGHT, spaceBefore=9, spaceAfter=1, keepWithNext=1),
     ans   = ParagraphStyle('ans', fontName='Helvetica-Bold', fontSize=11, leading=14,
                            textColor=GREEN, spaceBefore=2, spaceAfter=3),
     gold  = ParagraphStyle('gold', fontName='Helvetica-Bold', fontSize=14, leading=17,
@@ -272,7 +273,11 @@ def main():
     # ---- Cards, by topic ----
     for topic in order:
         group = by_topic[topic]
-        st.append(PageBreak() if topic == order[0] else Spacer(1, 14))
+        if topic == order[0]:
+            st.append(PageBreak())
+        else:
+            st.append(Spacer(1, 14))
+            st.append(CondPageBreak(2.2*inch))
         st.append(topic_band(topic, len(group), W))
         last_grp = None
         for c in group:
@@ -296,7 +301,7 @@ def main():
             sb = source_block(c, W)
             if sb is not None:
                 blk.append(sb)
-            st.append(KeepTogether(blk))
+            st.extend(blk)
 
     natcards = [c for c in cards if (c.get('icao') or '').strip()]
     if natcards:
@@ -308,10 +313,9 @@ def main():
             'every case; these are the ICAO references behind them, collected for review '
             'before a North Atlantic crossing. Each note also appears on its card.', S['body']))
         for c in natcards:
-            blk = [Paragraph(esc(c['q']), S['q']),
-                   Paragraph(esc(c['a']), S['ans'] if c['status'] == 'verified' else S['ansr']),
-                   Paragraph(esc(c['icao']), S['icao'])]
-            st.append(KeepTogether(blk))
+            st.append(Paragraph(esc(c['q']), S['q']))
+            st.append(Paragraph(esc(c['a']), S['ans'] if c['status'] == 'verified' else S['ansr']))
+            st.append(Paragraph(esc(c['icao']), S['icao']))
 
     doc.multiBuild(st)
     print('built %s  (%d cards, %d gold, %d topics)' % (OUT, len(cards), len(gold), len(order)))
