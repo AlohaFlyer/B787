@@ -71,7 +71,7 @@ footer{text-align:right;padding:14px 18px;color:var(--accent);font-size:11px}
 <div class="bank" id="bankInfo"></div>
 
 <div id="main"><div class="empty">Loading question bank...</div></div>
-<footer>Ver 1.6</footer>
+<footer>Ver 1.7</footer>
 
 <script>
 const GAME_SECS=20, BEST_KEY="ioe_best";
@@ -203,7 +203,7 @@ function showSrc(){
     <div class="ref">${esc(c.ref)}</div>
     ${c.quote?`<blockquote>${esc(c.quote)}</blockquote>`:""}
     ${c.note?`<div class="note">${esc(c.note)}</div>`:""}
-    ${c.icao?`<div class="icao"><b>ICAO DIFFERENCE, REFERENCE ONLY. COMPANY PROCEDURE GOVERNS</b>${esc(c.icao)}</div>`:""}
+    ${c.icao?`<div class="icao"><b>NAT DOC 007, REFERENCE ONLY. COMPANY PROCEDURE GOVERNS</b>${esc(c.icao)}</div>`:""}
     ${c.qOrig&&c.qOrig!==c.q?`<p class="orig">Workbook wording: ${esc(c.qOrig)}</p>`:""}
   </div>`;
   w.classList.remove("hidden");
