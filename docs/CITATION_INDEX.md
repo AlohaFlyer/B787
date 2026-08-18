@@ -6,16 +6,14 @@ Regenerate after any content change: `python3 build_scripts/citation_index.py`.
 ## Page -> manuals (structured citation counts)
 
 - **aircraft_setup**: FCOM 3
-- **cdu_preflight**: FCOM 4
-- **flows_quiz**: FCOM 166
+- **flows_quiz**: FCOM 181
 - **hot-seat**: QRH 10
 - **index**: FCOM 2, QRH 1
 - **jeopardy**: FCOM 11
 - **limit-or-bust**: FCOM 29, FOM 1
 - **limitations**: FCOM 46
 - **memory-items**: QRH 10
-- **phase_flows**: FCOM 139, FCTM 3, FOM 43, QRH 26
-- **podcast**: FCOM 19, FCTM 5, FOM 6, MEL 3, QRH 6
+- **podcast**: FCOM 19, FCTM 5, FOM 5, MEL 3, QRH 6
 - **systems_quiz**: FCOM 1442, FCTM 4, FOM 19, QRH 23
 - **triggers**: FCOM 10
 - **weather**: FOM 24
@@ -23,9 +21,6 @@ Regenerate after any content change: `python3 build_scripts/citation_index.py`.
 
 ## Untagged pages (manual content but NO parseable section refs - manual review required)
 
-- **fom_quiz**: mentions ['FOM'] - NO structured refs
-- **ioe**: mentions ['FCOM', 'QRH', 'FCTM', 'FOM', 'MEL'] - NO structured refs
-- **sv_exam**: mentions ['FCOM', 'FCTM', 'FOM'] - NO structured refs
 - **view**: mentions ['QRH'] - NO structured refs
 - **fom_quiz / fom_q/*.json**: FOM question bank carries ref/src.ref per item but is not parsed here.
 - **cdu_preflight**: declares FCOM NP.21 only, but carries FOM-derived ETOPS facts (FOM 6.2.3 / 6.3.3).

@@ -8,9 +8,9 @@ The authoritative per-section dependency map is AUTO-GENERATED in docs/CITATION_
 |---|---|---|---|---|
 | FCOM | R10 | 2026-04-01 | 2026-06-17 | flows_quiz (NP.21), limitations (L.10), systems_quiz, limit-or-bust (L.10), jeopardy, aircraft_setup (NP.21), cdu_preflight (NP.21.2-5), triggers (NP.21), podcast, index footer |
 | QRH | R7 | 2026-01-19 | 2026-06-17 | memory-items, hot-seat, podcast, index footer |
-| FCTM | R9 | 2026-04-01 | 2026-06-23 | systems_quiz, flows_quiz, podcast, index footer |
-| FOM | 125.1 | 2026-08-12 | 2026-08-18 | weather, wx-alternate, systems_quiz, limit-or-bust, podcast, fom_quiz + fom_q/*.json, phase_flows, index footer |
-| MEL | R5 | 2026-04-01 | 2026-06-17 | podcast, index footer |
+| FCTM | R9 | 2026-04-01 | 2026-08-18 | systems_quiz, flows_quiz, phase_flows, limitations (crosswind tables), podcast, ioe (bank), index footer |
+| FOM | 125 | 2026-07-29 | 2026-07-31 | weather, wx-alternate, systems_quiz, limit-or-bust, podcast, fom_quiz + fom_q/*.json, phase_flows, index footer |
+| MEL | R5 | 2026-04-01 | 2026-08-18 | podcast, weather (CAT II/III RVR), sv_questions (2 items), ioe (bank), index footer |
 | AOM | TBD | TBD | not vetted | (AOM PDF not present in Drive folder as of 2026-06-23; revision cannot be confirmed - do not cite until staged) |
 | Systems training decks | Jun 2026 | 2026-06-12 | systems_quiz + sv_exam (1,515 Q from Systems_extract/*.md) |
 
@@ -35,7 +35,7 @@ Regenerated via build_scripts/ (parse_ep.py + master_ep_fast.sh). Per-episode ma
 the episode source .txt / manifests. See build_scripts/PODCAST_BUILD_TOOLCHAIN.md.
 
 ## Page version registry (bump +0.1 per edit)
-index 2.21 | flows_quiz 9.6 | hot-seat 1.3 | jeopardy 1.0 | limit-or-bust 1.4 | limitations 2.6 | memory-items 1.6 | triggers 1.6 | systems_quiz 2.7 | weather 1.7 | wx-alternate 1.2 | aircraft_setup 1.5 | cdu_preflight 1.0 | sv_exam 1.0 | phase_flows 2.7 | podcast.html data-driven
+index 2.19 | flows_quiz 9.7 | hot-seat 1.3 | jeopardy 1.0 | limit-or-bust 1.4 | limitations 2.7 | memory-items 1.6 | triggers 1.6 | systems_quiz 2.7 | weather 1.7 | wx-alternate 1.2 | aircraft_setup 1.5 | cdu_preflight 1.0 | sv_exam 1.0 | ioe 1.9 | phase_flows 2.7 | podcast.html data-driven
 
 ## Open build items
 - 4 DRAFT stub flows (NP.21.30 Pushback/Towing, Cruise/ETOPS entry, NP.21.45 Landing-IAN, NP.21.48 Landing-VNAV) still pending in flows_quiz.html / phase_flows.html. Verbatim source staged in docs/FLOWS_REBUILD_SOURCE_NP21.md (FCOM R10). Flows 3 (CDU Preflight) and 4 (Preflight-FO) FCOM R10 verbatim audit CLOSED 2026-07-03 (flows_quiz Ver 9.6).
@@ -97,9 +97,18 @@ Still open after this sweep:
   finds citation_index.json in either location; citation_index.py now also regenerates
   docs/CITATION_INDEX.md and drops manual revision numbers that were being parsed as sections.
 
-## FOM 125.1 sweep (2026-08-18)
-Source: FOM.pdf Rev 125.1, 8/12/26, 847 pp. Change list taken from the manual's own Revision Highlights (RH) chapter, 18 sections.
-Material finding: 125.1 deleted the regional decompression procedures from 19.3 (Canadian Rockies), 22.5 (Greenland) and 23.16 (Alps). Those section numbers now hold unrelated content (19.3.1.1 = Airspeed Restrictions Takeoff/Landing; 22.6 = Oceanic Procedures). No fixed regional floor is published anywhere in the FOM. 787 initial descent altitude comes from the Jeppesen FD Pro polygon detail drawer and varies by polygon (11.2.9). 737/A330 remains 17,000 ft or FL170.
-Corrected: fom_q/ch19_24.json (fom1924-002, fom1924-017), fom_q/ch11.json (fom11-018, fom11-sc02), podcast.html Ep73 blurb, weather.html 8.2.2.2 (added DOM reference per RH), fom_questions.json rev, index.html footer, phase_flows.html header.
-Verified unchanged: systems_quiz PED bag quote (11.1.10, reorganized only); all other cited FOM sections retain their expected titles; aircraft_setup and view carry no FOM content; limitations and memory-items carry no FOM claims.
-Open: Ep73 AUDIO still teaches 18/18/15 and the wrong UK/Italy chapter numbers. Requires re-synth on desktop. phase_flows 'depress' card cites PRC Western US Depress Strategy for 18,000 ft MSL; PRC is not in the browser environment and was not revised by this FOM change, so it was left alone and is flagged for Ryan.
+## FCTM R9 / MEL R5 citation sweep (2026-08-18)
+First full-text vetting of portal content against the FCTM and MEL (both PDFs now in the library).
+140 items checked by 5 independent passes; every WRONG and STALE_REF item fixed the same day.
+Applied: flows_quiz 9.7 (7 wrong facts fixed, 18 blocks re-attributed from FCTM to their real
+FCOM NP.21 / FOM sources); weather 1.7 (TDZ RVR advisory rule scoped to Non-Precision/CAT I,
+header to FOM 125.1); phase_flows 2.7 (callout cite); limitations 2.7 (FCTM 6.29 operational
+crosswind tables appended to the demonstrated-crosswind card); sv_questions genops-041 (EMK per
+MEL 25-64-03C, 1 installed 0 required) and sv-ground-088 (24 blocker doors total per CDL 78-31-01).
+Notable wrong facts caught: PECS is power-electronics liquid cooling, not a battery cooler;
+reverse thrust reduction begins approaching 60 KIAS, not 80; all-engine rotation target is
+15 degrees (12 to 13 is engine-inop); engine-inop go-around from a flaps 20 approach uses flaps 5.
+Flagged, not applied (advisory MEL conditioning, for a future pass): takeoff-alternate and
+below-RVR-500 items conditioned by MEL 05-10-01A/B and 31-61-14B; fuel temp floor -7 C with
+MEL 29-11-09; MZFW reduction with MEL 28-22-02B; FCTM 7.8 Western US depressurization strategy.
+ioe.html 1.9: workbook PDF now opens through view.html with portal navigation.
