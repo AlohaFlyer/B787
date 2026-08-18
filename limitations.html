@@ -107,7 +107,7 @@
 <script>
 
 const DATA=[
- {s:"Airplane General",q:"Maximum takeoff and landing tailwind component?",a:"15 knots",ref:"FCOM L.10.2",mem:true,src:"Maximum Takeoff and Landing Tailwind Component: 15 knots."},
+ {s:"Airplane General",q:"Maximum takeoff and landing tailwind component?",a:"15 knots",ref:"FCOM L.10.2",mem:true,src:"Maximum Takeoff and Landing Tailwind Component: 15 knots. FCTM 3.11 technique: a rolling takeoff is strongly advised when crosswinds exceed 20 knots or tailwinds exceed 5 knots (engine stress and possible surge if thrust is set before brake release)."},
  {s:"Airplane General",q:"Maximum runway slope?",a:"+/- 2%",ref:"FCOM L.10.2",mem:false,src:"Runway slope: +/- 2%."},
  {s:"Airplane General",q:"Maximum operating altitude?",a:"43,100 ft pressure altitude",ref:"FCOM L.10.2",mem:false,src:"Maximum Operating Altitude: 43,100 ft pressure altitude."},
  {s:"Airplane General",q:"Maximum takeoff and landing altitude?",a:"14,000 ft pressure altitude",ref:"FCOM L.10.2",mem:false,src:"Maximum Takeoff and Landing Altitude: 14,000 ft pressure altitude."},
@@ -133,7 +133,7 @@ const DATA=[
  {s:"HUD Takeoff / Autoland",q:"Maximum headwind (HUD takeoff and autoland)?",a:"25 knots",ref:"FCOM L.10.9",mem:true,src:"HUD takeoff operations: Headwind 25 knots; Tailwind 15 knots; Crosswind 20 knots. Autoland operations: Headwind 25 knots; Tailwind 15 knots; Crosswind 25 knots (15 KTS for CAT II/III)."},
  {s:"HUD Takeoff / Autoland",q:"Maximum tailwind (HUD takeoff and autoland)?",a:"15 knots",ref:"FCOM L.10.9",mem:true,src:"HUD takeoff operations: Headwind 25 knots; Tailwind 15 knots; Crosswind 20 knots. Autoland operations: Headwind 25 knots; Tailwind 15 knots; Crosswind 25 knots (15 KTS for CAT II/III)."},
  {s:"HUD Takeoff",q:"HUD takeoff: maximum crosswind?",a:"20 knots",ref:"FCOM L.10.9",mem:true,src:"Maximum wind component speeds when takeoff weather minima are predicated on HUD takeoff operations: Headwind 25 knots; Tailwind 15 knots; Crosswind 20 knots."},
- {s:"Autoland",q:"Autoland: maximum crosswind?",a:"25 knots (15 knots for CAT II/III)",ref:"FCOM L.10.9",mem:true,src:"Maximum wind component speeds when landing weather minima are predicated on autoland operations: Headwind 25 knots; Tailwind 15 knots; Crosswind 25 knots (15 KTS for CAT II/III)."},
+ {s:"Autoland",q:"Autoland: maximum crosswind?",a:"25 knots (15 knots for CAT II/III)",ref:"FCOM L.10.9",mem:true,src:"Maximum wind component speeds when landing weather minima are predicated on autoland operations: Headwind 25 knots; Tailwind 15 knots; Crosswind 25 knots (15 KTS for CAT II/III). MEL note: autoland or LAND 3 may be inoperative for dispatch provided approach minimums do not require them (MEL 22-11-07A/B); with the aircraft downgraded to CAT I (MEL 05-10-01A), CAT II, CAT III, and autolands are not used."},
  {s:"Autoland",q:"Autoland glideslope angle range?",a:"2.5 to 3.25 degrees",ref:"FCOM L.10.9",mem:true,src:"The maximum glideslope angle is 3.25 degrees. The minimum glideslope angle is 2.5 degrees."},
  {s:"Autoland",q:"Autoland approved flap settings and engine config?",a:"Flaps 20, 25, or 30; both engines operative or one engine inoperative",ref:"FCOM L.10.9",mem:false,src:"Autoland capability may be used with flaps 20, 25, or 30, with both engines operative or with one engine inoperative. The AFDS autoland status annunciation must have LAND 2 or LAND 3 displayed."},
  {s:"Approach",q:"FLCH on final approach below what altitude?",a:"Do not use below 1,000 ft AFE",ref:"FCOM L.10.9",mem:true,src:"Do not use FLCH on final approach below 1,000 feet AFE."},
@@ -149,9 +149,9 @@ const DATA=[
  {s:"Flight Instruments",q:"EFB portable keyboard and cable during takeoff and landing?",a:"Must be stowed",ref:"FCOM L.10.10",mem:false,src:"EFB portable keyboard and attaching cable (if installed) must be stowed during takeoff and landing."},
  {s:"Fuel",q:"Maximum tank fuel temperature at takeoff (Jet A / A-1 / JP-5 / JP-8 / TS-1)?",a:"49 deg C (120 deg F)",ref:"FCOM L.10.11",mem:false,src:"Maximum tank fuel temperature at takeoff is 49 deg C (120 deg F) for Jet A, Jet A-1, JP-5, JP-8 or TS-1."},
  {s:"Fuel",q:"In-flight fuel temperature limit (Jet A / A-1 / JP-5 / JP-8)?",a:"65 deg C (150 deg F)",ref:"FCOM L.10.11",mem:false,src:"Inflight fuel temperature is limited to 65 deg C (150 deg F) for Jet A, Jet A-1, JP-5 or JP-8."},
- {s:"Fuel",q:"Minimum tank fuel temperature prior to takeoff?",a:"Not less than -29 deg C (-20 deg F)",ref:"FCOM L.10.11",mem:false,src:"Tank fuel temperature prior to takeoff must not be less than -29 deg C (-20 deg F)."},
+ {s:"Fuel",q:"Minimum tank fuel temperature prior to takeoff?",a:"Not less than -29 deg C (-20 deg F)",ref:"FCOM L.10.11",mem:false,src:"Tank fuel temperature prior to takeoff must not be less than -29 deg C (-20 deg F). MEL note: with one heat exchanger bypass valve inoperative (MEL 29-11-09), fuel temperature must be above -7 deg C before takeoff."},
  {s:"Fuel",q:"Minimum in-flight tank fuel temperature?",a:"At least -42 deg C, and at least 3 deg C above the freezing point of the fuel",ref:"FCOM L.10.11",mem:false,src:"In-flight tank fuel temperature must be maintained at least -42 deg C, as well as 3 deg C above the freezing point of the fuel being used."},
- {s:"Fuel",q:"Center tank fuel loading rule?",a:"Main tanks must be scheduled full if center tank fuel is loaded",ref:"FCOM L.10.11",mem:false,src:"Main tanks must be scheduled to be full if center tank fuel is loaded."},
+ {s:"Fuel",q:"Center tank fuel loading rule?",a:"Main tanks must be scheduled full if center tank fuel is loaded",ref:"FCOM L.10.11",mem:false,src:"Main tanks must be scheduled to be full if center tank fuel is loaded. MEL note: with center tank override/jettison pumps deferred (MEL 28-22-02), center tank fuel must be accounted for in weight and balance in case it cannot be used, and main tank fuel must be adequate to reach a suitable airport if the scavenge system fails."},
  {s:"Warning Systems",q:"Using the terrain display for navigation?",a:"Do not use the terrain display for navigation",ref:"FCOM L.10.11",mem:false,src:"Do not use the terrain display for navigation."},
 ];
 
@@ -230,7 +230,7 @@ start(false);
 <footer style="width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:8px;margin:28px auto 0;">
 <img src="B787_night.jpg" alt="Boeing 787" style="width:380px;max-width:60%;height:auto;border-radius:6px;">
 <a href="mailto:ryan.pettit@alaskaair.com?subject=B787%20Study%20Portal%20-%20Limitations%20Drill" style="font-size:11px;color:#b1d887;font-family:inherit;text-decoration:none;">ryan.pettit@alaskaair.com</a>
-<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 2.7</div>
+<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 2.8</div>
 </footer>
 </body>
 </html>

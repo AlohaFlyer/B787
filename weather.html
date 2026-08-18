@@ -127,7 +127,7 @@ const DATA=[
   src:"Visibility types (5.4.1): 1. Runway Visual Range (RVR); 2. Runway Visibility Value (RVV); 3. ICAO Runway Visual Range; 4. Prevailing Visibility. If RVR is reported, it controls for the specified runway; otherwise, use prevailing visibility in the absence of RVR."},
 
  {cat:"Takeoff Alternate",ref:"FOM 5.4.2",q:"When is a takeoff alternate required?",
-  a:["When reported departure weather is below the approach landing minimums for the runway of intended use (<b>excluding SA CAT I or CAT II/III</b>), or conditions exist that would <b>preclude a return</b>."],
+  a:["When reported departure weather is below the approach landing minimums for the runway of intended use (<b>excluding SA CAT I or CAT II/III</b>), or conditions exist that would <b>preclude a return</b>.","<b>MEL note:</b> with the LLM downgraded to CAT I (MEL 05-10-01A), CAT II/III and autolands are not used, so weather below CAT I minimums then drives a takeoff alternate."],
   src:"A takeoff alternate is required when the reported weather at the departure airport is below the approach landing minimums for the runway of intended use, excluding any SA CAT I or CAT II/III approaches or conditions that exist that would preclude a return."},
 
  {cat:"Takeoff Alternate",ref:"FOM 5.4.2",q:"Maximum distance from the departure airport to a takeoff alternate (787)?",
@@ -139,11 +139,11 @@ const DATA=[
   src:"Takeoff alternate airport weather must meet the same requirements as the Alternate for Destination Weather (see 8.2.2.1 - Destination Alternate Airport Weather Requirements)."},
 
  {cat:"High Minimums Captain",ref:"FOM 3.9",q:"As a High Minimums Captain (under 100 hr PIC in type), when is a takeoff alternate required?",
-  a:["If departure reported weather is below published <b>CAT I DH +100 ft</b> AND published <b>CAT I visibility +1/2 sm</b>.","CAT II/III are not usable for these adjustments."],
+  a:["If departure reported weather is below published <b>CAT I DH +100 ft</b> AND published <b>CAT I visibility +1/2 sm</b>.","Under <b>Exemption 5549</b> an HMC may fly CAT I to <b>published minima</b> (autopilot coupled to DH), and SA CAT I / SA CAT II / CAT II per FOM 3.16.2. <b>CAT III requires 100 hr PIC in type</b>, not reducible (FOM 3.15)."],
   src:"Required if departure airport reported weather is below published Category I approach DH plus 100 ft and published Category I approach visibility minimums plus 1/2 sm."},
 
  {cat:"Takeoff Minimums",ref:"FOM 5.4.4",q:"787 takeoff below RVR 500 (150 m). What governs?",
-  a:["Use the <b>Takeoff Low Visibility Card</b> in the PRC, and the <b>HGS/HUD Takeoff Briefing Card</b>.","<b>New in Rev 125:</b> this was 737-only through 124.2; the 787 is now included."],
+  a:["Use the <b>Takeoff Low Visibility Card</b> in the PRC, and the <b>HGS/HUD Takeoff Briefing Card</b>.","<b>New in Rev 125:</b> this was 737-only through 124.2; the 787 is now included.","<b>MEL note:</b> the HUD low visibility takeoff function may be deferred only when takeoff minima do not require it (MEL 31-61-14B); with it deferred, below-RVR-500 takeoffs are not available."],
   src:"(737/787) For takeoffs less than 500 RVR (150 m), see Takeoff Low Visibility Card in PRC. Table row: (737/787) <500 (150 m) - SEE HGS/HUD TAKEOFF BRIEFING CARD."},
  {cat:"Destination Alternate",ref:"FOM 8.2.3",q:"Within the contiguous 48 (or from AK / Mexico / Central America / Canada / Caribbean), when is no destination alternate required?",
   a:["Destination weather at <b>ETA +/- 1 hour</b> forecast at least <b>2000 ft ceiling and 3 sm</b> visibility.","The <b>2 sm more than the lowest applicable minimums</b> additive and the more-than-one-runway requirement apply to <b>Alaska</b> destinations, not the contiguous 48."],
@@ -158,7 +158,7 @@ const DATA=[
   src:"An alternate airport must be listed on the release prior to dispatch when thunderstorms or volcanic ash are forecast in the TAF at the ETA. / Per 14 CFR 121.621, an alternate is required for any Flag flight more than six hours flight time as planned on the Flight Plan."},
 
  {cat:"Alternate Minimums",ref:"FOM 8.2.2.1",q:"Derived alternate minimums, ONE nav facility (straight-in non-precision, CAT I, or circling). Additives?",
-  a:["Add <b>400 ft</b> to MDA(H)/DA(H), and add <b>1 sm (1600 m)</b> to the landing minimum."],
+  a:["Add <b>400 ft</b> to MDA(H)/DA(H), and add <b>1 sm (1600 m)</b> to the landing minimum.","<b>MEL note:</b> with an expired nav database (MEL 05-34-01), RNP and RNAV procedures are not permitted, so plan approaches on ground-based NAVAIDs."],
   src:"At least one operational navigational facility providing a straight-in non-precision approach, a CAT I precision approach, or a circling maneuver: Add 400 ft to MDA(H) or DA(H), as applicable. Add 1 sm or 1600 m to landing minimum."},
 
  {cat:"Alternate Minimums",ref:"FOM 8.2.2.1",q:"Derived alternate minimums, TWO facilities to different suitable runways (two approach ends). Additives?",
@@ -178,7 +178,7 @@ const DATA=[
   src:"The reported weather at the destination must be at or above the visibility minimums prescribed for the approach. Do not begin the final approach segment of an instrument approach procedure unless the latest reported RVR, visibility, or ceiling (if required) is at or above the authorized minimums. If a weather report is obtained after the final approach segment of an instrument approach has been initiated, and it indicates below minimum conditions, the pilot may continue the approach to DA/DH or MDA."},
 
  {cat:"Approach",ref:"FOM 5.6.11",q:"Which RVR is controlling, and what is the approach visibility floor?",
-  a:["<b>Non-Precision and CAT I: TDZ RVR controls</b> (Mid and Rollout are advisory; Mid may substitute if TDZ unavailable). CAT II/III: all required RVR values on the approach briefing card apply.","RVR greater than 6000 is advisory only. <b>Visibility below 1/2 sm is not authorized</b> for approach minimums."],
+  a:["<b>Non-Precision and CAT I: TDZ RVR controls</b> (Mid and Rollout are advisory; Mid may substitute if TDZ unavailable). CAT II/III: all required RVR values on the approach briefing card apply.","RVR greater than 6000 is advisory only. <b>Visibility values below 1/2 sm are not authorized</b> for approach minimums (RVR-based CAT II/III minima below that equivalent remain authorized)."],
   src:"TDZ RVR reports are controlling. Mid RVR and Rollout RVR reports (if available) are advisory. Mid RVR report may be substituted for the TDZ RVR if the TDZ RVR report is not available. RVR values greater than 6000 are advisory only. Visibility values below 1/2 sm are not authorized and shall not be used for approach minimums."},
 
  {cat:"Prohibited",ref:"FOM 9.2.1",q:"Takeoff/landing prohibited: wind, crosswind, braking action?",
@@ -281,7 +281,7 @@ start(false);
 <footer style="width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:8px;margin:28px auto 0;">
 <img src="B787_night.jpg" alt="Boeing 787" style="width:380px;max-width:60%;height:auto;border-radius:6px;">
 <a href="mailto:ryan.pettit@alaskaair.com?subject=B787%20Study%20Portal%20-%20Weather%20Requirements%20Quiz" style="font-size:11px;color:#b1d887;font-family:inherit;text-decoration:none;">ryan.pettit@alaskaair.com</a>
-<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 1.7</div>
+<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 1.8</div>
 </footer>
 </body>
 </html>

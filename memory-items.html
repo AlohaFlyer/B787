@@ -100,7 +100,7 @@
 
 <script>
 const DATA=[
- {name:"CABIN ALTITUDE",ref:"QRH 2.1",cond:"Cabin altitude is excessive.",steps:[
+ {name:"CABIN ALTITUDE",ref:"QRH 2.1",cond:"Cabin altitude is excessive.",fctm:"FCTM 7.8 Western US Depress Strategy: over mountainous terrain set the initial altitude target to 18,000 ft to stay above all grid MORAs, start a chronograph, and fly the oxygen endurance profile: 5 minutes to FL180, then 45 minutes from mask drop to FL100. Level at the lowest safe altitude, stepping down toward 10,000 ft.",steps:[
    {t:'n',n:'1',h:'Don the oxygen masks.'},
    {t:'n',n:'2',h:'Establish crew communications.'},
    {t:'n',n:'3',h:'Check the cabin altitude and rate.'},
@@ -137,7 +137,7 @@ const DATA=[
    {t:'n',n:'3',h:'FUEL CONTROL switch (affected side): <i>Confirm</i> <b>CUTOFF</b>'},
    {t:'n',n:'4',h:'Engine fire switch (affected side): <i>Confirm</i> <b>Pull</b>'},
  ]},
- {name:"FIRE ENG L, R",ref:"QRH 8.2",cond:"Fire is detected in the affected engine. (Memory item applies in flight; on the ground it routes to step 13.)",steps:[
+ {name:"FIRE ENG L, R",ref:"QRH 8.2",cond:"Fire is detected in the affected engine. (Memory item applies in flight; on the ground it routes to step 13.)",fctm:"FCTM 3.36: after takeoff, accomplish the memory items as soon as the flight path is under control, the gear has been retracted, and a safe altitude has been attained (minimum 400 ft AGL). Reference items by the PM as soon as practical.",steps:[
    {t:'n',n:'1',h:'Choose one:'},
    {t:'b',h:'On the ground: Go to step 13'},
    {t:'b',h:'In flight: Go to step 2'},
@@ -195,7 +195,7 @@ function render(){
         <div class="cond">Condition: ${d.cond}</div>
       </div>
       <div class="readout${revealed?' show':''}">${stepsHTML(d.steps)}</div>
-      <div class="srcpanel${srcOpen?' show':''}"><div class="srclabel">QRH Source &mdash; ${d.ref}</div><div class="srcref">${d.name}</div><div class="srcsub" style="color:#cfe2f2;font-style:normal">Condition: ${d.cond}<br>QRH R7 (19 Jan 2026). Verbatim recall items above the dashed line, recited cold.</div></div>
+      <div class="srcpanel${srcOpen?' show':''}"><div class="srclabel">QRH Source &mdash; ${d.ref}</div><div class="srcref">${d.name}</div><div class="srcsub" style="color:#cfe2f2;font-style:normal">Condition: ${d.cond}<br>QRH R7 (19 Jan 2026). Verbatim recall items above the dashed line, recited cold.</div>${d.fctm?`<div class="srcsub" style="color:#f0d9a8;font-style:normal;margin-top:10px">${d.fctm}</div>`:``}</div>
       <div class="spacer"></div>
       <div class="controls">
         ${revealed?`
@@ -242,7 +242,7 @@ start(false);
 <footer style="width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:8px;margin:28px auto 0;">
 <img src="B787_night.jpg" alt="Boeing 787" style="width:380px;max-width:60%;height:auto;border-radius:6px;">
 <a href="mailto:ryan.pettit@alaskaair.com?subject=B787%20Study%20Portal%20-%20Memory%20Items%20Drill" style="font-size:11px;color:#b1d887;font-family:inherit;text-decoration:none;">ryan.pettit@alaskaair.com</a>
-<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 1.6</div>
+<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 1.7</div>
 </footer>
 </body>
 </html>
