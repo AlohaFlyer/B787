@@ -9,7 +9,7 @@
   var TAX_SRC = 'Tax Foundation, top marginal rates effective 1 Jan 2026';
   // Bump this every deploy. It is the only way to tell from inside the browser
   // whether you are looking at current code or a cached copy.
-  var BUILD = 'v2.36';
+  var BUILD = 'v2.37';
 
   var LS = {
     get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } },
@@ -738,8 +738,14 @@
 
   // This file is deferred, so pages that paint a profile row at parse time see
   // the fallback defaults and never correct themselves. Tell them when we exist.
+  function paintVersion() {
+    var n = document.querySelectorAll('.ver, #verSlot');
+    for (var i = 0; i < n.length; i++) n[i].textContent = 'Ver ' + BUILD.replace(/^v/, '');
+  }
+
   function ready() {
     mount();
+    paintVersion();
     try { window.dispatchEvent(new CustomEvent('portalsettings:ready')); } catch (e) {}
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
