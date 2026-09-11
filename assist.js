@@ -228,6 +228,18 @@
   '.as-ans ul{margin:0;padding-left:20px;}' +
   '.as-ans li{margin:7px 0;line-height:1.6;}' +
   '.as-ans .who{font-size:11px;color:#666;margin-top:9px;}' +
+  '.as-ans .turn{border-top:2px solid #bfe9f4;margin-top:12px;padding-top:10px;}' +
+  '.as-ans .turn:first-child{border-top:none;margin-top:0;padding-top:0;}' +
+  '.as-ans .tq{font-size:12.5px;font-weight:700;color:#007cba;margin-bottom:6px;}' +
+  '.as-fu{border-top:2px solid #bfe9f4;margin-top:12px;padding-top:10px;}' +
+  '.as-fu textarea{width:100%;min-height:50px;padding:9px;border:2px solid #bfe9f4;border-radius:6px;font-family:inherit;font-size:16px;resize:vertical;}' +
+  '.as-fu textarea:focus{outline:none;border-color:#007cba;}' +
+  '.as-fubar{display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap;}' +
+  '.as-fubar button{font-family:inherit;font-size:12.5px;font-weight:700;border-radius:6px;padding:9px 14px;cursor:pointer;min-height:40px;border:2px solid #01416e;}' +
+  '#as-fuask{background:#01416e;color:#fff;}' +
+  '#as-fuask[disabled]{opacity:.5;cursor:not-allowed;}' +
+  '#as-funew{background:#fff;color:#01416e;}' +
+  '.as-fubar .as-fucount{font-size:11px;color:#666;}' +
   '.as-res{background:#fff;border:2px solid #bfe9f4;border-left:6px solid #007cba;padding:11px 13px;margin-top:9px;}' +
   '.as-res .t{font-size:13px;font-weight:700;}' +
   '.as-res .r{font-size:11px;font-weight:700;color:#007cba;margin-top:2px;}' +
@@ -250,7 +262,13 @@
   '</div>' +
   '<div class="as-chips" id="as-chips"></div>' +
   '<div class="as-status" id="as-status"></div>' +
-  '<div class="as-ans" id="as-ans"><h4>Pualani says</h4><div class="body" id="as-ansb"></div><div class="who" id="as-answ"></div></div>' +
+  '<div class="as-ans" id="as-ans"><h4>Pualani says</h4><div class="body" id="as-ansb"></div><div class="who" id="as-answ"></div>' +
+    '<div class="as-fu" id="as-fu" style="display:none">' +
+      '<textarea id="as-fuq" placeholder="Follow up on this answer" aria-label="Follow-up question"></textarea>' +
+      '<div class="as-fubar"><button type="button" id="as-fuask">Ask follow-up</button>' +
+      '<button type="button" id="as-funew">New thread</button>' +
+      '<span class="as-fucount" id="as-fucount"></span></div>' +
+    '</div></div>' +
   '<div id="as-res"></div>' +
   '</div></div>';
 
@@ -318,6 +336,67 @@
     load().then(function () { chips(); render(runSearch(q, 10)); })
       .catch(function (e) { status('Section index unavailable: ' + e.message + '. Tick Make Available Offline in settings while you have signal.'); });
   }
+  /* One thread holds the excerpts pulled for the opening question. Follow-ups
+     add only the new question, so this section's text is sent once. */
+  var THREAD = null, MAXTURNS = 12, BUSY = false;
+
+  function paintThread(pending) {
+    if (!THREAD) return;
+    var html = THREAD.turns.map(function (t) {
+      return '<div class="turn"><div class="tq">' + esc(t.q) + '</div><div class="ta">' + t.a + '</div></div>';
+    }).join('');
+    if (pending) html += '<div class="turn"><div class="tq">' + esc(THREAD.pendingQ || '') + '</div><div class="ta">' + esc(pending) + '</div></div>';
+    el('as-ansb').innerHTML = html;
+    var n = THREAD.turns.length, done = n > 0 && !pending;
+    el('as-fu').style.display = done ? '' : 'none';
+    if (done) {
+      var left = MAXTURNS - n;
+      el('as-fuask').disabled = left <= 0;
+      el('as-fucount').textContent = left > 0
+        ? left + ' follow-up' + (left === 1 ? '' : 's') + ' left in this thread'
+        : 'Thread full. Start a new one.';
+    }
+  }
+
+  function send() {
+    BUSY = true;
+    el('as-fuask').disabled = true;
+    return window.PortalSettings.askThread(THREAD.sys, THREAD.messages).then(function (txt) {
+      var body = (txt || '').trim();
+      THREAD.messages.push({ role: 'assistant', content: body || '(empty)' });
+      THREAD.turns.push({ q: THREAD.pendingQ, a: body ? renderAnswer(body) : '<p>Empty response.</p>' });
+      THREAD.pendingQ = null;
+      paintThread();
+    }).catch(function (e) {
+      THREAD.messages.pop();           // never leave an unanswered question in the history
+      THREAD.pendingQ = null;
+      paintThread();
+      var n = document.createElement('div');
+      n.style.cssText = 'color:#8a1f1f;font-size:13px;margin-top:9px;';
+      n.textContent = 'Could not reach the model. ' + (e && e.message ? e.message : '');
+      el('as-ansb').appendChild(n);
+      el('as-fu').style.display = THREAD.turns.length ? '' : 'none';
+    }).then(function () { BUSY = false; el('as-fuask').disabled = THREAD.turns.length >= MAXTURNS; });
+  }
+
+  function followUp() {
+    if (BUSY || !THREAD || !window.PortalSettings) return;
+    var q = el('as-fuq').value.trim();
+    if (!q || THREAD.turns.length >= MAXTURNS) { if (!q) el('as-fuq').focus(); return; }
+    el('as-fuq').value = '';
+    THREAD.pendingQ = q;
+    THREAD.messages.push({ role: 'user', content: q });
+    paintThread('Thinking...');
+    send();
+  }
+
+  function newThread() {
+    THREAD = null;
+    el('as-ans').style.display = 'none';
+    el('as-fu').style.display = 'none';
+    el('as-fuq').value = '';
+  }
+
   function ask() {
     var q = el('as-q').value.trim();
     if (!q) { el('as-q').focus(); return; }
@@ -352,16 +431,15 @@
       var ctx = hits.map(function (h, i) {
         return '[' + (i + 1) + '] ' + h.d.t + (h.d.r ? ' (' + h.d.r + ')' : '') + '\n' + h.d.x.slice(0, 2600);
       }).join('\n\n');
-      var user = 'Question: ' + q + '\n\nExcerpts from ' + CORPUS.title + ':\n\n' + ctx;
+      var user = 'Question: ' + q + '\n\nExcerpts from ' + CORPUS.title +
+        '. Later questions in this conversation refer back to these same excerpts:\n\n' + ctx;
+      THREAD = { sys: sys, messages: [{ role: 'user', content: user }], turns: [], pendingQ: q };
       el('as-ans').style.display = 'block';
+      el('as-fu').style.display = 'none';
       el('as-ansb').textContent = 'Thinking...';
       el('as-answ').textContent = window.PortalSettings.modelLabel() + ' · ' + CORPUS.title + ' only · ' +
         p.seat + ' · B787 · ' + p.base + (p.longevity ? ' · ' + p.longevity : '');
-      window.PortalSettings.ask(sys, user).then(function (txt) {
-        var body = (txt || '').trim();
-        if (body) { el('as-ansb').innerHTML = renderAnswer(body); }
-        else { el('as-ansb').textContent = 'Empty response.'; }
-      }).catch(function (e) { el('as-ansb').textContent = 'Could not reach the model. ' + e.message; });
+      send();
     }).catch(function (e) {
       // Without this the button did nothing at all when the corpus failed:
       // no spinner, no message, just an unhandled rejection in the console.
@@ -394,11 +472,13 @@
     setMode(lsGet('as787_assist_mode', 'keywords'), false);
     el('as-search').addEventListener('click', doSearch);
     el('as-ask').addEventListener('click', ask);
+    el('as-fuask').addEventListener('click', followUp);
+    el('as-funew').addEventListener('click', function () { newThread(); el('as-q').focus(); });
     // Keys typed inside the widget belong to the widget. Pages like triggers,
     // flows and the quizzes bind Space, K and R to document, so without this a
     // space bar in the question box advances the card instead of typing.
     function inWidget(t) {
-      if (!t || !t.closest || !t.closest('#as-panel')) return false;
+      if (!t || !t.closest || !t.closest('#as-panel')) return false;   // covers #as-q and #as-fuq
       var tag = (t.tagName || '').toUpperCase();
       return tag === 'INPUT' || tag === 'TEXTAREA' || t.isContentEditable === true;
     }

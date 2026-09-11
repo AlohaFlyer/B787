@@ -15,36 +15,53 @@
   var PROV = {
     claude: { name: 'Claude', hint: 'sk-ant-... from console.anthropic.com',
       models: function (k) { return fetch('https://api.anthropic.com/v1/models?limit=100', { headers: hdr(k) }).then(j).then(function (r) { return (r.data || []).map(function (m) { return m.id; }); }); },
-      ask: function (k, model, sys, user) {
+      ask: function (k, model, sys, msgs) {
+        // The first user turn carries the retrieved manual text and never changes
+        // for the life of a thread, so it is the cache anchor. Everything before
+        // the breakpoint is read from cache on every follow-up instead of re-read
+        // at full price. Verified against the Messages API prompt-caching docs:
+        // generally available, no beta header, 512 token floor on current models.
+        var out = msgs.map(function (m, i) {
+          if (i === 0 && m.role === 'user') {
+            return { role: 'user', content: [{ type: 'text', text: m.content, cache_control: { type: 'ephemeral' } }] };
+          }
+          return { role: m.role, content: m.content };
+        });
         return fetch('https://api.anthropic.com/v1/messages', { method: 'POST', headers: hdr(k, 1),
-          body: JSON.stringify({ model: model, max_tokens: 1200, system: sys, messages: [{ role: 'user', content: user }] }) })
+          body: JSON.stringify({ model: model, max_tokens: 1200, system: sys, messages: out }) })
           .then(j).then(function (r) { return (r.content || []).filter(function (c) { return c.type === 'text'; }).map(function (c) { return c.text; }).join('\n'); });
       } },
     openai: { name: 'ChatGPT', hint: 'sk-... from platform.openai.com',
       models: function (k) { return fetch('https://api.openai.com/v1/models', { headers: { Authorization: 'Bearer ' + k } }).then(j).then(function (r) { return (r.data || []).map(function (m) { return m.id; }).sort(); }); },
-      ask: function (k, model, sys, user) { return chat('https://api.openai.com/v1/chat/completions', { Authorization: 'Bearer ' + k }, model, sys, user); } },
+      ask: function (k, model, sys, msgs) { return chat('https://api.openai.com/v1/chat/completions', { Authorization: 'Bearer ' + k }, model, sys, msgs); } },
     gemini: { name: 'Gemini', hint: 'key from aistudio.google.com',
       models: function (k) { return fetch('https://generativelanguage.googleapis.com/v1beta/models?pageSize=200', { headers: { 'x-goog-api-key': k } }).then(j)
         .then(function (r) { return (r.models || []).filter(function (m) { return (m.supportedGenerationMethods || []).indexOf('generateContent') >= 0; }).map(function (m) { return m.name.replace(/^models\//, ''); }); }); },
-      ask: function (k, model, sys, user) {
+      ask: function (k, model, sys, msgs) {
+        var contents = msgs.map(function (m) {
+          return { role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] };
+        });
         return fetch('https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(model) + ':generateContent',
           { method: 'POST', headers: { 'content-type': 'application/json', 'x-goog-api-key': k },
-            body: JSON.stringify({ systemInstruction: { parts: [{ text: sys }] }, contents: [{ role: 'user', parts: [{ text: user }] }] }) })
+            body: JSON.stringify({ systemInstruction: { parts: [{ text: sys }] }, contents: contents }) })
           .then(j).then(function (r) { var c = r.candidates && r.candidates[0]; return c ? (c.content.parts || []).map(function (p) { return p.text || ''; }).join('') : ''; });
       } },
     grok: { name: 'Grok', hint: 'xai-... from console.x.ai',
       models: function (k) { return fetch('https://api.x.ai/v1/models', { headers: { Authorization: 'Bearer ' + k } }).then(j).then(function (r) { return (r.data || []).map(function (m) { return m.id; }).sort(); }); },
-      ask: function (k, model, sys, user) { return chat('https://api.x.ai/v1/chat/completions', { Authorization: 'Bearer ' + k }, model, sys, user); } }
+      ask: function (k, model, sys, msgs) { return chat('https://api.x.ai/v1/chat/completions', { Authorization: 'Bearer ' + k }, model, sys, msgs); } }
   };
   function hdr(k, post) {
     var h = { 'x-api-key': k, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' };
     if (post) h['content-type'] = 'application/json';
     return h;
   }
-  function chat(url, extra, model, sys, user) {
+  function chat(url, extra, model, sys, msgs) {
     var h = { 'content-type': 'application/json' };
     for (var k in extra) h[k] = extra[k];
-    return fetch(url, { method: 'POST', headers: h, body: JSON.stringify({ model: model, messages: [{ role: 'system', content: sys }, { role: 'user', content: user }] }) })
+    var out = [{ role: 'system', content: sys }].concat(msgs.map(function (m) {
+      return { role: m.role, content: m.content };
+    }));
+    return fetch(url, { method: 'POST', headers: h, body: JSON.stringify({ model: model, messages: out }) })
       .then(j).then(function (r) { return (r.choices && r.choices[0] && r.choices[0].message.content) || ''; });
   }
   function j(r) {
@@ -500,13 +517,21 @@
       var p = LS.get('pwa_provider', 'claude');
       return !!(LS.get(keyName(p), '') && LS.get(modelName(p), ''));
     },
-    ask: function (sys, user) {
+    // Multi-turn. messages is [{role:'user'|'assistant', content:'...'}], oldest first.
+    askThread: function (sys, messages) {
       var p = LS.get('pwa_provider', 'claude');
       var k = LS.get(keyName(p), ''), m = LS.get(modelName(p), '');
       if (!k) return Promise.reject(new Error('No API key saved. Open settings and add one.'));
       if (!m) return Promise.reject(new Error('No model chosen. Open settings and tap Load.'));
-      return PROV[p].ask(k, m, sys, user);
+      if (!messages || !messages.length) return Promise.reject(new Error('Nothing to ask.'));
+      return PROV[p].ask(k, m, sys, messages);
     },
+    // Single-shot, kept so anything still calling ask(sys, user) keeps working.
+    ask: function (sys, user) {
+      return window.PortalSettings.askThread(sys, [{ role: 'user', content: user }]);
+    },
+    // Only Claude caches the context block today. The others re-read it every turn.
+    threadsAreCheap: function () { return LS.get('pwa_provider', 'claude') === 'claude'; },
     modelLabel: function () {
       var p = LS.get('pwa_provider', 'claude');
       return PROV[p].name + ' · ' + LS.get(modelName(p), '');

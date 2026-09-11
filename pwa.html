@@ -78,6 +78,21 @@
   .res .sn{font-size:14px;line-height:1.55;color:#333;margin-top:7px;}
   .res mark{background:var(--good);color:var(--midnight);padding:0 2px;}
   .res .tag{background:var(--good);color:var(--midnight);border-radius:3px;padding:1px 6px;font-size:10px;letter-spacing:.06em;margin-left:6px;}
+  #answer .turn{border-top:2px solid var(--breeze);margin-top:14px;padding-top:12px;}
+  #answer .turn:first-child{border-top:none;margin-top:0;padding-top:0;}
+  #answer .tq{font-size:13px;font-weight:700;color:var(--atlas);margin-bottom:7px;}
+  #answer .tq:before{content:"You: ";color:#7a93a4;}
+  .fu{border-top:2px solid var(--breeze);margin-top:14px;padding-top:12px;}
+  .fu textarea{width:100%;min-height:54px;padding:10px;border:2px solid var(--breeze);border-radius:6px;font-family:inherit;font-size:16px;resize:vertical;}
+  .fu textarea:focus{outline:none;border-color:var(--atlas);}
+  .fubar{display:flex;align-items:center;gap:9px;margin-top:9px;flex-wrap:wrap;}
+  .fubar button{font-family:inherit;font-size:13px;font-weight:700;border-radius:6px;padding:10px 15px;cursor:pointer;min-height:40px;border:2px solid var(--midnight);}
+  #fuAsk{background:var(--midnight);color:#fff;}
+  #fuAsk:hover{background:var(--atlas);}
+  #fuAsk[disabled]{opacity:.5;cursor:not-allowed;}
+  #fuNew{background:#fff;color:var(--midnight);}
+  #fuNew:hover{background:var(--breeze);}
+  .fubar .fucount{font-size:11px;color:#666;}
   #answer .lead{font-size:16.5px;font-weight:700;line-height:1.5;margin:0 0 10px;}
   #answer ul{margin:0;padding-left:20px;}
   #answer li{margin:7px 0;line-height:1.6;}
@@ -161,6 +176,14 @@
     <h3>Pualani says</h3>
     <div class="body" id="answerBody"></div>
     <div class="who" id="answerWho"></div>
+    <div class="fu" id="fuWrap" style="display:none">
+      <textarea id="fuQ" placeholder="Follow up on this answer" aria-label="Follow-up question"></textarea>
+      <div class="fubar">
+        <button type="button" id="fuAsk">Ask follow-up</button>
+        <button type="button" id="fuNew">New thread</button>
+        <span class="fucount" id="fuCount"></span>
+      </div>
+    </div>
   </div>
 
   <div id="status"></div>
@@ -716,6 +739,88 @@
     return { text: out.join('\n\n'), read: readList };
   }
 
+  /* ---------- thread ----------
+     One thread holds the sections retrieved for the opening question. Follow-ups
+     add only the new question, so the manual text is sent once and, on Claude,
+     read from cache thereafter. Typing in the main box starts a new thread. */
+  var THREAD = null, MAXTURNS = 12, BUSY = false;
+
+  function threadHTML() {
+    if (!THREAD) return '';
+    return THREAD.turns.map(function (t) {
+      return '<div class="turn"><div class="tq">' + esc(t.q) + '</div>' +
+        '<div class="ta">' + t.a + '</div></div>';
+    }).join('');
+  }
+
+  function paintThread(pendingText) {
+    var html = threadHTML();
+    if (pendingText) {
+      html += '<div class="turn"><div class="tq">' + esc(THREAD.pendingQ || '') + '</div>' +
+        '<div class="ta">' + esc(pendingText) + '</div></div>';
+    }
+    $('answerBody').innerHTML = html;
+    var n = THREAD ? THREAD.turns.length : 0;
+    var done = n > 0 && !pendingText;
+    $('fuWrap').style.display = done ? '' : 'none';
+    if (done) {
+      var left = MAXTURNS - n;
+      $('fuAsk').disabled = left <= 0;
+      $('fuCount').textContent = left > 0
+        ? left + ' follow-up' + (left === 1 ? '' : 's') + ' left in this thread'
+        : 'Thread full. Start a new one.';
+    }
+  }
+
+  function newThread() {
+    THREAD = null;
+    $('answer').style.display = 'none';
+    $('fuWrap').style.display = 'none';
+    $('fuQ').value = '';
+  }
+
+  function send(s) {
+    BUSY = true;
+    $('fuAsk').disabled = true;
+    return s.askThread(THREAD.sys, THREAD.messages).then(function (txt) {
+      var body = (txt || '').trim();
+      var html = body ? renderAnswer(body) : '<p>Empty response.</p>';
+      THREAD.messages.push({ role: 'assistant', content: body || '(empty)' });
+      THREAD.turns.push({ q: THREAD.pendingQ, a: html });
+      THREAD.pendingQ = null;
+      paintThread();
+      if (THREAD.turns.length === 1 && THREAD.readList.length) {
+        var n = document.createElement('div');
+        n.style.cssText = 'font-size:11px;color:#666;margin-top:8px;';
+        n.textContent = 'Read in full: ' + THREAD.readList.join(', ') + '.';
+        $('answerBody').appendChild(n);
+      }
+    }).catch(function (e) {
+      // Drop the unanswered question so the next attempt is not sent twice.
+      THREAD.messages.pop();
+      THREAD.pendingQ = null;
+      paintThread();
+      var n = document.createElement('div');
+      n.style.cssText = 'color:#8a1f1f;font-size:13px;margin-top:10px;';
+      n.textContent = 'Could not reach the model. ' + (e && e.message ? e.message : '');
+      $('answerBody').appendChild(n);
+      $('fuWrap').style.display = THREAD.turns.length ? '' : 'none';
+    }).then(function () { BUSY = false; if ($('fuAsk')) $('fuAsk').disabled = THREAD && THREAD.turns.length >= MAXTURNS; });
+  }
+
+  function followUp() {
+    var st = PS();
+    if (BUSY || !THREAD || !st) return;
+    var q = $('fuQ').value.trim();
+    if (!q) { $('fuQ').focus(); return; }
+    if (THREAD.turns.length >= MAXTURNS) return;
+    $('fuQ').value = '';
+    THREAD.pendingQ = q;
+    THREAD.messages.push({ role: 'user', content: q });
+    paintThread('Thinking...');
+    send(st);
+  }
+
   function ask() {
     var q = $('q').value.trim();
     if (!q) { $('q').focus(); return; }
@@ -734,9 +839,12 @@
         'Pilot profile: ' + p.seat + ' on the ' + p.fleet + ', domiciled ' + p.base + '.' +
         (p.doh ? ' Date of hire ' + p.doh + ', so ' + p.years + ' years ' + p.months + ' months of service as of today, next longevity anniversary ' + p.next + '.' : '');
 
+      THREAD = { sys: SYS, messages: [], turns: [], readList: [], pendingQ: q };
       $('answer').style.display = 'block';
+      $('fuWrap').style.display = 'none';
       $('answerBody').textContent = 'Working out which sections govern this...';
-      $('answerWho').textContent = s.modelLabel() + ' \u00b7 asked as ' + profileText();
+      $('answerWho').textContent = s.modelLabel() + ' \u00b7 asked as ' + profileText() +
+        (s.threadsAreCheap && s.threadsAreCheap() ? '' : ' \u00b7 follow-ups re-send the full text on this provider');
 
       var ROUTER = 'You route questions about the Hawaiian Airlines 2023 Pilots Agreement to its sections. ' +
         'Reply with section numbers only, comma separated, at most 4, most likely first. No words, no punctuation beyond commas. ' +
@@ -745,26 +853,17 @@
 
       function answerWith(nums) {
         var built = buildWholeSections(nums, hits);
-        if (!built.text) { $('answerBody').textContent = 'Nothing in the agreement matched.'; return; }
+        if (!built.text) { $('answerBody').textContent = 'Nothing in the agreement matched.'; THREAD = null; return; }
         $('answerBody').textContent = 'Reading ' + (built.read.join(', ') || 'the matched pages') + '...';
+        // Everything the thread will ever need from the manual rides in this one
+        // message, which is also the cache anchor. Follow-ups add a bare question.
         var user = who + '\n\n' + PROFILE_INSTRUCTION + '\n\nQuestion: ' + q +
           '\n\nYou have been given the COMPLETE text of these sections of the 2023 Hawaiian Airlines Pilots Agreement: ' +
           (built.read.join('; ') || 'the pages matched by search') +
-          '. Read all of it before answering.\n\n' + built.text;
-        s.ask(SYS, user).then(function (txt) {
-          var body = (txt || '').trim();
-          if (body) {
-            $('answerBody').innerHTML = renderAnswer(body);
-            if (built.read.length) {
-              var n = document.createElement('div');
-              n.style.cssText = 'font-size:11px;color:#666;margin-top:8px;';
-              n.textContent = 'Read in full: ' + built.read.join(', ') + '.';
-              $('answerBody').appendChild(n);
-            }
-          } else { $('answerBody').textContent = 'Empty response.'; }
-        }).catch(function (e) {
-          $('answerBody').textContent = 'Could not reach the model. ' + e.message;
-        });
+          '. Read all of it before answering. Later questions in this conversation refer back to this same text.\n\n' + built.text;
+        THREAD.readList = built.read;
+        THREAD.messages.push({ role: 'user', content: user });
+        send(s);
       }
 
       s.ask(ROUTER, routerUser).then(function (txt) {
@@ -797,6 +896,12 @@
     if (b) setMode(b.getAttribute('data-mode'), true);
   });
   setMode(LS.get('pwa_search_mode', 'keywords'), false);
+  $('fuAsk').addEventListener('click', followUp);
+  $('fuNew').addEventListener('click', function () { newThread(); $('q').focus(); });
+  $('fuQ').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); followUp(); }
+    e.stopPropagation();
+  });
   $('searchBtn').addEventListener('click', doSearch);
   $('askBtn').addEventListener('click', ask);
   $('q').addEventListener('keydown', function (e) {
