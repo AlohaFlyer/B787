@@ -1,7 +1,7 @@
 /* AS787 Study Portal service worker - offline support
    Two tiers: core (pages, quizzes, data, PDFs) and audio (podcast mp3s).
    Nothing is downloaded until the user asks for it from the menu page. */
-const VERSION = 'v2';
+const VERSION = 'v3';
 const CORE  = 'b787-core-'  + VERSION;
 const AUDIO = 'b787-audio-' + VERSION;
 const MANIFEST = '/offline-manifest.json';

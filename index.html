@@ -119,7 +119,11 @@
     if(/^[^\s@]+@alaskaair\.com$/i.test(v)){grant();note(v);err.textContent='';open_();}
     else{err.textContent='Enter your @alaskaair.com email address.';inp.focus();}
   }
-  if(hasAccess()){open_();}
+  // The cookie alone is not enough any more. Browsers unlocked before the log
+  // existed have access but no recorded email, so the owner gate and the
+  // collector both see nothing. Re-show the gate once to capture it.
+  function known(){try{return !!localStorage.getItem('as787_email');}catch(e){return false;}}
+  if(hasAccess()&&known()){open_();}
   else if(inp){inp.focus();}
   if(btn)btn.addEventListener('click',check);
   if(inp)inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();check();}});
