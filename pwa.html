@@ -78,6 +78,24 @@
   .res .sn{font-size:14px;line-height:1.55;color:#333;margin-top:7px;}
   .res mark{background:var(--good);color:var(--midnight);padding:0 2px;}
   .res .tag{background:var(--good);color:var(--midnight);border-radius:3px;padding:1px 6px;font-size:10px;letter-spacing:.06em;margin-left:6px;}
+  .atts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+  .att{position:relative;width:62px;height:62px;border:2px solid var(--breeze);border-radius:6px;overflow:hidden;background:#fff;}
+  .att img{width:100%;height:100%;object-fit:cover;display:block;}
+  .att button{position:absolute;top:1px;right:1px;width:20px;height:20px;border:none;border-radius:50%;background:rgba(1,23,43,.78);color:#fff;font-size:13px;line-height:1;cursor:pointer;padding:0;}
+  .clip{background:#fff;border:2px solid var(--midnight);color:var(--midnight);border-radius:6px;padding:10px 13px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;min-height:40px;}
+  .clip:hover{background:var(--breeze);}
+  .drop{outline:3px dashed var(--atlas);outline-offset:3px;}
+  .attnote{font-size:11px;color:#666;margin-top:7px;}
+  .working{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--midnight);font-weight:700;}
+  .working .dots{display:inline-flex;gap:4px;}
+  .working .dots i{width:7px;height:7px;border-radius:50%;background:var(--atlas);display:block;animation:bl 1.05s infinite ease-in-out;}
+  .working .dots i:nth-child(2){animation-delay:.16s;}
+  .working .dots i:nth-child(3){animation-delay:.32s;}
+  @keyframes bl{0%,72%,100%{opacity:.22;transform:translateY(0);}36%{opacity:1;transform:translateY(-3px);}}
+  @media (prefers-reduced-motion:reduce){.working .dots i{animation:none;opacity:.7;}}
+  details.think{margin-top:9px;}
+  details.think summary{cursor:pointer;font-size:11px;font-weight:700;color:#7a93a4;letter-spacing:.04em;text-transform:uppercase;}
+  details.think .tb{white-space:pre-wrap;font-size:12.5px;line-height:1.55;color:#444;background:#f4f9fc;border-left:4px solid var(--breeze);padding:9px 11px;margin-top:7px;}
   #answer .turn{border-top:2px solid var(--breeze);margin-top:14px;padding-top:12px;}
   #answer .turn:first-child{border-top:none;margin-top:0;padding-top:0;}
   #answer .tq{font-size:13px;font-weight:700;color:var(--atlas);margin-bottom:7px;}
@@ -158,8 +176,12 @@
       </div>
       <span class="mhelp" id="modeHelp"></span>
     </div>
+    <div class="atts" id="atts"></div>
+    <div class="attnote" id="attNote"></div>
     <div class="row">
       <button class="primary" id="searchBtn" type="button">Offline Search</button>
+      <button class="clip" id="clipBtn" type="button" title="Attach a screenshot">&#128206; Attach</button>
+      <input type="file" id="fileIn" accept="image/*" multiple style="display:none">
       <button class="pualani" id="askBtn" type="button" title="Ask Pualani">
         <span class="disc"><img id="pualaniImg" src="/assets/pualani-2001.png" alt=""><span class="fallback" style="display:none">&#127802;</span></span>
         <span class="lbl">Ask Pualani</span>
@@ -178,8 +200,12 @@
     <div class="who" id="answerWho"></div>
     <div class="fu" id="fuWrap" style="display:none">
       <textarea id="fuQ" placeholder="Follow up on this answer" aria-label="Follow-up question"></textarea>
+      <div class="atts" id="fuAtts"></div>
+      <div class="attnote" id="fuAttNote"></div>
       <div class="fubar">
         <button type="button" id="fuAsk">Ask follow-up</button>
+        <button type="button" class="clip" id="fuClip" title="Attach a screenshot">&#128206;</button>
+        <input type="file" id="fuFileIn" accept="image/*" multiple style="display:none">
         <button type="button" id="fuNew">New thread</button>
         <span class="fucount" id="fuCount"></span>
       </div>
@@ -739,25 +765,110 @@
     return { text: out.join('\n\n'), read: readList };
   }
 
+  /* ---------- attachments ----------
+     Paste, paperclip and drop all land here. Images ride on the turn they were
+     attached to, so a screenshot on a follow-up is only sent with that question. */
+  var ATT = { main: [], fu: [] };
+
+  function attCap() { var s = PS(); return (s && s.MAX_IMAGES) || 4; }
+
+  function paintAtts(which) {
+    var box = $(which === 'fu' ? 'fuAtts' : 'atts');
+    var note = $(which === 'fu' ? 'fuAttNote' : 'attNote');
+    var list = ATT[which];
+    box.innerHTML = '';
+    list.forEach(function (im, i) {
+      var d = document.createElement('div');
+      d.className = 'att';
+      d.innerHTML = '<img src="' + im.url + '" alt="' + esc(im.name || 'attachment') + '">' +
+        '<button type="button" aria-label="Remove attachment">&times;</button>';
+      d.querySelector('button').addEventListener('click', function () {
+        list.splice(i, 1); paintAtts(which);
+      });
+      box.appendChild(d);
+    });
+    note.textContent = list.length
+      ? list.length + ' image' + (list.length === 1 ? '' : 's') + ' attached. Paste, drop or use Attach. Max ' + attCap() + '.'
+      : '';
+  }
+
+  function addFiles(which, files) {
+    var s = PS();
+    if (!s || !s.prepImage) return;
+    var list = ATT[which], room = attCap() - list.length;
+    var take = Array.prototype.slice.call(files).filter(function (f) { return /^image\//.test(f.type); }).slice(0, Math.max(0, room));
+    if (!take.length) {
+      if (room <= 0) $(which === 'fu' ? 'fuAttNote' : 'attNote').textContent = 'That is the ' + attCap() + ' image limit for one question.';
+      return;
+    }
+    Promise.all(take.map(function (f) { return s.prepImage(f).catch(function () { return null; }); }))
+      .then(function (out) {
+        out.forEach(function (im) { if (im) list.push(im); });
+        paintAtts(which);
+      });
+  }
+
+  function wireAttach(which, boxId, btnId, inputId) {
+    var box = $(boxId), btn = $(btnId), inp = $(inputId);
+    if (!box) return;
+    btn.addEventListener('click', function () { inp.click(); });
+    inp.addEventListener('change', function () { addFiles(which, inp.files); inp.value = ''; });
+    box.addEventListener('paste', function (e) {
+      var items = e.clipboardData && e.clipboardData.files;
+      if (items && items.length) { e.preventDefault(); addFiles(which, items); }
+    });
+    ['dragenter', 'dragover'].forEach(function (t) {
+      box.addEventListener(t, function (e) { e.preventDefault(); box.classList.add('drop'); });
+    });
+    ['dragleave', 'drop'].forEach(function (t) {
+      box.addEventListener(t, function (e) { e.preventDefault(); box.classList.remove('drop'); });
+    });
+    box.addEventListener('drop', function (e) {
+      if (e.dataTransfer && e.dataTransfer.files) addFiles(which, e.dataTransfer.files);
+    });
+  }
+
+  function workingHTML(label) {
+    return '<div class="working"><span class="dots"><i></i><i></i><i></i></span><span>' + esc(label) + '</span></div>';
+  }
+
   /* ---------- thread ----------
      One thread holds the sections retrieved for the opening question. Follow-ups
      add only the new question, so the manual text is sent once and, on Claude,
      read from cache thereafter. Typing in the main box starts a new thread. */
   var THREAD = null, MAXTURNS = 12, BUSY = false;
 
+  // The system prompt says to use ONLY the agreement excerpts. That is right for
+  // contract provisions and wrong for a paystub the pilot attached on purpose,
+  // so widen it only when images are actually present, and keep the two sources
+  // separately citable so a number's origin is never ambiguous.
+  function imageRule(n) {
+    return '\n\nThe user attached ' + n + ' image' + (n === 1 ? '' : 's') +
+      ' of their own documents, such as paystubs. Treat those images as authoritative for the ' +
+      'user\'s personal figures: gross pay, credited hours, pretax deductions, taxes withheld, ' +
+      'net pay. Keep using ONLY the agreement excerpts for contract provisions and rates. ' +
+      'When a figure comes from an image, cite it as (from your paystub) rather than a section. ' +
+      'If two paystubs disagree, say which you used and why. Never invent a figure that is in ' +
+      'neither the excerpts nor the images. If a deduction is present but unlabelled, say so ' +
+      'rather than guessing what it is.';
+  }
+
   function threadHTML() {
     if (!THREAD) return '';
     return THREAD.turns.map(function (t) {
       return '<div class="turn"><div class="tq">' + esc(t.q) + '</div>' +
-        '<div class="ta">' + t.a + '</div></div>';
+        '<div class="ta">' + t.a + '</div>' +
+        (t.think ? '<details class="think"><summary>Show reasoning</summary><div class="tb">' + esc(t.think) + '</div></details>' : '') +
+        '</div>';
     }).join('');
   }
 
+  // pendingText is a status label, not prose, so it renders as the live indicator.
   function paintThread(pendingText) {
     var html = threadHTML();
     if (pendingText) {
       html += '<div class="turn"><div class="tq">' + esc(THREAD.pendingQ || '') + '</div>' +
-        '<div class="ta">' + esc(pendingText) + '</div></div>';
+        '<div class="ta">' + workingHTML(pendingText) + '</div></div>';
     }
     $('answerBody').innerHTML = html;
     var n = THREAD ? THREAD.turns.length : 0;
@@ -777,16 +888,17 @@
     $('answer').style.display = 'none';
     $('fuWrap').style.display = 'none';
     $('fuQ').value = '';
+    ATT.fu = []; paintAtts('fu');
   }
 
   function send(s) {
     BUSY = true;
     $('fuAsk').disabled = true;
-    return s.askThread(THREAD.sys, THREAD.messages).then(function (txt) {
-      var body = (txt || '').trim();
-      var html = body ? renderAnswer(body) : '<p>Empty response.</p>';
-      THREAD.messages.push({ role: 'assistant', content: body || '(empty)' });
-      THREAD.turns.push({ q: THREAD.pendingQ, a: html });
+    return s.askFull(THREAD.sys, THREAD.messages).then(function (res) {
+      var body = (res.text || '').trim();
+      var html = body ? renderAnswer(body) : '<p>' + esc(s.emptyReason(res)) + '</p>';
+      THREAD.messages.push({ role: 'assistant', content: body || '(no answer)' });
+      THREAD.turns.push({ q: THREAD.pendingQ, a: html, think: (res.thinking || '').trim() });
       THREAD.pendingQ = null;
       paintThread();
       if (THREAD.turns.length === 1 && THREAD.readList.length) {
@@ -816,8 +928,15 @@
     if (THREAD.turns.length >= MAXTURNS) return;
     $('fuQ').value = '';
     THREAD.pendingQ = q;
-    THREAD.messages.push({ role: 'user', content: q });
-    paintThread('Thinking...');
+    var msg = { role: 'user', content: q };
+    if (ATT.fu.length) {
+      msg.images = ATT.fu.map(function (im) { return { mime: im.mime, b64: im.b64 }; });
+      THREAD.imgs = (THREAD.imgs || 0) + ATT.fu.length;
+      if (THREAD.sys.indexOf('attached') < 0) THREAD.sys = THREAD.sys + imageRule(THREAD.imgs);
+      ATT.fu = []; paintAtts('fu');
+    }
+    THREAD.messages.push(msg);
+    paintThread('Reading your question' + (msg.images ? ' and ' + msg.images.length + ' image' + (msg.images.length === 1 ? '' : 's') : '') + '...');
     send(st);
   }
 
@@ -839,10 +958,11 @@
         'Pilot profile: ' + p.seat + ' on the ' + p.fleet + ', domiciled ' + p.base + '.' +
         (p.doh ? ' Date of hire ' + p.doh + ', so ' + p.years + ' years ' + p.months + ' months of service as of today, next longevity anniversary ' + p.next + '.' : '');
 
-      THREAD = { sys: SYS, messages: [], turns: [], readList: [], pendingQ: q };
+      THREAD = { sys: SYS, messages: [], turns: [], readList: [], pendingQ: q, imgs: ATT.main.length };
+      if (ATT.main.length) THREAD.sys = SYS + imageRule(ATT.main.length);
       $('answer').style.display = 'block';
       $('fuWrap').style.display = 'none';
-      $('answerBody').textContent = 'Working out which sections govern this...';
+      $('answerBody').innerHTML = workingHTML('Working out which sections govern this...');
       $('answerWho').textContent = s.modelLabel() + ' \u00b7 asked as ' + profileText() +
         (s.threadsAreCheap && s.threadsAreCheap() ? '' : ' \u00b7 follow-ups re-send the full text on this provider');
 
@@ -854,7 +974,7 @@
       function answerWith(nums) {
         var built = buildWholeSections(nums, hits);
         if (!built.text) { $('answerBody').textContent = 'Nothing in the agreement matched.'; THREAD = null; return; }
-        $('answerBody').textContent = 'Reading ' + (built.read.join(', ') || 'the matched pages') + '...';
+        $('answerBody').innerHTML = workingHTML('Reading ' + (built.read.join(', ') || 'the matched pages') + '...');
         // Everything the thread will ever need from the manual rides in this one
         // message, which is also the cache anchor. Follow-ups add a bare question.
         var user = who + '\n\n' + PROFILE_INSTRUCTION + '\n\nQuestion: ' + q +
@@ -862,17 +982,24 @@
           (built.read.join('; ') || 'the pages matched by search') +
           '. Read all of it before answering. Later questions in this conversation refer back to this same text.\n\n' + built.text;
         THREAD.readList = built.read;
-        THREAD.messages.push({ role: 'user', content: user });
+        var first = { role: 'user', content: user };
+        if (ATT.main.length) {
+          first.images = ATT.main.map(function (im) { return { mime: im.mime, b64: im.b64 }; });
+          ATT.main = []; paintAtts('main');
+        }
+        THREAD.messages.push(first);
         send(s);
       }
 
       s.ask(ROUTER, routerUser).then(function (txt) {
         var nums = String(txt || '').match(/\d+/g) || [];
         nums = nums.filter(function (v, i, a) { return a.indexOf(v) === i; }).slice(0, 4);
-        if (!nums.length) nums = hits.slice(0, 2).map(function (h) { return h.doc.s; });
+        if (!nums.length) nums = hits.slice(0, 4).map(function (h) { return h.doc.s; })
+          .filter(function (v, i, a) { return a.indexOf(v) === i; }).slice(0, 2);
         answerWith(nums);
       }).catch(function () {
-        answerWith(hits.slice(0, 2).map(function (h) { return h.doc.s; }));
+        answerWith(hits.slice(0, 4).map(function (h) { return h.doc.s; })
+          .filter(function (v, i, a) { return a.indexOf(v) === i; }).slice(0, 2));
       });
     }).catch(function (e) {
       $('answer').style.display = 'block';
@@ -896,6 +1023,9 @@
     if (b) setMode(b.getAttribute('data-mode'), true);
   });
   setMode(LS.get('pwa_search_mode', 'keywords'), false);
+  wireAttach('main', 'q', 'clipBtn', 'fileIn');
+  wireAttach('fu', 'fuQ', 'fuClip', 'fuFileIn');
+  paintAtts('main'); paintAtts('fu');
   $('fuAsk').addEventListener('click', followUp);
   $('fuNew').addEventListener('click', function () { newThread(); $('q').focus(); });
   $('fuQ').addEventListener('keydown', function (e) {

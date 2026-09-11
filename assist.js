@@ -228,6 +228,23 @@
   '.as-ans ul{margin:0;padding-left:20px;}' +
   '.as-ans li{margin:7px 0;line-height:1.6;}' +
   '.as-ans .who{font-size:11px;color:#666;margin-top:9px;}' +
+  '.as-atts{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px;}' +
+  '.as-att{position:relative;width:56px;height:56px;border:2px solid #bfe9f4;border-radius:6px;overflow:hidden;background:#fff;}' +
+  '.as-att img{width:100%;height:100%;object-fit:cover;display:block;}' +
+  '.as-att button{position:absolute;top:1px;right:1px;width:19px;height:19px;border:none;border-radius:50%;background:rgba(1,23,43,.78);color:#fff;font-size:12px;line-height:1;cursor:pointer;padding:0;}' +
+  '.as-clip{background:#fff;border:2px solid #01416e;color:#01416e;border-radius:6px;padding:9px 13px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;min-height:40px;}' +
+  '.as-drop{outline:3px dashed #007cba;outline-offset:3px;}' +
+  '.as-attnote{font-size:11px;color:#666;margin-top:6px;}' +
+  '.as-working{display:flex;align-items:center;gap:9px;font-size:13.5px;color:#01416e;font-weight:700;}' +
+  '.as-working .as-dots{display:inline-flex;gap:4px;}' +
+  '.as-working .as-dots i{width:7px;height:7px;border-radius:50%;background:#007cba;display:block;animation:asbl 1.05s infinite ease-in-out;}' +
+  '.as-working .as-dots i:nth-child(2){animation-delay:.16s;}' +
+  '.as-working .as-dots i:nth-child(3){animation-delay:.32s;}' +
+  '@keyframes asbl{0%,72%,100%{opacity:.22;transform:translateY(0);}36%{opacity:1;transform:translateY(-3px);}}' +
+  '@media (prefers-reduced-motion:reduce){.as-working .as-dots i{animation:none;opacity:.7;}}' +
+  '.as-think{margin-top:8px;}' +
+  '.as-think summary{cursor:pointer;font-size:11px;font-weight:700;color:#7a93a4;letter-spacing:.04em;text-transform:uppercase;}' +
+  '.as-think .as-tb{white-space:pre-wrap;font-size:12px;line-height:1.55;color:#444;background:#f4f9fc;border-left:4px solid #bfe9f4;padding:8px 10px;margin-top:6px;}' +
   '.as-ans .turn{border-top:2px solid #bfe9f4;margin-top:12px;padding-top:10px;}' +
   '.as-ans .turn:first-child{border-top:none;margin-top:0;padding-top:0;}' +
   '.as-ans .tq{font-size:12.5px;font-weight:700;color:#007cba;margin-bottom:6px;}' +
@@ -258,14 +275,20 @@
     '</div><span class="as-mhelp" id="as-mhelp"></span></div>' +
   '<div class="as-row">' +
     '<button id="as-search" type="button">Offline Search</button>' +
+    '<button id="as-clip" type="button" class="as-clip" title="Attach a screenshot">&#128206;</button>' +
+    '<input type="file" id="as-file" accept="image/*" multiple style="display:none">' +
     '<button id="as-ask" type="button" title="Ask Pualani"><span class="disc"><img src="/assets/pualani-2001.png" alt=""></span><span class="lbl">Ask Pualani</span></button>' +
   '</div>' +
+  '<div class="as-atts" id="as-atts"></div><div class="as-attnote" id="as-attnote"></div>' +
   '<div class="as-chips" id="as-chips"></div>' +
   '<div class="as-status" id="as-status"></div>' +
   '<div class="as-ans" id="as-ans"><h4>Pualani says</h4><div class="body" id="as-ansb"></div><div class="who" id="as-answ"></div>' +
     '<div class="as-fu" id="as-fu" style="display:none">' +
       '<textarea id="as-fuq" placeholder="Follow up on this answer" aria-label="Follow-up question"></textarea>' +
+      '<div class="as-atts" id="as-fuatts"></div><div class="as-attnote" id="as-fuattnote"></div>' +
       '<div class="as-fubar"><button type="button" id="as-fuask">Ask follow-up</button>' +
+      '<button type="button" id="as-fuclip" class="as-clip" title="Attach a screenshot">&#128206;</button>' +
+      '<input type="file" id="as-fufile" accept="image/*" multiple style="display:none">' +
       '<button type="button" id="as-funew">New thread</button>' +
       '<span class="as-fucount" id="as-fucount"></span></div>' +
     '</div></div>' +
@@ -339,13 +362,61 @@
   /* One thread holds the excerpts pulled for the opening question. Follow-ups
      add only the new question, so this section's text is sent once. */
   var THREAD = null, MAXTURNS = 12, BUSY = false;
+  var ATT = { main: [], fu: [] };
+
+  function cap() { var s = window.PortalSettings; return (s && s.MAX_IMAGES) || 4; }
+  function paintAtts(which) {
+    var box = el(which === 'fu' ? 'as-fuatts' : 'as-atts');
+    var note = el(which === 'fu' ? 'as-fuattnote' : 'as-attnote');
+    if (!box) return;
+    var list = ATT[which];
+    box.innerHTML = '';
+    list.forEach(function (im, i) {
+      var d = document.createElement('div');
+      d.className = 'as-att';
+      d.innerHTML = '<img src="' + im.url + '" alt="' + esc(im.name || 'attachment') + '"><button type="button" aria-label="Remove attachment">&times;</button>';
+      d.querySelector('button').addEventListener('click', function () { list.splice(i, 1); paintAtts(which); });
+      box.appendChild(d);
+    });
+    note.textContent = list.length ? list.length + ' image' + (list.length === 1 ? '' : 's') + ' attached. Max ' + cap() + '.' : '';
+  }
+  function addFiles(which, files) {
+    var s = window.PortalSettings;
+    if (!s || !s.prepImage) return;
+    var list = ATT[which], room = cap() - list.length;
+    var take = Array.prototype.slice.call(files).filter(function (f) { return /^image\//.test(f.type); }).slice(0, Math.max(0, room));
+    if (!take.length) {
+      if (room <= 0) el(which === 'fu' ? 'as-fuattnote' : 'as-attnote').textContent = 'That is the ' + cap() + ' image limit for one question.';
+      return;
+    }
+    Promise.all(take.map(function (f) { return s.prepImage(f).catch(function () { return null; }); }))
+      .then(function (out) { out.forEach(function (im) { if (im) list.push(im); }); paintAtts(which); });
+  }
+  function wireAttach(which, boxId, btnId, inputId) {
+    var box = el(boxId), btn = el(btnId), inp = el(inputId);
+    if (!box || !btn || !inp) return;
+    btn.addEventListener('click', function () { inp.click(); });
+    inp.addEventListener('change', function () { addFiles(which, inp.files); inp.value = ''; });
+    box.addEventListener('paste', function (e) {
+      var f = e.clipboardData && e.clipboardData.files;
+      if (f && f.length) { e.preventDefault(); addFiles(which, f); }
+    });
+    ['dragenter', 'dragover'].forEach(function (t) { box.addEventListener(t, function (e) { e.preventDefault(); box.classList.add('as-drop'); }); });
+    ['dragleave', 'drop'].forEach(function (t) { box.addEventListener(t, function (e) { e.preventDefault(); box.classList.remove('as-drop'); }); });
+    box.addEventListener('drop', function (e) { if (e.dataTransfer && e.dataTransfer.files) addFiles(which, e.dataTransfer.files); });
+  }
+  function workingHTML(label) {
+    return '<div class="as-working"><span class="as-dots"><i></i><i></i><i></i></span><span>' + esc(label) + '</span></div>';
+  }
 
   function paintThread(pending) {
     if (!THREAD) return;
     var html = THREAD.turns.map(function (t) {
-      return '<div class="turn"><div class="tq">' + esc(t.q) + '</div><div class="ta">' + t.a + '</div></div>';
+      return '<div class="turn"><div class="tq">' + esc(t.q) + '</div><div class="ta">' + t.a + '</div>' +
+        (t.think ? '<details class="as-think"><summary>Show reasoning</summary><div class="as-tb">' + esc(t.think) + '</div></details>' : '') +
+        '</div>';
     }).join('');
-    if (pending) html += '<div class="turn"><div class="tq">' + esc(THREAD.pendingQ || '') + '</div><div class="ta">' + esc(pending) + '</div></div>';
+    if (pending) html += '<div class="turn"><div class="tq">' + esc(THREAD.pendingQ || '') + '</div><div class="ta">' + workingHTML(pending) + '</div></div>';
     el('as-ansb').innerHTML = html;
     var n = THREAD.turns.length, done = n > 0 && !pending;
     el('as-fu').style.display = done ? '' : 'none';
@@ -361,10 +432,12 @@
   function send() {
     BUSY = true;
     el('as-fuask').disabled = true;
-    return window.PortalSettings.askThread(THREAD.sys, THREAD.messages).then(function (txt) {
-      var body = (txt || '').trim();
-      THREAD.messages.push({ role: 'assistant', content: body || '(empty)' });
-      THREAD.turns.push({ q: THREAD.pendingQ, a: body ? renderAnswer(body) : '<p>Empty response.</p>' });
+    var S = window.PortalSettings;
+    return S.askFull(THREAD.sys, THREAD.messages).then(function (res) {
+      var body = (res.text || '').trim();
+      THREAD.messages.push({ role: 'assistant', content: body || '(no answer)' });
+      THREAD.turns.push({ q: THREAD.pendingQ, a: body ? renderAnswer(body) : '<p>' + esc(S.emptyReason(res)) + '</p>',
+        think: (res.thinking || '').trim() });
       THREAD.pendingQ = null;
       paintThread();
     }).catch(function (e) {
@@ -385,8 +458,10 @@
     if (!q || THREAD.turns.length >= MAXTURNS) { if (!q) el('as-fuq').focus(); return; }
     el('as-fuq').value = '';
     THREAD.pendingQ = q;
-    THREAD.messages.push({ role: 'user', content: q });
-    paintThread('Thinking...');
+    var msg = { role: 'user', content: q };
+    if (ATT.fu.length) { msg.images = ATT.fu.map(function (im) { return { mime: im.mime, b64: im.b64 }; }); ATT.fu = []; paintAtts('fu'); }
+    THREAD.messages.push(msg);
+    paintThread('Reading your question' + (msg.images ? ' and ' + msg.images.length + ' image' + (msg.images.length === 1 ? '' : 's') : '') + '...');
     send();
   }
 
@@ -395,6 +470,7 @@
     el('as-ans').style.display = 'none';
     el('as-fu').style.display = 'none';
     el('as-fuq').value = '';
+    ATT.fu = []; paintAtts('fu');
   }
 
   function ask() {
@@ -402,7 +478,7 @@
     if (!q) { el('as-q').focus(); return; }
     if (!window.PortalSettings) { status('Settings are not loaded on this page.'); return; }
     if (!window.PortalSettings.ready()) { status('Add an API key and pick a model in settings first.'); window.PortalSettings.open(); return; }
-    status('Reading this section...');
+    status('');
     load().then(function () {
       status('');
       chips();
@@ -433,10 +509,17 @@
       }).join('\n\n');
       var user = 'Question: ' + q + '\n\nExcerpts from ' + CORPUS.title +
         '. Later questions in this conversation refer back to these same excerpts:\n\n' + ctx;
-      THREAD = { sys: sys, messages: [{ role: 'user', content: user }], turns: [], pendingQ: q };
+      if (ATT.main.length) {
+        sys += ' The user attached ' + ATT.main.length + ' image' + (ATT.main.length === 1 ? '' : 's') +
+          ' of their own documents. Treat those images as authoritative for the user\'s own figures, ' +
+          'keep using ONLY the excerpts for section content, and cite an image figure as (from your image).';
+      }
+      var first = { role: 'user', content: user };
+      if (ATT.main.length) { first.images = ATT.main.map(function (im) { return { mime: im.mime, b64: im.b64 }; }); ATT.main = []; paintAtts('main'); }
+      THREAD = { sys: sys, messages: [first], turns: [], pendingQ: q };
       el('as-ans').style.display = 'block';
       el('as-fu').style.display = 'none';
-      el('as-ansb').textContent = 'Thinking...';
+      el('as-ansb').innerHTML = workingHTML('Reading ' + CORPUS.title + '...');
       el('as-answ').textContent = window.PortalSettings.modelLabel() + ' · ' + CORPUS.title + ' only · ' +
         p.seat + ' · B787 · ' + p.base + (p.longevity ? ' · ' + p.longevity : '');
       send();
@@ -472,6 +555,9 @@
     setMode(lsGet('as787_assist_mode', 'keywords'), false);
     el('as-search').addEventListener('click', doSearch);
     el('as-ask').addEventListener('click', ask);
+    wireAttach('main', 'as-q', 'as-clip', 'as-file');
+    wireAttach('fu', 'as-fuq', 'as-fuclip', 'as-fufile');
+    paintAtts('main'); paintAtts('fu');
     el('as-fuask').addEventListener('click', followUp);
     el('as-funew').addEventListener('click', function () { newThread(); el('as-q').focus(); });
     // Keys typed inside the widget belong to the widget. Pages like triggers,

@@ -17,19 +17,34 @@
       models: function (k) { return fetch('https://api.anthropic.com/v1/models?limit=100', { headers: hdr(k) }).then(j).then(function (r) { return (r.data || []).map(function (m) { return m.id; }); }); },
       ask: function (k, model, sys, msgs) {
         // The first user turn carries the retrieved manual text and never changes
-        // for the life of a thread, so it is the cache anchor. Everything before
-        // the breakpoint is read from cache on every follow-up instead of re-read
-        // at full price. Verified against the Messages API prompt-caching docs:
-        // generally available, no beta header, 512 token floor on current models.
+        // for the life of a thread, so it is the cache anchor. The breakpoint goes
+        // on the LAST block of that message, which is the text block, so attached
+        // images sit inside the cached prefix rather than after it.
         var out = msgs.map(function (m, i) {
-          if (i === 0 && m.role === 'user') {
-            return { role: 'user', content: [{ type: 'text', text: m.content, cache_control: { type: 'ephemeral' } }] };
-          }
-          return { role: m.role, content: m.content };
+          var anchor = (i === 0 && m.role === 'user');
+          if (!anchor && !(m.images && m.images.length)) return { role: m.role, content: m.content };
+          var blocks = (m.images || []).map(function (im) {
+            return { type: 'image', source: { type: 'base64', media_type: im.mime, data: im.b64 } };
+          });
+          var textBlock = { type: 'text', text: m.content };
+          if (anchor) textBlock.cache_control = { type: 'ephemeral' };
+          blocks.push(textBlock);
+          return { role: m.role, content: blocks };
         });
+        // 1200 was the old ceiling. Fable 5.1 thinks adaptively and those tokens
+        // count against max_tokens, so a long answer spent the whole budget
+        // reasoning and returned a thinking block with no text at all.
         return fetch('https://api.anthropic.com/v1/messages', { method: 'POST', headers: hdr(k, 1),
-          body: JSON.stringify({ model: model, max_tokens: 1200, system: sys, messages: out }) })
-          .then(j).then(function (r) { return (r.content || []).filter(function (c) { return c.type === 'text'; }).map(function (c) { return c.text; }).join('\n'); });
+          body: JSON.stringify({ model: model, max_tokens: 8000, system: sys, messages: out }) })
+          .then(j).then(function (r) {
+            var c = r.content || [];
+            // The thinking field name is not pinned down in the docs for adaptive
+            // thinking, so take whichever of these the block actually carries.
+            var think = c.filter(function (b) { return b.type === 'thinking' || b.type === 'redacted_thinking'; })
+              .map(function (b) { return b.thinking || b.summary || b.text || ''; }).join('\n').trim();
+            return { text: c.filter(function (b) { return b.type === 'text'; }).map(function (b) { return b.text; }).join('\n'),
+              thinking: think, stop: r.stop_reason || '', usage: r.usage || null };
+          });
       } },
     openai: { name: 'ChatGPT', hint: 'sk-... from platform.openai.com',
       models: function (k) { return fetch('https://api.openai.com/v1/models', { headers: { Authorization: 'Bearer ' + k } }).then(j).then(function (r) { return (r.data || []).map(function (m) { return m.id; }).sort(); }); },
@@ -39,12 +54,21 @@
         .then(function (r) { return (r.models || []).filter(function (m) { return (m.supportedGenerationMethods || []).indexOf('generateContent') >= 0; }).map(function (m) { return m.name.replace(/^models\//, ''); }); }); },
       ask: function (k, model, sys, msgs) {
         var contents = msgs.map(function (m) {
-          return { role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] };
+          var parts = [{ text: m.content }];
+          (m.images || []).forEach(function (im) { parts.push({ inlineData: { mimeType: im.mime, data: im.b64 } }); });
+          return { role: m.role === 'assistant' ? 'model' : 'user', parts: parts };
         });
         return fetch('https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(model) + ':generateContent',
           { method: 'POST', headers: { 'content-type': 'application/json', 'x-goog-api-key': k },
             body: JSON.stringify({ systemInstruction: { parts: [{ text: sys }] }, contents: contents }) })
-          .then(j).then(function (r) { var c = r.candidates && r.candidates[0]; return c ? (c.content.parts || []).map(function (p) { return p.text || ''; }).join('') : ''; });
+          .then(j).then(function (r) {
+            var c = r.candidates && r.candidates[0];
+            if (!c) return { text: '', thinking: '', stop: '', usage: null };
+            var parts = c.content && c.content.parts || [];
+            return { text: parts.filter(function (p) { return !p.thought; }).map(function (p) { return p.text || ''; }).join(''),
+              thinking: parts.filter(function (p) { return p.thought; }).map(function (p) { return p.text || ''; }).join('\n'),
+              stop: c.finishReason || '', usage: r.usageMetadata || null };
+          });
       } },
     grok: { name: 'Grok', hint: 'xai-... from console.x.ai',
       models: function (k) { return fetch('https://api.x.ai/v1/models', { headers: { Authorization: 'Bearer ' + k } }).then(j).then(function (r) { return (r.data || []).map(function (m) { return m.id; }).sort(); }); },
@@ -59,10 +83,19 @@
     var h = { 'content-type': 'application/json' };
     for (var k in extra) h[k] = extra[k];
     var out = [{ role: 'system', content: sys }].concat(msgs.map(function (m) {
-      return { role: m.role, content: m.content };
+      if (!(m.images && m.images.length)) return { role: m.role, content: m.content };
+      var parts = [{ type: 'text', text: m.content }];
+      m.images.forEach(function (im) {
+        parts.push({ type: 'image_url', image_url: { url: 'data:' + im.mime + ';base64,' + im.b64 } });
+      });
+      return { role: m.role, content: parts };
     }));
-    return fetch(url, { method: 'POST', headers: h, body: JSON.stringify({ model: model, messages: out }) })
-      .then(j).then(function (r) { return (r.choices && r.choices[0] && r.choices[0].message.content) || ''; });
+    return fetch(url, { method: 'POST', headers: h, body: JSON.stringify({ model: model, max_tokens: 8000, messages: out }) })
+      .then(j).then(function (r) {
+        var c = r.choices && r.choices[0];
+        return { text: (c && c.message && c.message.content) || '', thinking: (c && c.message && c.message.reasoning_content) || '',
+          stop: (c && c.finish_reason) || '', usage: r.usage || null };
+      });
   }
   function j(r) {
     return r.text().then(function (t) {
@@ -517,8 +550,9 @@
       var p = LS.get('pwa_provider', 'claude');
       return !!(LS.get(keyName(p), '') && LS.get(modelName(p), ''));
     },
-    // Multi-turn. messages is [{role:'user'|'assistant', content:'...'}], oldest first.
-    askThread: function (sys, messages) {
+    // Multi-turn, full result: {text, thinking, stop, usage}.
+    // messages is [{role, content, images?:[{mime,b64}]}], oldest first.
+    askFull: function (sys, messages) {
       var p = LS.get('pwa_provider', 'claude');
       var k = LS.get(keyName(p), ''), m = LS.get(modelName(p), '');
       if (!k) return Promise.reject(new Error('No API key saved. Open settings and add one.'));
@@ -526,9 +560,54 @@
       if (!messages || !messages.length) return Promise.reject(new Error('Nothing to ask.'));
       return PROV[p].ask(k, m, sys, messages);
     },
-    // Single-shot, kept so anything still calling ask(sys, user) keeps working.
+    // Text only, kept so older callers keep working.
+    askThread: function (sys, messages) {
+      return window.PortalSettings.askFull(sys, messages).then(function (r) { return r.text; });
+    },
     ask: function (sys, user) {
       return window.PortalSettings.askThread(sys, [{ role: 'user', content: user }]);
+    },
+    // Shared by pwa.html and assist.js so the resize rule lives in one place.
+    // A Retina screenshot is 3x bigger than the model can use, and base64 adds
+    // another third on top, so downscale before it ever reaches the request.
+    MAX_IMAGES: 4,
+    prepImage: function (file) {
+      return new Promise(function (resolve, reject) {
+        if (!file || !/^image\//.test(file.type)) { reject(new Error('Not an image')); return; }
+        var fr = new FileReader();
+        fr.onerror = function () { reject(new Error('Could not read that file')); };
+        fr.onload = function () {
+          var img = new Image();
+          img.onerror = function () { reject(new Error('Could not decode that image')); };
+          img.onload = function () {
+            var LIMIT = 1568, w = img.width, h = img.height;
+            if (w > LIMIT || h > LIMIT) {
+              var sc = LIMIT / Math.max(w, h);
+              w = Math.max(1, Math.round(w * sc)); h = Math.max(1, Math.round(h * sc));
+            }
+            try {
+              var cv = document.createElement('canvas');
+              cv.width = w; cv.height = h;
+              cv.getContext('2d').drawImage(img, 0, 0, w, h);
+              // PNG keeps screenshot text crisp; JPEG would smear small type.
+              var url = cv.toDataURL('image/png');
+              resolve({ mime: 'image/png', b64: url.split(',')[1], url: url, w: w, h: h, name: file.name || 'pasted' });
+            } catch (e) { reject(new Error('Could not process that image')); }
+          };
+          img.src = fr.result;
+        };
+        fr.readAsDataURL(file);
+      });
+    },
+    // Why an answer came back without text, in words rather than a blank box.
+    emptyReason: function (r) {
+      var st = (r && r.stop) || '';
+      if (st === 'max_tokens' || st === 'length' || st === 'MAX_TOKENS') {
+        return 'The model hit its output limit before writing an answer. Ask again, or split the question.';
+      }
+      if (r && r.thinking) return 'The model reasoned but produced no answer text. Ask again, or rephrase.';
+      if (st === 'refusal' || st === 'SAFETY') return 'The model declined to answer that.';
+      return 'Empty response' + (st ? ' (' + st + ').' : '.');
     },
     // Only Claude caches the context block today. The others re-read it every turn.
     threadsAreCheap: function () { return LS.get('pwa_provider', 'claude') === 'claude'; },
