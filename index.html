@@ -18,7 +18,10 @@
   :root{--midnight:#01416e;--atlas:#00679c;--blue:#00b2d6;--breeze:#bfe9f4;--ice:#E8F3FA;--good:#b1d887;}
   *{box-sizing:border-box;}
   body{margin:0;font-family:"Segoe UI",Arial,Helvetica,sans-serif;background:var(--ice);min-height:100vh;display:flex;flex-direction:column;align-items:center;}
-  .banner{display:flex;align-items:center;justify-content:space-between;background:var(--midnight);padding:12px 20px;width:100%;max-width:560px;margin-top:24px;}
+  /* Full bleed navy, flush to the top. The side padding tracks the 560px
+     content column so the logo and title stay aligned with the cards below
+     instead of sliding to the screen edges on a wide display. */
+  .banner{display:flex;align-items:center;justify-content:space-between;background:var(--midnight);width:100%;max-width:none;margin-top:0;box-sizing:border-box;padding:12px max(20px, calc((100% - 560px) / 2 + 10px));}
   .banner img{height:30px;}
   .banner span{color:var(--good);font-size:20px;font-weight:700;letter-spacing:1px;white-space:nowrap;}
   .menu{width:100%;max-width:560px;display:flex;flex-direction:column;gap:14px;padding:24px 10px;}

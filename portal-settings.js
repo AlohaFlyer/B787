@@ -9,7 +9,7 @@
   var TAX_SRC = 'Tax Foundation, top marginal rates effective 1 Jan 2026';
   // Bump this every deploy. It is the only way to tell from inside the browser
   // whether you are looking at current code or a cached copy.
-  var BUILD = 'v2.39';
+  var BUILD = 'v2.40';
 
   var LS = {
     get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } },
