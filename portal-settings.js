@@ -9,7 +9,7 @@
   var TAX_SRC = 'Tax Foundation, top marginal rates effective 1 Jan 2026';
   // Bump this every deploy. It is the only way to tell from inside the browser
   // whether you are looking at current code or a cached copy.
-  var BUILD = 'v2.38';
+  var BUILD = 'v2.39';
 
   var LS = {
     get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } },
@@ -159,6 +159,7 @@
   '.ps-ck.off{opacity:.45;cursor:not-allowed;}' +
   '.ps-bar{height:8px;background:#bfe9f4;border-radius:4px;overflow:hidden;margin:8px 0 4px;display:none;}' +
   '.ps-bar i{display:block;height:100%;width:0;background:#b1d887;transition:width .2s;}' +
+  '.ps-free{background:#eaf7db;border-left:4px solid #b1d887;padding:8px 10px;border-radius:0 5px 5px 0;}' +
   '.ps-note{font-size:11px;color:#666;line-height:1.5;}' +
   '.ps-msg{font-size:12px;color:#555;min-height:16px;line-height:1.5;}';
 
@@ -181,6 +182,9 @@
     '<div class="ps-h3">Tax assumptions</div>' +
     '<div class="ps-f"><label for="psState">State of residence</label><select id="psState"></select></div>' +
     '<p class="ps-note">Residence, not domicile. Under 49 USC 40116(f) an air carrier employee with duties in two or more states is taxed only by their state of residence, or by a state holding more than 50% of their scheduled flight time for the year.</p>' +
+    '<p class="ps-note ps-free"><b>No tax on wage income:</b> AK, FL, NH, NV, SD, TN, TX, WA, WY. ' +
+      'Washington taxes capital gains only and New Hampshire no longer taxes interest or dividends, so both are 0 against a paycheck. ' +
+      'Picking any of these seeds your state rate at 0.00%.</p>' +
     '<div class="ps-f"><label for="psStateRate">State effective rate</label><div class="ps-row">' +
       '<input id="psStateRate" type="number" min="0" max="20" step="0.01" inputmode="decimal">' +
       '<button class="ps-mini" id="psStateReset" type="button">Reset</button></div>' +
