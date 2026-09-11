@@ -1,7 +1,7 @@
 /* AS787 Study Portal service worker - offline support
    Two tiers: core (pages, quizzes, data, PDFs) and audio (podcast mp3s).
    Nothing is downloaded until the user asks for it from the menu page. */
-const VERSION = 'v3';
+const VERSION = 'v4';
 const CORE  = 'b787-core-'  + VERSION;
 const AUDIO = 'b787-audio-' + VERSION;
 const MANIFEST = '/offline-manifest.json';
@@ -59,7 +59,17 @@ self.addEventListener('fetch', event => {
   if (isDoc(url.pathname) || req.mode === 'navigate') {
     event.respondWith((async () => {
       try {
-        const fresh = await fetch(req);
+        // "Network first" only means we go to the network STACK. The browser
+        // HTTP cache will still answer with whatever max-age it was given, so a
+        // shipped fix can sit unseen for the life of that entry. no-store makes
+        // the SW read the origin's current bytes, which is the whole point of
+        // going network first for code.
+        let fresh;
+        try {
+          fresh = await fetch(req.url, { cache: 'no-store', credentials: 'same-origin' });
+        } catch (e) {
+          fresh = await fetch(req);
+        }
         if (fresh && fresh.ok) {
           const c = await caches.open(CORE);
           c.put(req, fresh.clone());
