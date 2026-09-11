@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PWA PDF</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<meta name="theme-color" content="#01416e">
+<style>
+  :root{--midnight:#01416e;--atlas:#00679c;--breeze:#bfe9f4;--ice:#E8F3FA;--good:#b1d887;}
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{margin:0;font-family:"Segoe UI",Arial,Helvetica,sans-serif;background:var(--ice);display:flex;flex-direction:column;}
+  .bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--midnight);padding:10px 14px;flex-wrap:wrap;}
+  .bar a,.bar button{background:none;border:none;color:var(--breeze);font-family:inherit;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer;padding:4px 2px;white-space:nowrap;}
+  .bar a:hover,.bar button:hover{color:#fff;}
+  .bar .title{color:var(--good);font-size:13px;font-weight:700;letter-spacing:.05em;}
+  .bar button.idx{border:2px solid var(--breeze);border-radius:6px;padding:5px 12px;}
+  .bar button.idx:hover{background:var(--breeze);color:var(--midnight);}
+  .jump{display:flex;align-items:center;gap:6px;}
+  .jump input{width:74px;padding:5px 7px;border:2px solid var(--breeze);border-radius:5px;font-family:inherit;font-size:13px;}
+  .jump input:focus{outline:none;border-color:var(--good);}
+  .jump button{background:var(--breeze);color:var(--midnight);border-radius:5px;padding:5px 10px;}
+  .stage{flex:1;display:flex;min-height:0;}
+  #frame{flex:1;width:100%;border:none;background:#555;}
+  .panel{width:340px;max-width:86vw;background:#fff;border-right:2px solid var(--midnight);display:none;flex-direction:column;min-height:0;}
+  .panel.on{display:flex;}
+  .panel .ph{padding:10px 12px;border-bottom:2px solid var(--breeze);}
+  .panel .ph input{width:100%;padding:8px 10px;border:2px solid var(--breeze);border-radius:6px;font-family:inherit;font-size:13px;}
+  .panel .ph input:focus{outline:none;border-color:var(--atlas);}
+  .panel .pl{overflow:auto;padding:6px 0 20px;}
+  .sec{border-bottom:1px solid var(--breeze);}
+  .sec>button.sh{display:flex;width:100%;justify-content:space-between;gap:8px;align-items:baseline;background:#fff;border:none;text-align:left;font-family:inherit;font-size:13px;font-weight:700;color:var(--midnight);padding:10px 12px;cursor:pointer;}
+  .sec>button.sh:hover{background:var(--ice);}
+  .sec>button.sh .pg{font-size:11px;color:var(--atlas);font-weight:700;white-space:nowrap;}
+  .sec .items{display:none;padding-bottom:6px;}
+  .sec.open .items{display:block;}
+  .sec .items button{display:flex;width:100%;justify-content:space-between;gap:10px;align-items:baseline;background:none;border:none;text-align:left;font-family:inherit;font-size:12.5px;color:#234;padding:7px 12px 7px 24px;cursor:pointer;line-height:1.4;}
+  .sec .items button:hover{background:var(--breeze);}
+  .sec .items button b{font-weight:700;color:var(--midnight);text-decoration:underline;text-underline-offset:2px;}
+  .sec .items button .cp{font-size:11px;color:var(--atlas);font-weight:700;white-space:nowrap;}
+  .fallback{padding:26px 18px;text-align:center;color:var(--midnight);font-size:14px;line-height:1.7;}
+  .fallback a{color:var(--atlas);font-weight:700;}
+  @media (max-width:640px){ .panel{position:absolute;top:0;bottom:0;left:0;z-index:15;box-shadow:0 0 24px rgba(1,23,43,.4);} .stage{position:relative;} }
+</style>
+<style>
+.ps-homebar{align-self:stretch;width:100%;box-sizing:border-box;padding:8px 0 0 10px;flex:0 0 auto;text-align:left;}
+.ps-home{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;background:#fff;border:2px solid #01416e;color:#01416e;text-decoration:none;box-shadow:0 1px 4px rgba(1,23,43,.2);transition:background .12s,color .12s;-webkit-tap-highlight-color:transparent;}
+.ps-home:hover,.ps-home:focus-visible{background:#01416e;color:#fff;}
+.ps-home:focus{outline:none;}
+.ps-home svg{display:block;}
+@media (max-width:480px){.ps-homebar{padding:6px 0 0 8px;}.ps-home{width:40px;height:40px;}}
+</style>
+</head>
+<body>
+<div class="ps-homebar"><a class="ps-home" href="/index.html" title="B787 Study Portal" aria-label="B787 Study Portal"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true" focusable="false"><path d="M3 11.3 12 4l9 7.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.7 10.1v9.4h12.6v-9.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 19.5v-5.1h4v5.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+
+<div class="bar">
+  <a href="/pwa.html">&#9664; PWA Search</a>
+  <button class="idx" id="idxBtn" type="button" aria-expanded="false">&#9776; Index</button>
+  <span class="title">2023 PILOTS AGREEMENT</span>
+  <span class="jump">
+    <input id="pg" type="number" min="1" max="577" inputmode="numeric" aria-label="PDF page number" placeholder="page">
+    <button id="go" type="button">Go</button>
+  </span>
+</div>
+<div class="stage">
+  <aside class="panel" id="panel">
+    <div class="ph"><input id="filter" type="search" placeholder="Filter the index" aria-label="Filter the index"></div>
+    <div class="pl" id="plist"></div>
+  </aside>
+  <iframe id="frame" title="Hawaiian Airlines 2023 Pilots Agreement"></iframe>
+</div>
+<div class="fallback" id="fb" style="display:none">
+  Your browser will not display the PDF inline.
+  <a id="direct" href="/2023-pwa.pdf">Open the agreement directly</a>, then use the back gesture to return.
+</div>
+<script>
+(function () {
+  var PDF = '/2023-pwa.pdf', TOC = null;
+  function $(i){ return document.getElementById(i); }
+  function pageFromHash() {
+    var m = (location.hash || '').match(/page=(\d+)/i);
+    return m ? parseInt(m[1], 10) : 1;
+  }
+  function show(p) {
+    $('pg').value = p;
+    $('frame').src = PDF + '#page=' + p + '&view=FitH';
+    $('direct').href = PDF + '#page=' + p;
+  }
+  function goto(p) {
+    if (!p) return;
+    location.hash = 'page=' + p;
+    show(p);
+    if (window.innerWidth <= 640) togglePanel(false);
+  }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function renderTOC(q) {
+    var box = $('plist'); box.innerHTML = '';
+    var needle = (q || '').trim().toLowerCase();
+    TOC.sections.forEach(function (s) {
+      var items = s.items.filter(function (it) {
+        return !needle || (it.k + '. ' + it.t + ' ' + it.cp).toLowerCase().indexOf(needle) >= 0;
+      });
+      var secHit = !needle || ('section ' + s.s + ' ' + s.t).toLowerCase().indexOf(needle) >= 0;
+      if (!secHit && !items.length) return;
+      if (secHit) items = s.items;
+      var d = document.createElement('div');
+      d.className = 'sec' + (needle ? ' open' : '');
+      var head = '<button class="sh" type="button"><span>SECTION ' + esc(s.s) + (s.t ? ' &middot; ' + esc(s.t) : '') +
+        '</span><span class="pg">p.' + (s.p || '?') + '</span></button>';
+      var body = '<div class="items">' + items.map(function (it) {
+        return '<button type="button" data-p="' + (it.p || '') + '"><span><b>' + esc(it.k) + '.</b> ' + esc(it.t) +
+          '</span><span class="cp">' + esc(it.cp) + '</span></button>';
+      }).join('') + '</div>';
+      d.innerHTML = head + body;
+      d.querySelector('button.sh').addEventListener('click', function (e) {
+        if (e.shiftKey) { goto(s.p); return; }
+        d.classList.toggle('open');
+      });
+      d.querySelector('button.sh').addEventListener('dblclick', function () { goto(s.p); });
+      [].forEach.call(d.querySelectorAll('.items button'), function (b) {
+        b.addEventListener('click', function () { goto(parseInt(b.getAttribute('data-p'), 10)); });
+      });
+      box.appendChild(d);
+    });
+    if (!box.children.length) box.innerHTML = '<div style="padding:14px;font-size:13px;color:#666">No index entry matches that.</div>';
+  }
+
+  function togglePanel(on) {
+    var p = $('panel');
+    var open = on === undefined ? !p.classList.contains('on') : on;
+    p.classList.toggle('on', open);
+    $('idxBtn').setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open && !TOC) {
+      fetch('/pwa_toc.json').then(function (r) { return r.json(); }).then(function (j) {
+        TOC = j; renderTOC('');
+      }).catch(function () {
+        $('plist').innerHTML = '<div style="padding:14px;font-size:13px;color:#666">Index not available offline yet. Tick Make Available Offline on the portal.</div>';
+      });
+    }
+  }
+
+  $('idxBtn').addEventListener('click', function () { togglePanel(); });
+  $('filter').addEventListener('input', function () { if (TOC) renderTOC(this.value); });
+  $('go').addEventListener('click', function () {
+    var v = parseInt($('pg').value, 10);
+    if (v > 0) goto(v);
+  });
+  $('pg').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('go').click(); });
+  window.addEventListener('hashchange', function () { show(pageFromHash()); });
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent)) $('fb').style.display = 'block';
+  show(pageFromHash());
+  if (window.innerWidth > 640) togglePanel(true);
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(function () {});
+})();
+</script>
+<script src="/portal-settings.js" defer></script>
+<script src="/assist.js" defer></script>
+</body>
+</html>

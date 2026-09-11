@@ -1,0 +1,596 @@
+[
+ {
+  "i": 2,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Aloha, and welcome back to seven-eight-seven Flight Deck Notes. I'm Pualani — poo-ah-LAH-nee — and today is THE episode. The flagship. We are pointing the Dreamliner at a whole lot of empty ocean and talking ee tops."
+ },
+ {
+  "i": 3,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] And I'm Chester, live from a gray, drizzly Seattle morning, second coffee already, the way Boeing intended. Flight Operations Manual Chapter 6. If it were a movie it'd be Top Gun — big, loud, everybody thinks they're Maverick."
+ },
+ {
+  "i": 4,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And I'm Otto. ee tops. Some wags say it stands for Engines Turn Or Passengers Swim. The eff oh em does not say that, so neither do we. And yes — I'm named after the inflatable bloke in Airplane! I take it as a compliment."
+ },
+ {
+  "i": 5,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] He would. Cold open, real talk. Chester, section 6.1.1 — the definition. This is the number the whole chapter hangs on."
+ },
+ {
+  "i": 6,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Straight out of eff oh em 6.1.1: an ee tops operation is a flight over a route that contains a point farther than 60 minutes of flying time from an adequate airport — at an approved one-engine-inoperative cruise speed, under standard conditions, in still air. Sixty minutes is the doorway. Cross it and you're in ee tops world. The eye kay oh crowd calls the exact same thing ee dee tee oh."
+ },
+ {
+  "i": 7,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Note what that 60 minutes is NOT. It assumes one donk's already gone quiet and you're plodding on the survivor. Sixty minutes on ONE engine. That's the ruler."
+ },
+ {
+  "i": 8,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And there's a sneaky second number people blend into the first. Section 6.1.2 — Extended Over-Water Operation. That's an operation over water more than 50 nautical miles from the nearest shoreline. Different idea, different number. So write it down — MEMORY AID number one: \"Sixty in the air, fifty to the shore.\" Sixty minutes flips you into ee tops; fifty nautical miles makes it extended over-water."
+ },
+ {
+  "i": 9,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Now the soul of the chapter. Section 6.1.3. The philosophy. Chester, this is your Boeing-pride moment."
+ },
+ {
+  "i": 10,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Quote: \"The premise of ee tops is to preclude a diversion and, if it were to occur, to have programs in place to protect the diversion.\" Preclude and Protect. Preclude is every layer that keeps the diversion from ever happening — aircraft and propulsion design, testing, maintenance procedures, flight ops procedures. Protect is every layer that carries you through if it happens anyway — designated alternates monitored the whole flight, increased communication requirements, and enhanced dispatch fuel."
+ },
+ {
+  "i": 11,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Preclude and Protect. The buddy system for airliners. MEMORY AID number two — the two P's. If you can remember \"please and thank you,\" you can remember Preclude and Protect."
+ },
+ {
+  "i": 12,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And bruddah, that's pop-quiz question two — \"which is true about Preclude and Protect,\" answer all-of-the-above: Preclude is the maintenance-and-planning side, Protect is the airports, weather, firefighting, passenger handling, landing performance, and fuel-to-the-alternate side. Same two P's, dressed up."
+ },
+ {
+  "i": 13,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] One more Rev 125 note while we're here. 6.2.1 got broader. Any regular, provisional, refueling, or alternate airport may be used as an adequate airport, provided it is listed in 8.1.3, Authorized Airports. The old wording pointed at an eff ay ay-approved list. Now it's the one list."
+ },
+ {
+  "i": 14,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Let's teach the preflight, section 6.2. First, 6.2.1 — the adequate airport. The number pilots love: a turbojet must be able to stop within 60 percent of the effective runway length, from a point 50 feet above the intersection of the obstruction clearance plane and the runway. And it either meets Part 139 Subpart D — excluding aircraft rescue and firefighting — or it's an active, operational military airport."
+ },
+ {
+  "i": 15,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And read the CAUTION at the top of 6.2.1 — it's the whole trick. An adequate airport may NOT be appropriate for a diversion. No firefighting worth the name, might be socked in. Adequate is a paperwork bar, not a promise of a warm welcome and a cup of tea."
+ },
+ {
+  "i": 16,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Which walks us up to 6.2.2 — the ee tops ALTERNATE, higher bar. Chester, the firefighting piece — pop-quiz gold."
+ },
+ {
+  "i": 17,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Section 6.2.2. Each designated ee tops alternate must have rescue and firefighting service — RFFS — equivalent to eye kay oh Category 4 or higher, and it meets a 30-minute response time. That's pop-quiz 25, and the answer's both."
+ },
+ {
+  "i": 18,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And the gotcha in the Note. The 30-minute response time does NOT mean fire trucks idling for thirty minutes waiting on you at Pago Pago. It means the equipment must be available on ARRIVAL of the diverting airplane and stay on station as long as needed. Available when YOU get there."
+ },
+ {
+  "i": 19,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And who clears all that? The Dispatcher, per 6.2.2 — and this changed in Rev 125 — the alternate must be an adequate airport listed in 8.1.3, Authorized Airports, not out of an OpSpec list any more. The weather at or above the ee tops-alternate minima in OpSpec C055 across the whole earliest-to-latest landing window, and the field reports must say a safe landing can be made. That's pop-quiz 24 — all of the above."
+ },
+ {
+  "i": 20,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Okay. The big one. Section 6.2.3. The ee tops Area of Operation. This is where the orange rings live. Third coffee."
+ },
+ {
+  "i": 21,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] My favorite part. The area of operation begins beyond 60 minutes from the adequate airport, and it extends out to the Maximum Diversion Time — the em dee tee — from your planned ee tops alternates. And for us, straight out of 6.2.3, the authorized em dee tee is 180 minutes — three hours on a single engine, the fence line of your sandbox. That's pop-quiz question one."
+ },
+ {
+  "i": 22,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] But that 180 isn't a blank check. No airport can be an ee tops alternate if the time to fly there would exceed the approved time for the aircraft's most limiting ee tops-significant system — including the most limiting fire-suppression time for the cargo compartments required to have it — minus 15 minutes."
+ },
+ {
+  "i": 23,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And here's where you attribute honestly. The eff oh em gives you the minus-15 RULE. But which system is most limiting on the seven-eight-seven, and why 15 — that's the seven-eight-seven ay eff em talking, not Chapter 6."
+ },
+ {
+  "i": 24,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Right. Per the seven-eight-seven ay eff em, the cargo fire suppression system is the seven-eight-seven's most limiting ee tops-significant system. In certification it must deliver at least the em dee tee plus 15 minutes of suppression — so for a 180 airplane, that bottle covers 195 minutes. The eff oh em then draws the rings at system time MINUS 15, landing you back at your diversion time. The extra fifteen is deliberate slack."
+ },
+ {
+  "i": 25,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] MEMORY AID number three — \"minus fifteen, always the buffer.\" The rings are drawn in standard conditions and still air, which never exist, so the fifteen minutes is the honest margin for the real world."
+ },
+ {
+  "i": 26,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And 6.2.3 tosses in one more curveball — occasionally, em ee el-deferred items may limit the em dee tee to 120 minutes. So the diversion time from any point along the route has to be no more than 120 OR 180 minutes, as dispatched. Not always 180 — read the release, assume nothing."
+ },
+ {
+  "i": 27,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Now the numbers that print money on the oral — Table 6.2.3(1), seven-eight-seven line. The Dreamliner flies the rings at point-eight-four Mach, 290 knots indicated. Four hundred ten nautical miles at 60 minutes. Eight hundred six at 120. Twelve hundred seven at 180."
+ },
+ {
+  "i": 28,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] MEMORY AID number four — \"four-ten, eight-oh-six, twelve-oh-seven.\" The seven-eight-seven's personal set of orange rings. Heaps of range on that carbon-fibre beauty. She's alright, that one."
+ },
+ {
+  "i": 29,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] He loves her. Okay — Chester, quiz me. Where does that .84 Mach, 290 knots come from? Why THAT speed?"
+ },
+ {
+  "i": 30,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] It's the diversion-speed logic in 6.4.5 and the fleet reference data in 6.2.9. For the seven-eight-seven the reference is .84 Mach over 290 knots, at a reference weight of 515,000 pounds and reference flight level 350. That single one-engine cruise speed sits closest to Maximum Range Cruise — the engine-out max-miles-per-pound speed. So the company carries the LEAST fuel on every flight while still drawing rings big enough for the routes."
+ },
+ {
+  "i": 31,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Chur — a fuel decision dressed up as a speed. Faster speed, bigger rings, more fuel every flight; slower toward Max Range Cruise, smaller rings, less fuel. The seven-eight-seven's so efficient the small rings still cover the Pacific."
+ },
+ {
+  "i": 32,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And there's your Top Gun line. The temptation is Maverick — \"the need for speed.\" But the fuel plan is built on .84 over 290, so you fly the plan first. The Captain can deviate to a faster speed like Long Range Cruise, per 6.4.5, but only AFTER assessing the emergency and considering fuel remaining. Ego doesn't get a vote until the fuel does."
+ },
+ {
+  "i": 33,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And a cue are see nuance worth gold on a checkride. Punch ENG OUT and the jet first gives you engine-out minimum drag speed — the L-over-D max speed that minimizes altitude loss per mile in a driftdown when terrain is the worry. Great over high terrain, but it's slower than Max Range Cruise, so riding it the whole way burns more gas and more time. Once you're pointed at the alternate and the checklists are done, select company speed — CO SPD, .84 over 290 — to protect the fuel."
+ },
+ {
+  "i": 34,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Minimum drag saves altitude, .84 over 290 saves fuel, Long Range Cruise and faster save time. Fuel's the one you cannot cut short, so .84 over 290 is home base."
+ },
+ {
+  "i": 35,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Beautiful. Section 6.2.5 — critical fuel planning. Dense. Slow down. Three scenarios for the fuel to fly to the ee tops alternate. Chester, walk 'em."
+ },
+ {
+  "i": 36,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Section 6.2.5. Scenario one — immediate descent from cruise to 10,000 feet with BOTH engines operating. That's the pressurization-loss case. Scenario two — descent to the best single-engine altitude with ONE engine operating. That's the engine-failure case. Scenario three — immediate descent to 10,000 feet with ONE engine operating. That's the double whammy: depressurized AND single-engine, down low. The planning system takes the hungriest of the three."
+ },
+ {
+  "i": 37,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] MEMORY AID number five — \"both low, one high, one low.\" Both engines down at ten thousand, one engine up at best single-engine altitude, one engine down at ten thousand. Worst case wins the fuel."
+ },
+ {
+  "i": 38,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Then, reaching the alternate, 6.2.5 adds fuel to descend to 1500 feet above the airport, hold for 15 minutes, and fly an instrument approach and landing."
+ },
+ {
+  "i": 39,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Fifteen minutes at fifteen hundred feet. Tidy little rhyme."
+ },
+ {
+  "i": 40,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And it stacks conservatism: forecast winds bumped 5 percent the pessimistic way — more headwind, less tailwind — plus adjustments for icing, engine deterioration, ay pee you use, and any em ee el or see dee el fuel penalties. The icing one is a \"greater of\": airframe icing drag PLUS engine and wing anti-ice for 10 percent of the forecast icing time, OR anti-ice for 100 percent of it. Take the bigger number."
+ },
+ {
+  "i": 41,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] All of that gets compared to the flag fuel requirement, and whichever's bigger drives the release. It's measured at the CP — the critical point, the ee tee pee — where the critical fuel gets checked."
+ },
+ {
+  "i": 42,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And here's a favorite line-check trap, straight from 6.3.6. Tell me about a time you thought you had to divert and didn't."
+ },
+ {
+  "i": 43,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Story time — fictional, numbers real. Auckland up to Honolulu overnight, Pago Pago and Papeete our alternates, 20 minutes shy of the ee ee pee, and the totalizer's whispering my estimated fuel at the critical point will land just UNDER the critical-fuel number on the release. New copilot goes wide-eyed. \"Do we turn around?\""
+ },
+ {
+  "i": 44,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And per 6.3.6, no. ee tops regulations add no additional fuel requirement once in flight. Arriving at the CP at or above the critical fuel is only a DISPATCH requirement. So if you'll be a touch low at the CP, there's no requirement to divert prior to the CP for that reason alone — provided your estimated fuel at destination is still above the arrival requirements."
+ },
+ {
+  "i": 45,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Exactly what I told him. We looped in Dispatch, who worked altitude, speed, and a different enroute alternate, nudged it back onto the plan, and we pressed on legal and comfortable — though 6.3.6 warns it may not always be possible."
+ },
+ {
+  "i": 46,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] A planning gate, not an in-flight guillotine. But 6.3.6 is blunt — watch your fuel like a hawk, because a long diversion to the nearest enroute alternate is the whole reason ee tops exists. The ocean doesn't hand out do-overs."
+ },
+ {
+  "i": 47,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Speaking of that critical point — the ee tee pee. Section 6.3.7. An Equal-Time Point is where the flight time, considering wind, to each of two selected diversion destinations is equal. Because ETPs are wind-affected, a DIFFERENT ee tee pee exists for every altitude. Alaska computes them using flight performance and winds at 10,000 feet."
+ },
+ {
+  "i": 48,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Ten thousand, because that's your depressurized floor. And 6.3.7 reminds you — most diversions aren't a big descent, so stay aware of which airport takes least time at or near cruise altitude, too. Keep both pictures."
+ },
+ {
+  "i": 49,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Now the running gag Otto loves — the daily track scramble. Otto, set it up."
+ },
+ {
+  "i": 50,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Tell me about a time the track message turned into a fire drill."
+ },
+ {
+  "i": 51,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Lived it. Fictional, but you'll believe it. Preflight for a mainland-to-Honolulu leg, we lean on yesterday's mental model of the oceanic tracks, feeling smug. Then the fresh organized-Pacific track message drops for the day and the picture's moved — the copilot's already half-loaded yesterday's route. We stop, reload off the CURRENT message, cross-check the lat-longs, request clearance fresh, and only THEN relax."
+ },
+ {
+  "i": 52,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And know the layer, because the pop quiz leans on it even though it's not IN Chapter 6. West-Coast-to-Hawaii oceanic routings live in the Central East Pacific system, and the minimum navigation spec there is are en pee 10 — pop-quiz three and four. The organized Pacific tracks are built and published on a DAILY Track Definition Message. So when a question claims the organized Pacific tracks are established WEEKLY — that's FALSE. Daily message, daily picture."
+ },
+ {
+  "i": 53,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] are en pee 10 keeps you honest, but a stale track message will hang you out. Daily means daily — the Pacific reshuffles the furniture and doesn't leave a note."
+ },
+ {
+  "i": 54,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Now the em ee el, section 6.2.8. Otto, you live for a good exception."
+ },
+ {
+  "i": 55,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] I do. The em ee el flags ee tops-critical items, and there's this designation — \"ER or ee tops.\" Per 6.2.8 it's used primarily as an EXCEPTION to a normally allowed deferred item. The remarks read: \"Except for ER operations slash ee tops, may be inoperative provided...\" Translation — defer it for a domestic hop, but NOT for ee tops. The ocean says no. And 6.2.8 is flat: these items can shrink your area of operation or preclude ee tops entirely."
+ },
+ {
+  "i": 56,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Which ties to the Preclude side of maintenance — pop-quiz seventeen, all-of-the-above: ee tops-significant systems live in the manufacturer's maintenance program, there's a dual-maintenance limitation requiring ee tops-qualified oversight, and ee tops parts get tracked specifically. All in section 6.5."
+ },
+ {
+  "i": 57,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And the reliability target behind it — pop-quiz eighteen. Per Advisory Circular 120-42B, the in-flight shutdown rate for our two-engine jet in the beyond-120-up-to-180-minute band stays under three-hundredths per thousand engine-hours. An AC 120-42B number, mind — not restated in Chapter 6 — but it's the bar the IFSD program chases. Preclude first."
+ },
+ {
+  "i": 58,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Alright — the paperwork clocks, because IOE loves these. Two four-hour timers, and people fuse them and get burned. Chester?"
+ },
+ {
+  "i": 59,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Two separate four-hour clocks. Clock one, 6.3.2 — the ee tops Dispatch Release and Pre-Departure Check are valid four hours after the SCHEDULED DEPARTURE TIME; past that, new Pre-Departure Check and amended Dispatch Release. Clock two, 6.5.4 — the maintenance pee dee ess see Airworthiness Release is valid four hours from the TIME IT WAS SIGNED in the logbook. Same duration, different start point."
+ },
+ {
+  "i": 60,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And the pee dee ess see clock's got a boarding twist worth a story. Tell me about a time a four-hour clock nearly bit you."
+ },
+ {
+  "i": 61,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Fictional, numbers real. Honolulu turn — HNL's our maintenance hub — mechanic signs the ee tops pee dee ess see at 0400 Zulu. A cargo snag drags us; the gate agent starts boarding at 0730 Zulu; then we sit. Somebody asks, \"isn't the pee dee ess see about to expire at 0800?\" Per 6.5.4 — because boarding STARTED before the four hours lapsed, the flight may continue on that pee dee ess see, but we must notify MOC. So we called MOC through Dispatch, logged it, and went. Had boarding NOT started by 0800, it would've been invalidated and we'd need a fresh one."
+ },
+ {
+  "i": 62,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] MOC monitors that clock and pings Maintenance and ess oh see see slash Dispatch if a new one's needed. And if the crew ever suspects a maintenance action invalidated the pee dee ess see — contact MOC via Dispatch. When in doubt, phone a friend."
+ },
+ {
+  "i": 63,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And what does the pee dee ess see actually check? Pop-quiz nineteen, all-of-the-above, section 6.5.4 — the condition of the ee tops-significant systems, the overall aircraft status from the maintenance records, and an interior-exterior inspection including engine and ay pee you oil levels and consumption."
+ },
+ {
+  "i": 64,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And a release-reading trap in 6.3.2 that busts people. \"ee tops NA\" on the release means the aircraft is NOT ee tops capable. And \"EQUIP ee tops\" is NOT an indication of ee tops status. The word ee tops printed on your release does not mean you're good to go."
+ },
+ {
+  "i": 65,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] That's a Top Gun \"don't write a check your body can't cash\" trap. Read the fine print."
+ },
+ {
+  "i": 66,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Maverick busts that oral question. Confidently. Then buzzes the tower."
+ },
+ {
+  "i": 67,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[laughs] Every time. Into the flight, 6.3.3 — the entry point. THE definition. When does the jet reach the ee tops Entry Point, the ee ee pee?"
+ },
+ {
+  "i": 68,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] The aircraft reaches the ee ee pee when it's 60 minutes from the adequate airport — same one-engine speed, standard conditions, still air. For the seven-eight-seven that 60 minutes is 410 nautical miles. And the Exit Point, the EXP, is the mirror image on the way out — same fixed distance, same conditions."
+ },
+ {
+  "i": 69,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] ee ee pee going in, EXP coming out. Same fence, opposite sides. And 6.3.3 is firm — crew and Dispatch must use the SAME adequate airports to define those points, listed on the release. Want to change them? Coordinate with Dispatch. No freelancing."
+ },
+ {
+  "i": 70,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] IOE reality check — your check airman WILL ask about ee tops entry. \"Show me the ee ee pee, tell me your alternates, tell me your critical fuel.\" Have it cold."
+ },
+ {
+  "i": 71,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And they'll roleplay a curveball. Otto, run the scenario — alternate goes below mins near the ee ee pee."
+ },
+ {
+  "i": 72,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Right. Section 6.3.5. Honolulu to Haneda, eight minutes from the ee ee pee, Midway — PMDY — is your designated ee tops alternate, and Dispatch relays it just dropped below the crew's operating minima, no mee tar coming. What now?"
+ },
+ {
+  "i": 73,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Timing is everything. BEFORE the ee ee pee, you must have a suitable ee tops alternate to enter the area, so you work with Dispatch to establish a new one. If none can be designated and Midway's no longer available — a turnback is required before you cross the ee ee pee. You don't enter ee tops airspace without a good alternate."
+ },
+ {
+  "i": 74,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] But AFTER the ee ee pee, 6.3.5 flips it. A turnback is NOT required just because the alternate's below minima or a runway's unusable. You attempt to establish a new ee tops alternate with Dispatch — which may lead to a turnback, reroute, or continuation on the planned route — and the pee eye see and Dispatcher exercise judgment on the safest course."
+ },
+ {
+  "i": 75,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Before the fence, be strict. After the fence, be smart. The ocean doesn't hand out do-overs."
+ },
+ {
+  "i": 76,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Now the contingency a check airman loves — engine failure past the ee tee pee, way out in the blue. Section 6.4.2. Otto, quiz Chester."
+ },
+ {
+  "i": 77,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Chester. Honolulu to Sydney, deep in the South Pacific, cruising between Pago Pago — NSTU — and Nadi — NFFN. You pass the fuel-critical ee tee pee between those two, and a few minutes later an engine quits. Which airport, what speed, what rule?"
+ },
+ {
+  "i": 78,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Fourteen see eff are 121.565 — land at the nearest SUITABLE airport where, in the Captain's judgment after considering all relevant factors, a safe landing can be made. Nearest suitable, not nearest full stop. And by definition of the ee tee pee, once I'm past it the airport ahead — Nadi — now takes the least time, so that's generally my field. Speed — the cue are see gives engine-out minimum drag first for the driftdown, then once I'm pointed at Nadi with checklists done I select CO SPD, .84 over 290, until the Captain assesses the emergency and fuel and elects otherwise. And per 6.4.1, the planning system does NOT model the time or fuel to make the turn near the ee tee pee, so a big turn near a fuel-critical point costs more than the paper says."
+ },
+ {
+  "i": 79,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Gold star. Nearest suitable, planned speed, mind the turn."
+ },
+ {
+  "i": 80,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And decompression, 6.4.3 — quick and clean, Chester."
+ },
+ {
+  "i": 81,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Offset from the route using the Special Procedures for In-Flight Contingencies. Emergency descent to 10,000 feet OR moe kuh slash Grid more uh — whichever is HIGHER. Below FL290, or sooner if cleared by ay tee see, proceed directly to the nearest suitable airport. When level, use the flight-plan one-engine diversion speed, or Long Range Cruise for a two-engine decompression."
+ },
+ {
+  "i": 82,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Ten thousand or the terrain floor, whichever's higher. The rocks don't care about your cabin altitude."
+ },
+ {
+  "i": 83,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] One more world our check airmen drift into on the oral — the oceanic-nav layer. Not in Chapter 6, but the pop quiz leans on it, so know it. Otto, the alphabet soup."
+ },
+ {
+  "i": 84,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Right, the performance-based stuff, per nat Doc 007 and the OpSpecs. To ride the pee bee see ess tracks you need three performances. Navigation is pee bee en slash are en pee. Communication is Required Communication Performance, are see pee — on those tracks it's are see pee 240, the application being see pee dee el see, flown over vee aitch eff or sat com datalink. Surveillance is Required Surveillance Performance, are ess pee 180, the application being ay dee ess see. That's pop-quiz nine, twelve, and thirteen in one breath."
+ },
+ {
+  "i": 85,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Last block — maintenance reporting, section 6.5.2. Within 96 hours the certificate holder must report IFSDs, diversions and turnbacks for failures, malfunctions or defects, uncommanded thrust changes, inability to control thrust, inadvertent fuel loss or imbalance, and any event that would jeopardize the safe flight and landing. Ninety-six hours."
+ },
+ {
+  "i": 86,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Four days. And that clock only starts if YOU write it up. So write it up. The airplane can't confess for you."
+ },
+ {
+  "i": 87,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And the friendliest fact in the whole chapter, 6.5.1 — how do you know a jet is ee tops just by looking?"
+ },
+ {
+  "i": 88,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] It's marked with the word \"ee tops\" on the nose landing gear doors, for positive identification by all crewmembers."
+ },
+ {
+  "i": 89,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] It literally says ee tops on the nose gear doors. Refreshingly honest, that airplane."
+ },
+ {
+  "i": 90,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Recap. Otto, top of the list."
+ },
+ {
+  "i": 91,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Sixty minutes from an adequate airport puts you in ee tops, 6.1.1. Fifty miles from shore is extended over-water, 6.1.2. The whole religion is Preclude and Protect, 6.1.3 — the two P's."
+ },
+ {
+  "i": 92,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Adequate airport, 6.2.1 — stop within 60 percent of the runway from 50 feet, adequate on paper, not necessarily suitable. ee tops alternate, 6.2.2 — eye kay oh Category 4 firefighting, 30-minute response meaning available on arrival, C055 weather, and listed in 8.1.3. Area of operation, 6.2.3 — em dee tee 180, sometimes 120 with an em ee el item, always the most limiting system minus 15. Rings — four-ten, eight-oh-six, twelve-oh-seven, at .84 Mach, 290 knots."
+ },
+ {
+  "i": 93,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Critical fuel, 6.2.5 — both low, one high, one low, then 1500 feet, hold 15, approach and land, winds bumped 5 percent. Speed, 6.4.5 — .84 over 290 protects fuel, minimum drag protects altitude, faster protects time; the Captain deviates only after weighing emergency and fuel. Reference, 6.2.9 — 515,000 pounds at FL350."
+ },
+ {
+  "i": 94,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] In flight — ee ee pee at 60 minutes, 410 nautical miles, 6.3.3, same airports as Dispatch. Two four-hour clocks — release from scheduled departure, 6.3.2; pee dee ess see from logbook sign-off, 6.5.4. \"ee tops NA\" means NOT capable. No added fuel rule in flight, 6.3.6. ETPs at 10,000 feet, 6.3.7. Engine failure — nearest suitable, 121.565, 6.4.2. Decompression — 10,000 or moe kuh slash Grid more uh, whichever's higher, 6.4.3."
+ },
+ {
+  "i": 95,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Maintenance — report within 96 hours, 6.5.2. IFSD target under point-oh-three per thousand hours per AC 120-42B. And the jet wears its name on the nose gear doors, 6.5.1. Don't overthink it."
+ },
+ {
+  "i": 96,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Five memory aids to pocket. \"Sixty in the air, fifty to the shore\" for the triggers. \"The two P's — Preclude and Protect\" for the philosophy. \"Minus fifteen, always the buffer\" for the diversion-time margin. \"Both low, one high, one low\" for critical fuel. And \"four-ten, eight-oh-six, twelve-oh-seven\" for the rings."
+ },
+ {
+  "i": 97,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] Study your rings, know your numbers, respect the ocean, and read the release like it's trying to trick you — because sometimes it is."
+ },
+ {
+  "i": 98,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And remember — the Dreamliner can fly three hours on one engine, and the eff oh em's got layers on layers so you never have to find out the hard way. Engines Turn Or Passengers Swim? Not on this airplane. Surely you can remember all that. And don't call me Shirley."
+ },
+ {
+  "i": 99,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] There it is. Mahalo for flying the big one with us on seven-eight-seven Flight Deck Notes. Study hard, brief it on IOE like you mean it, and a hui hou."
+ },
+ {
+  "i": 100,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Chur. Sweet as. Otto out. Roll credits before I inflate."
+ }
+]

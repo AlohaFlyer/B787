@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>B787 Alternate or Not</title>
+<style>
+:root{--bg:#01172b;--panel:#062b46;--panel2:#0a3556;--line:#13486e;--ink:#eaf3fb;--muted:#8fb3cf;
+ --mid:#01426A;--atlas:#0074C8;--breeze:#00C7E6;--green:#C0E585;--amber:#f2a65a;--red:#ff6b6b;
+ --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px 60px}
+.wrap{width:100%;max-width:640px}
+header{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px;gap:12px}
+h1{font-size:15px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin:0}
+h1 .sub{color:var(--breeze);font-weight:600}
+.src{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.hud{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:13px;color:var(--muted);margin-bottom:12px;gap:10px;flex-wrap:wrap}
+.hud .lives{font-size:16px;letter-spacing:2px}.hud b{color:var(--ink)}.hud .streak{color:var(--amber)}
+.tbar{height:6px;background:var(--panel2);border-radius:3px;overflow:hidden;margin-bottom:14px}
+.tfill{height:100%;width:100%;background:var(--green);transition:width .1s linear}.tfill.warn{background:var(--amber)}.tfill.crit{background:var(--red)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px 22px;min-height:200px;display:flex;flex-direction:column;justify-content:center;gap:12px;text-align:center}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.scn{font-size:21px;line-height:1.35;font-weight:700}
+.wx{font-family:var(--mono);font-size:24px;color:var(--breeze);margin-top:4px}
+.cond{font-size:14px;color:var(--amber);font-weight:600;margin-top:2px}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+button{font-family:var(--sans);font-size:15px;font-weight:700;cursor:pointer;border-radius:9px;padding:17px 10px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);transition:.1s}
+button:hover{border-color:var(--breeze)}button:active{transform:translateY(1px)}
+.no{border-color:var(--green);color:var(--green)}.no:hover{background:rgba(192,229,133,.14)}
+.req{border-color:var(--amber);color:var(--amber)}.req:hover{background:rgba(242,166,90,.14)}
+.feed{min-height:46px;margin-top:14px;text-align:center;font-size:13.5px;line-height:1.45}
+.feed .ok{color:var(--green);font-weight:700}.feed .bad{color:var(--red);font-weight:700}
+.feed .lim{color:var(--ink)}.feed .ref{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.hint{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;margin-top:16px}
+.over{text-align:center;padding:30px 16px}
+.over .big{font-family:var(--mono);font-size:52px;color:var(--green);font-weight:700}
+.over .lbl{color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.over .best{color:var(--amber);font-family:var(--mono);font-size:13px;margin:10px 0 22px}
+.start{background:var(--atlas);color:#fff;border-color:var(--atlas);font-size:16px;padding:14px 26px}
+@media(max-width:480px){.scn{font-size:18px}.wx{font-size:20px}}
+</style><style>
+.ps-homebar{align-self:stretch;width:100%;box-sizing:border-box;padding:8px 0 0 10px;flex:0 0 auto;text-align:left;}
+.ps-home{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;background:#fff;border:2px solid #01416e;color:#01416e;text-decoration:none;box-shadow:0 1px 4px rgba(1,23,43,.2);transition:background .12s,color .12s;-webkit-tap-highlight-color:transparent;}
+.ps-home:hover,.ps-home:focus-visible{background:#01416e;color:#fff;}
+.ps-home:focus{outline:none;}
+.ps-home svg{display:block;}
+@media (max-width:480px){.ps-homebar{padding:6px 0 0 8px;}.ps-home{width:40px;height:40px;}}
+</style>
+<script>
+/* Storage access throws outright in some private-browsing and embedded-webview
+   contexts. These pages read localStorage at the top level of their inline
+   script, so an exception there aborted the whole script and the page rendered
+   inert. This shim keeps the API shape and degrades to in-memory. */
+(function () {
+  try { var t = '__t'; window.localStorage.setItem(t, t); window.localStorage.removeItem(t); return; }
+  catch (e) {}
+  var mem = {};
+  try {
+    Object.defineProperty(window, 'localStorage', {
+      configurable: true,
+      value: {
+        getItem: function (k) { return Object.prototype.hasOwnProperty.call(mem, k) ? mem[k] : null; },
+        setItem: function (k, v) { mem[k] = String(v); },
+        removeItem: function (k) { delete mem[k]; },
+        clear: function () { mem = {}; },
+        key: function (i) { return Object.keys(mem)[i] || null; },
+        get length() { return Object.keys(mem).length; }
+      }
+    });
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+<div class="ps-homebar"><a class="ps-home" href="/index.html" title="B787 Study Portal" aria-label="B787 Study Portal"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true" focusable="false"><path d="M3 11.3 12 4l9 7.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.7 10.1v9.4h12.6v-9.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 19.5v-5.1h4v5.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+
+<div class="wrap">
+ <header><h1>Alternate or Not <span class="sub">// Dispatch Call</span></h1><span class="src">FOM 8.2.3</span></header>
+ <div id="app"></div>
+ <div class="hint">1-2-3 rule: no alternate if ETA &plusmn;1 hr forecasts at least 2000 ft ceiling AND 3 sm vis &nbsp;&middot;&nbsp; &larr; no alt &nbsp; &rarr; required</div>
+</div>
+<script>
+let lives,score,streak,best=+(localStorage.getItem('aon_best')||0),cur,timer,locked,TMAX=8000;
+const app=document.getElementById('app');const ri=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+const ALWAYS=[
+ {c:"Thunderstorms forecast in the TAF at ETA",ref:"FOM 8.2.3"},
+ {c:"Volcanic ash forecast in the TAF at ETA",ref:"FOM 8.2.3"},
+ {c:"Flag flight planned at 7 hr flight time on the Flight Plan",ref:"FOM 8.2.2.1 / 121.621"},
+];
+function gen(){
+ const wantReq=Math.random()<0.5;let ceil,vis,condTxt="",ref="FOM 8.2.3";
+ if(!wantReq){ceil=ri(20,36)*100;vis=ri(6,11)*0.5;}
+ else if(Math.random()<0.4){ceil=ri(20,36)*100;vis=ri(6,11)*0.5;const a=ALWAYS[ri(0,ALWAYS.length-1)];condTxt=a.c;ref=a.ref;}
+ else if(Math.random()<0.5){ceil=ri(8,19)*100;vis=ri(2,11)*0.5;}
+ else {ceil=ri(20,36)*100;vis=ri(2,5)*0.5;}
+ const req=wantReq;
+ const why=req?(condTxt?"Alternate always required when "+condTxt.toLowerCase()+".":"Below 2000 ft ceiling and/or below 3 sm vis - alternate required."):"At least 2000 ft ceiling and 3 sm vis at ETA - no alternate required.";
+ return {ceil,vis:vis.toFixed(1),cond:condTxt,req,ref,why};
+}
+function hud(){return `<div class="hud"><span class="lives">${'♥'.repeat(lives)}<span style="color:#234">${'♥'.repeat(3-lives)}</span></span><span>score <b>${score}</b> &middot; <span class="streak">streak ${streak}</span></span><span>best <b>${best}</b></span></div>`;}
+function round(){
+ cur=gen();locked=false;
+ app.innerHTML=hud()+`<div class="tbar"><div class="tfill" id="tf"></div></div>
+  <div class="card"><div class="tag">Destination, ETA &plusmn; 1 hr (contiguous 48)</div>
+   <div class="scn">Is a destination alternate required?</div>
+   <div class="wx">${cur.ceil} ft ceiling &middot; ${cur.vis} sm vis</div>
+   ${cur.cond?`<div class="cond">+ ${cur.cond}</div>`:''}</div>
+  <div class="btns"><button class="no" onclick="ans(false)">NO ALTERNATE</button><button class="req" onclick="ans(true)">ALTERNATE REQ</button></div>
+  <div class="feed" id="feed"></div>`;
+ const tf=document.getElementById('tf');clearInterval(timer);const t0=Date.now();
+ timer=setInterval(()=>{const left=TMAX-(Date.now()-t0);const pct=Math.max(0,left/TMAX*100);tf.style.width=pct+'%';
+  tf.className='tfill'+(pct<50?' warn':'')+(pct<22?' crit':'');if(left<=0){clearInterval(timer);ans(null);}},60);
+}
+function ans(choice){
+ if(locked)return;locked=true;clearInterval(timer);
+ const correct = choice!==null && choice===cur.req;
+ const fb=document.getElementById('feed');
+ if(correct){score++;streak++;if(score>best){best=score;localStorage.setItem('aon_best',best);}
+  fb.innerHTML=`<span class="ok">CORRECT</span> &nbsp;<span class="ref">${cur.ref}</span>`;setTimeout(round,650);
+ }else{lives--;streak=0;const v=cur.req?'<span class="bad">ALTERNATE REQUIRED</span>':'<span class="ok">NO ALTERNATE</span>';
+  fb.innerHTML=`<div>${choice===null?'<span class="bad">TIME</span>':'<span class="bad">WRONG</span>'} &middot; ${v}</div><div class="lim">${cur.why}</div><div class="ref">${cur.ref}</div>`;
+  document.querySelectorAll('.btns button').forEach(b=>b.disabled=true);
+  setTimeout(()=>lives<=0?over():round(),1700);}
+}
+function over(){app.innerHTML=`<div class="card"><div class="over"><div class="big">${score}</div><div class="lbl">correct dispatch calls</div>
+  <div class="best">best ${best}</div><button class="start" onclick="startGame()">Play again</button></div></div>`;}
+function startGame(){lives=3;score=0;streak=0;round();}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'){if(!locked)ans(false);}else if(e.key==='ArrowRight'){if(!locked)ans(true);}});
+function intro(){app.innerHTML=`<div class="card"><div class="over"><div class="lbl" style="margin-bottom:6px">Destination alternate, 1-2-3 rule</div>
+ <div class="scn" style="font-size:20px;margin:6px 0 4px">Alternate or Not?</div>
+ <div class="src" style="margin:8px 0 20px;color:#8fb3cf">3 lives &middot; ${TMAX/1000}s per call &middot; watch for TS, ash, 6+ hr flag</div>
+ <button class="start" onclick="startGame()">Start</button>${best?`<div class="best">best ${best}</div>`:''}</div></div>`;}
+intro();
+</script>
+<footer style="width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:8px;margin:28px auto 0;">
+<img src="B787_night.jpg" alt="Boeing 787" style="width:380px;max-width:60%;height:auto;border-radius:6px;">
+<a href="mailto:ryan.pettit@alaskaair.com?subject=B787%20Study%20Portal%20-%20Alternate%20or%20Not" style="font-size:11px;color:#b1d887;font-family:inherit;text-decoration:none;">ryan.pettit@alaskaair.com</a>
+<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 1.2</div>
+</footer>
+<script src="/portal-settings.js" defer></script>
+<script src="/assist.js" defer></script>
+</body></html>

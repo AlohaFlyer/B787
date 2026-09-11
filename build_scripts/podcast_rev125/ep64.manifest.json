@@ -1,0 +1,542 @@
+[
+ {
+  "i": 2,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Aloha, aloha, and welcome back to seven-eight-seven Flight Deck Notes. I'm Pualani — that's poo-ah-LAH-nee — and if this is your first ride with us, come sit by me, we go take care of you. Today we go deep on Flight Operations Manual Chapter 9, Weather. Grab one coffee, buckle up, yeah? This whole chapter, brah, it's numbers on numbers on numbers."
+ },
+ {
+  "i": 3,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] And I'm Chester, coming to you live from Seattle, where it is — you'll never guess — raining sideways into my coffee. Which makes me exactly the right man for a chapter that opens on wet and contaminated runways. Pualani, this is my Super Bowl. I stretched for this one."
+ },
+ {
+  "i": 4,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And I'm Otto. It's raining where Chester is. It is always raining where Chester is. Chur, everyone. Let's get moving before he tells us again that the seven-eight-seven is the finest flying machine ever bolted together by human hands."
+ },
+ {
+  "i": 5,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[laughs] It objectively is, Otto. Composite barrel fuselage, bleedless architecture, the whole —"
+ },
+ {
+  "i": 6,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And there it is. Fourteen seconds. That's a new record. I'm starting a clock this episode, folks. Every time Chester professes his love for the airplane, I mark the time. Fourteen seconds cold open."
+ },
+ {
+  "i": 7,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Okay, okay, rein 'em in. Here's our hook — three questions we going answer. One: when is a runway \"wet\" versus \"contaminated,\" and why does one little eighth of an inch flip your whole takeoff? Two: how far you stay away from a thunderstorm, and how you don't go fly through severe turbulence like some malihini fresh off the boat? And three — the big one — when does the eff oh em just flat-out tell you, no, not today. Stick around, we get stories from Anchorage, Honolulu, and Seattle."
+ },
+ {
+  "i": 8,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Let's build it from the ground up. eff oh em nine-one-one-one, Runway Conditions. A runway is Dry when no more than 25 percent of the area being used is visibly damp or covered by frost, ice, compact snow, water, or slush. Now — and this matters — our seven-eight-seven is Hawaiian-operated, so we fly the Hawaiian definitions, and they run stricter. Same section: a Hawaiian Wet runway is more than 25 percent of the area visibly damp, or covered by no more than one-eighth inch — that's three millimeters — of liquid water. Liquid water only. Not slush, not snow — water."
+ },
+ {
+  "i": 9,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Mark that difference. On the Hawaiian jet, \"wet\" means liquid water and nothing else. The moment you've got slush, dry snow, or wet snow out there — any depth at all — you are not wet, you are contaminated. Same section, Hawaiian Contaminated: frost, ice, compact snow, or more than one-eighth inch of liquid water, or any depth of slush, dry snow, or wet snow. Sweet as. Alaska mainline gets to play the one-eighth-inch game with loose snow and slush; on our airplane, frozen and slushy stuff skips the line and goes straight to contaminated."
+ },
+ {
+  "i": 10,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And that's memory aid number one, Hawaiian-style — write 'em down. \"An eighth is the fence — but only for water.\" Up to one-eighth inch of liquid water, three millimeters, you stay wet; over that, you're contaminated. But slush or snow? No fence at all — any depth and you contaminated. And frost, ice, or compact snow — contaminated, full stop. Water gets the fence; everything frozen or slushy jumps right over it. Say it with me next time you brief."
+ },
+ {
+  "i": 11,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Love it. And temperature tells dry snow from wet snow — section nine-one-one-two. Absent a descriptor, snow is dry at minus three Celsius or colder, and wet at minus two Celsius or warmer. Dry snow you blow off, it won't pack a snowball. Wet snow packs a solid ball, but water won't squeeze out of it."
+ },
+ {
+  "i": 12,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Minus three, dry. Minus two, wet. One degree between a snowball and a puff of powder. Physics is petty, and I respect it."
+ },
+ {
+  "i": 13,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Petty but precise. Now my favorite little trap — the Slippery When Wet no tam, nine-one-one-four. It's a continuous alert that says the moment this runway gets wet, it immediately degrades to three-three-three instead of five-five-five."
+ },
+ {
+  "i": 14,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Rubber deposits, usually, down in the touchdown zone. And here's the sneaky part — it stays visible even when the runway's bone dry. So don't let it spook you into thinking you're contaminated right now. It only bites when the runway is actually wet."
+ },
+ {
+  "i": 15,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Three-three-three, not five-five-five. It's the runway quietly telling you it's got trust issues. Believe it."
+ },
+ {
+  "i": 16,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Braking action reports now — nine-one-two. A pie rep is a pilot's qualitative read: good, medium, poor, nil. Two hard rules, tattoo 'em on your brain. Airport personnel cannot issue braking action reports. And a pie rep must never be used to upgrade expected braking action — only downgrade."
+ },
+ {
+  "i": 17,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Only ever downgrade. So if somebody landed ahead of you and keyed up, \"yeah, way better than the FICON\" — too bad, you can't take the freebie. Downgrade only. And if the ay tiss says \"Braking Action Advisories in Effect,\" section nine-one-two-one, that's telling you braking action is medium or worse."
+ },
+ {
+  "i": 18,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Good news travels, but it never gets a vote on your performance page. Only bad news gets to speak. Democracy, she is dead."
+ },
+ {
+  "i": 19,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Ho, Otto going dark early today. And the Runway Condition Code — nine-one-six-one — runs zero for nil up to six for dry. And remember from nine-two-one: if the are dubya why see see is zero on any portion of the runway, or braking action is nil, you not going. Pau. Full stop."
+ },
+ {
+  "i": 20,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Okay — data selection, because this is exactly where crews trip on a line check. Section nine-one-eight. On a contaminated runway, reduced thrust using assumed temperature — labeled A-T or FLEX — is not authorized. You do not FLEX on a contaminated runway. Not ever. And here's the why: your data depends on contaminant type. Hard-packed stuff, ice or compact snow, that's an accelerate-and-stop concern. Loose stuff — slush, snow, water — that also adds drag when you're continuing the takeoff after an engine failure."
+ },
+ {
+  "i": 21,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] No FLEXing on the ice. Which, spiritually, is also excellent life advice."
+ },
+ {
+  "i": 22,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Chester, this is your yard. Tell 'em about Anchorage."
+ },
+ {
+  "i": 23,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Oh, you want the cold one. Tell me about a time. Picture it — I'm the check airman, right seat, line check into Anchorage, Papa-Alpha-November-Charlie, dead of a January morning. Chugach mountains all around us, minus temps well below standard, FICON on the runway reads three-three-three, packed snow the whole length. Sharp young eff oh, smooth as butter, sets up the takeoff and reaches for an assumed-temp FLEX because the numbers looked easy. Hand's already drifting toward the panel."
+ },
+ {
+  "i": 24,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Cue the ominous Alaskan wind."
+ },
+ {
+  "i": 25,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] And I just said, real quiet, \"What's under the wheels?\" And you watched it land on his face — contaminated runway, nine-one-eight, no FLEX. He pulled his hand back, ran rated thrust, pulled the contaminated data for packed snow. Textbook save. Told me later that one question rewired how he briefs every takeoff. That's the whole game — it's not knowing it on the ground, it's catching it with your hand already moving."
+ },
+ {
+  "i": 26,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Chee-hoo. And that's what IOE is for, yeah — building the reflex so the rule fires before the hand does."
+ },
+ {
+  "i": 27,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] \"The hand was already moving.\" Cracking title for your memoir, Chester. Volume one of forty."
+ },
+ {
+  "i": 28,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Okay, this is your danger-zone moment, Chester."
+ },
+ {
+  "i": 29,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] It truly is — cue Kenny Loggins, highway to the danger zone. But seriously, folks — landing precipitation, nine-one-nine. On a smooth runway you must treat two categories of rain as contaminated with standing water and plan a are dubya why see see of two: moderate rain — that's plain R-A — and heavy rain — that's plus R-A. You may only fall back to are dubya why see see five with light rain, minus R-A, or on a skid-resistant runway in moderate rain."
+ },
+ {
+  "i": 30,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Smooth runway, real rain — are dubya why see see two. Not four. Not \"eh, she'll be right.\" Two."
+ },
+ {
+  "i": 31,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And the numbers that keep you honest on landing — nine-one-twelve. Latest Touchdown Point: take your landing distance, subtract it from the LDA, add a thousand feet for air-run. Brief that LTP when LDA is less than seven thousand feet, or braking action is less than good."
+ },
+ {
+  "i": 32,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And still under seven thousand — nine-one-twelve-three — do not use WET data for LDA less than seven thousand feet. And nine-one-twelve-two, that same short-field, less-than-good braking situation, you use the maximum selectable autobrake setting if it's available."
+ },
+ {
+  "i": 33,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Seven thousand feet is the magic gate. Under it — no wet data, max autobrakes, brief your latest touchdown point. Above it, you get to relax. Slightly. Marginally. Don't get comfortable."
+ },
+ {
+  "i": 34,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[excited] Which brings us to memory aid number two, straight out of the eff oh em — nine-one-thirteen — \"Can U StoP.\" C-U-S-P. C for Calculate: run all conditions through the landing tool, get your limiting condition. U for Understand: know your data, your assumptions, your runway report. S for Stabilize: on speed, on glideslope, plan to touch down by a thousand feet, in the touchdown zone no sooner than 500 feet, no later than the LTP — and if not, go around. And P for Professional."
+ },
+ {
+  "i": 35,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] And the eff oh em actually says it, word for word — a slippery runway is not the time to try to grease one on. A professional puts safety ahead of style."
+ },
+ {
+  "i": 36,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Don't try to grease it on the ice to impress the jumpseat rider, Maverick. Nobody's pinning a medal on you. You'll just be the fella explaining a runway excursion to a very calm man with a clipboard."
+ },
+ {
+  "i": 37,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Surely you can't be serious about all these numbers, Otto."
+ },
+ {
+  "i": 38,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] I am serious. And don't call me Shirley."
+ },
+ {
+  "i": 39,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[laughs] Every episode. Every single episode, and it still lands."
+ },
+ {
+  "i": 40,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Chester — before we leave the wet stuff, you've got the Seattle story. The grooved-runway one."
+ },
+ {
+  "i": 41,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] I do. Tell me about a time — and this one's home turf, Seattle-Tacoma, Kilo-Sierra-Echo-Alpha. Autumn atmospheric river, raining like the sky owed somebody money. We're inbound, and the eff oh calls the runway \"wet, no big deal.\" And I said, hold on — pull up the Jepp, check the Additional Runway Information. Is it skid-resistant — grooved or PFC — or do we treat it Smooth? Because nine-one-nine says a Smooth runway in that heavy rain, plus R-A, is are dubya why see see two with standing water. A skid-resistant runway in moderate rain, we could hold are dubya why see see five."
+ },
+ {
+  "i": 42,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Big swing between a five and a two. That's the difference between a normal rollout and a \"why is the far end getting closer so fast\" rollout."
+ },
+ {
+  "i": 43,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Exactly. And the kicker — LDA on our runway that night was well over seven thousand, so we had room. But I made him say the whole logic out loud anyway: contaminant, are dubya why see see, wet-versus-contaminated data, no FLEX concerns because we're landing. Ran the numbers, ar cam in the PRC, briefed the limiting condition. Greased nothing. Planted it in the zone like nine-one-thirteen says."
+ },
+ {
+  "i": 44,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Land like a professional. That's the P, every time."
+ },
+ {
+  "i": 45,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Twelve seconds, by the way. Chester said \"the airplane just handled it beautifully\" under his breath while I was talking. I heard it. The clock heard it."
+ },
+ {
+  "i": 46,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[laughs] I regret nothing."
+ },
+ {
+  "i": 47,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Okay — the prohibited list, nine-two-one. This is the \"you're not going\" section and it's pure memory work, so lean in. Takeoffs and landings are prohibited when steady-state wind velocity is greater than 50 knots."
+ },
+ {
+  "i": 48,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Contaminated runway prep that leaves you a prepared width less than — for our jet, the seven-eight-seven — 45 meters, which is 148 feet. That's the number. If they've plowed a lane, it's gotta be at least 45 meters wide or you don't go. Also prohibited: takeoffs, approaches, and landings when thunderstorms are reported at or near the airport, unless the runway and the whole flight path — including the missed approach — are clear."
+ },
+ {
+  "i": 49,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Forty-five meters, one-forty-eight feet, seven-eight-seven. Plow you a lane skinnier than that and you're a spectator. Bring snacks."
+ },
+ {
+  "i": 50,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Takeoffs specifically are prohibited — same section — when contaminant depth is greater than one-half inch for wet snow, slush, or water, or greater than four inches for dry snow. And when steady-state tailwind exceeds 10 knots on a contaminated runway."
+ },
+ {
+  "i": 51,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Half an inch of the wet stuff, four inches of the dry fluffy stuff. And landings get prohibited when LDA is under seven thousand feet with braking less than good and the tailwind's greater than 5 knots, or you've got any inoperative thrust reverser, or the antiskid's out."
+ },
+ {
+  "i": 52,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Ten knots of tailwind for takeoff, five for landing, on a contaminated runway. The runway's junk and the wind's shoving you along — the eff oh em says quit while you're ahead."
+ },
+ {
+  "i": 53,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Heavy snow, nine-two-two — here's memory aid number three, I call it \"five in five.\" In heavy snow you anti-ice with undiluted Type Four fluid and complete a successful Contamination Check within five minutes of takeoff. Type Four preferred, Type Two if you must. Five in five — Type Four fluid, five-minute check."
+ },
+ {
+  "i": 54,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Pualani made a mnemonic and it actually rhymes. Frame it."
+ },
+ {
+  "i": 55,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] I contain multitudes, Otto. High barometric pressure, nine-two-three — when pressure exceeds 31.00 inches of mercury, you set 31.00 for enroute below 18,000 feet em ess el, and hold it until the final approach segment or beyond the affected area. On departure or missed approach, set 31.00 before any mandatory crossing altitude or 1500 feet ay gee el, whichever is lower."
+ },
+ {
+  "i": 56,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] And if the airport can't even measure pressure above 31.00, they report it as \"in excess of 31.00 inches of Hg,\" and operations there are limited to vee eff are conditions. High pressure, low drama — as long as you set the window."
+ },
+ {
+  "i": 57,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Cold weather, nine-three. Fuel freeze, nine-three-two-three — fuel temp drifts toward total air temp at roughly three degrees C per hour, up to 12 in extreme conditions. To warm it back up, a 4000-foot descent below the tropopause buys you about seven degrees of tee ay tee, and Mach point-oh-one buys about seven-tenths of a degree. In severe cases, descend as low as 25,000 feet."
+ },
+ {
+  "i": 58,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] And it takes up to an hour for fuel temp to stabilize after any of that. So don't yo-yo the jet expecting instant warmth. Patience, or the wax crystals win. This matters on the long ones, by the way — the deep South Pacific and Asia legs, hours over cold ocean at altitude. That's where you actually watch that fuel temp."
+ },
+ {
+  "i": 59,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Now cold-temp altimetry, nine-three-three-one. When it's colder than ISA, true altitude is lower than indicated altitude. The jet is actually lower than the altimeter's telling you. And in the US, the approach chart drops a note right in the briefing strip when corrections apply. Pualani — you've got the one that made you a believer."
+ },
+ {
+  "i": 60,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] I do. Tell me about a time. Years back, deadheading in the jumpseat on the approach into Anchorage, Papa-Alpha-November-Charlie — one of those brutal clear winter nights, Chugach all around, temperature way, way below standard, blowing snow, black as the inside of a cow. Old salt in the left seat. And I watched him pull the cold-temp correction off the chart and bump every altitude on the approach. The eff oh — green, sharp, but green — goes, \"Why bother? Altimeter's set, we're legal.\" And the captain just said, \"Because the mountain doesn't read our altimeter.\""
+ },
+ {
+  "i": 61,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Ooh. Chills. And not just from the minus temperatures."
+ },
+ {
+  "i": 62,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] We crossed the step-down and I swear the terrain out my side felt closer than the numbers said it should be — because it was. True altitude lower than indicated, exactly like nine-three-three-one says. Without that correction we'd have been low over rocks in the dark and never known till it mattered. That night the cold-temp correction wasn't a chart note. It was the whole margin. Never skipped one since."
+ },
+ {
+  "i": 63,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] \"The mountain doesn't read our altimeter.\" That goes on the ready-room wall."
+ },
+ {
+  "i": 64,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Right up next to Chester's seven-eight-seven wedding photos."
+ },
+ {
+  "i": 65,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[excited] Icing intensity, nine-three-two-two. Moderate icing — even short encounters become potentially hazardous, so you use the anti-ice or you divert. Severe — the equipment can't keep up, immediate flight diversion is necessary. Trace and light mostly matter when you're stuck in it over an hour."
+ },
+ {
+  "i": 66,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Moderate: short exposure, big problem. Severe: your gear's losing the fight, leave. Simple as."
+ },
+ {
+  "i": 67,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] Turbulence, nine-four-one. This is a bright, bold line — under no circumstances will a flight be operated intentionally through areas of validated severe or extreme turbulence. But here's the nuance people miss: moderate clear air turbulence in the climb or descent? You don't have to reroute around it. It's actually safer to transit those altitudes quickly with the cabin secured. And nine-four-one names the local troublemakers by name — Turnagain Arm at Anchorage, the Taku winds at Juneau, Santa Ana winds at Ontario."
+ },
+ {
+  "i": 68,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Turnagain Arm. Chester's beloved Anchorage has a wind named after a place that's basically saying \"turn again, you should not be here.\" Never fly into validated severe on purpose. That's not skill. That's a maintenance write-up with passengers attached."
+ },
+ {
+  "i": 69,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Thunderstorms, nine-five-five — here's the big avoidance number. Avoid by at least 20 miles any thunderstorm that's severe or gives an intense radar echo. And when you're on top in the clear, clear the tops by 5000 feet. If you can't clear by 5000, then you avoid the storm laterally by 20 nautical miles."
+ },
+ {
+  "i": 70,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Twenty miles from the nasty ones, 5000 feet over the top. And from nine-five-four, a return beyond 50 miles is a strong echo, and a steep rainfall gradient — green to red in a mile or less — that's your maximum-turbulence marker. Also, don't fly under a cumulonimbus overhang; if you have to, antenna up-tilt to hunt for hail."
+ },
+ {
+  "i": 71,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Green to red in a mile means don't go looking for the door in there. There is no door. There is only regret. And a word from the South Pacific — you cross the equator, the ITCZ throws up cells that'll dwarf anything Chester frets about in Seattle. Same rule, bigger canvas. Twenty miles. You detour, you don't debate."
+ },
+ {
+  "i": 72,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Windshear, nine-five-six. Do not take off or continue an approach below 1000 feet ay gee el to a runway where ay tee see reported a Microburst Alert. And windshear and microburst advisories stay in effect for 20 minutes after they're issued. And this one's mine — the go-around at Kahului."
+ },
+ {
+  "i": 73,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[excited] Maui. Let's hear it."
+ },
+ {
+  "i": 74,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Tell me about a time. Kahului, Oscar-Golf-Golf, hot trade-wind afternoon, showers stacking up over the West Maui mountains and building cells off the pali. We're cleared to land. About nine hundred feet, tower keys up: \"Microburst Alert.\" And the airspeed tape just starts doing this ugly little dance — gaining, then bleeding."
+ },
+ {
+  "i": 75,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] The dance you never want the tape to do."
+ },
+ {
+  "i": 76,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Nine-five-six is crystal — below a thousand ay gee el with a microburst alert, you do not continue. And we were at nine hundred. So it wasn't even a debate. Called the go-around, firewalled 'em, flew the escape guidance, pitched to the cues, rode it up. Felt the airplane sag once in the shear and then just — climb out of it. Clean. We held for the advisory to expire — that's your 20 minutes — came around, landed on dry numbers into the trades."
+ },
+ {
+  "i": 77,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Go-around at nine hundred feet in a microburst over Maui. That, Pualani, is the one time I'll allow that the seven-eight-seven is a decent machine."
+ },
+ {
+  "i": 78,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[laughs] Write it down. Otto said something nice about the airplane. Date and time."
+ },
+ {
+  "i": 79,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] And here's your bonus memory aid, the \"double-two\" for severe weather — 20 miles from the storm, 20 minutes on the advisory. Two and two."
+ },
+ {
+  "i": 80,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Two and two. Even I'll remember that one, and I forget my own coffee order."
+ },
+ {
+  "i": 81,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[excited] Volcanic ash, nine-six-one — flights won't operate within 10 nautical miles of a volcano where an eruption is imminent or underway when significant ash emission is likely. And space weather, nine-seven-five — Alaska won't dispatch flights at latitudes above 78 degrees north with solar radiation at S3 or higher. A significant space weather event, per nine-seven-six-one, is Radio Blackout R3, Solar Radiation S3, or Geomagnetic storm G4 or greater."
+ },
+ {
+  "i": 82,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[warm] And SIGMETs — big Rev 125 change here. The old section nine-eight-three, sig met Message Format, with the issuing criteria and the worked examples, was deleted from the manual entirely. Those turbulence, icing and volcanic ash thresholds are no longer in the eff oh em. What nine-eight-one says now is that mee tar, taff and sig met information is found in the Jeppesen FD Pro application, and mee tar codes can be expanded to plain English with a toggle button."
+ },
+ {
+  "i": 83,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Right. Recap. Before Chester proposes to the airplane again and we need a chaplain."
+ },
+ {
+  "i": 84,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[laughs] Recap time. One — an eighth is the fence, but only for water: under one-eighth inch of liquid water it's wet; over that, or any depth of slush, snow, or frozen stuff, it's contaminated — that's the Hawaiian definition, the one our seven-eight-seven flies. Two — braking PIREPs only downgrade, never upgrade, and airport folks can't issue them at all. Three — no FLEX on a contaminated runway, and under seven thousand feet LDA, no wet data, max autobrakes, brief your LTP. Run \"Can U StoP.\""
+ },
+ {
+  "i": 85,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[serious] Four — the prohibited numbers: wind over 50 knots, are dubya why see see zero or nil anywhere, seven-eight-seven prepared width under 45 meters, 148 feet. Takeoff's out at half an inch wet or four inches dry, tailwind over 10 on a contaminated runway. Heavy snow — five in five, Type Four, contamination check within five minutes."
+ },
+ {
+  "i": 86,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Five — the weather geometry: 20 miles from severe storms, 5000 feet over the tops. Windshear, a thousand feet ay gee el on a microburst alert, advisories good for 20 minutes — the double-two. Volcano, 10 miles. Colder than ISA, true altitude is lower than indicated — the mountain doesn't read your altimeter. And never, ever, into validated severe turbulence."
+ },
+ {
+  "i": 87,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] Three stories, three real places — packed snow into Anchorage, an atmospheric river into Seattle, a microburst over Maui. Same book, same numbers, whether you flying the North Pacific or the neighbor islands. Fly it by the numbers, brief it like a professional, and put safety ahead of style. Otto, take us out."
+ },
+ {
+  "i": 88,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] I've got the airplane. Roger, roger. What's our vector, Victor. Clearance, Clarence. Final tally on the clock, folks — Chester professed his love for the seven-eight-seven six times today. Personal best. And remember — the mountain doesn't read your altimeter. Mahalo, everyone."
+ },
+ {
+  "i": 89,
+  "speaker": "Chester",
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "text": "[laughs] You can be my wingman anytime, Otto."
+ },
+ {
+  "i": 90,
+  "speaker": "Otto",
+  "voice_id": "jOEnNSVLOHUgmrNwfqQE",
+  "text": "[dry] Negative, Ghost Rider. You can be mine."
+ },
+ {
+  "i": 91,
+  "speaker": "Pualani",
+  "voice_id": "cgSgspJ2msm6clMCkdW9",
+  "text": "[warm] A hui hou — until next time. Malama pono, everybody."
+ }
+]

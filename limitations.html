@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B787 Limitations Drill</title>
+<style>
+  :root{
+    --bg:#01172b; --panel:#062b46; --panel2:#0a3556; --line:#13486e;
+    --ink:#eaf3fb; --muted:#8fb3cf;
+    --mid:#01426A; --atlas:#0074C8; --breeze:#00C7E6; --green:#C0E585;
+    --amber:#f2a65a;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px 60px;}
+  .wrap{width:100%;max-width:700px}
+  header{display:flex;align-items:baseline;justify-content:space-between;
+    border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:18px;gap:12px}
+  h1{font-size:15px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin:0}
+  h1 .sub{color:var(--breeze);font-weight:600}
+  .src{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em}
+  .bar{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:14px;flex-wrap:wrap}
+  .bar .count{color:var(--ink)}
+  .track{flex:1;height:3px;background:var(--panel2);border-radius:2px;overflow:hidden;min-width:120px}
+  .fill{height:100%;width:0;background:var(--atlas);transition:width .25s}
+  .chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--breeze);border:1px solid var(--line);border-radius:3px;padding:3px 8px;align-self:flex-start}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    padding:24px 22px;min-height:240px;display:flex;flex-direction:column;gap:14px}
+  .prompt .lead{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .q{font-size:23px;line-height:1.25;font-weight:700;letter-spacing:.01em}
+  .cond{font-size:13px;color:var(--muted);font-style:italic;margin-top:6px;line-height:1.4}
+  .readout{background:#02101f;border:1px solid #0c3a5e;border-left:3px solid var(--green);
+    border-radius:5px;padding:0 16px;font-size:14.5px;line-height:1.5;
+    opacity:0;max-height:0;overflow:hidden;transition:opacity .2s}
+  .readout.show{opacity:1;max-height:1200px;padding:14px 16px}
+  .readout .ln{margin:3px 0;color:var(--ink)}
+  .readout .num{display:inline-block;min-width:18px;color:var(--breeze);font-weight:700;font-family:var(--mono)}
+  .readout .sub{margin-left:22px;color:#cfe2f2}
+  .readout .bul{margin-left:34px;color:#cfe2f2}
+  .readout b{color:var(--green);font-weight:700}
+  .readout i{color:var(--muted);font-style:italic}
+  .spacer{flex:1}
+  .controls{display:flex;gap:10px;flex-wrap:wrap}
+  button{font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;border-radius:6px;
+    padding:11px 18px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);transition:.12s}
+  button:hover{border-color:var(--breeze)}
+  button:focus-visible{outline:2px solid var(--breeze);outline-offset:2px}
+  .primary{background:var(--atlas);color:#fff;border-color:var(--atlas)}
+  .primary:hover{filter:brightness(1.1)}
+  .ghost{background:transparent}
+  .mark{flex:1}
+  .knew{border-color:var(--green);color:var(--green)}
+  .knew:hover{background:rgba(192,229,133,.12)}
+  .rev{border-color:var(--amber);color:var(--amber)}
+  .rev:hover{background:rgba(242,166,90,.12)}
+  .foot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .foot button{padding:6px 12px;font-size:12px}
+  .hint{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;margin-top:18px;letter-spacing:.03em}
+  .summary{text-align:center;padding:38px 20px}
+  .summary .big{font-family:var(--mono);font-size:46px;color:var(--green);font-weight:700}
+  .summary .lbl{color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:24px}
+  .summary .stat{display:flex;justify-content:center;gap:32px;margin:18px 0 28px;font-family:var(--mono)}
+  .summary .stat div span{display:block;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+  .summary .stat .r{color:var(--amber)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  @media (max-width:480px){.q{font-size:19px}.readout{font-size:13.5px}}
+.srcbtn{background:transparent;border:1px solid var(--atlas);color:var(--breeze);border-radius:5px;padding:10px 14px;font-weight:700;font-family:var(--sans);cursor:pointer}
+.srcbtn:hover{background:var(--atlas);color:#fff}
+.srcpanel{max-height:0;overflow:hidden;opacity:0;background:#01233b;border:1px solid var(--line);border-radius:6px;padding:0 16px;margin-top:10px;transition:max-height .2s,opacity .2s,padding .2s}
+.srcpanel.show{max-height:320px;opacity:1;padding:14px 16px}
+.srclabel{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.srcref{font-family:var(--mono);font-size:14px;color:var(--breeze);font-weight:700}
+.srcsub{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.45}
+.gamelink{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--atlas);color:var(--breeze);border-radius:5px;padding:8px 12px;font-weight:700;font-size:12px;text-decoration:none;font-family:var(--sans);margin-left:8px}
+.gamelink:hover{background:var(--atlas);color:#fff}
+.handrow{flex-wrap:wrap;gap:8px}
+</style>
+
+<style>
+.handout{display:inline-flex;align-items:center;gap:7px;background:var(--green);color:#02233b;border:1px solid var(--green);border-radius:5px;padding:8px 13px;font-weight:700;font-size:12.5px;text-decoration:none;font-family:var(--sans);letter-spacing:.02em}
+.handout:hover{filter:brightness(1.06)}
+.handrow{display:flex;justify-content:flex-end;margin:-6px 0 14px}
+.cat{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+.mem{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#02233b;background:var(--amber);border-radius:3px;padding:2px 6px;margin-left:8px;font-weight:700;vertical-align:middle}
+.answer{font-family:var(--mono);font-size:22px;line-height:1.3;color:var(--green);font-weight:700}
+</style>
+
+<style>
+.ps-homebar{align-self:stretch;width:100%;box-sizing:border-box;padding:8px 0 0 10px;flex:0 0 auto;text-align:left;}
+.ps-home{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;background:#fff;border:2px solid #01416e;color:#01416e;text-decoration:none;box-shadow:0 1px 4px rgba(1,23,43,.2);transition:background .12s,color .12s;-webkit-tap-highlight-color:transparent;}
+.ps-home:hover,.ps-home:focus-visible{background:#01416e;color:#fff;}
+.ps-home:focus{outline:none;}
+.ps-home svg{display:block;}
+@media (max-width:480px){.ps-homebar{padding:6px 0 0 8px;}.ps-home{width:40px;height:40px;}}
+</style>
+</head>
+<body>
+<div class="ps-homebar"><a class="ps-home" href="/index.html" title="B787 Study Portal" aria-label="B787 Study Portal"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true" focusable="false"><path d="M3 11.3 12 4l9 7.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.7 10.1v9.4h12.6v-9.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 19.5v-5.1h4v5.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+
+<div class="wrap">
+  <header>
+    <h1>B787 Limitations <span class="sub">// Number, Units, Condition</span></h1>
+    <span class="src">FCOM R10 L.10</span>
+  </header>
+  <div class="handrow"><a class="handout" href="view.html?f=B787_Memory_Limitations.pdf" target="_blank" rel="noopener">&#128196; Open memorize-set handout (PDF)</a><a class="gamelink" href="limit-or-bust.html">&#127918; GAME</a></div>
+  <div id="app"></div>
+  <div class="hint">Amber "Memorize" = memory item (#) per FCOM L.10 &nbsp;&middot;&nbsp; State the limit aloud, then reveal &nbsp;&middot;&nbsp; Space / Enter = reveal then advance &nbsp;&middot;&nbsp; K = got it &nbsp;&middot;&nbsp; R = review &nbsp;&middot;&nbsp; Source = verbatim FCOM quote</div>
+</div>
+
+
+<script>
+
+const DATA=[
+ {s:"Airplane General",q:"Maximum takeoff and landing tailwind component?",a:"15 knots",ref:"FCOM L.10.2",mem:true,src:"Maximum Takeoff and Landing Tailwind Component: 15 knots. FCTM 3.11 technique: a rolling takeoff is strongly advised when crosswinds exceed 20 knots or tailwinds exceed 5 knots (engine stress and possible surge if thrust is set before brake release)."},
+ {s:"Airplane General",q:"Maximum runway slope?",a:"+/- 2%",ref:"FCOM L.10.2",mem:false,src:"Runway slope: +/- 2%."},
+ {s:"Airplane General",q:"Maximum operating altitude?",a:"43,100 ft pressure altitude",ref:"FCOM L.10.2",mem:false,src:"Maximum Operating Altitude: 43,100 ft pressure altitude."},
+ {s:"Airplane General",q:"Maximum takeoff and landing altitude?",a:"14,000 ft pressure altitude",ref:"FCOM L.10.2",mem:false,src:"Maximum Takeoff and Landing Altitude: 14,000 ft pressure altitude."},
+ {s:"Airplane General",q:"Operating HF radios when refueling?",a:"Prohibited",ref:"FCOM L.10.2",mem:true,src:"Do not operate HF radios when refueling."},
+ {s:"Airplane General",q:"Flying in RVSM airspace on ISFD alone?",a:"Prohibited (standby altimeter does not meet RVSM accuracy)",ref:"FCOM L.10.2",mem:false,src:"Do not fly in RVSM airspace on ISFD alone. The standby altimeter does not meet RVSM altimeter accuracy requirements."},
+ {s:"Airplane General",q:"Severe turbulent air penetration speed?",a:"290 KIAS below 25,000 ft; 310 KIAS / .84 Mach (whichever lower) at and above 25,000 ft",ref:"FCOM L.10.3",mem:true,src:"Severe turbulent air penetration speed (in severe turbulence) is defined as: 290 KIAS below 25,000 feet; 310 KIAS/.84 Mach (whichever is lower) at and above 25,000 feet."},
+ {s:"Airplane General",q:"Weather radar operation in a hangar?",a:"Avoid (test mode exempt)",ref:"FCOM L.10.3",mem:true,src:"Avoid weather radar operation in a hangar. Note: The hangar recommendation does not apply to the weather radar test mode."},
+ {s:"Airplane General",q:"Max allowable difference between Capt/FO altitude display and field elevation prior to takeoff?",a:"75 feet",ref:"FCOM L.10.3",mem:false,src:"Prior to takeoff the maximum allowable difference between Captain's or First Officer's altitude display and field elevation is 75 feet."},
+ {s:"Crosswind",q:"Maximum demonstrated crosswind, takeoff and landing?",a:"33 kt takeoff, 40 kt landing (gust included) - certification only, not operational limits",ref:"FCOM L.10.3",mem:false,src:"The maximum demonstrated crosswind for takeoff is 33 knots (gust included), and the maximum demonstrated crosswind component for landing is 40 knots (gust included). Note: The demonstrated crosswinds are for certification only and do not represent operational limitations. Operational landing crosswind limitations, gusts included, are published in FCTM 6.29: dry 40 kt, wet 40 kt, standing water/slush 20 kt, snow (no melting) 35 kt, ice (no melting) 17 kt."},
+ {s:"Crosswind",q:"Sideslip-only (zero crab) landings are not recommended above what crosswind?",a:"25 knots",ref:"FCOM L.10.7",mem:false,src:"Sideslip only (zero crab) landings are not recommended with crosswind components in excess of 25 knots."},
+ {s:"Crosswind",q:"When must you reduce takeoff crosswind guidelines by 5 knots (GE engines)?",a:"If thrust is above 40% N1 at brake release for takeoff roll",ref:"FCOM L.10.5",mem:false,src:"Reduce all takeoff crosswind guidelines by 5 knots if thrust is above 40% N1 (GE engines) at brake release for takeoff roll."},
+ {s:"Crosswind",q:"Reduce landing crosswind limit by 5 knots on wet/contaminated runways when?",a:"Whenever asymmetric reverse thrust is used",ref:"FCOM L.10.7",mem:false,src:"Reduce crosswind limitation by 5 knots on wet or contaminated runways whenever asymmetric reverse thrust is used."},
+ {s:"Weights",q:"Maximum taxi weight?",a:"563,000 lb",ref:"FCOM L.10.8",mem:false,src:"Maximum Taxi Weight: 563,000 Pounds."},
+ {s:"Weights",q:"Maximum takeoff weight?",a:"561,500 lb",ref:"FCOM L.10.8",mem:false,src:"Maximum Takeoff Weight: 561,500 Pounds."},
+ {s:"Weights",q:"Maximum landing weight?",a:"425,000 lb",ref:"FCOM L.10.8",mem:false,src:"Maximum Landing Weight: 425,000 Pounds."},
+ {s:"Weights",q:"Maximum zero fuel weight?",a:"400,000 lb",ref:"FCOM L.10.8",mem:false,src:"Maximum Zero Fuel Weight: 400,000 Pounds."},
+ {s:"Autoflight",q:"Autopilot minimum engage altitude after takeoff?",a:"200 ft AGL",ref:"FCOM L.10.8",mem:true,src:"The autopilot must not be engaged below a minimum engage altitude of 200 feet AGL after takeoff."},
+ {s:"Autoflight",q:"Autoland maximum airport field elevation?",a:"8,400 ft",ref:"FCOM L.10.8",mem:true,src:"Autoland capability may only be used for operations into runways at or below 8400 feet airport field elevation."},
+ {s:"Autoflight",q:"Without LAND 2 or LAND 3 annunciated, the autopilot must be disengaged below?",a:"135 ft AGL",ref:"FCOM L.10.8",mem:true,src:"Without LAND 2 or LAND 3 annunciated, the autopilot must be disengaged below 135 feet AGL."},
+ {s:"Autoflight",q:"With LAND 2/3 and glideslope greater than 3.25 deg, the autopilot must be disengaged below?",a:"100 ft AGL",ref:"FCOM L.10.8",mem:true,src:"With LAND 2 or LAND 3 annunciated and glideslope angles greater than 3.25 degrees, the autopilot must be disengaged below 100 feet AGL."},
+ {s:"Autoflight",q:"If the glidepath angle is greater than 3.77 deg, the autopilot must be disengaged no later than?",a:"50 ft below DH/MDA",ref:"FCOM L.10.8",mem:false,src:"If the glidepath angle for approach is greater than 3.77 degrees, the autopilot must be disengaged no later than 50 feet below DH/MDA."},
+ {s:"HUD Takeoff",q:"Low weather minima takeoff guidance requirement?",a:"ILS guidance only, on U.S. Type II or Type III ILS facilities",ref:"FCOM L.10.9",mem:false,src:"Low weather minima takeoff may only be performed using ILS guidance on U.S. Type II or Type III ILS facilities."},
+ {s:"HUD Takeoff / Autoland",q:"Maximum headwind (HUD takeoff and autoland)?",a:"25 knots",ref:"FCOM L.10.9",mem:true,src:"HUD takeoff operations: Headwind 25 knots; Tailwind 15 knots; Crosswind 20 knots. Autoland operations: Headwind 25 knots; Tailwind 15 knots; Crosswind 25 knots (15 KTS for CAT II/III)."},
+ {s:"HUD Takeoff / Autoland",q:"Maximum tailwind (HUD takeoff and autoland)?",a:"15 knots",ref:"FCOM L.10.9",mem:true,src:"HUD takeoff operations: Headwind 25 knots; Tailwind 15 knots; Crosswind 20 knots. Autoland operations: Headwind 25 knots; Tailwind 15 knots; Crosswind 25 knots (15 KTS for CAT II/III)."},
+ {s:"HUD Takeoff",q:"HUD takeoff: maximum crosswind?",a:"20 knots",ref:"FCOM L.10.9",mem:true,src:"Maximum wind component speeds when takeoff weather minima are predicated on HUD takeoff operations: Headwind 25 knots; Tailwind 15 knots; Crosswind 20 knots."},
+ {s:"Autoland",q:"Autoland: maximum crosswind?",a:"25 knots (15 knots for CAT II/III)",ref:"FCOM L.10.9",mem:true,src:"Maximum wind component speeds when landing weather minima are predicated on autoland operations: Headwind 25 knots; Tailwind 15 knots; Crosswind 25 knots (15 KTS for CAT II/III). MEL note: autoland or LAND 3 may be inoperative for dispatch provided approach minimums do not require them (MEL 22-11-07A/B); with the aircraft downgraded to CAT I (MEL 05-10-01A), CAT II, CAT III, and autolands are not used."},
+ {s:"Autoland",q:"Autoland glideslope angle range?",a:"2.5 to 3.25 degrees",ref:"FCOM L.10.9",mem:true,src:"The maximum glideslope angle is 3.25 degrees. The minimum glideslope angle is 2.5 degrees."},
+ {s:"Autoland",q:"Autoland approved flap settings and engine config?",a:"Flaps 20, 25, or 30; both engines operative or one engine inoperative",ref:"FCOM L.10.9",mem:false,src:"Autoland capability may be used with flaps 20, 25, or 30, with both engines operative or with one engine inoperative. The AFDS autoland status annunciation must have LAND 2 or LAND 3 displayed."},
+ {s:"Approach",q:"FLCH on final approach below what altitude?",a:"Do not use below 1,000 ft AFE",ref:"FCOM L.10.9",mem:true,src:"Do not use FLCH on final approach below 1,000 feet AFE."},
+ {s:"Communications",q:"Using Capt/FO ACP to establish a SATCOM/cabin conference?",a:"Prohibited",ref:"FCOM L.10.9",mem:false,src:"Use of the captains or first officers ACP to establish a SATCOM/cabin conference is prohibited."},
+ {s:"Engines",q:"Takeoff and Go-Around thrust time limit?",a:"5 minutes (10 minutes if one engine loses thrust)",ref:"FCOM L.10.10",mem:false,src:"Takeoff and Go-Around Thrust Rating is limited to 5 minutes, or 10 minutes in the event of loss of thrust on one engine."},
+ {s:"Engines",q:"Minimum oil temperature for engine start?",a:"Greater than -40 deg C",ref:"FCOM L.10.10",mem:true,src:"Oil temperature must be greater than -40 deg C for engine start."},
+ {s:"Engines",q:"Intentional selection of reverse thrust in flight?",a:"Prohibited",ref:"FCOM L.10.10",mem:true,src:"Intentional selection of reverse thrust in flight is prohibited."},
+ {s:"Engines",q:"Backing the airplane with reverse thrust?",a:"Prohibited",ref:"FCOM L.10.10",mem:true,src:"Backing the airplane with use of reverse thrust is prohibited."},
+ {s:"Engines",q:"Ground wind: thrust limit for winds greater than 55 knots?",a:"Limit engine thrust to idle",ref:"FCOM L.10.10",mem:false,src:"Ground wind operating envelope: for crosswinds greater than 40 knots, limit thrust to taxi (45% N1); with a tailwind greater than 5 knots and winds greater than 35 knots, limit to taxi (45% N1); for winds greater than 55 knots, limit engine thrust to idle."},
+ {s:"Flight Controls",q:"Flight control mode required for takeoff?",a:"Normal flight control mode only",ref:"FCOM L.10.10",mem:false,src:"Takeoff is permitted only in the normal flight control mode."},
+ {s:"Flight Controls",q:"Rapid and large alternating control inputs?",a:"Avoid - structural failure risk at any speed, including below VA",ref:"FCOM L.10.10",mem:true,src:"Avoid rapid and large alternating control inputs, especially in combination with large changes in pitch, roll, or yaw (e.g. large side slip angles) as they may result in structural failure at any speed, including below VA."},
+ {s:"Flight Controls",q:"Maximum altitude with flaps extended?",a:"20,000 feet",ref:"FCOM L.10.10",mem:false,src:"The maximum altitude with flaps extended is 20,000 feet."},
+ {s:"Flight Instruments",q:"EFB portable keyboard and cable during takeoff and landing?",a:"Must be stowed",ref:"FCOM L.10.10",mem:false,src:"EFB portable keyboard and attaching cable (if installed) must be stowed during takeoff and landing."},
+ {s:"Fuel",q:"Maximum tank fuel temperature at takeoff (Jet A / A-1 / JP-5 / JP-8 / TS-1)?",a:"49 deg C (120 deg F)",ref:"FCOM L.10.11",mem:false,src:"Maximum tank fuel temperature at takeoff is 49 deg C (120 deg F) for Jet A, Jet A-1, JP-5, JP-8 or TS-1."},
+ {s:"Fuel",q:"In-flight fuel temperature limit (Jet A / A-1 / JP-5 / JP-8)?",a:"65 deg C (150 deg F)",ref:"FCOM L.10.11",mem:false,src:"Inflight fuel temperature is limited to 65 deg C (150 deg F) for Jet A, Jet A-1, JP-5 or JP-8."},
+ {s:"Fuel",q:"Minimum tank fuel temperature prior to takeoff?",a:"Not less than -29 deg C (-20 deg F)",ref:"FCOM L.10.11",mem:false,src:"Tank fuel temperature prior to takeoff must not be less than -29 deg C (-20 deg F). MEL note: with one heat exchanger bypass valve inoperative (MEL 29-11-09), fuel temperature must be above -7 deg C before takeoff."},
+ {s:"Fuel",q:"Minimum in-flight tank fuel temperature?",a:"At least -42 deg C, and at least 3 deg C above the freezing point of the fuel",ref:"FCOM L.10.11",mem:false,src:"In-flight tank fuel temperature must be maintained at least -42 deg C, as well as 3 deg C above the freezing point of the fuel being used."},
+ {s:"Fuel",q:"Center tank fuel loading rule?",a:"Main tanks must be scheduled full if center tank fuel is loaded",ref:"FCOM L.10.11",mem:false,src:"Main tanks must be scheduled to be full if center tank fuel is loaded. MEL note: with center tank override/jettison pumps deferred (MEL 28-22-02), center tank fuel must be accounted for in weight and balance in case it cannot be used, and main tank fuel must be adequate to reach a suitable airport if the scavenge system fails."},
+ {s:"Warning Systems",q:"Using the terrain display for navigation?",a:"Do not use the terrain display for navigation",ref:"FCOM L.10.11",mem:false,src:"Do not use the terrain display for navigation."},
+];
+
+const MEM=DATA.map((d,i)=>i).filter(i=>DATA[i].mem);
+let order=[], idx=0, revealed=false, known=new Set(), review=new Set(), reviewMode=false, srcOpen=false;
+const app=document.getElementById("app");
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function start(reviewOnly){
+  reviewMode=reviewOnly;
+  order= reviewOnly ? shuffle([...review]) : shuffle([...MEM]);
+  if(!reviewOnly){known=new Set();review=new Set();}
+  idx=0;revealed=false;srcOpen=false;render();
+}
+function render(){
+  if(idx>=order.length)return summary();
+  const d=DATA[order[idx]];
+  app.innerHTML=`
+    <div class="bar">
+      <span class="count">${idx+1} / ${order.length}</span>
+      <div class="track"><div class="fill" style="width:${(idx/order.length)*100}%"></div></div>
+      <span>${reviewMode?"REVIEW SET":"MEMORY SET"}</span>
+    </div>
+    <div class="card">
+      <span class="chip">${d.ref}</span>
+      <div class="prompt">
+        <div class="cat">${d.s}${d.mem?'<span class="mem">Memorize</span>':''}</div>
+        <div class="lead">State the limitation, then reveal to check</div>
+        <div class="q">${d.q}</div>
+      </div>
+      <div class="readout${revealed?' show':''}"><div class="answer">${d.a}</div></div>
+      <div class="srcpanel${srcOpen?' show':''}"><div class="srclabel">FCOM Source &mdash; ${d.ref}</div><div class="srcsub" style="color:#cfe2f2;font-style:normal">&ldquo;${d.src}&rdquo;</div></div>
+      <div class="spacer"></div>
+      <div class="controls">
+        ${revealed?`
+          <button class="mark knew" onclick="grade(true)">Got it &nbsp;K</button>
+          <button class="mark rev" onclick="grade(false)">Review &nbsp;R</button>
+        `:`
+          <button class="primary" style="flex:1" onclick="reveal()">Reveal limit</button>
+        `}
+        <button class="srcbtn" onclick="toggleSrc()">${srcOpen?'Hide source':'Source'}</button>
+      </div>
+    </div>
+    <div class="foot">
+      <button class="ghost" onclick="start(false)">Restart memory set</button>
+      <span>got it ${known.size} &middot; review ${review.size}</span>
+    </div>`;
+}
+function reveal(){revealed=true;render()}
+function toggleSrc(){srcOpen=!srcOpen;render()}
+function grade(ok){const id=order[idx];if(ok){known.add(id);review.delete(id)}else{review.add(id)}idx++;revealed=false;srcOpen=false;render()}
+function summary(){
+  const pct=Math.round((known.size/MEM.length)*100);
+  app.innerHTML=`
+    <div class="card"><div class="summary">
+      <div class="big">${pct}%</div>
+      <div class="lbl">known cold</div>
+      <div class="stat">
+        <div>${known.size}<span>got it</span></div>
+        <div class="r">${review.size}<span>to review</span></div>
+      </div>
+      <div class="controls" style="justify-content:center">
+        ${review.size?`<button class="primary" onclick="start(true)">Drill review only (${review.size})</button>`:''}
+        <button class="ghost" onclick="start(false)">Restart memory set</button>
+      </div>
+    </div></div>`;
+}
+document.addEventListener("keydown",e=>{
+  if(idx>=order.length)return;
+  if(e.code==="Space"||e.code==="Enter"){e.preventDefault();revealed?grade(true):reveal();}
+  else if(e.key==="k"||e.key==="K"){if(revealed)grade(true)}
+  else if(e.key==="r"||e.key==="R"){if(revealed)grade(false)}
+});
+start(false);
+</script>
+
+<footer style="width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:8px;margin:28px auto 0;">
+<img src="B787_night.jpg" alt="Boeing 787" style="width:380px;max-width:60%;height:auto;border-radius:6px;">
+<a href="mailto:ryan.pettit@alaskaair.com?subject=B787%20Study%20Portal%20-%20Limitations%20Drill" style="font-size:11px;color:#b1d887;font-family:inherit;text-decoration:none;">ryan.pettit@alaskaair.com</a>
+<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 2.8</div>
+</footer>
+<script src="/portal-settings.js" defer></script>
+<script src="/assist.js" defer></script>
+</body>
+</html>

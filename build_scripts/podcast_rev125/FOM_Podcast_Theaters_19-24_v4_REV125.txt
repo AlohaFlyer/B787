@@ -1,0 +1,231 @@
+787 Flight Deck Notes - FOM Series
+
+Episode: "Chapters 19-24: The Theaters" (Around the World in One 787)
+
+Pualani: [warm] Aloha, and welcome back to 787 Flight Deck Notes. I'm Pualani - poo-ah-LAH-nee - and today we pack one bag and fly around the whole planet without getting out of the seat. FOM Chapters 19 through 24: North America, Pacific, Caribbean, Atlantic, Europe, and Asia. Six theaters, one episode, one airplane.
+
+Chester: [excited] Six theaters, one episode. I'm Chester, live from Seattle, where it is raining sideways, the coffee is strong, and the Dreamliner gets built right up the road. I have peaked. This is the best day of my week and it's not close.
+
+Otto: [dry] And I'm Otto. Kiwi, skeptic, professionally unimpressed. My job today is to make sure nobody invents a flight level that doesn't exist. Six theaters in one sitting. Sweet as. Let's not crash into the details.
+
+Pualani: [laughs] No crashing. That's rule one. Chester, you're wheels-up - take us to North America.
+
+Chester: [serious] Right. FOM Chapter 19, North America, which is just the United States and Canada. First airspace fact, FOM 19.2: the United States is divided into 22 Area Control Centers. Canada into three - the Southern, Northern, and Arctic Control Areas.
+
+Otto: [dry] Twenty-two centers. That's twenty-two different people to disappoint on one flight.
+
+Chester: [laughs] Efficient. Now, a 787-specific one people fumble. FOM 19.3.1.1, the Canadian Rockies decompression procedure. Lose pressurization inside one of those terrain polygons and in the 787 you descend at VMO/MMO to eighteen thousand feet - one-eight-thousand - hold eighteen thousand until you're clear of terrain, then continue down to ten thousand.
+
+Pualani: [serious] And that eighteen thousand is the airplane talking. Do not borrow somebody else's floor - they fly different numbers. In the Rockies, the 787 number is eighteen thousand. Full stop.
+
+Otto: [serious] Say it twice. Eighteen thousand in the Rockies, 787.
+
+Chester: [warm] Otto, I want a story on this one. Tell me about a time a decompression drill went sideways.
+
+Otto: [dry] Right. IOE, my first oceanic trip as a check kiwi. Sim, mind you - fictional, so nobody file a report. We're feet-dry over the Canadian Rockies, right in the polygons. Instructor pulls an outflow valve on us. My trainee grabs a floor out of muscle memory - some number he flew on a different jet in a past life - and starts leveling too low. I just say, quietly, "eighteen thousand." He resets, holds one-eight-zero until clear of terrain, then down to ten. Clean. The debrief was one sentence.
+
+Pualani: [laughs] One sentence?
+
+Otto: [deadpan] "Fly the airplane you're strapped to." He never grabbed the wrong floor again.
+
+Chester: [warm] That's going on a hat. Two more North America gems. FOM 19.3.1.2 - Canada restricts you to 200 knots, or minimum clean maneuver speed, whichever is faster, below three thousand above field level within ten miles of a controlled airport. And weather, FOM 19.5.3, the Juneau Taku winds down the Gastineau Channel. Gusts of seventy-two miles an hour or greater, windshear, rotors. JAWS - the Juneau Area Wind System - throws you the alerts.
+
+Pualani: [laughs] And up Anchorage way, FOM 19.5.1, Turnagain Arm turbulence - do not descend below fourteen thousand until you're over or abeam the airport. Stays you above the rotor.
+
+Otto: [dry] Fourteen thousand over Turnagain, seventy-two mile-an-hour Taku gusts. Alaska is just flexing at this point.
+
+Pualani: [excited] Okay - my water now. The Pacific. FOM Chapter 20, and this is home. The NOPAC, the North Pacific route system. FOM 20.3.1: on certain routes between flight level three-four-zero and four-zero-zero, lateral route separation is twenty-three nautical miles, and to play in there you must be RCP240, RSP180, and RNP4.
+
+Chester: [nerdy] Twenty-three miles of lateral spacing. That is tight. And below flight level three-three-zero, or above four-one-zero, it opens up to fifty miles and you only need RNP10.
+
+Pualani: [warm] Rajah dat. And the good news, same 20.3.1 - the 787 is RCP240, RSP180, and RNP4 capable, unless an MEL knocks you down a notch.
+
+Otto: [dry] So the airplane's qualified. It's the paperwork that'll get you.
+
+Pualani: [excited] Now let me tell you about a track crossing, because this is where the Pacific gets spicy. Fictional, but the numbers are real. Honolulu to Tokyo Haneda, HNL to HND, westbound in the 787, heavy with fuel. FOM 20.3.4, the PACOTS - Pacific Organized Track System - runs between Japan and North America and Hawaii, built daily off the jet stream. San Francisco Radio hands me a PACOTS track riding a gorgeous tailwind toward Japan, and that track ends on a NOPAC route - R220, east of NANAC, feeding me into the arrival. My first officer, brand new, goes, "we're RNP10, we're golden."
+
+Chester: [excited] Are you golden?
+
+Pualani: [warm] For the PACOTS track, sure - on a PACOTS track you must be RNP10 or RNP4 approved, that's the rule. But the second we join that NOPAC segment, we owe them the NOPAC numbers - RNP4, RCP240, RSP180. We checked the box, confirmed the airplane, slid onto R220 like butter. Tracks are at least fifty miles apart out there, but you still fly like the airplane next to you is exactly where he says he is.
+
+Otto: [dry] Because he is. That's the whole religion of oceanic. Everyone is precisely where they claim to be. Deeply unsettling if you think about it.
+
+Pualani: [laughs] So don't think about it. Now - my favorite trap, and it's a Hawaii one. Altimetry. Tell me about a time... Chester, you had this one on a check ride, yeah?
+
+Chester: [surprised] Oh, I walked right into it. Inbound to Honolulu, descending through the Oakland Oceanic FIR, and my check airman goes, "at exactly what altitude is your altimeter already on two-nine-nine-two?" And I said, cool as anything, "eighteen thousand, standard transition, easy." Wrong.
+
+Pualani: [laughs] Wrong.
+
+Chester: [serious] FOM 20.7.1. Within the Hawaiian Islands domestic area, yes - flight level one-eight-zero and above you set standard, two-nine-nine-two, QNE; below eighteen thousand, current, QNH. But within all areas of the Oakland FIR, at or above five thousand five hundred feet, you set standard two-nine-nine-two.
+
+Otto: [dry] Fifty-five hundred. Not eighteen thousand.
+
+Chester: [warm] Fifty-five hundred in the Oakland oceanic FIR. Write it on your hand. My check airman just looked at me and said -
+
+Pualani: [laughs] Let me guess.
+
+Otto: [deadpan] "Fly the airplane you're strapped to." She wants twenty-nine ninety-two at five-five-hundred coming into Hawaii. Give it to her.
+
+Chester: [laughs] Word for word.
+
+Pualani: [excited] Two more Pacific ones, then I hand off. FOM 20.2.2 - cruise Mach gets reported at FIR entry, and any change of Mach zero-point-zero-two or greater from what you last reported has to go to ARINC. And lost comms in oceanic, FOM 20.4.4 - first memory aid of the day, everybody grab a pen.
+
+Otto: [serious] Go on.
+
+Pualani: [warm] "Seventy-seven hundred for one, seventy-six hundred for fifteen." Set transponder seven-seven-zero-zero for one minute, then switch to seven-six-zero-zero and stay there for fifteen minutes or the rest of the flight. Squawk 7700 for one, 7600 for fifteen.
+
+Chester: [excited] Seventy-seven for one, seventy-six for fifteen. Clean. Why the 7700 blip first?
+
+Pualani: [serious] Because replying on 7700 first bumps up the odds somebody catches your radio failure early. And in the clouds, you hold last assigned speed and flight level for twenty minutes after you miss a compulsory reporting point, then back to the filed flight plan.
+
+Otto: [dry] Now before we leave my ocean, do the South Pacific, because that's where I actually live. HNL to Auckland - HNL to AKL - in the 787. Fictional, numbers real. Down there, FOM 20.5, the jet stream stays active year-round and intensifies in the Southern Hemisphere winter, so I'm not surprised by chop the way a mainland kid would be. Pure open-ocean crossing. Two things I never skip: I report my cruise Mach at FIR entry per 20.2.2, and I fly SLOP the whole way.
+
+Chester: [nerdy] Define SLOP for the new folks.
+
+Otto: [dry] Strategic Lateral Offset. FOM 22.1.5 wrote it for the Atlantic but the oceanic procedure travels - see 5.7.4.7. You fly it as standard operating procedure for every oceanic crossing, entry point to exit point. Nudge yourself off the centerline a hair so that when everyone's "exactly where they say," a small position error doesn't put two heavies in the same cubic foot of sky.
+
+Pualani: [warm] And on a run like HNL-AKL or HNL-Papeete, HNL-PPT, or HNL-Sydney - that's a lot of water and not a lot of radar. SLOP is your friend.
+
+Otto: [deadpan] SLOP and a good book. The autopilot's flying anyway. Otto's got it.
+
+Pualani: [laughs] Otto flies the autopilot. Of course he does. Otto - Caribbean, take it away.
+
+Otto: [dry] Right. FOM Chapter 21, and I'll take it. Mexico, Central America, the islands, up to the north coast of South America, Bermuda. Speed first, FOM 21.3.3.2 - Mexico, max two-fifty knots at or below ten thousand in National airspace, and max two hundred within ten miles of any airport below three thousand feet AGL.
+
+Chester: [nerdy] And Central America runs its own transition numbers. FOM 21.3.4.2 - transition level is flight level two-zero-zero, transition altitude is nineteen thousand feet, unless charted otherwise.
+
+Otto: [dry] Flight level two hundred over, nineteen thousand under. And they don't do "climb via" or "descend via" in Central America - that's 21.3.4.3 - so don't sit there waiting for words that aren't coming.
+
+Pualani: [warm] Otto, do the visual approach one. It's so specific.
+
+Otto: [laughs] Right. FOM 21.3.3.5 - Mexico prohibits visual approaches outside of ten nautical miles. Ask for one further out and you'll just be told to "continue." And they don't respond to American slang, so you say the actual words - "visual descent" or "visual approach" - and those are two different things.
+
+Chester: [dry] Surely they'll figure out what you mean.
+
+Otto: [deadpan] They won't. And don't call me Shirley.
+
+Pualani: [laughs] There it is. He held that one the whole episode. Chester - Atlantic. Chapter 22. This is the big one.
+
+Chester: [excited] This is the big one. Define the sandbox first. FOM 22.1.1 - the North Atlantic High Level Airspace, the NAT HLA, is the volume between flight levels two-eight-five and four-two-zero inclusive, inside six oceanic control areas: Bodo, Gander, New York Oceanic East, Reykjavik, Santa Maria, and Shanwick.
+
+Otto: [dry] Two-eighty-five to four-twenty. Note that's wider than the RVSM band, which is two-ninety to four-ten. Don't confuse the two.
+
+Chester: [serious] Good catch. Now the 787 dispatch nugget, FOM 22.1.10 - the 787 can be dispatched with a single IRU as long as at least one GPS is operational. And after departure you only need a single HF radio plus SATCOM data link. Baseline, though, is dual IRS, dual long-range nav, dual NDs, one GPS, ADS-C, CPDLC, SATCOM data link, and two HF radios or one HF plus SATVOICE.
+
+Pualani: [warm] Chester, tell me about a time you actually copied an oceanic clearance. The real thing, not the textbook.
+
+Chester: [excited] Oh, I love this. Fictional, numbers real. And it's a real 787 route for us - the North Atlantic training crossing, westbound, Europe back toward Seattle. Here's the thing, FOM 22.7.1 and 22.7.4: except for Shanwick, oceanic clearances aren't issued in the NAT anymore. New York East doesn't even want an RCL. Everyone else, the RCL is basically a heads-up. But westbound I'm about to enter Shanwick's oceanic area - so Shanwick still clears me for real. I send the RCL, I'm sitting there with my pen, and Shanwick comes back fast: "cleared to destination, via ERAKA, flight level three-five-zero, Mach decimal eight-four, at sixty-one north contact Iceland Radio, at NADMA contact the next center, primary and secondary HF to follow."
+
+Otto: [dry] And you wrote all of that down while flying the airplane.
+
+Chester: [laughs] Every word. And here's the gotcha I nearly ate - I had my hand on the altitude window, ready to climb the second I sent the RCL. My check airman put one finger on the glareshield: "the RCL is a request, not a clearance. You fly your domestic clearance until they actually re-clear you before the oceanic entry point." I did not climb.
+
+Otto: [deadpan] Fly the airplane you're strapped to.
+
+Chester: [warm] Fly the clearance you're actually holding. Same church. Now the Organized Track System, because that's where memory aid number two lives.
+
+Chester: [excited] FOM 22.3.1 - the OTS, published twice a day. Eastbound tracks, mostly at night, built by Gander. Westbound tracks, daytime, built by Shanwick. And the lettering: westbound from "A," the most northerly, going down; eastbound from "Z," the most southerly, going up.
+
+Pualani: [warm] So the memory aid, everybody: "A is up north, Z is down south." Alpha high, Zulu low.
+
+Otto: [dry] And for who builds what - "Gander goes east in the dark, Shanwick sends you west in the daylight." Both roughly match their letters. Close enough at three in the morning over the water.
+
+Chester: [laughs] I'll allow it. Validity at thirty west, still 22.3.1 - westbound eleven-thirty to nineteen hundred UTC, eastbound zero-one-hundred to zero-eight-hundred UTC.
+
+Otto: [serious] And you squawk two thousand in NAT airspace unless ATC says otherwise - 22.1.9.
+
+Chester: [nerdy] Then the RCL timing table, FOM 22.7.4. Chant it with me. Gander: sixty to ninety minutes before the oceanic entry point. Shanwick: thirty to ninety. Santa Maria: at least forty. Bodo: at least twenty.
+
+Pualani: [excited] Sixty-ninety Gander, thirty-ninety Shanwick, forty Santa Maria, twenty Bodo.
+
+Otto: [dry] Now a NAT contingency the training deck hammers - engine failure or drift-down in the tracks. You minimize your descent rate until you're some distance off the track, then expedite down to a feasible level. And unless the situation forces it, you keep flying parallel to the tracks until you're below the lowest usable OTS flight level before you turn for your diversion.
+
+Chester: [nerdy] Why parallel first?
+
+Otto: [serious] Because the PBCS tracks are only thirty miles apart laterally. Turn early and you drive straight through your neighbor's track at his altitude. Crews forget that one under task saturation. Parallel, get below the deck of the track system, then turn. That's straight off the NAT HLA training material, referencing FOM 5.7.4.
+
+Pualani: [warm] And that ties to a weather one, which is my open-ocean story. Chester, hand me the deviation.
+
+Chester: [excited] All yours, Pua.
+
+Pualani: [warm] Okay. Transpacific, night, mid-ocean - think a Hawaii-Tokyo run out over nothing but black water. FOM 20.5.1 for the Pacific side, but the logic travels. A cell paints on the nose and I cannot raise ATC fast enough. Rule one: do NOT drag the FMC route around. You use the FMC lateral offset feature, pick an offset that clears the weather, and request that deviation - the clearance usually comes back "up to" what you asked for. And when you key the mic, you say the magic words: "WEATHER DEVIATION REQUIRED." That's priority.
+
+Otto: [dry] But you couldn't raise anyone. So?
+
+Pualani: [warm] So I broadcast on 121-decimal-5 and 123-decimal-45 so my neighbors know I'm moving, and I fly the deviation logic straight off the training card. Less than five miles off track, I stay at altitude. But I needed more than five - so I change altitude three hundred feet, and here's the second memory aid: SAND. South Ascend, North Descend. I was deviating south, so I climbed three hundred. Cleared the cell, came back within five miles, dropped back to my assigned altitude, and told ATC the moment I was back on the centerline.
+
+Chester: [surprised] SAND. South Ascend, North Descend, three hundred feet.
+
+Pualani: [warm] SAND. And it rides right on top of SLOP, which, FOM 22.1.5, you fly as standard operating procedure for every oceanic crossing, entry point to exit point. Just not inside the transition areas - NOTA, SOTA, BOTA, GOTA. And if your chop is coming off another airplane's wake, the training deck says nudge your SLOP offset.
+
+Otto: [dry] I feel the need... the need for a quarter-mile of offset. Wingman optional.
+
+Pualani: [laughs] Wingman optional. Chester - two more Atlantic. Terrain and magnetics.
+
+Chester: [serious] FOM 22.2.3 - and note the number, because Rev 125 renumbered this whole area. 22.2.1 is now Transition Areas, 22.2.2 is now the Oceanic Entry Point, and the Northern Area of Magnetic Unreliability, the AMU, moved to 22.2.3. The AMU is everything within a thousand nautical miles of the Northern Magnetic Pole, and it takes in the Canadian Northern Domestic Airspace. Up there you navigate in true, not magnetic. Runways, tracks, winds, NAVAIDs - all true north. And if ATC hands you a heading in the AMU, you confirm - magnetic or true?
+
+Otto: [dry] And practically, per the training deck and FCOM SP.10.1, the Heading Reference switch goes NORM to TRUE, and you re-select HDG SEL after you flip it. Little things that bite you at three in the morning.
+
+Chester: [excited] And the Greenland decompression, FOM 22.6 - the 787 descends at VMO/MMO to fifteen thousand feet, holds fifteen thousand until clear of terrain. And operations are flat-out prohibited in the red "No Ops Area."
+
+Otto: [serious] Now line up those 787 floors, because this is a gorgeous trap. Rockies - eighteen thousand. Alps, coming up in Europe - eighteen thousand. Greenland - fifteen thousand.
+
+Pualani: [warm] Mnemonic, everybody: "Green means go lower." Greenland is the low one - fifteen. The two big ranges, Rockies and Alps, are eighteen. And why do we memorize the 787's own numbers?
+
+Chester: [deadpan] Fly the airplane you're strapped to.
+
+Otto: [deadpan] He's learning. Fly the airplane you're strapped to.
+
+Pualani: [laughs] There it is, in stereo. Chester - Europe. Chapter 23.
+
+Chester: [warm] Chapter 23. Two flagship items. Voice first, FOM 23.13 - Europe uses eight-point-three-three kilohertz channel spacing across most of its airspace. Three times as many channels as the American twenty-five. You read the frequency back with all three decimals, exactly.
+
+Otto: [dry] Eight point three three. They'll ask "confirm eight point three three," and you'd better be able to say "affirm."
+
+Chester: [nerdy] Second, navigation - FOM 23.16.1 - RNAV 5, the old B-RNAV. Lateral accuracy plus or minus five nautical miles for at least ninety-five percent of the flight time. Enroute standard across ECAC airspace, and the 787 is compliant unless something's degraded.
+
+Pualani: [warm] And Chester, you have to do Heathrow. You love Heathrow.
+
+Chester: [excited] I love Heathrow. And the numbers moved in Rev 125 - chapter 23.18 is now titled United Kingdom, with Heathrow sitting underneath it as 23.18.1. So: curfew, 23.18.1.2 - no arrivals or departures between twenty-three hundred and zero-six-hundred local. And the holding stacks, 23.18.1.5 - Bovingdon, Lambourne, Ockham, Biggin. Inside the Heathrow control area, max holding speed up to and including flight level one-four-zero is two hundred twenty knots.
+
+Otto: [dry] Two-twenty in the stack at Heathrow. And per 23.18.1.9 they say "report established" instead of "cleared for approach," and per 23.18.1.6 they want a continuous descent - do not level off, or the airline eats a fine. Rev 125 also added 23.18.1.13 - jumpseaters are not authorized into or out of Heathrow unless operationally required. And there is a brand new chapter, 23.19, Italy, with Rome underneath it. Different words, same airplane.
+
+Chester: [laughs] Big deal. I've stacked over Ockham. I've got coffee. I can wait all day.
+
+Otto: [deadpan] You've had enough coffee to hold at Ockham without an airplane.
+
+Pualani: [laughs] Otto - bring us home. Asia.
+
+Otto: [dry] Chapter 24. Asia, specifically the Republic of Korea, run by KOCA - the Korea Office of Civil Aviation. FOM 24.2 - you avoid overflying the Demilitarized Zone, and there's a buffer that extends five nautical miles south of the DMZ. Stay out of it.
+
+Pualani: [serious] Five miles south. That's not a suggestion.
+
+Otto: [serious] It is not. And weather, FOM 24.2.1 - strong jet stream, watch for clear air turbulence along the west coast of Korea from flight level three-zero-zero to four-zero-zero. Winter brings haze and fog when it's calm; summer brings thunderstorms and typhoons.
+
+Chester: [nerdy] Three hundred to four hundred, CAT, west coast of Korea. Noted. And for us that's a real 787 leg - Honolulu to Seoul, HNL to ICN, comes down that same coast.
+
+Otto: [dry] It does. And that, as they say, is the whole planet. Somebody set the autopilot. Otto's got it.
+
+Pualani: [laughs] Otto flies the autopilot. Every time. Recap, quick and clean. Chester, North America.
+
+Chester: [serious] Twenty-two centers in the US, FOM 19.2. The 787 Rockies decompression floor is eighteen thousand, FOM 19.3.1.1. Two hundred knots below three thousand above field level within ten miles in Canada, 19.3.1.2.
+
+Pualani: [warm] Pacific - NOPAC twenty-three-mile lateral, RCP240, RSP180, RNP4, FOM 20.3.1. PACOTS to NOPAC picks up those same numbers, FOM 20.3.4. Oakland FIR altimeter goes standard at five thousand five hundred, FOM 20.7.1. And "seventy-seven hundred for one, seventy-six hundred for fifteen," FOM 20.4.4.
+
+Otto: [dry] Caribbean - Mexico two-fifty below ten thousand, two hundred within ten miles low, FOM 21.3.3.2. Central America transition level two hundred, altitude nineteen thousand, FOM 21.3.4.2. No visuals outside ten miles in Mexico, 21.3.3.5.
+
+Chester: [excited] Atlantic - NAT HLA two-eighty-five to four-twenty, FOM 22.1.1. "A up north, Z down south" for the OTS, FOM 22.3.1. RCL timing sixty-ninety Gander, thirty-ninety Shanwick, forty Santa Maria, twenty Bodo, FOM 22.7.4. And "green means go lower" - Greenland 787 to fifteen thousand, FOM 22.6.
+
+Pualani: [warm] Weather and offsets - SAND, South Ascend North Descend three hundred feet, and fly SLOP every oceanic crossing, FOM 20.5.1 and 22.1.5 with the NAT training logic. Europe - eight-point-three-three kilohertz, FOM 23.13. RNAV 5, plus or minus five miles ninety-five percent of the time, FOM 23.16.1. Heathrow holding two-twenty up to flight level one-four-zero, FOM 23.18.1.5 in Rev 125.
+
+Otto: [dry] And Asia - DMZ buffer five miles south, FOM 24.2, Korean west-coast CAT three hundred to four hundred, 24.2.1. And in the NAT training material: lose RNP4, you can still enter under RNP10 - unlimited with GPS updating, eighteen hours on inertial. Lose comms after the oceanic entry, you hold route, level, and speed to the exit point.
+
+Pualani: [laughs] That's the world in one episode. And remember - those decompression floors are fleet-specific. So fly the 787's numbers. Nobody else's.
+
+Chester: [warm] Study hard. I feel the need - the need to review the RCL table one more time.
+
+Otto: [deadpan] I just want to tell you both good luck. We're all counting on you. And fly the airplane you're strapped to.
+
+Pualani: [laughs] Mahalo, everybody. Fly safe, and we'll catch you next episode.
+
+SOURCES: FOM Chapters 19-24 (Theaters): 19.2, 19.3.1.1, 19.3.1.2, 19.5.1, 19.5.3, 20.2.2, 20.3.1, 20.3.4, 20.4.4, 20.5, 20.5.1, 20.7.1, 21.3.3.2, 21.3.4.2, 21.3.4.3, 21.3.3.5, 22.1.1, 22.1.5, 22.1.9, 22.1.10, 22.2, 22.2.1, 22.2.2, 22.2.3, 22.3.1, 22.6, 22.7.1, 22.7.4, 23.13, 23.16.1, 23.17, 23.18.1.2, 23.18.1.5, 23.18.1.6, 23.18.1.9, 23.18.1.13, 23.19, 24.2, 24.2.1; and the oceanic SLOP procedure at FOM 5.7.4.7. NAT HLA (training): NAT HLA definition and required equipment, weather-deviation SAND / 300 ft / less-than-5NM-stay logic and SLOP adjustment for wake turbulence (NAT Doc 007 5.6.10), communications lost after entering the NAT - hold route/level/speed to Oceanic Exit Point (NAT Doc 007 5.6.10), RNP4-to-RNP10 entry with OpSpec B036 timing - unlimited with GPS updating, 18 hours inertial (NAT Doc 007 7.2), engine-failure/drift-down parallel-track contingency and 30 nm PBCS spacing (FOM 5.7.4), AMU Heading Reference NORM-to-TRUE and HDG SEL reselect (FCOM SP.10.1), and the westbound Shanwick oceanic-clearance example (NAT HLA training LOFT).

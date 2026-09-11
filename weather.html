@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B787 Weather Requirements Quiz</title>
+<style>
+  :root{
+    --bg:#01172b; --panel:#062b46; --panel2:#0a3556; --line:#13486e;
+    --ink:#eaf3fb; --muted:#8fb3cf;
+    --mid:#01426A; --atlas:#0074C8; --breeze:#00C7E6; --green:#C0E585;
+    --amber:#f2a65a;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px 60px;}
+  .wrap{width:100%;max-width:700px}
+  header{display:flex;align-items:baseline;justify-content:space-between;
+    border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:18px;gap:12px}
+  h1{font-size:15px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin:0}
+  h1 .sub{color:var(--breeze);font-weight:600}
+  .src{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em}
+  .bar{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:14px;flex-wrap:wrap}
+  .bar .count{color:var(--ink)}
+  .track{flex:1;height:3px;background:var(--panel2);border-radius:2px;overflow:hidden;min-width:120px}
+  .fill{height:100%;width:0;background:var(--atlas);transition:width .25s}
+  .chip{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--breeze);border:1px solid var(--line);border-radius:3px;padding:3px 8px;align-self:flex-start}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    padding:24px 22px;min-height:240px;display:flex;flex-direction:column;gap:14px}
+  .prompt .lead{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .q{font-size:23px;line-height:1.25;font-weight:700;letter-spacing:.01em}
+  .cond{font-size:13px;color:var(--muted);font-style:italic;margin-top:6px;line-height:1.4}
+  .readout{background:#02101f;border:1px solid #0c3a5e;border-left:3px solid var(--green);
+    border-radius:5px;padding:0 16px;font-size:14.5px;line-height:1.5;
+    opacity:0;max-height:0;overflow:hidden;transition:opacity .2s}
+  .readout.show{opacity:1;max-height:1200px;padding:14px 16px}
+  .readout .ln{margin:3px 0;color:var(--ink)}
+  .readout .num{display:inline-block;min-width:18px;color:var(--breeze);font-weight:700;font-family:var(--mono)}
+  .readout .sub{margin-left:22px;color:#cfe2f2}
+  .readout .bul{margin-left:34px;color:#cfe2f2}
+  .readout b{color:var(--green);font-weight:700}
+  .readout i{color:var(--muted);font-style:italic}
+  .spacer{flex:1}
+  .controls{display:flex;gap:10px;flex-wrap:wrap}
+  button{font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;border-radius:6px;
+    padding:11px 18px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);transition:.12s}
+  button:hover{border-color:var(--breeze)}
+  button:focus-visible{outline:2px solid var(--breeze);outline-offset:2px}
+  .primary{background:var(--atlas);color:#fff;border-color:var(--atlas)}
+  .primary:hover{filter:brightness(1.1)}
+  .ghost{background:transparent}
+  .mark{flex:1}
+  .knew{border-color:var(--green);color:var(--green)}
+  .knew:hover{background:rgba(192,229,133,.12)}
+  .rev{border-color:var(--amber);color:var(--amber)}
+  .rev:hover{background:rgba(242,166,90,.12)}
+  .foot{display:flex;justify-content:space-between;align-items:center;margin-top:16px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .foot button{padding:6px 12px;font-size:12px}
+  .hint{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;margin-top:18px;letter-spacing:.03em}
+  .summary{text-align:center;padding:38px 20px}
+  .summary .big{font-family:var(--mono);font-size:46px;color:var(--green);font-weight:700}
+  .summary .lbl{color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:24px}
+  .summary .stat{display:flex;justify-content:center;gap:32px;margin:18px 0 28px;font-family:var(--mono)}
+  .summary .stat div span{display:block;font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+  .summary .stat .r{color:var(--amber)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  @media (max-width:480px){.q{font-size:19px}.readout{font-size:13.5px}}
+.srcbtn{background:transparent;border:1px solid var(--atlas);color:var(--breeze);border-radius:5px;padding:10px 14px;font-weight:700;font-family:var(--sans);cursor:pointer}
+.srcbtn:hover{background:var(--atlas);color:#fff}
+.srcpanel{max-height:0;overflow:hidden;opacity:0;background:#01233b;border:1px solid var(--line);border-radius:6px;padding:0 16px;margin-top:10px;transition:max-height .2s,opacity .2s,padding .2s}
+.srcpanel.show{max-height:320px;opacity:1;padding:14px 16px}
+.srclabel{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.srcref{font-family:var(--mono);font-size:14px;color:var(--breeze);font-weight:700}
+.srcsub{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.45}
+.gamelink{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--atlas);color:var(--breeze);border-radius:5px;padding:8px 12px;font-weight:700;font-size:12px;text-decoration:none;font-family:var(--sans);margin-left:8px}
+.gamelink:hover{background:var(--atlas);color:#fff}
+.handrow{flex-wrap:wrap;gap:8px}
+</style>
+
+<style>
+.handout{display:inline-flex;align-items:center;gap:7px;background:var(--green);color:#02233b;border:1px solid var(--green);border-radius:5px;padding:8px 13px;font-weight:700;font-size:12.5px;text-decoration:none;font-family:var(--sans);letter-spacing:.02em}
+.handout:hover{filter:brightness(1.06)}
+.handrow{display:flex;justify-content:flex-end;margin:-6px 0 14px}
+.atbl{border-collapse:collapse;font-family:var(--mono);font-size:13px;margin:4px 0;width:100%}
+.atbl th{background:var(--atlas);color:#fff;font-weight:700;padding:5px 10px;text-align:left;font-size:12px}
+.atbl td{padding:4px 10px;border-bottom:1px solid #0c3a5e;color:#cfe2f2}
+.atbl tr:nth-child(even) td{background:#02101f}
+.atbl .hi td{background:rgba(192,229,133,.14);color:#eaf3fb;font-weight:700}
+.cat{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+</style>
+
+<style>
+.ps-homebar{align-self:stretch;width:100%;box-sizing:border-box;padding:8px 0 0 10px;flex:0 0 auto;text-align:left;}
+.ps-home{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;background:#fff;border:2px solid #01416e;color:#01416e;text-decoration:none;box-shadow:0 1px 4px rgba(1,23,43,.2);transition:background .12s,color .12s;-webkit-tap-highlight-color:transparent;}
+.ps-home:hover,.ps-home:focus-visible{background:#01416e;color:#fff;}
+.ps-home:focus{outline:none;}
+.ps-home svg{display:block;}
+@media (max-width:480px){.ps-homebar{padding:6px 0 0 8px;}.ps-home{width:40px;height:40px;}}
+</style>
+</head>
+<body>
+<div class="ps-homebar"><a class="ps-home" href="/index.html" title="B787 Study Portal" aria-label="B787 Study Portal"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true" focusable="false"><path d="M3 11.3 12 4l9 7.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.7 10.1v9.4h12.6v-9.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 19.5v-5.1h4v5.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+
+<div class="wrap">
+  <header>
+    <h1>B787 Weather <span class="sub">// Requirements</span></h1>
+    <span class="src">FOM Rev 125.1</span>
+  </header>
+  <div class="handrow"><a class="handout" href="view.html?f=B787_Weather_Requirements.pdf" target="_blank" rel="noopener">&#128196; Open 1-page handout (PDF)</a><a class="gamelink" href="wx-alternate.html">&#127918; GAME</a></div>
+  <div id="app"></div>
+  <div class="hint">Answer aloud, then reveal to check &nbsp;&middot;&nbsp; Space / Enter = reveal then advance &nbsp;&middot;&nbsp; K = got it &nbsp;&middot;&nbsp; R = review &nbsp;&middot;&nbsp; Source = verbatim FOM quote</div>
+</div>
+
+
+<script>
+
+const DATA=[
+ {cat:"Takeoff Minimums",ref:"FOM 5.4.1.1",q:"Standard takeoff minimums (aircraft with 2 engines or less)?",
+  a:["<b>1 sm</b> visibility, or <b>RVR 5000</b>."],
+  src:"Defined as 1 sm visibility or RVR 5000 for aircraft having 2 engines or less."},
+
+ {cat:"Takeoff Minimums",ref:"FOM 5.4.1.2",q:"Published takeoff mins exceed 1 sm / RVR 5000 and no special procedure (e.g. RNP departure) is available. May you depart below the published mins?",
+  a:["<b>No.</b> Takeoff in weather less than published minimums shall not be made."],
+  src:"When published takeoff minimums are greater than 1 sm or RVR 5000, and a special procedure (e.g., RNP departure) is not available or prescribed, takeoff in weather less than published minimums shall not be made."},
+
+ {cat:"Takeoff Minimums",ref:"FOM 5.4.3",q:"At what visibility must the Captain make the takeoff?",
+  a:["Any time visibility is <b>less than or equal to 1/4 sm or RVR 1600</b>."],
+  src:"Any time the visibility is less than or equal to 1/4 sm or 1600 RVR, the Captain will make the takeoff."},
+
+ {cat:"Takeoff Minimums",ref:"FOM 5.4.1 / 5.4.4",q:"Controlling visibility priority order for takeoff?",
+  a:["<b>RVR &gt; RVV &gt; ICAO RVR &gt; prevailing.</b>","If RVR is reported it controls for that runway; otherwise use prevailing visibility."],
+  src:"Visibility types (5.4.1): 1. Runway Visual Range (RVR); 2. Runway Visibility Value (RVV); 3. ICAO Runway Visual Range; 4. Prevailing Visibility. If RVR is reported, it controls for the specified runway; otherwise, use prevailing visibility in the absence of RVR."},
+
+ {cat:"Takeoff Alternate",ref:"FOM 5.4.2",q:"When is a takeoff alternate required?",
+  a:["When reported departure weather is below the approach landing minimums for the runway of intended use (<b>excluding SA CAT I or CAT II/III</b>), or conditions exist that would <b>preclude a return</b>.","<b>MEL note:</b> with the LLM downgraded to CAT I (MEL 05-10-01A), CAT II/III and autolands are not used, so weather below CAT I minimums then drives a takeoff alternate."],
+  src:"A takeoff alternate is required when the reported weather at the departure airport is below the approach landing minimums for the runway of intended use, excluding any SA CAT I or CAT II/III approaches or conditions that exist that would preclude a return."},
+
+ {cat:"Takeoff Alternate",ref:"FOM 5.4.2",q:"Maximum distance from the departure airport to a takeoff alternate (787)?",
+  a:["<b>393 nm.</b>"],
+  src:"Takeoff alternates must be within the following distance: 787 - 393 nm. (FOM 5.4.2)"},
+
+ {cat:"Takeoff Alternate",ref:"FOM 5.4.2",q:"What weather must a takeoff alternate meet?",
+  a:["The <b>same requirements as the Alternate for Destination</b> weather (the derived Ops Spec C055 alternate minimums)."],
+  src:"Takeoff alternate airport weather must meet the same requirements as the Alternate for Destination Weather (see 8.2.2.1 - Destination Alternate Airport Weather Requirements)."},
+
+ {cat:"High Minimums Captain",ref:"FOM 3.9",q:"As a High Minimums Captain (under 100 hr PIC in type), when is a takeoff alternate required?",
+  a:["If departure reported weather is below published <b>CAT I DH +100 ft</b> AND published <b>CAT I visibility +1/2 sm</b>.","Under <b>Exemption 5549</b> an HMC may fly CAT I to <b>published minima</b> (autopilot coupled to DH), and SA CAT I / SA CAT II / CAT II per FOM 3.16.2. <b>CAT III requires 100 hr PIC in type</b>, not reducible (FOM 3.15)."],
+  src:"Required if departure airport reported weather is below published Category I approach DH plus 100 ft and published Category I approach visibility minimums plus 1/2 sm."},
+
+ {cat:"Takeoff Minimums",ref:"FOM 5.4.4",q:"787 takeoff below RVR 500 (150 m). What governs?",
+  a:["Use the <b>Takeoff Low Visibility Card</b> in the PRC, and the <b>HGS/HUD Takeoff Briefing Card</b>.","<b>New in Rev 125:</b> this was 737-only through 124.2; the 787 is now included.","<b>MEL note:</b> the HUD low visibility takeoff function may be deferred only when takeoff minima do not require it (MEL 31-61-14B); with it deferred, below-RVR-500 takeoffs are not available."],
+  src:"(737/787) For takeoffs less than 500 RVR (150 m), see Takeoff Low Visibility Card in PRC. Table row: (737/787) <500 (150 m) - SEE HGS/HUD TAKEOFF BRIEFING CARD."},
+ {cat:"Destination Alternate",ref:"FOM 8.2.3",q:"Within the contiguous 48 (or from AK / Mexico / Central America / Canada / Caribbean), when is no destination alternate required?",
+  a:["Destination weather at <b>ETA +/- 1 hour</b> forecast at least <b>2000 ft ceiling and 3 sm</b> visibility.","The <b>2 sm more than the lowest applicable minimums</b> additive and the more-than-one-runway requirement apply to <b>Alaska</b> destinations, not the contiguous 48."],
+  src:"Destination weather reports or forecast or any combination of them indicate at the estimated time of arrival, +/- one hour, conditions will be at least 2000 ft ceiling and 3 sm visibility. (FOM 8.2.3, Within Contiguous 48 States row. The 2 sm additive appears only in the Alaska rows.)"},
+
+ {cat:"Destination Alternate",ref:"FOM 8.2.3 (121.621a)",q:"Flag operation (excluding A012): no-alternate ceiling and visibility requirement?",
+  a:["<b>Ceiling:</b> straight-in available, at least <b>1500 ft above the lowest published IAP min</b> or <b>2000 ft above field elev</b>, whichever is higher; if circling required, <b>1500 ft above the lowest circling MDA</b>.","<b>Vis:</b> <b>3 sm</b> or 2 sm more than the applicable min, whichever greater, ETA +/- 1 hr."],
+  src:"Ceiling at or above either of the following: If a circling approach is required, 1500 ft above the lowest circling MDA. If a straight-in approach is available, at least 1500 ft above the lowest published instrument approach minimum or 2000 ft above airport elevation, whichever is higher. Three miles visibility or two miles more than the applicable visibility minimum, whichever is greater, for the instrument approach procedure to be used."},
+
+ {cat:"Destination Alternate",ref:"FOM 8.2.3 / 8.2.2.1",q:"When is a destination alternate ALWAYS required, regardless of forecast?",
+  a:["Any <b>Flag flight planned over 6 hours</b> flight time; and","When <b>thunderstorms or volcanic ash</b> are forecast in the TAF at the ETA."],
+  src:"An alternate airport must be listed on the release prior to dispatch when thunderstorms or volcanic ash are forecast in the TAF at the ETA. / Per 14 CFR 121.621, an alternate is required for any Flag flight more than six hours flight time as planned on the Flight Plan."},
+
+ {cat:"Alternate Minimums",ref:"FOM 8.2.2.1",q:"Derived alternate minimums, ONE nav facility (straight-in non-precision, CAT I, or circling). Additives?",
+  a:["Add <b>400 ft</b> to MDA(H)/DA(H), and add <b>1 sm (1600 m)</b> to the landing minimum.","<b>MEL note:</b> with an expired nav database (MEL 05-34-01), RNP and RNAV procedures are not permitted, so plan approaches on ground-based NAVAIDs."],
+  src:"At least one operational navigational facility providing a straight-in non-precision approach, a CAT I precision approach, or a circling maneuver: Add 400 ft to MDA(H) or DA(H), as applicable. Add 1 sm or 1600 m to landing minimum."},
+
+ {cat:"Alternate Minimums",ref:"FOM 8.2.2.1",q:"Derived alternate minimums, TWO facilities to different suitable runways (two approach ends). Additives?",
+  a:["Add <b>200 ft</b> to the higher DA(H)/MDA(H) of the two, and add <b>1/2 sm (800 m)</b> to the higher authorized landing minimum of the two."],
+  src:"At least two operational navigational facilities, each providing a straight-in non-precision or precision approach to different, suitable runways (two approach ends): Add 200 ft to higher DA(H) or MDA(H). Add 1/2 sm or 800 m to higher authorized landing minimum of two approaches used."},
+
+ {cat:"Alternate Minimums",ref:"FOM 8.2.2.1",q:"Do the Jeppesen 'For Filing As Alternate' minimums apply to our operations? How are additives rounded?",
+  a:["<b>No</b>, they do not apply. Use the derived table.","Additives apply only to the <b>height (H) value, rounded up to the next 100 ft</b>. Wind including gust must be forecast within limits."],
+  src:"The minimums depicted in 'For Filing As Alternate' listed on the Jeppesen 10-9/10-9A pages do not apply to our operations. Additives are applied only to the height value (H) rounded up to the next 100-ft value (if not a multiple of 100) to determine the required ceiling. Wind including gust must be forecast to be within operating limits."},
+
+ {cat:"Second Alternate",ref:"FOM 8.2.2.2",q:"When is a second (marginal) alternate required?",
+  a:["Destination ceiling (if required) and/or visibility is <b>at or below CAT I minimums</b> for the intended runway/approach, AND the first alternate is <b>at alternate minimums</b> (ceiling OR visibility).","Also for a flag/supplemental flight to an <b>international airport missing METAR info</b> (both alternates need a complete METAR and TAF)."],
+  src:"Marginal: Destination airport weather has a ceiling (if required) AND/OR the visibility is at or below CAT I minimums for the intended runway and approach to be used. Alternate airport weather is marginal when either the ceiling OR visibility is at alternate minimums. A second alternate is required for a flag or supplemental flight if dispatching to an international airport that is missing information in the METAR per Ops Spec A010(e). Both destination alternates must have a complete METAR and TAF."},
+
+ {cat:"Approach",ref:"FOM 5.6.11",q:"When may you begin the final approach segment? What if a below-min report arrives after?",
+  a:["Reported weather must be <b>at or above</b> the approach visibility mins. Do not begin the final approach segment unless the latest RVR, visibility, or ceiling (if required) is at or above authorized mins.","If a <b>below-min report arrives after</b> the final segment has begun, you may continue to <b>DA/DH or MDA</b>."],
+  src:"The reported weather at the destination must be at or above the visibility minimums prescribed for the approach. Do not begin the final approach segment of an instrument approach procedure unless the latest reported RVR, visibility, or ceiling (if required) is at or above the authorized minimums. If a weather report is obtained after the final approach segment of an instrument approach has been initiated, and it indicates below minimum conditions, the pilot may continue the approach to DA/DH or MDA."},
+
+ {cat:"Approach",ref:"FOM 5.6.11",q:"Which RVR is controlling, and what is the approach visibility floor?",
+  a:["<b>Non-Precision and CAT I: TDZ RVR controls</b> (Mid and Rollout are advisory; Mid may substitute if TDZ unavailable). CAT II/III: all required RVR values on the approach briefing card apply.","RVR greater than 6000 is advisory only. <b>Visibility values below 1/2 sm are not authorized</b> for approach minimums (RVR-based CAT II/III minima below that equivalent remain authorized)."],
+  src:"TDZ RVR reports are controlling. Mid RVR and Rollout RVR reports (if available) are advisory. Mid RVR report may be substituted for the TDZ RVR if the TDZ RVR report is not available. RVR values greater than 6000 are advisory only. Visibility values below 1/2 sm are not authorized and shall not be used for approach minimums."},
+
+ {cat:"Prohibited",ref:"FOM 9.2.1",q:"Takeoff/landing prohibited: wind, crosswind, braking action?",
+  a:["Steady-state wind <b>greater than 50 kt</b>.","Crosswind exceeds <b>fleet-specific manual limits</b> (787 per FCOM/AOM - not on this sheet).","Braking action <b>NIL</b> or <b>RWYCC 0</b> on any portion of the runway."],
+  src:"Takeoffs and landings are prohibited when: Steady-state wind velocity is greater than 50 kts. Crosswinds exceed limits in fleet-specific manuals. Braking action is NIL or the RWYCC is 0 on any portion of the runway."},
+
+ {cat:"Prohibited",ref:"FOM 9.2.1",q:"Takeoff/landing prohibited: 787 contaminated surface width, thunderstorms, freezing rain, icing?",
+  a:["787 contaminated <b>prepared surface width less than 45 m (148 ft)</b>.","<b>TS at or near the airport</b> unless runway and flight path (incl missed approach) are clear of storms.","<b>Moderate or greater freezing rain</b> (takeoff still allowed if an LWE-derived HOT is available, absent another prohibitor).","<b>Severe icing</b> reported by a similar type or larger aircraft."],
+  src:"Contaminated runway preparation results in an available prepared surface width of less than 45 m / 148 ft (787). Takeoffs, approaches, and landings should not be attempted when TS are reported at or near the airport unless runway of intended operation and the flight path, including missed approach, are clear of the storms. There is moderate or greater freezing rain (takeoff still allowed if an LWE-derived HOT is available, unless another prohibiting factor exists). Severe icing is reported by a similar type or larger aircraft."},
+
+ {cat:"Prohibited",ref:"FOM 9.2.1",q:"Takeoff prohibited: contaminant depth limits?",
+  a:["Contaminant depth <b>greater than 1/2 inch</b> for wet snow, slush, or water, or <b>greater than 4 inches</b> for dry snow.","Also: steady-state <b>tailwind over 10 kt</b> on a contaminated runway."],
+  src:"Takeoffs are prohibited when: Contaminant depth is greater than 1/2 inch for wet snow, slush, or water or greater than 4 inches for dry snow. Steady-state tailwind component exceeds 10 kts on a contaminated runway."},
+
+ {cat:"Controlling Report",ref:"FOM 9.2.1",q:"Which weather report is controlling?",
+  a:["The <b>most recent report</b>, including Remarks or conditional language.","A <b>verbal tower</b> report of visibility / RVV / RVR takes precedence over METAR or ATIS."],
+  src:"The controlling visibility for an airport, or if a particular runway is identified, is the most recent report, including Remarks or conditional language. A verbal report from a control tower that includes a visibility value, Runway Visibility (RVV) or Runway Visual Range (RVR), is controlling and will take precedence over a METAR or ATIS."},
+];
+
+let order=[], idx=0, revealed=false, known=new Set(), review=new Set(), reviewMode=false, srcOpen=false;
+const app=document.getElementById("app");
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function ansHTML(d){
+  let h = (d.a||[]).map(s=>`<div class="ln">${s}</div>`).join('');
+  if(d.tbl){
+    h += '<table class="atbl"><thead><tr><th>Fleet</th><th>Max distance</th></tr></thead><tbody>';
+    h += d.tbl.map(r=>`<tr class="${r[2]?'hi':''}"><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('');
+    h += '</tbody></table>';
+  }
+  return h;
+}
+function start(reviewOnly){
+  reviewMode=reviewOnly;
+  order= reviewOnly ? shuffle([...review]) : shuffle([...Array(DATA.length).keys()]);
+  if(!reviewOnly){known=new Set();review=new Set();}
+  idx=0;revealed=false;srcOpen=false;render();
+}
+function render(){
+  if(idx>=order.length)return summary();
+  const d=DATA[order[idx]];
+  app.innerHTML=`
+    <div class="bar">
+      <span class="count">${idx+1} / ${order.length}</span>
+      <div class="track"><div class="fill" style="width:${(idx/order.length)*100}%"></div></div>
+      <span>${reviewMode?"REVIEW SET":"FULL SET"}</span>
+    </div>
+    <div class="card">
+      <span class="chip">${d.ref}</span>
+      <div class="prompt">
+        <div class="cat">${d.cat}</div>
+        <div class="lead">Answer aloud, then reveal to check</div>
+        <div class="q">${d.q}</div>
+      </div>
+      <div class="readout${revealed?' show':''}">${ansHTML(d)}</div>
+      <div class="srcpanel${srcOpen?' show':''}"><div class="srclabel">FOM Source &mdash; ${d.ref}</div><div class="srcsub" style="color:#cfe2f2;font-style:normal">&ldquo;${d.src}&rdquo;</div></div>
+      <div class="spacer"></div>
+      <div class="controls">
+        ${revealed?`
+          <button class="mark knew" onclick="grade(true)">Got it &nbsp;K</button>
+          <button class="mark rev" onclick="grade(false)">Review &nbsp;R</button>
+        `:`
+          <button class="primary" style="flex:1" onclick="reveal()">Reveal answer</button>
+        `}
+        <button class="srcbtn" onclick="toggleSrc()">${srcOpen?'Hide source':'Source'}</button>
+      </div>
+    </div>
+    <div class="foot">
+      <button class="ghost" onclick="start(false)">Restart full set</button>
+      <span>got it ${known.size} &middot; review ${review.size}</span>
+    </div>`;
+}
+function reveal(){revealed=true;render()}
+function toggleSrc(){srcOpen=!srcOpen;render()}
+function grade(ok){const id=order[idx];if(ok){known.add(id);review.delete(id)}else{review.add(id)}idx++;revealed=false;srcOpen=false;render()}
+function summary(){
+  const pct=Math.round((known.size/DATA.length)*100);
+  app.innerHTML=`
+    <div class="card"><div class="summary">
+      <div class="big">${pct}%</div>
+      <div class="lbl">answered cold</div>
+      <div class="stat">
+        <div>${known.size}<span>got it</span></div>
+        <div class="r">${review.size}<span>to review</span></div>
+      </div>
+      <div class="controls" style="justify-content:center">
+        ${review.size?`<button class="primary" onclick="start(true)">Drill review only (${review.size})</button>`:''}
+        <button class="ghost" onclick="start(false)">Restart full set</button>
+      </div>
+    </div></div>`;
+}
+document.addEventListener("keydown",e=>{
+  if(idx>=order.length)return;
+  if(e.code==="Space"||e.code==="Enter"){e.preventDefault();revealed?grade(true):reveal();}
+  else if(e.key==="k"||e.key==="K"){if(revealed)grade(true)}
+  else if(e.key==="r"||e.key==="R"){if(revealed)grade(false)}
+});
+start(false);
+</script>
+
+<footer style="width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:8px;margin:28px auto 0;">
+<img src="B787_night.jpg" alt="Boeing 787" style="width:380px;max-width:60%;height:auto;border-radius:6px;">
+<a href="mailto:ryan.pettit@alaskaair.com?subject=B787%20Study%20Portal%20-%20Weather%20Requirements%20Quiz" style="font-size:11px;color:#b1d887;font-family:inherit;text-decoration:none;">ryan.pettit@alaskaair.com</a>
+<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 1.8</div>
+</footer>
+<script src="/portal-settings.js" defer></script>
+<script src="/assist.js" defer></script>
+</body>
+</html>

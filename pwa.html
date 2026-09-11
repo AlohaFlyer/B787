@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ALPA Pilot Working Agreement</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#01416e">
+<style>
+  :root{--midnight:#01416e;--atlas:#00679c;--blue:#00b2d6;--breeze:#bfe9f4;--ice:#E8F3FA;--good:#b1d887;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Segoe UI",Arial,Helvetica,sans-serif;background:var(--ice);color:var(--midnight);min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+  .wrap{width:100%;max-width:820px;padding:0 10px 40px;}
+  .banner{display:flex;align-items:center;justify-content:space-between;background:var(--midnight);padding:12px 20px;margin-top:24px;gap:12px;}
+  .banner a.home{color:var(--breeze);text-decoration:none;font-size:13px;font-weight:700;white-space:nowrap;}
+  .banner a.home:hover{color:#fff;}
+  .banner span.t{color:var(--good);font-size:17px;font-weight:700;letter-spacing:1px;text-align:right;}
+  .sub{font-size:12px;color:#555;padding:8px 4px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  .sub a{color:var(--atlas);font-weight:700;text-decoration:none;}
+  .card{background:#fff;border:2px solid var(--midnight);padding:16px;margin-top:14px;}
+  textarea#q{width:100%;min-height:78px;padding:12px;border:2px solid var(--midnight);border-radius:6px;font-family:inherit;font-size:16px;resize:vertical;}
+  textarea#q:focus{outline:none;border-color:var(--atlas);}
+  .row{display:flex;align-items:center;gap:16px;margin-top:14px;flex-wrap:wrap;}
+  button.primary{flex:1 1 240px;background:var(--midnight);color:#fff;border:none;border-radius:6px;padding:16px 20px;font-size:16px;font-weight:700;cursor:pointer;}
+  button.primary:hover{background:var(--atlas);}
+  .pualani{display:flex;flex-direction:column;align-items:center;gap:5px;background:none;border:none;cursor:pointer;padding:0;font-family:inherit;}
+  .pualani .disc{width:96px;height:96px;border-radius:50%;overflow:hidden;background:#fff;border:3px solid var(--midnight);display:flex;align-items:center;justify-content:center;transition:transform .12s,box-shadow .12s;}
+  .pualani:hover .disc{transform:scale(1.04);box-shadow:0 2px 10px rgba(1,65,110,.35);}
+  .pualani .disc img{width:100%;height:100%;object-fit:contain;padding:4px;}
+  .pualani .disc .fallback{font-size:38px;line-height:1;}
+  .pualani .lbl{font-size:12px;font-weight:700;color:var(--midnight);letter-spacing:.02em;}
+  .pualani:focus{outline:none;}
+  .pualani:focus-visible{outline:none;}
+  .pualani:focus-visible .disc{box-shadow:0 0 0 3px var(--breeze);}
+  .pualani::-moz-focus-inner{border:0;}
+  .pualani[disabled]{cursor:not-allowed;}
+  .pualani[disabled] .disc{filter:grayscale(1);opacity:.45;}
+  .pualani[disabled] .lbl{color:#888;}
+  .hint{font-size:12px;color:#666;margin-top:10px;}
+  .card{position:relative;}
+  .gear{position:absolute;top:8px;right:10px;background:none;border:none;color:#9ab3c4;font-size:20px;line-height:1;cursor:pointer;padding:4px 6px;border-radius:6px;transition:color .12s,background .12s,transform .2s;}
+  .gear:hover{color:var(--midnight);background:var(--breeze);}
+  .gear[aria-expanded="true"]{color:var(--midnight);transform:rotate(60deg);}
+  #settings{display:none;margin-top:12px;border-top:2px solid var(--breeze);padding-top:12px;}
+  #settings h3{margin:0 0 8px;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--midnight);}
+  .fld{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;}
+  .fld label{font-size:12px;font-weight:700;}
+  .fld input,.fld select{padding:9px;border:2px solid var(--breeze);border-radius:5px;font-family:inherit;font-size:13px;}
+  .fld input:focus,.fld select:focus{outline:none;border-color:var(--atlas);}
+  .fld .keyrow{display:flex;gap:6px;}
+  .fld .keyrow input{flex:1;}
+  .mini{background:var(--breeze);border:none;border-radius:5px;padding:0 10px;font-size:11px;font-weight:700;color:var(--midnight);cursor:pointer;}
+  .mini:hover{background:var(--blue);color:#fff;}
+  .note{font-size:11px;color:#666;line-height:1.5;}
+  .seg{display:inline-flex;border:2px solid var(--midnight);border-radius:999px;overflow:hidden;align-self:flex-start;}
+  .seg button{font-family:inherit;font-size:13px;font-weight:700;letter-spacing:.03em;background:#fff;color:var(--midnight);border:none;padding:8px 20px;cursor:pointer;transition:background .12s,color .12s;}
+  .seg button+button{border-left:2px solid var(--midnight);}
+  .seg button[aria-pressed="true"]{background:var(--midnight);color:#fff;}
+  .seg button:hover:not([aria-pressed="true"]){background:var(--breeze);}
+  .chips{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px;font-size:12px;}
+  .chips .chip{background:var(--midnight);color:#fff;border-radius:999px;padding:3px 11px;font-weight:700;letter-spacing:.04em;}
+  .chips .caveat{color:#8a6d00;font-size:11px;}
+  #answer{display:none;background:#fff;border:2px solid var(--good);border-left:8px solid var(--good);padding:16px;margin-top:14px;}
+  #answer h3{margin:0 0 8px;font-size:13px;text-transform:uppercase;letter-spacing:.04em;}
+  #answer .body{font-size:15px;line-height:1.6;}
+  #answer .who{font-size:11px;color:#666;margin-top:10px;}
+  .res{background:#fff;border:2px solid var(--breeze);border-left:6px solid var(--atlas);padding:12px 14px;margin-top:10px;}
+  .res .h{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12px;font-weight:700;color:var(--midnight);}
+  .res .h .pg a{color:var(--atlas);text-decoration:none;}
+  .res .h .pg a:hover{text-decoration:underline;}
+  .res .sn{font-size:14px;line-height:1.55;color:#333;margin-top:7px;}
+  .res mark{background:var(--good);color:var(--midnight);padding:0 2px;}
+  .res .tag{background:var(--good);color:var(--midnight);border-radius:3px;padding:1px 6px;font-size:10px;letter-spacing:.06em;margin-left:6px;}
+  #answer .lead{font-size:16.5px;font-weight:700;line-height:1.5;margin:0 0 10px;}
+  #answer ul{margin:0;padding-left:20px;}
+  #answer li{margin:7px 0;line-height:1.6;}
+  #answer li::marker{color:var(--midnight);}
+  a.cite{white-space:nowrap;}
+  #status{font-size:13px;color:#555;margin-top:14px;min-height:18px;}
+  details.toc{margin-top:18px;background:#fff;border:2px solid var(--breeze);padding:10px 14px;}
+  details.toc summary{cursor:pointer;font-weight:700;font-size:13px;}
+  details.toc ol{margin:10px 0 4px;padding-left:20px;font-size:13px;line-height:1.8;}
+  details.toc a{color:var(--atlas);text-decoration:none;}
+  footer{font-size:11px;color:#666;text-align:center;padding:18px 10px 30px;line-height:1.6;}
+  a.cite{color:var(--atlas);font-weight:700;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:2px;cursor:pointer;}
+  a.cite:hover{background:var(--breeze);color:var(--midnight);}
+  .res .h .pg a{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:2px;}
+  .res{cursor:pointer;}
+  .res:hover{border-color:var(--atlas);}
+  details.toc a{cursor:pointer;}
+  .ovl{position:fixed;inset:0;background:rgba(1,23,43,.72);display:none;align-items:center;justify-content:center;padding:16px;z-index:50;}
+  .ovl.on{display:flex;}
+  .modal{background:#fff;border:2px solid var(--midnight);width:100%;max-width:720px;max-height:86vh;display:flex;flex-direction:column;}
+  .modal .mh{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--midnight);color:#fff;padding:11px 14px;flex-wrap:wrap;}
+  .modal .mh .mt{font-size:13px;font-weight:700;letter-spacing:.03em;color:var(--good);}
+  .modal .mh button{background:none;border:none;color:var(--breeze);font-size:20px;line-height:1;cursor:pointer;padding:0 4px;}
+  .modal .mh button:hover{color:#fff;}
+  .modal .mb{padding:0 0 14px;overflow:auto;font-size:14px;line-height:1.6;color:#222;}
+  .modal .pgmark{position:sticky;top:0;background:var(--breeze);color:var(--midnight);font-size:11px;font-weight:700;letter-spacing:.05em;padding:5px 16px;border-bottom:1px solid var(--midnight);}
+  .modal .pgtext{white-space:pre-wrap;padding:12px 16px 18px;}
+  .modal .pgnote{background:#fff7e0;color:#7a5c00;font-size:12px;padding:8px 16px;}
+  .modal .mb mark{background:var(--good);}
+  .modal .mf{display:flex;gap:10px;justify-content:flex-end;padding:10px 14px;border-top:2px solid var(--breeze);flex-wrap:wrap;}
+  .modal .mf a,.modal .mf button{font-family:inherit;font-size:13px;font-weight:700;text-decoration:none;border-radius:6px;padding:9px 14px;cursor:pointer;border:2px solid var(--midnight);background:#fff;color:var(--midnight);}
+  .modal .mf a.go{background:var(--midnight);color:#fff;}
+</style>
+<style>
+.ps-homebar{align-self:stretch;width:100%;box-sizing:border-box;padding:8px 0 0 10px;flex:0 0 auto;text-align:left;}
+.ps-home{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;background:#fff;border:2px solid #01416e;color:#01416e;text-decoration:none;box-shadow:0 1px 4px rgba(1,23,43,.2);transition:background .12s,color .12s;-webkit-tap-highlight-color:transparent;}
+.ps-home:hover,.ps-home:focus-visible{background:#01416e;color:#fff;}
+.ps-home:focus{outline:none;}
+.ps-home svg{display:block;}
+@media (max-width:480px){.ps-homebar{padding:6px 0 0 8px;}.ps-home{width:40px;height:40px;}}
+</style>
+</head>
+<body>
+<div class="ps-homebar"><a class="ps-home" href="/index.html" title="B787 Study Portal" aria-label="B787 Study Portal"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true" focusable="false"><path d="M3 11.3 12 4l9 7.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.7 10.1v9.4h12.6v-9.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 19.5v-5.1h4v5.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+
+<div class="wrap">
+  <div class="banner">
+    <span class="t">ALPA PILOT WORKING AGREEMENT</span>
+  </div>
+  <div class="sub">
+    <span id="meta">Hawaiian Airlines 2023 Pilots Agreement</span>
+    <span><a href="/pwa_pdf.html">Open full PDF &#9654;</a></span>
+  </div>
+
+  <div class="card">
+    <textarea id="q" placeholder="Ask a contract question, e.g. how much rest do I get at a domestic overnight?" aria-label="Your question"></textarea>
+    <div class="row">
+      <button class="primary" id="searchBtn" type="button">Offline Search</button>
+      <button class="pualani" id="askBtn" type="button" title="Ask Pualani">
+        <span class="disc"><img id="pualaniImg" src="/assets/pualani-2001.png" alt=""><span class="fallback" style="display:none">&#127802;</span></span>
+        <span class="lbl">Ask Pualani</span>
+      </button>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="hint" id="hintText">
+      Offline search always works, radio off, no account. Ask Pualani needs a connection and the key in portal settings.
+    </div>
+
+  </div>
+
+  <div id="answer">
+    <h3>Pualani says</h3>
+    <div class="body" id="answerBody"></div>
+    <div class="who" id="answerWho"></div>
+  </div>
+
+  <div id="status"></div>
+  <div id="results"></div>
+
+  <details class="toc">
+    <summary>Browse by section</summary>
+    <ol id="tocList"></ol>
+  </details>
+
+  <footer>
+    Hawaiian Airlines 2023 Pilots Agreement, effective March 2, 2023 to March 2, 2027.<br>
+    Study aid only. The filed PDF governs. Verify anything you act on against the source.
+  </footer>
+</div>
+
+<div class="ovl" id="ovl" role="dialog" aria-modal="true" aria-labelledby="ovlTitle">
+  <div class="modal">
+    <div class="mh"><span class="mt" id="ovlTitle">Reference</span><button type="button" id="ovlX" aria-label="Close">&times;</button></div>
+    <div class="mb" id="ovlBody"></div>
+    <div class="mf"><button type="button" id="ovlClose">Close</button><a class="go" id="ovlPdf" href="#">Open PDF page &#9654;</a></div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var IDX = null, BM = null, LOADING = null;
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ---------- persistence ---------- */
+  var LS = {
+    get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } },
+    set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
+    del: function (k) { try { localStorage.removeItem(k); } catch (e) {} }
+  };
+
+  /* ---------- text search ---------- */
+  var STOP = ('a an the and or of to in on for is are was were be been am i my me you your it its this that these those ' +
+    'do does did can could would should shall will may might must have has had if then than as at by from with without ' +
+    'what when where which who whom how why not no yes about into over under any all some each per').split(' ');
+  var STOPS = {}; STOP.forEach(function (w) { STOPS[w] = 1; });
+
+  var SYN = {
+    rest: ['rest', 'layover', 'overnight', 'reduced', 'free'], layover: ['layover', 'rest', 'overnight', 'hotel'],
+    pay: ['pay', 'compensation', 'rate', 'credit', 'paid'], sick: ['sick', 'illness', 'sick leave'],
+    vacation: ['vacation', 'vac', 'accrual'], reserve: ['reserve', 'rsv', 'standby', 'short call', 'long call'],
+    deadhead: ['deadhead', 'deadheading', 'dh'], hotel: ['hotel', 'lodging', 'accommodation'],
+    perdiem: ['per diem', 'expenses', 'meal'], commute: ['commute', 'commuter', 'commuting'],
+    duty: ['duty', 'fdp', 'flight duty period', 'hours of service'],
+    training: ['training', 'ground school', 'simulator', 'ioe', 'oe'],
+    bid: ['bid', 'bidding', 'pbs', 'award'], furlough: ['furlough', 'recall'],
+    retirement: ['retirement', '401', 'pension', 'dc plan'], insurance: ['insurance', 'medical', 'dental', 'disability'],
+    seniority: ['seniority', 'longevity'], grievance: ['grievance', 'discipline', 'system board'],
+    uniform: ['uniform', 'allowance'], jumpseat: ['jumpseat', 'js', 'cockpit seat'],
+    fatigue: ['fatigue', 'fatigued', 'frc'], holiday: ['holiday', 'holidays'],
+    military: ['military', 'uniformed services'], maternity: ['parental', 'maternity', 'family leave'],
+    domestic: ['domestic', 'dom', 'interisland'], overnight: ['overnight', 'layover', 'rest period', 'hotel'],
+    reduced: ['reduced', 'rest period'], furloughed: ['furlough', 'recall'],
+    trip: ['flight grouping', 'pairing', 'run', 'sequence'], dayoff: ['day off', 'days off', 'golden'],
+    vacancy: ['vacancy', 'bid', 'award'], upgrade: ['upgrade', 'vacancy', 'captain'],
+    jury: ['jury duty', 'court'], bereavement: ['bereavement', 'funeral'],
+    make: ['hourly pay rate', 'pay rate', 'compensation', 'longevity'],
+    earn: ['hourly pay rate', 'pay rate', 'compensation', 'longevity'],
+    salary: ['hourly pay rate', 'monthly salary', 'compensation'],
+    wage: ['hourly pay rate', 'pay rate', 'compensation'],
+    hour: ['hourly pay rate', 'pay and credit'],
+    hourly: ['hourly pay rate', 'effective dates'],
+    rate: ['hourly pay rate', 'effective dates', 'longevity'],
+    paycheck: ['hourly pay rate', 'compensation'],
+    scale: ['longevity', 'hourly pay rate']
+  };
+
+  function norm(w) {
+    w = w.toLowerCase();
+    if (w.length > 4 && /ies$/.test(w)) return w.slice(0, -3) + 'y';
+    if (w.length > 3 && /(ses|xes|zes|ches|shes)$/.test(w)) return w.slice(0, -2);
+    if (w.length > 3 && /s$/.test(w) && !/ss$/.test(w)) return w.slice(0, -1);
+    if (w.length > 5 && /ing$/.test(w)) return w.slice(0, -3);
+    if (w.length > 4 && /ed$/.test(w)) return w.slice(0, -2);
+    return w;
+  }
+  function tok(s) {
+    var out = [], m = String(s).toLowerCase().match(/[a-z0-9][a-z0-9.']*/g) || [];
+    for (var i = 0; i < m.length; i++) {
+      var w = m[i].replace(/\.+$/, '').replace(/'s$/, '');
+      if (!w || STOPS[w] || w.length < 2) continue;
+      out.push(norm(w));
+    }
+    return out;
+  }
+
+  function buildBM() {
+    var docs = IDX.docs, N = docs.length, df = {}, tf = new Array(N), len = new Array(N), sum = 0;
+    for (var i = 0; i < N; i++) {
+      var t = tok(docs[i].x), c = {}, ht = tok(docs[i].h || '');
+      for (var r = 0; r < 4; r++) t = t.concat(ht);
+      for (var j = 0; j < t.length; j++) c[t[j]] = (c[t[j]] || 0) + 1;
+      tf[i] = c; len[i] = t.length; sum += t.length;
+      for (var k in c) df[k] = (df[k] || 0) + 1;
+    }
+    return { N: N, df: df, tf: tf, len: len, avg: sum / N };
+  }
+
+  var PAYQ = /(pay|paid|rate|make|earn|salary|wage|hour|hourly|scale|longevity|compensation)/i;
+
+  function expand(terms, query) {
+    var out = terms.slice(), joined = terms.join(' ');
+    // Settings steer the search: seat and fleet are query terms on pay questions.
+    if (query && PAYQ.test(query)) {
+      var p = prof();
+      tok((p.seat === 'FO' ? 'first officer' : 'captain') + ' ' + p.fleet + ' hourly pay rate longevity effective dates')
+        .forEach(function (t) { if (out.indexOf(t) < 0) out.push(t); });
+    }
+    for (var key in SYN) {
+      if (joined.indexOf(norm(key)) >= 0) SYN[key].forEach(function (s) { tok(s).forEach(function (t) { if (out.indexOf(t) < 0) out.push(t); }); });
+    }
+    return out;
+  }
+
+  function search(query, limit) {
+    var base = tok(query);
+    if (!base.length) return [];
+    var terms = expand(base, query), k1 = 1.5, b = 0.75, scores = new Array(BM.N).fill(0);
+    for (var ti = 0; ti < terms.length; ti++) {
+      var t = terms[ti], n = BM.df[t]; if (!n) continue;
+      var boost = base.indexOf(t) >= 0 ? 1 : 0.45;
+      var idf = Math.log(1 + (BM.N - n + 0.5) / (n + 0.5));
+      for (var d = 0; d < BM.N; d++) {
+        var f = BM.tf[d][t]; if (!f) continue;
+        scores[d] += boost * idf * (f * (k1 + 1)) / (f + k1 * (1 - b + b * BM.len[d] / BM.avg));
+      }
+    }
+    // exact phrase bonus
+    var phrase = query.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+    if (phrase.length > 8) {
+      for (var d2 = 0; d2 < BM.N; d2++) {
+        if (IDX.docs[d2].x.toLowerCase().replace(/\s+/g, ' ').indexOf(phrase) >= 0) scores[d2] += 6;
+      }
+    }
+    // a pay question belongs in Compensation, not wherever the word "hour" happens to fall
+    if (PAYQ.test(query)) {
+      for (var d4 = 0; d4 < BM.N; d4++) {
+        var dd = IDX.docs[d4];
+        if (dd.s === '3') scores[d4] += 4;
+        if (/EFFECTIVE DATES FOR/.test(dd.x)) scores[d4] += 5;
+      }
+    }
+    // explicit section reference, e.g. "22.B.4" or "section 10"
+    var secRef = query.match(/\b(?:section\s*)?(\d{1,2})(?:\.[A-Za-z0-9]+)*\b/i);
+    if (secRef && /section|\d\./i.test(query)) {
+      for (var d3 = 0; d3 < BM.N; d3++) if (IDX.docs[d3].s === secRef[1]) scores[d3] += 2.5;
+    }
+    var order = [];
+    for (var i2 = 0; i2 < scores.length; i2++) if (scores[i2] > 0) order.push([scores[i2], i2]);
+    order.sort(function (a, c) { return c[0] - a[0]; });
+    return order.slice(0, limit || 12).map(function (r) {
+      return { score: r[0], doc: IDX.docs[r[1]], terms: terms, base: base };
+    });
+  }
+
+  // Rate tables are walls of digits. Collapse them so the sentence survives.
+  function tidy(s) {
+    return s.replace(/\s+/g, ' ')
+      .replace(/(?:(?:\$?\d[\d.,]*|\d{1,2}\/\d{1,2}\/\d{2,4})\s+){5,}/g, ' [rate table] ')
+      .replace(/\s{2,}/g, ' ').trim();
+  }
+  function snippet(text, terms, width) {
+    width = width || 320;
+    var flat = tidy(text), low = flat.toLowerCase(), best = 0, bestScore = -1e9;
+    var step = 30;
+    for (var s = 0; s < Math.max(1, flat.length - width); s += step) {
+      var win = low.slice(s, s + width), score = 0;
+      for (var i = 0; i < terms.length; i++) {
+        if (win.indexOf(terms[i].slice(0, Math.max(4, terms[i].length - 1))) >= 0) score += 2;
+      }
+      var digits = (win.match(/[0-9$]/g) || []).length;
+      score -= digits / 18;                       // prose beats digit soup
+      if (/^[A-Z(]/.test(flat.slice(s, s + 1))) score += 0.6;
+      if (s > 0 && /[.;:] $/.test(flat.slice(s - 2, s))) score += 1.2;
+      if (score > bestScore) { bestScore = score; best = s; }
+    }
+    var out = flat.slice(best, best + width);
+    var sp = out.lastIndexOf(' ');
+    if (sp > width - 40) out = out.slice(0, sp);
+    if (best > 0) out = '... ' + out;
+    if (best + width < flat.length) out += ' ...';
+    return out;
+  }
+
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function highlight(s, terms) {
+    var html = esc(s);
+    var uniq = terms.slice().sort(function (a, b) { return b.length - a.length; }).slice(0, 6);
+    uniq.forEach(function (t) {
+      if (t.length < 3) return;
+      var stem = t.slice(0, Math.max(4, t.length - 1)).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      html = html.replace(new RegExp('(?<![\\w>])(' + stem + '\\w*)', 'gi'), '<mark>$1</mark>');
+    });
+    return html;
+  }
+
+  function load() {
+    if (LOADING) return LOADING;
+    setStatus('Loading the agreement index...');
+    LOADING = fetch('/pwa_index.json').then(function (r) {
+      if (!r.ok) throw new Error('index ' + r.status);
+      return r.json();
+    }).then(function (j) {
+      IDX = j; BM = buildBM();
+      $('meta').textContent = j.meta.title + ', ' + j.meta.effective;
+      var ol = $('tocList'); ol.innerHTML = '';
+      j.toc.forEach(function (s) {
+        var li = document.createElement('li');
+        li.innerHTML = '<a class="cite" data-p="' + s.p + '" data-l="Section ' + esc(s.s) + '">Section ' + s.s + ' &mdash; ' + esc(s.t) + '</a>';
+        ol.appendChild(li);
+      });
+      setStatus('');
+      return j;
+    }).catch(function (e) {
+      // Clear the cached promise, otherwise one dropped packet leaves the page
+      // permanently unable to search until a full reload.
+      LOADING = null;
+      setStatus('Could not load the index: ' + e.message + '. If you are offline, tick Make Available Offline on the portal while you have signal.');
+      throw e;
+    });
+    return LOADING;
+  }
+
+  function setStatus(t) { $('status').textContent = t; }
+
+  function render(hits) {
+    var box = $('results'); box.innerHTML = '';
+    if (!hits.length) { setStatus('No match. Try different words, or a section number like 22.B.'); return; }
+    setStatus(hits.length + ' matching passage' + (hits.length === 1 ? '' : 's') + ', best first. Asked as ' + profileText() + '.');
+    hits.forEach(function (h) {
+      var d = h.doc, div = document.createElement('div');
+      div.className = 'res';
+      var isTable = /EFFECTIVE DATES FOR/.test(d.x);
+      div.innerHTML =
+        '<div class="h"><span>SECTION ' + esc(d.s) + (d.t ? ' &middot; ' + esc(d.t) : '') + (d.cp ? ' &middot; ' + esc(d.cp) : '') +
+        (isTable ? ' <span class="tag">RATE TABLE</span>' : '') + '</span>' +
+        '<span class="pg"><a href="/pwa_pdf.html#page=' + d.p + '">Open PDF p.' + d.p + ' &#9654;</a></span></div>' +
+        '<div class="sn">' + highlight(snippet(d.x, h.terms), h.base) + '</div>';
+      div.setAttribute('role', 'button');
+      div.setAttribute('tabindex', '0');
+      div.addEventListener('click', function (ev) {
+        if (ev.target.closest('a')) return;
+        openRef(d.p, 'Section ' + d.s + (d.t ? ' ' + d.t : ''), h.base.concat(h.terms));
+      });
+      div.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); div.click(); }
+      });
+      box.appendChild(div);
+    });
+  }
+
+  function doSearch() {
+    var q = $('q').value.trim();
+    if (!q) { $('q').focus(); return; }
+    $('answer').style.display = 'none';
+    load().then(function () { render(search(q, 12)); }).catch(function () {});
+  }
+
+  /* ---------- reference popout ---------- */
+  function docByPage(pg) {
+    for (var i = 0; i < IDX.docs.length; i++) if (IDX.docs[i].p === pg) return IDX.docs[i];
+    return null;
+  }
+
+  function docsForSection(s) {
+    return IDX.docs.filter(function (d) { return d.s === s; }).sort(function (a, b) { return a.p - b.p; });
+  }
+
+  // Show the whole section, continuous, and jump to the page you came from.
+  function openRef(pg, label, terms) {
+    if (!IDX) { load().then(function () { openRef(pg, label, terms); }).catch(function () {}); return; }
+    var d = docByPage(pg);
+    if (!d) {
+      $('ovlTitle').textContent = 'PDF p.' + pg;
+      $('ovlBody').innerHTML = 'That page is not in the offline index. Open the PDF instead.';
+      $('ovlPdf').setAttribute('href', '/pwa_pdf.html#page=' + pg);
+      $('ovl').classList.add('on');
+      return;
+    }
+    var all = docsForSection(d.s), list = all, note = '';
+    if (all.length > 20) {                       // long sections: a window, not a novel
+      var at = all.findIndex(function (x) { return x.p === d.p; });
+      var from = Math.max(0, at - 8), to = Math.min(all.length, from + 20);
+      list = all.slice(from, to);
+      note = '<div class="pgnote">Showing pages ' + list[0].p + ' to ' + list[list.length - 1].p +
+        ' of a ' + all.length + ' page section. Open the PDF for the rest.</div>';
+    }
+    $('ovlTitle').textContent = 'Section ' + d.s + (d.t ? ' \u00b7 ' + d.t : '') +
+      '  \u00b7  ' + all.length + (all.length === 1 ? ' page' : ' pages');
+    $('ovlBody').innerHTML = note + list.map(function (x) {
+      return '<div class="pgmark" id="pgm' + x.p + '">PDF p.' + x.p + (x.cp ? '  \u00b7  contract page ' + x.cp : '') +
+        (x.o ? '  \u00b7  OCR, check against the PDF' : '') + '</div>' +
+        '<div class="pgtext">' + highlight(x.x, terms || []) + '</div>';
+    }).join('');
+    $('ovlPdf').setAttribute('href', '/pwa_pdf.html#page=' + pg);
+    $('ovl').classList.add('on');
+    var anchor = document.getElementById('pgm' + pg);
+    if (anchor) $('ovlBody').scrollTop = anchor.offsetTop - 8; else $('ovlBody').scrollTop = 0;
+  }
+
+  function closeRef() { $('ovl').classList.remove('on'); }
+
+  // Turn "(Section 10.E.2.b, p.117)" and "(p.117)" into popout links.
+  function linkCites(text) {
+    var html = esc(text);
+    html = html.replace(/\(\s*Section\s+([^\n]{1,48}?)\s*,\s*p\.?\s*(\d{1,3})\s*\)/gi,
+      function (m, sec, pg) {
+        return '<a class="cite" data-p="' + pg + '" data-l="Section ' + sec + '">' + m + '</a>';
+      });
+    html = html.replace(/(^|[^">=])\(\s*p\.?\s*(\d{1,3})\s*\)/gi,
+      function (m, pre, pg) {
+        return pre + '<a class="cite" data-p="' + pg + '">(p.' + pg + ')</a>';
+      });
+    return html;
+  }
+
+  // Lead sentence, then real bullets. Citations never wrap.
+  function renderAnswer(text) {
+    var lines = text.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+    var lead = [], items = [];
+    lines.forEach(function (l) {
+      var m = l.match(/^[-\u2022*]\s+(.*)$/);
+      if (m) items.push(m[1]);
+      else if (!items.length) lead.push(l);
+      else items.push(l);
+    });
+    var html = '';
+    if (lead.length) html += '<p class="lead">' + linkCites(lead.join(' ')) + '</p>';
+    if (items.length) html += '<ul>' + items.map(function (i) { return '<li>' + linkCites(i) + '</li>'; }).join('') + '</ul>';
+    return html || linkCites(text);
+  }
+
+  /* ---------- profile, from portal settings ---------- */
+  function PS() { return window.PortalSettings || null; }
+  function prof() {
+    var s = PS();
+    return s ? s.profile() : { seat: 'CA', fleet: 'B787', base: 'HNL', longevity: '' };
+  }
+  function profileText() {
+    var p = prof();
+    return p.seat + ' \u00b7 ' + p.fleet + ' \u00b7 ' + p.base + (p.longevity ? ' \u00b7 ' + p.longevity : '');
+  }
+  function paintProfile() {
+    var p = prof();
+    $('chips').innerHTML = '<span class="chip">' + p.seat + '</span><span class="chip">' + p.fleet +
+      '</span><span class="chip">' + p.base + '</span>' +
+      (p.years || p.years === 0 ? '<span class="chip">' + p.years + ' yr</span>' : '');
+  }
+  function updateAskState() {
+    var online = navigator.onLine, btn = $('askBtn');
+    btn.style.display = online ? '' : 'none';
+    btn.disabled = !online;
+    $('hintText').textContent = online
+      ? 'Offline search always works, radio off, no account. Ask Pualani needs a connection and the key in portal settings.'
+      : 'No connection, so offline search is the whole show. Ask Pualani comes back when you have signal.';
+  }
+
+  /* ---------- ask ---------- */
+  var SYS = 'You answer questions about the Hawaiian Airlines 2023 Pilots Agreement (the PWA) for a line pilot. '
+    + 'Use ONLY the excerpts provided. Answer in TLDR format: line 1 is the bottom line in one sentence under 20 words, '
+    + 'then 2 to 5 one-line bullets under 18 words each, every bullet ending with its citation like (Section 10.E.2.b, p.117). '
+    + 'No preamble, no closing summary, no em dashes, no run-on sentences. Numbers carry units and conditions. '
+    + 'Never invent a section number, a page, or a figure.';
+  var PROFILE_INSTRUCTION = 'Answer for that seat, fleet and domicile. If a provision differs by seat, fleet or domicile, '
+    + 'say which one you applied in one short bullet. If the excerpts do not cover this fleet or domicile, say so in line 1.';
+
+  // Answer style lives in pwa_prompt.json so it can be tuned without touching this page.
+  fetch('/pwa_prompt.json').then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+    if (!j) return;
+    if (j.system) SYS = j.system;
+    if (j.profileInstruction) PROFILE_INSTRUCTION = j.profileInstruction;
+  }).catch(function () {});
+
+  // Section menu for the router pass, built from the index itself.
+  function sectionMenu() {
+    var seen = {}, out = [];
+    (CORPUS.docs || []).forEach(function (d) {
+      if (!d.s || seen[d.s]) return;
+      seen[d.s] = 1;
+      out.push('Section ' + d.s + ': ' + (d.t || ''));
+    });
+    return out.join('\n');
+  }
+  function sectionPages(num) {
+    return (CORPUS.docs || []).filter(function (d) { return String(d.s) === String(num); })
+      .sort(function (a, b) { return (parseInt(a.p, 10) || 0) - (parseInt(b.p, 10) || 0); });
+  }
+  var CTX_CAP = 140000;
+  function buildWholeSections(nums, hits) {
+    var out = [], used = 0, seenPage = {}, readList = [];
+    nums.forEach(function (n) {
+      var pages = sectionPages(n);
+      if (!pages.length) return;
+      readList.push('Section ' + n + ' (' + pages.length + ' pages)');
+      var head = '===== SECTION ' + n + ' ' + (pages[0].t || '') + ', COMPLETE TEXT =====';
+      var body = pages.map(function (d) {
+        seenPage[d.p] = 1;
+        return '[PDF p.' + d.p + (d.cp ? ', contract page ' + d.cp : '') + '] ' + String(d.x || '').replace(/\s+/g, ' ');
+      }).join('\n');
+      var block = head + '\n' + body;
+      if (used + block.length > CTX_CAP) block = block.slice(0, Math.max(0, CTX_CAP - used));
+      if (!block) return;
+      out.push(block); used += block.length;
+    });
+    // Always append the ranked hits, so a provision outside the routed sections still lands.
+    var extra = [];
+    hits.forEach(function (h) {
+      var d = h.doc;
+      if (seenPage[d.p]) return;
+      seenPage[d.p] = 1;
+      extra.push('[PDF p.' + d.p + (d.cp ? ', contract page ' + d.cp : '') + '] Section ' + d.s + ' ' + d.t +
+        '\n' + String(d.x || '').replace(/\s+/g, ' '));
+    });
+    if (extra.length && used < CTX_CAP) {
+      out.push('===== ADDITIONAL PAGES MATCHED BY SEARCH =====\n' + extra.join('\n\n').slice(0, CTX_CAP - used));
+    }
+    return { text: out.join('\n\n'), read: readList };
+  }
+
+  function ask() {
+    var q = $('q').value.trim();
+    if (!q) { $('q').focus(); return; }
+    var s = PS();
+    if (!s) { setStatus('Portal settings did not load on this page.'); return; }
+    if (!s.ready()) { setStatus('Add an API key and pick a model in portal settings first.'); s.open(); return; }
+
+    load().then(function () {
+      paintProfile();
+      var hits = search(q, 8);
+      render(hits);
+
+      var p = prof();
+      var today = new Date().toISOString().slice(0, 10);
+      var who = 'Today is ' + today + '.\n' +
+        'Pilot profile: ' + p.seat + ' on the ' + p.fleet + ', domiciled ' + p.base + '.' +
+        (p.doh ? ' Date of hire ' + p.doh + ', so ' + p.years + ' years ' + p.months + ' months of service as of today, next longevity anniversary ' + p.next + '.' : '');
+
+      $('answer').style.display = 'block';
+      $('answerBody').textContent = 'Working out which sections govern this...';
+      $('answerWho').textContent = s.modelLabel() + ' \u00b7 asked as ' + profileText();
+
+      var ROUTER = 'You route questions about the Hawaiian Airlines 2023 Pilots Agreement to its sections. ' +
+        'Reply with section numbers only, comma separated, at most 4, most likely first. No words, no punctuation beyond commas. ' +
+        'Choose generously: include any section that could plausibly govern any part of the question.';
+      var routerUser = 'Question: ' + q + '\n\nSection list:\n' + sectionMenu();
+
+      function answerWith(nums) {
+        var built = buildWholeSections(nums, hits);
+        if (!built.text) { $('answerBody').textContent = 'Nothing in the agreement matched.'; return; }
+        $('answerBody').textContent = 'Reading ' + (built.read.join(', ') || 'the matched pages') + '...';
+        var user = who + '\n\n' + PROFILE_INSTRUCTION + '\n\nQuestion: ' + q +
+          '\n\nYou have been given the COMPLETE text of these sections of the 2023 Hawaiian Airlines Pilots Agreement: ' +
+          (built.read.join('; ') || 'the pages matched by search') +
+          '. Read all of it before answering.\n\n' + built.text;
+        s.ask(SYS, user).then(function (txt) {
+          var body = (txt || '').trim();
+          if (body) {
+            $('answerBody').innerHTML = renderAnswer(body);
+            if (built.read.length) {
+              var n = document.createElement('div');
+              n.style.cssText = 'font-size:11px;color:#666;margin-top:8px;';
+              n.textContent = 'Read in full: ' + built.read.join(', ') + '.';
+              $('answerBody').appendChild(n);
+            }
+          } else { $('answerBody').textContent = 'Empty response.'; }
+        }).catch(function (e) {
+          $('answerBody').textContent = 'Could not reach the model. ' + e.message;
+        });
+      }
+
+      s.ask(ROUTER, routerUser).then(function (txt) {
+        var nums = String(txt || '').match(/\d+/g) || [];
+        nums = nums.filter(function (v, i, a) { return a.indexOf(v) === i; }).slice(0, 4);
+        if (!nums.length) nums = hits.slice(0, 2).map(function (h) { return h.doc.s; });
+        answerWith(nums);
+      }).catch(function () {
+        answerWith(hits.slice(0, 2).map(function (h) { return h.doc.s; }));
+      });
+    }).catch(function (e) {
+      $('answer').style.display = 'block';
+      $('answerBody').textContent = 'Could not load the agreement index. ' + (e && e.message ? e.message : '');
+    });
+  }
+
+  /* ---------- wire up ---------- */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a.cite');
+    if (!a) return;
+    e.preventDefault();
+    openRef(parseInt(a.getAttribute('data-p'), 10), a.getAttribute('data-l') || '', tok($('q').value || ''));
+  });
+  $('ovlX').addEventListener('click', closeRef);
+  $('ovlClose').addEventListener('click', closeRef);
+  $('ovl').addEventListener('click', function (e) { if (e.target === $('ovl')) closeRef(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeRef(); });
+  $('searchBtn').addEventListener('click', doSearch);
+  $('askBtn').addEventListener('click', ask);
+  $('q').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); doSearch(); }
+  });
+  $('pualaniImg').addEventListener('error', function () {
+    this.style.display = 'none';
+    this.parentNode.querySelector('.fallback').style.display = 'block';
+  });
+  window.addEventListener('online', updateAskState);
+  window.addEventListener('offline', updateAskState);
+  updateAskState();
+  paintProfile();
+
+  load().catch(function () {});
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(function () {});
+})();
+</script>
+<script src="/portal-settings.js" defer></script>
+<script src="/assist.js" defer></script>
+</body>
+</html>

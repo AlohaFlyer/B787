@@ -1,0 +1,294 @@
+/* Per-section Offline Search + Ask Pualani.
+   Each page searches only its own corpus, so answers stay inside that section. */
+(function () {
+  'use strict';
+  if (window.__assistLoaded) return;
+  window.__assistLoaded = true;
+
+  var MAP = {
+    'ioe.html': 'ioe', 'flows_quiz.html': 'flows', 'cdu_preflight.html': 'cdu',
+    'triggers.html': 'triggers', 'limitations.html': 'limitations', 'memory-items.html': 'memory',
+    'systems_quiz.html': 'systems', 'fom_quiz.html': 'fom', 'weather.html': 'weather'
+  };
+  var file = location.pathname.split('/').pop() || 'index.html';
+  var KEY = MAP[file];
+  if (!KEY) return;
+
+  var CORPUS = null, BM = null, LOADING = null;
+  function el(id) { return document.getElementById(id); }
+
+  var STOP = ('a an the and or of to in on for is are was were be been am i my me you your it its this that these those do does did ' +
+    'can could would should shall will may might must have has had if then than as at by from with without what when where which who ' +
+    'whom how why not no yes about into over under any all some each per').split(' ');
+  var STOPS = {}; STOP.forEach(function (w) { STOPS[w] = 1; });
+  function norm(w) {
+    w = w.toLowerCase();
+    if (w.length > 4 && /ies$/.test(w)) return w.slice(0, -3) + 'y';
+    if (w.length > 3 && /(ses|xes|zes|ches|shes)$/.test(w)) return w.slice(0, -2);
+    if (w.length > 3 && /s$/.test(w) && !/ss$/.test(w)) return w.slice(0, -1);
+    if (w.length > 5 && /ing$/.test(w)) return w.slice(0, -3);
+    if (w.length > 4 && /ed$/.test(w)) return w.slice(0, -2);
+    return w;
+  }
+  function tok(s) {
+    var out = [], m = String(s || '').toLowerCase().match(/[a-z0-9][a-z0-9.'-]*/g) || [];
+    for (var i = 0; i < m.length; i++) {
+      var w = m[i].replace(/[.'-]+$/, '');
+      if (!w || STOPS[w] || w.length < 2) continue;
+      out.push(norm(w));
+    }
+    return out;
+  }
+  function buildBM(docs) {
+    var N = docs.length, df = {}, tf = new Array(N), len = new Array(N), sum = 0;
+    for (var i = 0; i < N; i++) {
+      var t = tok(docs[i].x).concat(tok(docs[i].t), tok(docs[i].t), tok(docs[i].r));
+      var c = {};
+      for (var k2 = 0; k2 < t.length; k2++) c[t[k2]] = (c[t[k2]] || 0) + 1;
+      tf[i] = c; len[i] = t.length; sum += t.length;
+      for (var k in c) df[k] = (df[k] || 0) + 1;
+    }
+    return { N: N, df: df, tf: tf, len: len, avg: sum / N || 1 };
+  }
+  function search(q, limit) {
+    var terms = tok(q); if (!terms.length) return [];
+    var k1 = 1.5, b = 0.75, sc = new Array(BM.N).fill(0);
+    terms.forEach(function (t) {
+      var n = BM.df[t]; if (!n) return;
+      var idf = Math.log(1 + (BM.N - n + 0.5) / (n + 0.5));
+      for (var d = 0; d < BM.N; d++) {
+        var f = BM.tf[d][t]; if (!f) continue;
+        sc[d] += idf * (f * (k1 + 1)) / (f + k1 * (1 - b + b * BM.len[d] / BM.avg));
+      }
+    });
+    var phrase = q.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+    if (phrase.length > 8) for (var d2 = 0; d2 < BM.N; d2++)
+      if (CORPUS.docs[d2].x.toLowerCase().indexOf(phrase) >= 0) sc[d2] += 5;
+    var ord = [];
+    for (var i = 0; i < sc.length; i++) if (sc[i] > 0) ord.push([sc[i], i]);
+    ord.sort(function (a, c) { return c[0] - a[0]; });
+    return ord.slice(0, limit || 10).map(function (r) { return { s: r[0], d: CORPUS.docs[r[1]], terms: terms }; });
+  }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  // Lead sentence, then real bullets.
+  function renderAnswer(text) {
+    var lines = text.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+    var lead = [], items = [];
+    lines.forEach(function (l) {
+      var m = l.match(/^[-\u2022*]\s+(.*)$/);
+      if (m) items.push(m[1]);
+      else if (!items.length) lead.push(l);
+      else items.push(l);
+    });
+    var html = '';
+    if (lead.length) html += '<p class="lead">' + esc(lead.join(' ')) + '</p>';
+    if (items.length) html += '<ul>' + items.map(function (i) { return '<li>' + esc(i) + '</li>'; }).join('') + '</ul>';
+    return html || esc(text);
+  }
+  function hl(s, terms) {
+    var h = esc(s);
+    terms.slice().sort(function (a, b) { return b.length - a.length; }).slice(0, 10).forEach(function (t) {
+      if (t.length < 3) return;
+      var stem = t.slice(0, Math.max(4, t.length - 1)).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      h = h.replace(new RegExp('(?<![\\w>])(' + stem + '\\w*)', 'gi'), '<mark>$1</mark>');
+    });
+    return h;
+  }
+  function snip(text, terms, w) {
+    w = w || 300;
+    var flat = text.replace(/\s+/g, ' ').trim(), low = flat.toLowerCase(), best = 0, hits = -1;
+    for (var s = 0; s < Math.max(1, flat.length - w); s += 40) {
+      var win = low.slice(s, s + w), n = 0;
+      for (var i = 0; i < terms.length; i++) if (win.indexOf(terms[i].slice(0, Math.max(4, terms[i].length - 1))) >= 0) n++;
+      if (n > hits) { hits = n; best = s; }
+    }
+    var out = flat.slice(best, best + w);
+    if (best > 0) out = '... ' + out;
+    if (best + w < flat.length) out += ' ...';
+    return out;
+  }
+
+  var CSS = '' +
+  '#as-launch{position:fixed;right:14px;bottom:14px;z-index:9990;display:flex;align-items:center;gap:9px;background:#01416e;color:#fff;border:2px solid #b1d887;border-radius:999px;padding:9px 16px 9px 10px;font-family:"Segoe UI",Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 3px 14px rgba(1,23,43,.45);}' +
+  '#as-launch:hover{background:#007cba;}' +
+  '#as-launch img{width:30px;height:30px;border-radius:50%;background:#fff;object-fit:contain;padding:1px;}' +
+  '#as-panel{position:fixed;inset:auto 0 0 0;max-height:88vh;z-index:9991;background:#E8F3FA;color:#01416e;border-top:3px solid #01416e;display:none;flex-direction:column;font-family:"Segoe UI",Arial,Helvetica,sans-serif;box-shadow:0 -6px 26px rgba(1,23,43,.4);}' +
+  '#as-panel.on{display:flex;}' +
+  '.as-h{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#01416e;color:#b1d887;padding:10px 14px;font-size:13px;font-weight:700;letter-spacing:.04em;}' +
+  '.as-h button{background:none;border:none;color:#bfe9f4;font-size:22px;line-height:1;cursor:pointer;}' +
+  '.as-b{overflow:auto;padding:12px 14px 20px;}' +
+  '.as-wrap{max-width:820px;margin:0 auto;}' +
+  '#as-q{width:100%;min-height:62px;padding:11px;border:2px solid #01416e;border-radius:6px;font-family:inherit;font-size:16px;resize:vertical;}' +
+  '#as-q:focus{outline:none;border-color:#007cba;}' +
+  '.as-row{display:flex;align-items:center;gap:14px;margin-top:12px;flex-wrap:wrap;}' +
+  '#as-search{flex:1 1 220px;background:#01416e;color:#fff;border:none;border-radius:6px;padding:15px 18px;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;}' +
+  '#as-search:hover{background:#007cba;}' +
+  '#as-ask{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;cursor:pointer;font-family:inherit;padding:0;}' +
+  '#as-ask .disc{width:76px;height:76px;border-radius:50%;overflow:hidden;background:#fff;border:3px solid #01416e;display:flex;align-items:center;justify-content:center;}' +
+  '#as-ask .disc img{width:100%;height:100%;object-fit:contain;padding:3px;}' +
+  '#as-ask .lbl{font-size:11px;font-weight:700;color:#01416e;}' +
+  '.as-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px;font-size:12px;}' +
+  '.as-chip{background:#01416e;color:#fff;border-radius:999px;padding:3px 11px;font-weight:700;letter-spacing:.04em;}' +
+  '.as-scope{background:#b1d887;color:#01416e;border-radius:999px;padding:3px 11px;font-weight:700;}' +
+  '.as-status{font-size:13px;color:#555;margin-top:12px;min-height:17px;}' +
+  '.as-ans{background:#fff;border:2px solid #b1d887;border-left:8px solid #b1d887;padding:14px;margin-top:12px;display:none;}' +
+  '.as-ans h4{margin:0 0 7px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;}' +
+  '.as-ans .body{font-size:15px;line-height:1.6;}' +
+  '.as-ans .lead{font-size:16.5px;font-weight:700;line-height:1.5;margin:0 0 10px;}' +
+  '.as-ans ul{margin:0;padding-left:20px;}' +
+  '.as-ans li{margin:7px 0;line-height:1.6;}' +
+  '.as-ans .who{font-size:11px;color:#666;margin-top:9px;}' +
+  '.as-res{background:#fff;border:2px solid #bfe9f4;border-left:6px solid #007cba;padding:11px 13px;margin-top:9px;}' +
+  '.as-res .t{font-size:13px;font-weight:700;}' +
+  '.as-res .r{font-size:11px;font-weight:700;color:#007cba;margin-top:2px;}' +
+  '.as-res .sn{font-size:13.5px;line-height:1.55;color:#333;margin-top:6px;}' +
+  '.as-res mark{background:#b1d887;padding:0 2px;}';
+
+  var HTML = '' +
+  '<div class="as-h"><span id="as-title">SEARCH THIS SECTION</span><button type="button" id="as-x" aria-label="Close">&times;</button></div>' +
+  '<div class="as-b"><div class="as-wrap">' +
+  '<textarea id="as-q" placeholder="Ask about this section" aria-label="Your question"></textarea>' +
+  '<div class="as-row">' +
+    '<button id="as-search" type="button">Offline Search</button>' +
+    '<button id="as-ask" type="button" title="Ask Pualani"><span class="disc"><img src="/assets/pualani-2001.png" alt=""></span><span class="lbl">Ask Pualani</span></button>' +
+  '</div>' +
+  '<div class="as-chips" id="as-chips"></div>' +
+  '<div class="as-status" id="as-status"></div>' +
+  '<div class="as-ans" id="as-ans"><h4>Pualani says</h4><div class="body" id="as-ansb"></div><div class="who" id="as-answ"></div></div>' +
+  '<div id="as-res"></div>' +
+  '</div></div>';
+
+  function load() {
+    if (LOADING) return LOADING;
+    // A failed load used to stay cached in LOADING, so one dropped packet
+    // killed search for the life of the page. Clear it on failure and retry.
+    LOADING = fetch('/corpus/' + KEY + '.json').then(function (r) {
+      if (!r.ok) throw new Error('corpus ' + r.status);
+      return r.json();
+    }).then(function (j) {
+      CORPUS = j; BM = buildBM(j.docs);
+      el('as-title').textContent = (j.title || 'THIS SECTION').toUpperCase();
+      return j;
+    }).catch(function (e) { LOADING = null; throw e; });
+    return LOADING;
+  }
+  function status(t) { el('as-status').textContent = t; }
+  function chips() {
+    var p = window.PortalSettings ? window.PortalSettings.profile() : { seat: 'CA', fleet: 'B787', base: 'HNL' };
+    el('as-chips').innerHTML = '<span class="as-scope">' + esc(CORPUS ? CORPUS.title : 'this section') + ' only</span>' +
+      '<span class="as-chip">' + p.seat + '</span><span class="as-chip">' + p.fleet + '</span><span class="as-chip">' + p.base + '</span>' +
+      ((p.years || p.years === 0) ? '<span class="as-chip">' + p.years + ' yr</span>' : '');
+  }
+  function render(hits) {
+    var box = el('as-res'); box.innerHTML = '';
+    if (!hits.length) { status('Nothing in ' + CORPUS.title + ' matches that. This search only covers this section.'); return; }
+    status(hits.length + ' match' + (hits.length === 1 ? '' : 'es') + ' in ' + CORPUS.title + ', best first.');
+    hits.forEach(function (h) {
+      var d = document.createElement('div');
+      d.className = 'as-res';
+      d.innerHTML = '<div class="t">' + hl(h.d.t, h.terms) + '</div>' +
+        (h.d.r ? '<div class="r">' + esc(h.d.r) + '</div>' : '') +
+        '<div class="sn">' + hl(snip(h.d.x, h.terms), h.terms) + '</div>';
+      box.appendChild(d);
+    });
+  }
+  function doSearch() {
+    var q = el('as-q').value.trim();
+    if (!q) { el('as-q').focus(); return; }
+    el('as-ans').style.display = 'none';
+    status('Searching...');
+    load().then(function () { chips(); render(search(q, 10)); })
+      .catch(function (e) { status('Section index unavailable: ' + e.message + '. Tick Make Available Offline in settings while you have signal.'); });
+  }
+  function ask() {
+    var q = el('as-q').value.trim();
+    if (!q) { el('as-q').focus(); return; }
+    if (!window.PortalSettings) { status('Settings are not loaded on this page.'); return; }
+    if (!window.PortalSettings.ready()) { status('Add an API key and pick a model in settings first.'); window.PortalSettings.open(); return; }
+    status('Reading this section...');
+    load().then(function () {
+      status('');
+      chips();
+      var hits = search(q, 8);
+      render(hits);
+      if (!hits.length) return;
+      var p = window.PortalSettings.profile();
+      var today = new Date().toISOString().slice(0, 10);
+      var who = p.seat + ' on the B787 at Alaska/Hawaiian, domiciled ' + p.base +
+        (p.doh ? ', date of hire ' + p.doh + ', which is ' + p.years + ' years ' + p.months +
+          ' months of service as of today, next longevity anniversary ' + p.next : '');
+      var sys = 'Today is ' + today + '. You answer questions for a ' + who + '. ' +
+        'When a provision depends on longevity or years of service, apply the years above and say which band you used. ' +
+        'Never state a pay rate or a longevity step that is not in the excerpts. ' +
+        'You are scoped to ONE section of a study portal: ' + CORPUS.title + '. ' +
+        'Use ONLY the excerpts provided. Never use other aviation knowledge. Never invent a reference or a number. ' +
+        'ANSWER IN TLDR FORMAT: line 1 is the bottom line in one sentence under 20 words, then 2 to 5 one-line bullets under 18 words each, ' +
+        'each bullet ending with its reference in parentheses. No preamble, no closing summary, no em dashes, no run-on sentences. ' +
+        'Numbers carry units and the condition they apply to. ' +
+        'If the excerpts do not settle it, line 1 is: Not in this section. Then one bullet saying where to look.';
+      var ctx = hits.map(function (h, i) {
+        return '[' + (i + 1) + '] ' + h.d.t + (h.d.r ? ' (' + h.d.r + ')' : '') + '\n' + h.d.x.slice(0, 2600);
+      }).join('\n\n');
+      var user = 'Question: ' + q + '\n\nExcerpts from ' + CORPUS.title + ':\n\n' + ctx;
+      el('as-ans').style.display = 'block';
+      el('as-ansb').textContent = 'Thinking...';
+      el('as-answ').textContent = window.PortalSettings.modelLabel() + ' · ' + CORPUS.title + ' only · ' +
+        p.seat + ' · B787 · ' + p.base + (p.longevity ? ' · ' + p.longevity : '');
+      window.PortalSettings.ask(sys, user).then(function (txt) {
+        var body = (txt || '').trim();
+        if (body) { el('as-ansb').innerHTML = renderAnswer(body); }
+        else { el('as-ansb').textContent = 'Empty response.'; }
+      }).catch(function (e) { el('as-ansb').textContent = 'Could not reach the model. ' + e.message; });
+    }).catch(function (e) {
+      // Without this the button did nothing at all when the corpus failed:
+      // no spinner, no message, just an unhandled rejection in the console.
+      status('Could not load this section. ' + (e && e.message ? e.message : ''));
+    });
+  }
+  function togglePanel(on) {
+    var p = el('as-panel');
+    var open = on === undefined ? !p.classList.contains('on') : on;
+    p.classList.toggle('on', open);
+    if (open) { load().then(chips).catch(function () {}); el('as-q').focus(); }
+  }
+  function updateAsk() {
+    el('as-ask').style.display = navigator.onLine ? '' : 'none';
+  }
+  function mount() {
+    var st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);
+    var b = document.createElement('button');
+    b.id = 'as-launch'; b.type = 'button';
+    b.innerHTML = '<img src="/assets/pualani-2001.png" alt=""><span>Search this section</span>';
+    document.body.appendChild(b);
+    var p = document.createElement('div'); p.id = 'as-panel'; p.innerHTML = HTML;
+    document.body.appendChild(p);
+    b.addEventListener('click', function () { togglePanel(); });
+    el('as-x').addEventListener('click', function () { togglePanel(false); });
+    el('as-search').addEventListener('click', doSearch);
+    el('as-ask').addEventListener('click', ask);
+    // Keys typed inside the widget belong to the widget. Pages like triggers,
+    // flows and the quizzes bind Space, K and R to document, so without this a
+    // space bar in the question box advances the card instead of typing.
+    function inWidget(t) {
+      if (!t || !t.closest || !t.closest('#as-panel')) return false;
+      var tag = (t.tagName || '').toUpperCase();
+      return tag === 'INPUT' || tag === 'TEXTAREA' || t.isContentEditable === true;
+    }
+    ['keydown', 'keypress', 'keyup'].forEach(function (type) {
+      window.addEventListener(type, function (e) {
+        if (!inWidget(e.target)) return;
+        if (type === 'keydown') {
+          if (e.key === 'Escape') { e.preventDefault(); togglePanel(false); }
+          else if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); doSearch(); }
+        }
+        e.stopPropagation();
+      }, true);
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') togglePanel(false); });
+    window.addEventListener('online', updateAsk);
+    window.addEventListener('offline', updateAsk);
+    updateAsk();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);
+  else mount();
+})();

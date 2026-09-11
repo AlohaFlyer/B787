@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>B787 Limit or Bust</title>
+<style>
+:root{--bg:#01172b;--panel:#062b46;--panel2:#0a3556;--line:#13486e;--ink:#eaf3fb;--muted:#8fb3cf;
+ --mid:#01426A;--atlas:#0074C8;--breeze:#00C7E6;--green:#C0E585;--amber:#f2a65a;--red:#ff6b6b;
+ --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px 60px}
+.wrap{width:100%;max-width:640px}
+header{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px;gap:12px}
+h1{font-size:15px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin:0}
+h1 .sub{color:var(--breeze);font-weight:600}
+.src{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.hud{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:13px;color:var(--muted);margin-bottom:12px;gap:10px;flex-wrap:wrap}
+.hud .lives{font-size:16px;letter-spacing:2px}
+.hud b{color:var(--ink)}
+.hud .streak{color:var(--amber)}
+.tbar{height:6px;background:var(--panel2);border-radius:3px;overflow:hidden;margin-bottom:14px}
+.tfill{height:100%;width:100%;background:var(--green);transition:width .1s linear}
+.tfill.warn{background:var(--amber)} .tfill.crit{background:var(--red)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:26px 22px;min-height:190px;display:flex;flex-direction:column;justify-content:center;gap:10px;text-align:center}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.scn{font-size:26px;line-height:1.25;font-weight:700}
+.scn .val{color:var(--breeze)}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+button{font-family:var(--sans);font-size:17px;font-weight:700;cursor:pointer;border-radius:9px;padding:18px 12px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);transition:.1s}
+button:hover{border-color:var(--breeze)} button:active{transform:translateY(1px)}
+.legal{border-color:var(--green);color:var(--green)} .legal:hover{background:rgba(192,229,133,.14)}
+.nogo{border-color:var(--red);color:var(--red)} .nogo:hover{background:rgba(255,107,107,.14)}
+.feed{min-height:48px;margin-top:14px;text-align:center;font-size:13.5px;line-height:1.45}
+.feed .ok{color:var(--green);font-weight:700} .feed .no{color:var(--red);font-weight:700}
+.feed .lim{color:var(--ink)} .feed .ref{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.hint{font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;margin-top:16px}
+.over{text-align:center;padding:30px 16px}
+.over .big{font-family:var(--mono);font-size:52px;color:var(--green);font-weight:700}
+.over .lbl{color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.over .best{color:var(--amber);font-family:var(--mono);font-size:13px;margin:10px 0 22px}
+.start{background:var(--atlas);color:#fff;border-color:var(--atlas);font-size:16px;padding:14px 26px}
+@media(max-width:480px){.scn{font-size:21px}}
+</style><style>
+.ps-homebar{align-self:stretch;width:100%;box-sizing:border-box;padding:8px 0 0 10px;flex:0 0 auto;text-align:left;}
+.ps-home{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;background:#fff;border:2px solid #01416e;color:#01416e;text-decoration:none;box-shadow:0 1px 4px rgba(1,23,43,.2);transition:background .12s,color .12s;-webkit-tap-highlight-color:transparent;}
+.ps-home:hover,.ps-home:focus-visible{background:#01416e;color:#fff;}
+.ps-home:focus{outline:none;}
+.ps-home svg{display:block;}
+@media (max-width:480px){.ps-homebar{padding:6px 0 0 8px;}.ps-home{width:40px;height:40px;}}
+</style>
+<script>
+/* Storage access throws outright in some private-browsing and embedded-webview
+   contexts. These pages read localStorage at the top level of their inline
+   script, so an exception there aborted the whole script and the page rendered
+   inert. This shim keeps the API shape and degrades to in-memory. */
+(function () {
+  try { var t = '__t'; window.localStorage.setItem(t, t); window.localStorage.removeItem(t); return; }
+  catch (e) {}
+  var mem = {};
+  try {
+    Object.defineProperty(window, 'localStorage', {
+      configurable: true,
+      value: {
+        getItem: function (k) { return Object.prototype.hasOwnProperty.call(mem, k) ? mem[k] : null; },
+        setItem: function (k, v) { mem[k] = String(v); },
+        removeItem: function (k) { delete mem[k]; },
+        clear: function () { mem = {}; },
+        key: function (i) { return Object.keys(mem)[i] || null; },
+        get length() { return Object.keys(mem).length; }
+      }
+    });
+  } catch (e) {}
+})();
+</script>
+</head>
+<body>
+<div class="ps-homebar"><a class="ps-home" href="/index.html" title="B787 Study Portal" aria-label="B787 Study Portal"><svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true" focusable="false"><path d="M3 11.3 12 4l9 7.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.7 10.1v9.4h12.6v-9.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 19.5v-5.1h4v5.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+
+<div class="wrap">
+ <header><h1>Limit or Bust <span class="sub">// Go / No-Go</span></h1><span class="src">FCOM L.10 &middot; FOM 9.2</span></header>
+ <div id="app"></div>
+ <div class="hint">LEGAL = within limits &nbsp;&middot;&nbsp; NO-GO = exceeds or prohibited &nbsp;&middot;&nbsp; &larr; legal &nbsp; &rarr; no-go &nbsp;&middot;&nbsp; beat the clock</div>
+</div>
+<script>
+const NUM=[
+ {p:"Takeoff/landing tailwind",v:15,u:"kt",k:"max",ref:"FCOM L.10.2",step:1,spread:7},
+ {p:"HUD takeoff headwind",v:25,u:"kt",k:"max",ref:"FCOM L.10.9",step:1,spread:8},
+ {p:"HUD takeoff tailwind",v:15,u:"kt",k:"max",ref:"FCOM L.10.9",step:1,spread:7},
+ {p:"HUD takeoff crosswind",v:20,u:"kt",k:"max",ref:"FCOM L.10.9",step:1,spread:8},
+ {p:"Autoland headwind",v:25,u:"kt",k:"max",ref:"FCOM L.10.9",step:1,spread:8},
+ {p:"Autoland tailwind",v:15,u:"kt",k:"max",ref:"FCOM L.10.9",step:1,spread:7},
+ {p:"Autoland crosswind, CAT I",v:25,u:"kt",k:"max",ref:"FCOM L.10.9",step:1,spread:8},
+ {p:"Autoland crosswind, CAT II/III",v:15,u:"kt",k:"max",ref:"FCOM L.10.9",step:1,spread:7},
+ {p:"Autoland max glideslope angle",v:3.25,u:"deg",k:"max",ref:"FCOM L.10.9",step:0.25,spread:1,dec:2},
+ {p:"Autoland min glideslope angle",v:2.5,u:"deg",k:"min",ref:"FCOM L.10.9",step:0.25,spread:1,dec:2},
+ {p:"Autoland max airport field elevation",v:8400,u:"ft",k:"max",ref:"FCOM L.10.8",step:200,spread:1400},
+ {p:"AP min engage altitude after takeoff",v:200,u:"ft AGL",k:"min",ref:"FCOM L.10.8",step:50,spread:150},
+ {p:"Max operating altitude",v:43100,u:"ft",k:"max",ref:"FCOM L.10.2",step:100,spread:2200},
+ {p:"Max takeoff/landing altitude",v:14000,u:"ft",k:"max",ref:"FCOM L.10.2",step:500,spread:3000},
+ {p:"Oil temperature for engine start",v:-40,u:"deg C",k:"min",ref:"FCOM L.10.10",step:5,spread:30},
+ {p:"Max tank fuel temp at takeoff (Jet A)",v:49,u:"deg C",k:"max",ref:"FCOM L.10.11",step:3,spread:21},
+ {p:"Max altitude with flaps extended",v:20000,u:"ft",k:"max",ref:"FCOM L.10.10",step:1000,spread:7000},
+ {p:"Runway slope",v:2,u:"%",k:"max",ref:"FCOM L.10.2",step:0.5,spread:2,dec:1},
+ {p:"Steady-state wind, takeoff or landing",v:50,u:"kt",k:"max",ref:"FOM 9.2.1",step:5,spread:25},
+];
+const BOOL=[
+ {p:"Operate HF radios while refueling",legal:false,ref:"FCOM L.10.2",lim:"Prohibited."},
+ {p:"Select reverse thrust in flight",legal:false,ref:"FCOM L.10.10",lim:"Prohibited."},
+ {p:"Back the airplane using reverse thrust",legal:false,ref:"FCOM L.10.10",lim:"Prohibited."},
+ {p:"Fly in RVSM airspace on the ISFD alone",legal:false,ref:"FCOM L.10.2",lim:"Prohibited - standby altimeter not RVSM-accurate."},
+ {p:"Use FLCH on final approach below 1,000 ft AFE",legal:false,ref:"FCOM L.10.9",lim:"Do not use below 1,000 ft AFE."},
+ {p:"Take off in secondary or direct flight control mode",legal:false,ref:"FCOM L.10.10",lim:"Takeoff only in normal flight control mode."},
+ {p:"Use the terrain display for navigation",legal:false,ref:"FCOM L.10.11",lim:"Do not use terrain display for navigation."},
+ {p:"Operate weather radar in a hangar (normal mode)",legal:false,ref:"FCOM L.10.3",lim:"Avoid (test mode is exempt)."},
+ {p:"Autoland with one engine inoperative",legal:true,ref:"FCOM L.10.9",lim:"Allowed (flaps 20/25/30, LAND 2 or 3)."},
+ {p:"Autoland using flaps 25",legal:true,ref:"FCOM L.10.9",lim:"Allowed (flaps 20, 25, or 30)."},
+ {p:"Weather radar test mode while in a hangar",legal:true,ref:"FCOM L.10.3",lim:"Allowed - test mode is exempt."},
+];
+let lives,score,streak,best=+(localStorage.getItem('lob_best')||0),cur,timer,tleft,TMAX=8000,locked;
+const app=document.getElementById('app');
+const ri=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+function gen(){
+ const wantLegal=Math.random()<0.5;
+ if(Math.random()<0.6){const it=NUM[ri(0,NUM.length-1)];const dec=it.dec||0;const ms=Math.max(1,Math.round(it.spread/it.step));const k=ri(1,ms);
+  const sign=(it.k==='max')?(wantLegal?-1:1):(wantLegal?1:-1);
+  const t=+(it.v+sign*k*it.step).toFixed(dec);
+  const legal= it.k==='max'? t<=it.v : t>=it.v;
+  return {prompt:`${it.p}:`,val:`${t} ${it.u}`,legal,ref:it.ref,lim:`${it.k==='max'?'Max':'Min'} ${it.v} ${it.u}.`};}
+ const pool=BOOL.filter(b=>b.legal===wantLegal);const b=pool[ri(0,pool.length-1)];
+ return {prompt:b.p+"?",val:"",legal:b.legal,ref:b.ref,lim:b.lim};
+}
+function hud(){return `<div class="hud"><span class="lives">${'♥'.repeat(lives)}<span style="color:#234">${'♥'.repeat(3-lives)}</span></span><span>score <b>${score}</b> &middot; <span class="streak">streak ${streak}</span></span><span>best <b>${best}</b></span></div>`;}
+function round(){
+ cur=gen();locked=false;tleft=TMAX;
+ app.innerHTML=hud()+`<div class="tbar"><div class="tfill" id="tf"></div></div>
+  <div class="card"><div class="tag">${cur.val? 'Within limits?':'Permitted?'}</div>
+  <div class="scn">${cur.prompt}${cur.val?` <span class="val">${cur.val}</span>`:''}</div></div>
+  <div class="btns"><button class="legal" onclick="ans(true)">LEGAL</button><button class="nogo" onclick="ans(false)">NO-GO</button></div>
+  <div class="feed" id="feed"></div>`;
+ const tf=document.getElementById('tf');
+ clearInterval(timer);const t0=Date.now();
+ timer=setInterval(()=>{tleft=TMAX-(Date.now()-t0);let pct=Math.max(0,tleft/TMAX*100);tf.style.width=pct+'%';
+  tf.className='tfill'+(pct<50?' warn':'')+(pct<22?' crit':'');
+  if(tleft<=0){clearInterval(timer);ans(null);}},60);
+}
+function ans(choice){
+ if(locked)return;locked=true;clearInterval(timer);
+ const correct = choice!==null && choice===cur.legal;
+ const fb=document.getElementById('feed');
+ if(correct){score++;streak++;if(score>best){best=score;localStorage.setItem('lob_best',best);}
+  fb.innerHTML=`<span class="ok">CORRECT</span> &nbsp;<span class="ref">${cur.ref}</span>`;
+  setTimeout(round,650);
+ }else{lives--;streak=0;
+  const verdict=cur.legal?'<span class="ok">LEGAL</span>':'<span class="no">NO-GO</span>';
+  fb.innerHTML=`<div>${choice===null?'<span class="no">TIME</span>':'<span class="no">WRONG</span>'} &middot; ${verdict}</div><div class="lim">${cur.lim}</div><div class="ref">${cur.ref}</div>`;
+  document.querySelectorAll('.btns button').forEach(b=>b.disabled=true);
+  setTimeout(()=> lives<=0?over():round(),1600);
+ }
+}
+function over(){
+ app.innerHTML=`<div class="card"><div class="over"><div class="big">${score}</div><div class="lbl">calls correct</div>
+  <div class="best">best ${best} &middot; longest streak this run was tracked live</div>
+  <button class="start" onclick="startGame()">Play again</button></div></div>`;
+}
+function startGame(){lives=3;score=0;streak=0;round();}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='l'||e.key==='L'){if(!locked)ans(true);}else if(e.key==='ArrowRight'||e.key==='n'||e.key==='N'){if(!locked)ans(false);}});
+function intro(){app.innerHTML=`<div class="card"><div class="over"><div class="lbl" style="margin-bottom:6px">Snap judgment, FCOM L.10 limits</div>
+ <div class="scn" style="font-size:20px;margin:6px 0 4px">Legal or No-Go?</div>
+ <div class="src" style="margin:8px 0 20px;color:#8fb3cf">3 lives &middot; ${TMAX/1000}s per call &middot; build a streak</div>
+ <button class="start" onclick="startGame()">Start</button>${best?`<div class="best">best ${best}</div>`:''}</div></div>`;}
+intro();
+</script>
+<footer style="width:100%;max-width:980px;display:flex;flex-direction:column;align-items:center;gap:8px;margin:28px auto 0;">
+<img src="B787_night.jpg" alt="Boeing 787" style="width:380px;max-width:60%;height:auto;border-radius:6px;">
+<a href="mailto:ryan.pettit@alaskaair.com?subject=B787%20Study%20Portal%20-%20Limit%20or%20Bust" style="font-size:11px;color:#b1d887;font-family:inherit;text-decoration:none;">ryan.pettit@alaskaair.com</a>
+<div style="width:100%;text-align:right;font-size:11px;color:#b1d887;font-family:inherit;">Ver 1.4</div>
+</footer>
+<script src="/portal-settings.js" defer></script>
+<script src="/assist.js" defer></script>
+</body></html>

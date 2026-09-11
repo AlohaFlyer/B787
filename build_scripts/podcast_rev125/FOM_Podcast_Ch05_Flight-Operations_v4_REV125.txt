@@ -1,0 +1,230 @@
+787 Flight Deck Notes — FOM Series
+Chapter 5: Flight Operations
+
+Chester: [warm] Welcome back to 787 Flight Deck Notes, the FOM series where three slightly over-caffeinated pilots try to make a manual sound like a conversation you'd actually want to have. I'm Chester, coming to you from Seattle, where it is raining sideways and the coffee is the only thing keeping the terminal lit.
+
+Pualani: [excited] And I'm Pualani — that's poo-ah-LAH-nee for the text-to-speech gremlins in the back — coming at you from Honolulu with aloha and a pocket absolutely stuffed with mnemonics. Today is the big one, folks. Chapter 5, Flight Operations. Gate to gate. A hundred and twenty-six pages of pure, uncut checkride bait.
+
+Otto: [dry] And I'm Otto. A hundred and twenty-six pages. Sweet as. I brought snacks, a thermos, and expectations set so low they're taxiing.
+
+Chester: [laughs] Otto's our resident skeptic. If a number's wrong, he finds it, usually before I finish the sentence.
+
+Otto: [deadpan] I'd like to reassure everyone up front. I have the aircraft. Everything is under control. Like the autopilot in Airplane! — smooth, dependable, and, if you look closely, may or may not be partially inflatable.
+
+Pualani: [laughs] Otto the autopilot. Ladies and gentlemen, he's going to do this the entire episode.
+
+Otto: [dry] I'm going to do this until I gently deflate over the Pacific.
+
+Chester: [warm] Here's the plan: cold open at the gate, we fly the whole trip together, we tell some stories from the line, and we recap at the end. Pua, set the stage.
+
+Pualani: [warm] Okay. Chapter 5 is the entire flight, in order. Preflight, taxi, takeoff, climb, cruise, descent, approach, landing, block-in. We're gonna hit the high-yield stuff — the numbers that show up on a check and the ones your check airman loves to slide into a scenario when you least expect it. And we start where the airplane starts. The gate.
+
+Chester: [serious] Right. FOM 5.1.8.1, the APU. Here's the testable bit, word for word: an APU is considered to have started successfully on any one of three start attempts. And it is considered failed to start after three consecutive start attempt failures — or when fleet-specific procedures preclude subsequent attempts.
+
+Otto: [dry] Three strikes. Even the APU gets three swings before the dugout.
+
+Pualani: [excited] Ooh — that's memory aid number one, right out of the gate. "APU gets three swings." One good start out of three, you're golden. Three consecutive whiffs, it failed, and you write it up in the Maintenance Logbook.
+
+Chester: [warm] And a neighbor to that one, FOM 5.1.7 — doors. Doors shall be armed for any surface movement, including all pushbacks, taxi, and towing. Any surface movement. Not just the takeoff roll.
+
+Otto: [serious] That's a good one to tattoo on the inside of your eyelids. If the airplane is rolling on the ground with people on board, those doors are armed. Full stop. And you make sure the flight attendants have adequate time and notice to secure the cabin before you move.
+
+Pualani: [warm] While we're in the 5.1 general section — the crew rest facility, FOM 5.1.23.1. On the 787 that's the Overhead Flight Crew Rest. The rule: it must not be occupied from pushback to 10,000 feet AFE, and from 45 minutes prior to landing to aircraft block-in.
+
+Otto: [dry] So the window is: wheels-up-ish to forty-five-out. Bookended. Kind of like this podcast — nothing of value happens at the start or the end.
+
+Chester: [laughs] Rude, and accurate.
+
+Chester: [warm] One more general-section item that is pure widebody — FOM 5.1.3, narrow runways. A narrow runway is a nominal paved width less than 100 feet — that's 30 meters. And on the 787, takeoff and landing are not authorized on any narrow runway. Period.
+
+Pualani: [excited] "Under a hundred, we don't run it." The 787 needs its elbow room.
+
+Otto: [dry] Less than a hundred feet wide, the widebody stays home and pouts. I respect it. I too refuse to operate in tight spaces.
+
+Chester: [warm] Before we push, one for the fancy-approach nerds, since it lives up here in the 5.1 section — RNP AR, FOM 5.1.4.1. These look like RNAV GPS approaches but with two notable differences: RNP values of 0.3 or less, and Radius to Fix legs — the RF legs. Both the crew and the aircraft have to be certified for them.
+
+Pualani: [serious] And the prohibition, FOM 5.1.4.3 — the use of V/S mode on the final approach is prohibited. So on those, no vertical-speed mode down final. Keep your paws off it.
+
+Otto: [dry] Point-three or less, and curved RF legs. If it's got a curve and a tiny number, treat it like it's radioactive. And no V/S. We clear? Sweet.
+
+Chester: [warm] Alright. Push and start's done, doors armed, APU behaved on swing number two. Let's taxi. FOM 5.3.1, short and absolute: taxi operations are prohibited when braking action is reported as NIL by the airport or another aircraft. NIL braking, you do not taxi. Not "gently." Not at all.
+
+Pualani: [serious] And the callout culture — FOM 5.3.4.1, runway awareness. Dual acknowledgment is required for five clearances. You ready? Runway Crossing, Hold Short, Line Up and Wait, Cleared for Takeoff, and Cleared to Land.
+
+Otto: [dry] Five. Both pilots say it out loud. It's the one corner of aviation where repeating yourself is not annoying, it's mandatory. My family should be so lucky.
+
+Chester: [warm] And here comes a Top Gun moment — FOM 5.3.11, low visibility taxi. Restricted visibility includes dense fog, heavy precipitation, or any time the RVR is less than 1200. And the rule is explicit: during low visibility operations, the Captain must taxi the aircraft.
+
+Pualani: [excited] So no, Maverick, you don't get to buzz the tower, and you don't get to taxi in the fog. Below the numbers, that's the Captain's airplane.
+
+Otto: [dry] Chester's been holding that Maverick line since Monday. I watched it approach from ten miles out — which, ironically, is a lot better than 1200 RVR.
+
+Chester: [laughs] Guilty as charged. And Pua, tell them what you do when you actually can't see, because the FOM is specific.
+
+Pualani: [serious] Right — when taxi visibility is marginal, you perform checklists with the aircraft stopped and the parking brake set. You devote maximum attention to scanning outside, all exterior lights on except landing lights, and you do not perform any duties unrelated to taxiing until you're stopped with the brake set. That's the whole low-vis taxi discipline in one breath.
+
+Otto: [dry] Story time, actually. Chester, you want to tell the one about the FO who tried to run the taxi checklist while rolling in the fog up at Anchorage?
+
+Chester: [warm] Oh, tell me about a time. So — years ago, ANC, dead of winter, ice fog rolled in off the inlet thick as chowder. RVR's sitting around nine hundred. Brand-new First Officer, IOE, sharp kid, wanted to impress. We're cleared to taxi off the gate and he starts flipping through the checklist while we're moving. And I just — [calm] — "Brakes." Stopped the airplane. Set the park brake. And I said, look: FOM 5.3.11, below twelve hundred RVR that's restricted visibility, checklists happen stopped, brake set, eyes outside. The airplane doesn't care how fast your flow is if you drive it into a taxi sign in Anchorage in January.
+
+Otto: [serious] And that's the IOE lesson right there. The manual isn't punishing you. It's the accumulated scar tissue of everyone who tried it the other way.
+
+Pualani: [warm] IOE gold. Okay — takeoff. This is where the numbers get dense, so buckle in.
+
+Pualani: [serious] FOM 5.4.1.1 — standard takeoff minimums. Defined as 1 statute mile visibility or RVR 5000 for aircraft having two engines or less. The 787 has two engines, so that's us.
+
+Chester: [serious] Then FOM 5.4.3, Captain required takeoff. Any time the visibility is less than or equal to one-quarter statute mile or 1600 RVR, the Captain makes the takeoff.
+
+Otto: [dry] Quarter mile or sixteen hundred. Below that, it's the left seat's leg. Every time. No debate, no coin flip.
+
+Pualani: [excited] Time for memory aid number two, and this one's the fleet number everybody has to carry. Takeoff alternate distance, FOM 5.4.2 — for the 787, it's 393 nautical miles.
+
+Chester: [warm] And how do we lock in 393 without inventing a number out of thin air?
+
+Pualani: [excited] "Three-nine-three, that's the seven-eight-three, for me." It rhymes if you don't examine it too closely. 787, takeoff alternate, 393 nautical miles. And that alternate's weather has to meet the same requirements as a destination alternate — it's not a lower bar just because it's up front.
+
+Otto: [dry] It does not rhyme. It commits crimes against rhyme. But I will now never forget it, and I resent you for that.
+
+Chester: [laughs] Effective mnemonics are annoying by design. Okay — the rejected takeoff, FOM 5.4.10. This one is 787-specific in the number that matters, and it comes up on every checkride.
+
+Otto: [serious] The decision to reject the takeoff shall be the Captain's. Once the command has been given to reject, the takeoff will not be continued. On the 787, an RTO initiated at greater than 80 knots requires that the flight returns to the gate and a Maintenance Logbook entry be made — regardless of the reason.
+
+Pualani: [serious] At or below 80 knots for something correctable, you might not have to go back. But above 80? "Eighty and back to the gate." And a safety report after any RTO, high speed or low.
+
+Chester: [warm] And even below 80, you consider total brake temperature limits before another takeoff. If brake energy is a concern, you write it up with the aircraft weight, reject speed, and type of braking used.
+
+Otto: [dry] Simple version: you call stopping, you're stopping. No takebacks, no "actually let's keep going." The word "stopping" is a one-way door. Unlike me, who is a two-way valve.
+
+Chester: [laughs] There it is.
+
+Pualani: [excited] Okay, we survived the runway. We're airborne. Turns after takeoff, FOM 5.5.1. When there's no procedurally defined turn point, the initial turn is normally commenced at a minimum of 400 feet AFE — to comply with TERPS obstacle criteria.
+
+Chester: [serious] With one exception: a required course or heading change of less than 15 degrees initially is considered a non-maneuvering turn by TERPS, and can be commenced below 400 feet.
+
+Otto: [dry] Under fifteen degrees, it barely counts as a turn. It's a lane change. You don't even signal.
+
+Chester: [warm] Now, cruise. And this is altimetry, so Otto, this is your Super Bowl. RVSM.
+
+Otto: [dry] I'm always awake. My eyes are merely resting. Because I am the autopilot, and I have the aircraft.
+
+Pualani: [laughs] Of course you do. Okay — FOM 5.5.6.5, enroute RVSM altitude monitoring. At initial level-off you verify all altimeters are set to 29.92 and crosscheck them. The two primary altimeters should agree within 200 feet, or a lesser value if the FCOM specifies. And you crosscheck against the standby about every hour.
+
+Chester: [serious] And the airspace itself, FOM 5.5.6.2 — RVSM is required FL290 to FL410, inclusive, with 1000 feet of vertical separation, in all the airspace we're authorized for, including oceanic. And using the standby altimeter as a primary is prohibited in RVSM airspace.
+
+Otto: [serious] Two hundred feet between the primaries. That's the number to carry. Bigger gap than that, something is wrong and you owe it a look.
+
+Chester: [warm] Which is the perfect setup — because the FOM has a whole failure branch, FOM 5.5.6.4. In the event of required RVSM equipment failure, prior to or within RVSM airspace, you notify ATC and Dispatch to coordinate a prudent course of action. ATC may not require anything, or you may be looking at a reroute or a diversion.
+
+Pualani: [excited] And Otto, tell me about a time — because I know you've got the oceanic altimeter-split story from the Haneda run, and it's a good one.
+
+Otto: [dry] I do. Honolulu to Haneda. FL350, middle of the Pacific, middle of the night, black as the inside of a cow. Quiet flight. And on the hourly crosscheck, the primaries have drifted — they're sitting more than two hundred feet apart. Now, the note in 5.5.6.5 says the difference can vary with flight level and Mach and isn't automatically a standby malfunction. But this was past two hundred. So we worked it — and one altitude-control system flagged a fault, which meant required RVSM equipment was no longer playing nice. Out over the ocean on the tracks, that is not a "reset it and hum a song" moment.
+
+Otto: [serious] So we did what 5.5.6.4 says. Notified ATC, notified Dispatch, coordinated a prudent course of action. And here's the part people forget over water — the standby is not your bailout primary. Using the standby as a primary in RVSM is prohibited. So no quietly promoting the backup and pretending you've got three good boxes.
+
+Pualani: [excited] And it turned out you'd nudged off your assigned altitude, yeah?
+
+Otto: [dry] A hair. Caught an assigned altitude deviation climbing toward 300 feet before it got there.
+
+Chester: [serious] And that flows straight into FOM 5.5.7, altitude deviation reporting. Crew safety report within 24 hours for three things: an assigned altitude deviation of 300 feet or more, an altimeter system error of 245 feet or more, or a total vertical error of 300 feet or more.
+
+Pualani: [serious] "Three, two-forty-five, three — report in twenty-four." Memory aid, no charge.
+
+Chester: [warm] And separately, the Company reports altitude-keeping errors to the FAA within 72 hours. So don't blend the two: crew report, 24 hours. Company report, 72.
+
+Otto: [dry] We filed inside twenty-four. Nobody got in trouble, because the system works when you feed it honestly. A safety report is a fire alarm, not a confession booth. Also, for the record, the autopilot was blameless. I have the aircraft.
+
+Chester: [laughs] The autopilot self-exonerates. Noted. Two more cruise items. FOM 5.5.12, oxygen. If the Captain or First Officer leaves their duty station while the aircraft is above FL410, the remaining crewmember must put on and use their oxygen mask before the other leaves, and keep it on until they return.
+
+Otto: [dry] Above four-one-zero, one pilot up and walking means the other's on the mask. Non-negotiable. It is not a suggestion, it is not "if you feel like it."
+
+Pualani: [excited] And FOM 5.5.13, enroute nav. The 787 is approved for RNP-4 operations. That's your oceanic and remote-area navigation capability, and it's a big part of why this airplane goes the places it goes — Honolulu to Tokyo, Honolulu to Sydney, Honolulu to Seoul, all the long over-water legs.
+
+Chester: [warm] Good. Holding — FOM 5.5.15. The one number everyone should have on the tip of their tongue: holding pattern protection is based on a maximum of 280 knots or Mach 0.8, whichever is lower.
+
+Pualani: [serious] "Two-eighty or point-eight, whichever's less." That's memory aid — I've lost count now. And the altitude table if you want the full set: 200 knots at or below 6000, 230 above 6000 through 14,000, and 265 above 14,000. Standard holding is right-hand turns. And you calculate holding fuel every 15 minutes.
+
+Otto: [dry] Right-hand turns. Because somebody, somewhere, once turned left, and the entire industry has been quietly apologizing ever since.
+
+Chester: [laughs] Alright. Top of descent. Pua, the big one.
+
+Pualani: [serious] FOM 5.6.5, stabilized approach. For the 787 — normally the aircraft must be aligned with the runway by 500 feet AFE. There's a 300-foot AFE alignment exception at certain airports, and where it exists, it's called out in that airport's 10-7.
+
+Chester: [serious] And the warning in the book is one sentence, all caps in spirit: do not land from an unstable approach. Either crewmember may call for a go-around under the no-fault go-around policy.
+
+Otto: [serious] No-fault. Meaning if you call it, nobody's writing you up. It's a gift the company handed you. Use it.
+
+Pualani: [warm] And I've got a "tell me about a time" for this one — a Kona arrival that went sideways. Can I take it?
+
+Chester: [warm] It's all yours.
+
+Pualani: [serious] Okay. Kona — KOA — late afternoon, that classic Big Island setup. You're descending over the lava fields, the air's still warm and bumpy coming off the black rock, and it is deceptively hard to judge your height because there's just... nothing green down there to gauge against. I'm the pilot flying. We come off the visual a touch high, a touch hot, and I'm chasing it down. And I'm watching the AFE unwind — six-fifty, six hundred — and I know the gate: aligned, on speed, configured by 500. We hit 500 and I am still fast and still settling onto centerline. Not stable.
+
+Otto: [dry] And?
+
+Pualani: [firm] And I called my own go-around. "Going around, not stable." Nobody made me. The gate made me. We came back around, let the energy bleed off, flew it into the slot, and greased it on the second try. No paperwork. No drama.
+
+Otto: [serious] And that is the whole point of no-fault. The person who calls the go-around is the professional. Nobody in that flight deck thought less of Pua. Landing out of that mess is the amateur move that ends up on the news.
+
+Chester: [warm] Beautiful. And since we're on the theme — I've got the mirror-image one, the wet-runway version. Tell me about a time. Night arrival into Seattle. SEA. Runway's wet, gusty crosswind coming off the Sound, and I'm the pilot monitoring. We break out of the muck and we're high, we're fast, and we are not lined up. And I'm watching the AFE tick down — six hundred, five-fifty — and the numbers say aligned by 500. We hit 500 and we're still crabbing back toward centerline with the speed above target. So I called it. [firm] "Go around, not stable." And you know what happened? Nothing. We went around, came back, greased it. No paperwork, no drama.
+
+Otto: [dry] Two crews, two oceans apart, same gate, same call. It's almost like the number works.
+
+Pualani: [excited] That's the whole no-fault policy in two stories. Okay — circling, FOM 5.6.10. Circling minimums are 1000 feet and 3 statute miles visibility, or the charted circling minimums, whichever is greater.
+
+Chester: [warm] And one of my favorite precision traps — FOM 5.6.15, descent below minimums. To go below DH or MDA without the runway in sight, you need one of the listed visual references distinctly visible and identifiable. But here's the trap: with only the approach lighting system in sight, a descent below 100 feet is not allowed unless the red side row bars or the red terminating bars are in sight.
+
+Otto: [dry] So the rabbit lights alone only buy you down to a hundred feet. After that, you need the red bars, or something else on the list, or you're going around.
+
+Pualani: [serious] "Red bars or bust, below one hundred." And the book adds a real warning — 91.175 does not account for terrain between the missed approach point and the runway. So you layer your own judgment on top of the reg.
+
+Chester: [serious] And it's blunt about the exit: a missed approach must be immediately executed if any of the 91.175 requirements are not met when you're operating below the DH or MDA. Immediately. Not "let's give it another second."
+
+Otto: [dry] Immediately. The word does a lot of work in that sentence.
+
+Chester: [warm] Landing policy, FOM 5.6.22.1. Touchdown shall be planned within the first 3000 feet beyond the threshold, the first third of the runway, or the Latest Touchdown Point — whichever is less. And the earliest planned touchdown shall never be less than 500 feet from the threshold.
+
+Otto: [dry] Three thousand at the far end, five hundred at the near end. Land in the box. Miss the box on either side, that's a safety report. Maverick, this is the part where "the need for speed" meets "the need to still be on the runway."
+
+Pualani: [excited] Big one — LAHSO, FOM 5.6.32.2. Land and hold short. Weather minimums: ceiling no less than 1500 feet and visibility no less than 5 statute miles.
+
+Chester: [serious] But — if a PAPI or VASI is installed and operational, you may lower that to a ceiling no less than 1000 feet and 3 statute miles. Now listen to the Rev 125 rewrite of the limitations, because two of them changed. It is prohibited on wet runways, and the tailwind on the hold short runway shall be calm — less than three knots. The old dry, non-contaminated wording is gone, the flat no-tailwind rule is gone, and the bullet about not having descended below 1000 feet AGL was deleted outright.
+
+Otto: [dry] "Fifteen hundred and five, or a thousand and three with a PAPI." And LAHSO on a wet runway is flat prohibited. That one's easy — wet means no. Calm tailwind, under three knots, is the new number to carry.
+
+Chester: [serious] Two more Rev 125 items in this chapter land right on the seven-eight-seven. First, landing performance, 5.6.22.3. The old fixed model — touchdown a thousand feet past the threshold at VREF plus gust — is now banner-tagged for the 737. Our airplane is in the group that uses TALPA guidance: a seven-second air and flare distance from fifty feet above the threshold to touchdown, and a fifteen percent safety margin applied to TOTAL landing distance, including the air distance, for both maximum manual braking and autobrake. And the touchdown point is not a fixed distance any more — it is a calculated value that moves with weight, pressure altitude, temperature, approach speed and wind.
+
+Pualani: [excited] So stop picturing a thousand-foot aim point baked into the numbers. The number moves with the day.
+
+Otto: [dry] Second one, 5.4.4. Takeoffs below five hundred RVR used to be a 737 item. Rev 125 made it seven-three-seven slash seven-eight-seven. So it is ours now — Takeoff Low Visibility Card in the PRC, and the card is now called the HGS slash HUD Takeoff Briefing Card.
+
+Pualani: [excited] And one more that lives on the 787, FOM 5.6.29 — fuel jettison. If the Captain elects to jettison, avoid dumping below 6000 feet AGL, avoid cities and towns, preferably stay over water, and avoid the jettisoned flow itself — which descends at about 500 feet per minute.
+
+Chester: [serious] You notify ATC before you start jettison and again when it's complete, and you coordinate the route, altitude, and duration. Afterward, a Pilot Report of Incident with the date, time, and approximate amount jettisoned.
+
+Otto: [dry] Six thousand AGL floor, dump over water, tell ATC twice, and do not fly back into your own fuel cloud drifting down at 500 a minute. Which, when you say it out loud, seems like advice we shouldn't have needed to write down. And yet.
+
+Chester: [warm] Alright. That's the whole trip, gate to gate. Let's recap, because that was a lot of airplane. Pua, run it.
+
+Pualani: [excited] Recap time. Gate: APU gets three swings, 5.1.8.1. Doors armed for any surface movement, 5.1.7. Crew rest empty pushback to 10,000 AFE and 45 minutes prior to landing, 5.1.23.1. Under a hundred feet wide, the 787 doesn't run it, 5.1.3.
+
+Otto: [serious] Taxi: NIL braking, no taxi, 5.3.1. Five dual-acknowledgment clearances, 5.3.4.1. Below 1200 RVR the Captain taxis and checklists happen stopped with the brake set, 5.3.11.
+
+Chester: [serious] Takeoff: standard mins 1 mile or RVR 5000, 5.4.1.1. Quarter mile or 1600 RVR, Captain's takeoff, 5.4.3. 787 takeoff alternate, 393 miles, 5.4.2. RTO above 80 knots, back to the gate, Captain's call, 5.4.10.
+
+Pualani: [warm] Enroute: initial turn 400 feet AFE, 5.5.1. RVSM primaries agree within 200 feet, 5.5.6.5. Required RVSM equipment fails, notify ATC and Dispatch, 5.5.6.4. Altitude deviation report — 300, 245, 300, within 24 hours, 5.5.7. Above FL410, remaining pilot on oxygen, 5.5.12. 787 is RNP-4, 5.5.13. Holding protection, 280 or Mach 0.8, 5.5.15.
+
+Otto: [dry] Approach: stabilized by 500 feet AFE, 5.6.5. Circling minimums, a thousand and three, 5.6.10. Approach lights alone stop you at 100 feet without the red bars, 5.6.15. Land in the box — 3000 far, 500 near, 5.6.22.1. LAHSO weather, 1500 and 5, or 1000 and 3 with a PAPI, 5.6.32.2.
+
+Chester: [warm] Memory aids to walk away with: "APU gets three swings" for the start count, and "two-eighty or point-eight, whichever's less" for holding protection. Bonus Pua-isms: "red bars or bust, below one hundred," "eighty and back to the gate," and "three, two-forty-five, three, report in twenty-four."
+
+Pualani: [excited] I gave you like six. But who's counting.
+
+Otto: [dry] Not me. I was resting my eyes. And for the record, I never once disengaged the autopilot. Everything is, and has always been, completely under control.
+
+Chester: [laughs] He's fully inflated now, folks, you can hear it. That's Chapter 5, Flight Operations. Study the numbers, fly the box, call the go-around — whether you're over the lava at Kona or over the Sound at Seattle — and don't taxi in the chowder. We'll catch you next time on 787 Flight Deck Notes.
+
+Pualani: [warm] Aloha and a hui hou, everybody.
+
+Otto: [dry] Chur. Sweet as. I have the aircraft.
+
+SOURCES: Alaska Airlines FOM Chapter 5 (Flight Operations), Rev 125, dated 7/29/26 — sections 5.1.3, 5.1.4.1, 5.1.4.3, 5.1.7, 5.1.8.1, 5.1.23.1, 5.3.1, 5.3.4.1, 5.3.11, 5.4.1.1, 5.4.2, 5.4.3, 5.4.10, 5.5.1, 5.5.6.2, 5.5.6.4, 5.5.6.5, 5.5.7, 5.5.12, 5.5.13, 5.5.15, 5.6.5, 5.6.10, 5.6.15, 5.6.22.1, 5.6.29, 5.6.32.2.

@@ -1,0 +1,202 @@
+787 Flight Deck Notes — FOM Chapter 6: ETOPS (The Big One)
+
+Pualani: [warm] Aloha, and welcome back to 787 Flight Deck Notes. I'm Pualani — poo-ah-LAH-nee — and today is THE episode. The flagship. We are pointing the Dreamliner at a whole lot of empty ocean and talking ETOPS.
+
+Chester: [excited] And I'm Chester, live from a gray, drizzly Seattle morning, second coffee already, the way Boeing intended. Flight Operations Manual Chapter 6. If it were a movie it'd be Top Gun — big, loud, everybody thinks they're Maverick.
+
+Otto: [dry] And I'm Otto. ETOPS. Some wags say it stands for Engines Turn Or Passengers Swim. The FOM does not say that, so neither do we. And yes — I'm named after the inflatable bloke in Airplane! I take it as a compliment.
+
+Pualani: [laughs] He would. Cold open, real talk. Chester, section 6.1.1 — the definition. This is the number the whole chapter hangs on.
+
+Chester: [serious] Straight out of FOM 6.1.1: an ETOPS operation is a flight over a route that contains a point farther than 60 minutes of flying time from an adequate airport — at an approved one-engine-inoperative cruise speed, under standard conditions, in still air. Sixty minutes is the doorway. Cross it and you're in ETOPS world. The ICAO crowd calls the exact same thing EDTO.
+
+Otto: [dry] Note what that 60 minutes is NOT. It assumes one donk's already gone quiet and you're plodding on the survivor. Sixty minutes on ONE engine. That's the ruler.
+
+Pualani: [warm] And there's a sneaky second number people blend into the first. Section 6.1.2 — Extended Over-Water Operation. That's an operation over water more than 50 nautical miles from the nearest shoreline. Different idea, different number. So write it down — MEMORY AID number one: "Sixty in the air, fifty to the shore." Sixty minutes flips you into ETOPS; fifty nautical miles makes it extended over-water.
+
+Pualani: [warm] Now the soul of the chapter. Section 6.1.3. The philosophy. Chester, this is your Boeing-pride moment.
+
+Chester: [serious] Quote: "The premise of ETOPS is to preclude a diversion and, if it were to occur, to have programs in place to protect the diversion." Preclude and Protect. Preclude is every layer that keeps the diversion from ever happening — aircraft and propulsion design, testing, maintenance procedures, flight ops procedures. Protect is every layer that carries you through if it happens anyway — designated alternates monitored the whole flight, increased communication requirements, and enhanced dispatch fuel.
+
+Otto: [dry] Preclude and Protect. The buddy system for airliners. MEMORY AID number two — the two P's. If you can remember "please and thank you," you can remember Preclude and Protect.
+
+Pualani: [warm] And bruddah, that's pop-quiz question two — "which is true about Preclude and Protect," answer all-of-the-above: Preclude is the maintenance-and-planning side, Protect is the airports, weather, firefighting, passenger handling, landing performance, and fuel-to-the-alternate side. Same two P's, dressed up.
+
+Otto: [dry] One more Rev 125 note while we're here. 6.2.1 got broader. Any regular, provisional, refueling, or alternate airport may be used as an adequate airport, provided it is listed in 8.1.3, Authorized Airports. The old wording pointed at an FAA-approved list. Now it's the one list.
+
+Chester: [serious] Let's teach the preflight, section 6.2. First, 6.2.1 — the adequate airport. The number pilots love: a turbojet must be able to stop within 60 percent of the effective runway length, from a point 50 feet above the intersection of the obstruction clearance plane and the runway. And it either meets Part 139 Subpart D — excluding aircraft rescue and firefighting — or it's an active, operational military airport.
+
+Otto: [dry] And read the CAUTION at the top of 6.2.1 — it's the whole trick. An adequate airport may NOT be appropriate for a diversion. No firefighting worth the name, might be socked in. Adequate is a paperwork bar, not a promise of a warm welcome and a cup of tea.
+
+Pualani: [warm] Which walks us up to 6.2.2 — the ETOPS ALTERNATE, higher bar. Chester, the firefighting piece — pop-quiz gold.
+
+Chester: [serious] Section 6.2.2. Each designated ETOPS alternate must have rescue and firefighting service — RFFS — equivalent to ICAO Category 4 or higher, and it meets a 30-minute response time. That's pop-quiz 25, and the answer's both.
+
+Otto: [dry] And the gotcha in the Note. The 30-minute response time does NOT mean fire trucks idling for thirty minutes waiting on you at Pago Pago. It means the equipment must be available on ARRIVAL of the diverting airplane and stay on station as long as needed. Available when YOU get there.
+
+Pualani: [warm] And who clears all that? The Dispatcher, per 6.2.2 — and this changed in Rev 125 — the alternate must be an adequate airport listed in 8.1.3, Authorized Airports, not out of an OpSpec list any more. The weather at or above the ETOPS-alternate minima in OpSpec C055 across the whole earliest-to-latest landing window, and the field reports must say a safe landing can be made. That's pop-quiz 24 — all of the above.
+
+Chester: [excited] Okay. The big one. Section 6.2.3. The ETOPS Area of Operation. This is where the orange rings live. Third coffee.
+
+Pualani: [warm] My favorite part. The area of operation begins beyond 60 minutes from the adequate airport, and it extends out to the Maximum Diversion Time — the MDT — from your planned ETOPS alternates. And for us, straight out of 6.2.3, the authorized MDT is 180 minutes — three hours on a single engine, the fence line of your sandbox. That's pop-quiz question one.
+
+Chester: [serious] But that 180 isn't a blank check. No airport can be an ETOPS alternate if the time to fly there would exceed the approved time for the aircraft's most limiting ETOPS-significant system — including the most limiting fire-suppression time for the cargo compartments required to have it — minus 15 minutes.
+
+Otto: [dry] And here's where you attribute honestly. The FOM gives you the minus-15 RULE. But which system is most limiting on the 787, and why 15 — that's the 787 AFM talking, not Chapter 6.
+
+Chester: [serious] Right. Per the 787 AFM, the cargo fire suppression system is the 787's most limiting ETOPS-significant system. In certification it must deliver at least the MDT plus 15 minutes of suppression — so for a 180 airplane, that bottle covers 195 minutes. The FOM then draws the rings at system time MINUS 15, landing you back at your diversion time. The extra fifteen is deliberate slack.
+
+Otto: [dry] MEMORY AID number three — "minus fifteen, always the buffer." The rings are drawn in standard conditions and still air, which never exist, so the fifteen minutes is the honest margin for the real world.
+
+Pualani: [warm] And 6.2.3 tosses in one more curveball — occasionally, MEL-deferred items may limit the MDT to 120 minutes. So the diversion time from any point along the route has to be no more than 120 OR 180 minutes, as dispatched. Not always 180 — read the release, assume nothing.
+
+Chester: [excited] Now the numbers that print money on the oral — Table 6.2.3(1), 787 line. The Dreamliner flies the rings at point-eight-four Mach, 290 knots indicated. Four hundred ten nautical miles at 60 minutes. Eight hundred six at 120. Twelve hundred seven at 180.
+
+Otto: [dry] MEMORY AID number four — "four-ten, eight-oh-six, twelve-oh-seven." The 787's personal set of orange rings. Heaps of range on that carbon-fibre beauty. She's alright, that one.
+
+Pualani: [laughs] He loves her. Okay — Chester, quiz me. Where does that .84 Mach, 290 knots come from? Why THAT speed?
+
+Chester: [serious] It's the diversion-speed logic in 6.4.5 and the fleet reference data in 6.2.9. For the 787 the reference is .84 Mach over 290 knots, at a reference weight of 515,000 pounds and reference flight level 350. That single one-engine cruise speed sits closest to Maximum Range Cruise — the engine-out max-miles-per-pound speed. So the company carries the LEAST fuel on every flight while still drawing rings big enough for the routes.
+
+Pualani: [warm] Chur — a fuel decision dressed up as a speed. Faster speed, bigger rings, more fuel every flight; slower toward Max Range Cruise, smaller rings, less fuel. The 787's so efficient the small rings still cover the Pacific.
+
+Otto: [dry] And there's your Top Gun line. The temptation is Maverick — "the need for speed." But the fuel plan is built on .84 over 290, so you fly the plan first. The Captain can deviate to a faster speed like Long Range Cruise, per 6.4.5, but only AFTER assessing the emergency and considering fuel remaining. Ego doesn't get a vote until the fuel does.
+
+Chester: [serious] And a QRC nuance worth gold on a checkride. Punch ENG OUT and the jet first gives you engine-out minimum drag speed — the L-over-D max speed that minimizes altitude loss per mile in a driftdown when terrain is the worry. Great over high terrain, but it's slower than Max Range Cruise, so riding it the whole way burns more gas and more time. Once you're pointed at the alternate and the checklists are done, select company speed — CO SPD, .84 over 290 — to protect the fuel.
+
+Otto: [dry] Minimum drag saves altitude, .84 over 290 saves fuel, Long Range Cruise and faster save time. Fuel's the one you cannot cut short, so .84 over 290 is home base.
+
+Pualani: [warm] Beautiful. Section 6.2.5 — critical fuel planning. Dense. Slow down. Three scenarios for the fuel to fly to the ETOPS alternate. Chester, walk 'em.
+
+Chester: [serious] Section 6.2.5. Scenario one — immediate descent from cruise to 10,000 feet with BOTH engines operating. That's the pressurization-loss case. Scenario two — descent to the best single-engine altitude with ONE engine operating. That's the engine-failure case. Scenario three — immediate descent to 10,000 feet with ONE engine operating. That's the double whammy: depressurized AND single-engine, down low. The planning system takes the hungriest of the three.
+
+Otto: [dry] MEMORY AID number five — "both low, one high, one low." Both engines down at ten thousand, one engine up at best single-engine altitude, one engine down at ten thousand. Worst case wins the fuel.
+
+Pualani: [warm] Then, reaching the alternate, 6.2.5 adds fuel to descend to 1500 feet above the airport, hold for 15 minutes, and fly an instrument approach and landing.
+
+Otto: [dry] Fifteen minutes at fifteen hundred feet. Tidy little rhyme.
+
+Chester: [serious] And it stacks conservatism: forecast winds bumped 5 percent the pessimistic way — more headwind, less tailwind — plus adjustments for icing, engine deterioration, APU use, and any MEL or CDL fuel penalties. The icing one is a "greater of": airframe icing drag PLUS engine and wing anti-ice for 10 percent of the forecast icing time, OR anti-ice for 100 percent of it. Take the bigger number.
+
+Pualani: [warm] All of that gets compared to the flag fuel requirement, and whichever's bigger drives the release. It's measured at the CP — the critical point, the ETP — where the critical fuel gets checked.
+
+Otto: [dry] And here's a favorite line-check trap, straight from 6.3.6. Tell me about a time you thought you had to divert and didn't.
+
+Pualani: [warm] Story time — fictional, numbers real. Auckland up to Honolulu overnight, Pago Pago and Papeete our alternates, 20 minutes shy of the EEP, and the totalizer's whispering my estimated fuel at the critical point will land just UNDER the critical-fuel number on the release. New copilot goes wide-eyed. "Do we turn around?"
+
+Chester: [serious] And per 6.3.6, no. ETOPS regulations add no additional fuel requirement once in flight. Arriving at the CP at or above the critical fuel is only a DISPATCH requirement. So if you'll be a touch low at the CP, there's no requirement to divert prior to the CP for that reason alone — provided your estimated fuel at destination is still above the arrival requirements.
+
+Pualani: [warm] Exactly what I told him. We looped in Dispatch, who worked altitude, speed, and a different enroute alternate, nudged it back onto the plan, and we pressed on legal and comfortable — though 6.3.6 warns it may not always be possible.
+
+Otto: [dry] A planning gate, not an in-flight guillotine. But 6.3.6 is blunt — watch your fuel like a hawk, because a long diversion to the nearest enroute alternate is the whole reason ETOPS exists. The ocean doesn't hand out do-overs.
+
+Chester: [excited] Speaking of that critical point — the ETP. Section 6.3.7. An Equal-Time Point is where the flight time, considering wind, to each of two selected diversion destinations is equal. Because ETPs are wind-affected, a DIFFERENT ETP exists for every altitude. Alaska computes them using flight performance and winds at 10,000 feet.
+
+Otto: [dry] Ten thousand, because that's your depressurized floor. And 6.3.7 reminds you — most diversions aren't a big descent, so stay aware of which airport takes least time at or near cruise altitude, too. Keep both pictures.
+
+Pualani: [warm] Now the running gag Otto loves — the daily track scramble. Otto, set it up.
+
+Otto: [dry] Tell me about a time the track message turned into a fire drill.
+
+Pualani: [warm] Lived it. Fictional, but you'll believe it. Preflight for a mainland-to-Honolulu leg, we lean on yesterday's mental model of the oceanic tracks, feeling smug. Then the fresh organized-Pacific track message drops for the day and the picture's moved — the copilot's already half-loaded yesterday's route. We stop, reload off the CURRENT message, cross-check the lat-longs, request clearance fresh, and only THEN relax.
+
+Chester: [serious] And know the layer, because the pop quiz leans on it even though it's not IN Chapter 6. West-Coast-to-Hawaii oceanic routings live in the Central East Pacific system, and the minimum navigation spec there is RNP 10 — pop-quiz three and four. The organized Pacific tracks are built and published on a DAILY Track Definition Message. So when a question claims the organized Pacific tracks are established WEEKLY — that's FALSE. Daily message, daily picture.
+
+Otto: [dry] RNP 10 keeps you honest, but a stale track message will hang you out. Daily means daily — the Pacific reshuffles the furniture and doesn't leave a note.
+
+Pualani: [warm] Now the MEL, section 6.2.8. Otto, you live for a good exception.
+
+Otto: [dry] I do. The MEL flags ETOPS-critical items, and there's this designation — "ER or ETOPS." Per 6.2.8 it's used primarily as an EXCEPTION to a normally allowed deferred item. The remarks read: "Except for ER operations slash ETOPS, may be inoperative provided..." Translation — defer it for a domestic hop, but NOT for ETOPS. The ocean says no. And 6.2.8 is flat: these items can shrink your area of operation or preclude ETOPS entirely.
+
+Chester: [serious] Which ties to the Preclude side of maintenance — pop-quiz seventeen, all-of-the-above: ETOPS-significant systems live in the manufacturer's maintenance program, there's a dual-maintenance limitation requiring ETOPS-qualified oversight, and ETOPS parts get tracked specifically. All in section 6.5.
+
+Otto: [dry] And the reliability target behind it — pop-quiz eighteen. Per Advisory Circular 120-42B, the in-flight shutdown rate for our two-engine jet in the beyond-120-up-to-180-minute band stays under three-hundredths per thousand engine-hours. An AC 120-42B number, mind — not restated in Chapter 6 — but it's the bar the IFSD program chases. Preclude first.
+
+Pualani: [warm] Alright — the paperwork clocks, because IOE loves these. Two four-hour timers, and people fuse them and get burned. Chester?
+
+Chester: [serious] Two separate four-hour clocks. Clock one, 6.3.2 — the ETOPS Dispatch Release and Pre-Departure Check are valid four hours after the SCHEDULED DEPARTURE TIME; past that, new Pre-Departure Check and amended Dispatch Release. Clock two, 6.5.4 — the maintenance PDSC Airworthiness Release is valid four hours from the TIME IT WAS SIGNED in the logbook. Same duration, different start point.
+
+Otto: [dry] And the PDSC clock's got a boarding twist worth a story. Tell me about a time a four-hour clock nearly bit you.
+
+Chester: [serious] Fictional, numbers real. Honolulu turn — HNL's our maintenance hub — mechanic signs the ETOPS PDSC at 0400 Zulu. A cargo snag drags us; the gate agent starts boarding at 0730 Zulu; then we sit. Somebody asks, "isn't the PDSC about to expire at 0800?" Per 6.5.4 — because boarding STARTED before the four hours lapsed, the flight may continue on that PDSC, but we must notify MOC. So we called MOC through Dispatch, logged it, and went. Had boarding NOT started by 0800, it would've been invalidated and we'd need a fresh one.
+
+Otto: [dry] MOC monitors that clock and pings Maintenance and SOCC slash Dispatch if a new one's needed. And if the crew ever suspects a maintenance action invalidated the PDSC — contact MOC via Dispatch. When in doubt, phone a friend.
+
+Pualani: [warm] And what does the PDSC actually check? Pop-quiz nineteen, all-of-the-above, section 6.5.4 — the condition of the ETOPS-significant systems, the overall aircraft status from the maintenance records, and an interior-exterior inspection including engine and APU oil levels and consumption.
+
+Chester: [serious] And a release-reading trap in 6.3.2 that busts people. "ETOPS NA" on the release means the aircraft is NOT ETOPS capable. And "EQUIP ETOPS" is NOT an indication of ETOPS status. The word ETOPS printed on your release does not mean you're good to go.
+
+Pualani: [warm] That's a Top Gun "don't write a check your body can't cash" trap. Read the fine print.
+
+Otto: [dry] Maverick busts that oral question. Confidently. Then buzzes the tower.
+
+Chester: [laughs] Every time. Into the flight, 6.3.3 — the entry point. THE definition. When does the jet reach the ETOPS Entry Point, the EEP?
+
+Pualani: [warm] The aircraft reaches the EEP when it's 60 minutes from the adequate airport — same one-engine speed, standard conditions, still air. For the 787 that 60 minutes is 410 nautical miles. And the Exit Point, the EXP, is the mirror image on the way out — same fixed distance, same conditions.
+
+Otto: [dry] EEP going in, EXP coming out. Same fence, opposite sides. And 6.3.3 is firm — crew and Dispatch must use the SAME adequate airports to define those points, listed on the release. Want to change them? Coordinate with Dispatch. No freelancing.
+
+Pualani: [warm] IOE reality check — your check airman WILL ask about ETOPS entry. "Show me the EEP, tell me your alternates, tell me your critical fuel." Have it cold.
+
+Chester: [serious] And they'll roleplay a curveball. Otto, run the scenario — alternate goes below mins near the EEP.
+
+Otto: [dry] Right. Section 6.3.5. Honolulu to Haneda, eight minutes from the EEP, Midway — PMDY — is your designated ETOPS alternate, and Dispatch relays it just dropped below the crew's operating minima, no METAR coming. What now?
+
+Pualani: [warm] Timing is everything. BEFORE the EEP, you must have a suitable ETOPS alternate to enter the area, so you work with Dispatch to establish a new one. If none can be designated and Midway's no longer available — a turnback is required before you cross the EEP. You don't enter ETOPS airspace without a good alternate.
+
+Chester: [serious] But AFTER the EEP, 6.3.5 flips it. A turnback is NOT required just because the alternate's below minima or a runway's unusable. You attempt to establish a new ETOPS alternate with Dispatch — which may lead to a turnback, reroute, or continuation on the planned route — and the PIC and Dispatcher exercise judgment on the safest course.
+
+Otto: [dry] Before the fence, be strict. After the fence, be smart. The ocean doesn't hand out do-overs.
+
+Pualani: [warm] Now the contingency a check airman loves — engine failure past the ETP, way out in the blue. Section 6.4.2. Otto, quiz Chester.
+
+Otto: [dry] Chester. Honolulu to Sydney, deep in the South Pacific, cruising between Pago Pago — NSTU — and Nadi — NFFN. You pass the fuel-critical ETP between those two, and a few minutes later an engine quits. Which airport, what speed, what rule?
+
+Chester: [serious] Fourteen CFR 121.565 — land at the nearest SUITABLE airport where, in the Captain's judgment after considering all relevant factors, a safe landing can be made. Nearest suitable, not nearest full stop. And by definition of the ETP, once I'm past it the airport ahead — Nadi — now takes the least time, so that's generally my field. Speed — the QRC gives engine-out minimum drag first for the driftdown, then once I'm pointed at Nadi with checklists done I select CO SPD, .84 over 290, until the Captain assesses the emergency and fuel and elects otherwise. And per 6.4.1, the planning system does NOT model the time or fuel to make the turn near the ETP, so a big turn near a fuel-critical point costs more than the paper says.
+
+Otto: [dry] Gold star. Nearest suitable, planned speed, mind the turn.
+
+Pualani: [warm] And decompression, 6.4.3 — quick and clean, Chester.
+
+Chester: [serious] Offset from the route using the Special Procedures for In-Flight Contingencies. Emergency descent to 10,000 feet OR MOCA slash Grid MORA — whichever is HIGHER. Below FL290, or sooner if cleared by ATC, proceed directly to the nearest suitable airport. When level, use the flight-plan one-engine diversion speed, or Long Range Cruise for a two-engine decompression.
+
+Otto: [dry] Ten thousand or the terrain floor, whichever's higher. The rocks don't care about your cabin altitude.
+
+Pualani: [warm] One more world our check airmen drift into on the oral — the oceanic-nav layer. Not in Chapter 6, but the pop quiz leans on it, so know it. Otto, the alphabet soup.
+
+Otto: [dry] Right, the performance-based stuff, per NAT Doc 007 and the OpSpecs. To ride the PBCS tracks you need three performances. Navigation is PBN slash RNP. Communication is Required Communication Performance, RCP — on those tracks it's RCP 240, the application being CPDLC, flown over VHF or SATCOM datalink. Surveillance is Required Surveillance Performance, RSP 180, the application being ADS-C. That's pop-quiz nine, twelve, and thirteen in one breath.
+
+Chester: [serious] Last block — maintenance reporting, section 6.5.2. Within 96 hours the certificate holder must report IFSDs, diversions and turnbacks for failures, malfunctions or defects, uncommanded thrust changes, inability to control thrust, inadvertent fuel loss or imbalance, and any event that would jeopardize the safe flight and landing. Ninety-six hours.
+
+Otto: [dry] Four days. And that clock only starts if YOU write it up. So write it up. The airplane can't confess for you.
+
+Pualani: [warm] And the friendliest fact in the whole chapter, 6.5.1 — how do you know a jet is ETOPS just by looking?
+
+Chester: [warm] It's marked with the word "ETOPS" on the nose landing gear doors, for positive identification by all crewmembers.
+
+Otto: [dry] It literally says ETOPS on the nose gear doors. Refreshingly honest, that airplane.
+
+Pualani: [warm] Recap. Otto, top of the list.
+
+Otto: [dry] Sixty minutes from an adequate airport puts you in ETOPS, 6.1.1. Fifty miles from shore is extended over-water, 6.1.2. The whole religion is Preclude and Protect, 6.1.3 — the two P's.
+
+Chester: [serious] Adequate airport, 6.2.1 — stop within 60 percent of the runway from 50 feet, adequate on paper, not necessarily suitable. ETOPS alternate, 6.2.2 — ICAO Category 4 firefighting, 30-minute response meaning available on arrival, C055 weather, and listed in 8.1.3. Area of operation, 6.2.3 — MDT 180, sometimes 120 with an MEL item, always the most limiting system minus 15. Rings — four-ten, eight-oh-six, twelve-oh-seven, at .84 Mach, 290 knots.
+
+Pualani: [warm] Critical fuel, 6.2.5 — both low, one high, one low, then 1500 feet, hold 15, approach and land, winds bumped 5 percent. Speed, 6.4.5 — .84 over 290 protects fuel, minimum drag protects altitude, faster protects time; the Captain deviates only after weighing emergency and fuel. Reference, 6.2.9 — 515,000 pounds at FL350.
+
+Chester: [serious] In flight — EEP at 60 minutes, 410 nautical miles, 6.3.3, same airports as Dispatch. Two four-hour clocks — release from scheduled departure, 6.3.2; PDSC from logbook sign-off, 6.5.4. "ETOPS NA" means NOT capable. No added fuel rule in flight, 6.3.6. ETPs at 10,000 feet, 6.3.7. Engine failure — nearest suitable, 121.565, 6.4.2. Decompression — 10,000 or MOCA slash Grid MORA, whichever's higher, 6.4.3.
+
+Otto: [dry] Maintenance — report within 96 hours, 6.5.2. IFSD target under point-oh-three per thousand hours per AC 120-42B. And the jet wears its name on the nose gear doors, 6.5.1. Don't overthink it.
+
+Pualani: [warm] Five memory aids to pocket. "Sixty in the air, fifty to the shore" for the triggers. "The two P's — Preclude and Protect" for the philosophy. "Minus fifteen, always the buffer" for the diversion-time margin. "Both low, one high, one low" for critical fuel. And "four-ten, eight-oh-six, twelve-oh-seven" for the rings.
+
+Chester: [warm] Study your rings, know your numbers, respect the ocean, and read the release like it's trying to trick you — because sometimes it is.
+
+Otto: [dry] And remember — the Dreamliner can fly three hours on one engine, and the FOM's got layers on layers so you never have to find out the hard way. Engines Turn Or Passengers Swim? Not on this airplane. Surely you can remember all that. And don't call me Shirley.
+
+Pualani: [laughs] There it is. Mahalo for flying the big one with us on 787 Flight Deck Notes. Study hard, brief it on IOE like you mean it, and a hui hou.
+
+Otto: [dry] Chur. Sweet as. Otto out. Roll credits before I inflate.
+
+
+SOURCES: Alaska/Hawaiian 787 FOM Chapter 6 — ETOPS (Rev 125, 7/29/26), sections 6.1.1, 6.1.2, 6.1.3, 6.2.1, 6.2.2, 6.2.3 (incl. Table 6.2.3(1)), 6.2.5, 6.2.8, 6.2.9, 6.3.2, 6.3.3, 6.3.5, 6.3.6, 6.3.7, 6.4.1, 6.4.2, 6.4.3, 6.4.5, 6.5.1, 6.5.2, 6.5.4. Regulatory/reference: 14 CFR 121.565, 121.633, 121.646, 121.339, 121.374; AC 120-42B (IFSD rate target — not restated in FOM ch6); 787 AFM (most-limiting system = cargo fire suppression, MDT+15 certification basis — not restated in FOM ch6); OpSpec B342 (no longer the adequate-airport basis in Rev 125; see 8.1.3)/C070/C055/B036; NAT Doc 007 (PBCS/RCP 240/RSP 180, oceanic tracks); Central East Pacific system / RNP 10; organized Pacific tracks / daily Track Definition Message. ETOPS diversion-speed logic per FOM 6.4.5 / 20.4.4. Scenario stations (HNL, HND, SYD, AKL, PMDY/Midway, NSTU/Pago Pago, NFFN/Nadi, NTAA/Papeete) are real AS/HA 787 network points and Pacific ETOPS alternates; scenarios are illustrative, no real flight numbers.

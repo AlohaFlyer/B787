@@ -1,0 +1,220 @@
+787 FLIGHT DECK NOTES — FOM Series
+Episode: Chapter 2 — Operating-General
+
+Pualani: [warm] Howzit, everybody, and welcome back to 787 Flight Deck Notes. I'm Pualani — that's poo-ah-LAH-nee — coming to you from Honolulu, where the trades are blowing and the Kona's already poured. Today we go talk story about FOM Chapter 2, Operating-General. Da kine chapter that decides who's actually in charge of your airplane. And on our 787 — the combined Alaska and Hawaiian jet, Hawaiian-operated, flying HNL out over the whole Pacific — that question really matters. Because by the time you augment across the water, "in charge" can literally change seats mid-ocean.
+
+Chester: [warm] And I'm Chester, coming to you from a rainy Seattle window with a fresh pour-over. Or — hang on — Pualani mailed me a bag of Kona beans last week, so today it's a Kona pour. Don't tell my barista. Chapter 2 is one of the big high-yield ones, so grab your coffee. This is where the FOM lays out operational control, PIC authority, the chain of command, and the Operational Control Window. All of it.
+
+Otto: [dry] I'm Otto. And before anyone asks — yes, same name as the autopilot in Airplane! No, I do not inflate. And no, I have not got the aircraft. Yet. Surely we can start now.
+
+Chester: [laughs] Don't call him Shirley.
+
+Otto: [dry] I told you never to call me Shirley. Right on cue, Chester.
+
+Pualani: [laughs] Shoots. Okay Otto, you're our skeptic today, so keep us honest. Chester, kick us off. What even IS operational control?
+
+Chester: [serious] Straight from FOM 2.1: operational control, with respect to a flight, means the exercise of authority over initiating, conducting, or terminating a flight. Those three verbs are the whole ballgame. Initiating, conducting, terminating.
+
+Pualani: [excited] And that's memory aid number one, everybody, so write 'em down. I-C-T. Initiating, Conducting, Terminating. I tell my students think of it like a canoe trip — you gotta launch it, paddle it, and beach it. ICT. Same three verbs every time it shows up — and it shows up again in FOM 2.2.1, word for word.
+
+Otto: [dry] So who actually holds that authority? Because "the exercise of authority" is lovely, but somebody's name has to be on it.
+
+Chester: [serious] Good — FOM 2.1 again. The 14 CFR Part 119 designated Director of Operations, the DO, has the authority for the supervision and control of all Alaska Airlines flights. All of them. And the DO has delegated the authority to conduct certain functions to the Flight Operations Duty Officer — the FODO.
+
+Otto: [dry] Chur. DO at the top, delegates down to the FODO. So the DO's just handed the airplane to the FODO. Which means, for the record, I've got the aircraft. Figuratively.
+
+Pualani: [laughs] Otto, you don't got nothing.
+
+Otto: [deadpan] I've got it figuratively. It's a whole thing. You'll see.
+
+Chester: [warm] And notice how the FOM keeps a name on it. FOM 2.2.1 says the FODO serves as a direct representative of the Director of Operations. So when you're talking to the FODO, you're basically talking with the DO's authority. Nobody's got it "figuratively." Somebody's always got it for real.
+
+Pualani: [warm] Da chain runs deep. And that's the theme of the whole chapter — authority is never floating loose. It's always assigned to a human being with a title.
+
+Otto: [dry] Which is precisely why my bit is funny. Anyway. Carry on.
+
+Chester: [warm] Now here's the part every check airman loves — joint responsibility. FOM 2.1.1. The PIC and the Aircraft Dispatcher are jointly responsible for the preflight planning, delay, and Dispatch Release of a flight.
+
+Otto: [skeptical] Hang on. Jointly. So it's not the captain's airplane and the dispatcher just books the fuel?
+
+Chester: [serious] Correct — it's genuinely shared. Per FOM 2.1.1 they're jointly responsible for determining the suitability of weather, field and traffic conditions, airway facilities, and the filed route. And the agreement that the flight can be accomplished safely is indicated by the signatures of the PIC and Dispatcher on the Dispatch Release. Two signatures, one release.
+
+Pualani: [warm] Like both paddlers gotta agree before the canoe leaves the beach.
+
+Otto: [serious] Chester, tell me about a time you actually saw that joint responsibility get tested. Not the theory. A real disagreement.
+
+Chester: [serious] Oh, I've got one. Redeye out of Seattle, SEA to HNL, 787 full of people who want to wake up in Hawaii. My dispatcher had a beautiful release — legal fuel, legal alternate, everything squared. But sitting in the flight deck I'm watching the Honolulu forecast trend the wrong way. Kona low sliding in, low ceilings and rain earlier than the TAF said. On paper the flight could be accomplished safely. In my gut, the margins were getting thin over five and a half hours of ocean.
+
+Otto: [dry] And you just launched anyway, because Hawaii?
+
+Chester: [serious] Opposite. FOM 2.1.1 — when conditions change and the flight can't be conducted per the Dispatch Release, the person encountering or learning of the changed conditions must contact the other to institute the amendment. I saw it first, so I owned the call. I picked up the phone to my dispatcher.
+
+Otto: [dry] And the dispatcher just rolled over?
+
+Chester: [serious] Also opposite. He pushed back — his data still supported the release. And that's the whole point: neither of us can steamroll the other, because both the PIC and the Dispatcher must agree the flight as planned can be accomplished safely. We didn't agree yet. So we didn't sign yet. We reworked it — bumped the alternate to a field that was staying clear, added contingency fuel — and then both of us were comfortable. Two signatures. Off we went into the dark.
+
+Pualani: [excited] I love that, because it shows the FOM working exactly the way it's drawn. And notice — when the PIC has an issue related to operational control, FOM 2.1.1 says the PIC should contact the Dispatcher. The Dispatcher is the primary source of information related to the status of a flight. Not crew scheduling. Not the gate agent. The Dispatcher.
+
+Otto: [dry] And if the weather turns to custard halfway across the Pacific, after you've already launched?
+
+Chester: [serious] Same rule, FOM 2.1.1 — whoever encounters or learns of the changed conditions contacts the other to institute the amendment. On a long over-water 787 leg, that's often the relief pilot pulling fresh weather in cruise. You learn it, you own the call. No waiting around for the other guy.
+
+Otto: [serious] There's a sharper one buried in 2.1.1 though. The PIC may not allow a flight to continue toward a dispatched airport if it can't be completed safely due to hazardous conditions. What's the exception?
+
+Chester: [serious] The exception is right there in FOM 2.1.1: unless, in the opinion of the PIC, there is no safer procedure. And then — this is the line every oral hits — in that event, continuation toward that airport is an emergency.
+
+Pualani: [warm] Ho, let me tell you about a time that one came alive. Fictional, but the numbers all real. Captain friend of mine, HNL down to Papeete — PPT, Tahiti, deep South Pacific. And the thing about the South Pacific is the alternates are far apart. You got Bora Bora, you got Rarotonga, and then a whole lot of ocean. She's descending toward Tahiti and PPT drops below minimums, weather worse than forecast. Her filed alternate's now marginal, and the fuel to reach the next real field is right on the ragged edge.
+
+Otto: [dry] So she's out of good options.
+
+Pualani: [warm] She's out of good options. She looks at every single one, and there just is no safer procedure than pressing to Tahiti and getting it on the ground. So she does what FOM 2.1.1 says — the moment "no safer procedure" is your honest reason, you say the word. She declared. Continuation became an emergency.
+
+Otto: [dry] So the second "no safer option" becomes your reason for pressing on, you're not continuing a flight anymore. You're flying an emergency.
+
+Chester: [serious] And here's where FOM 2.2.8.1 backs her up — in the PIC job description, the Captain may unilaterally exercise emergency authority. Unilaterally. No committee. No phone call for permission. She already had the authority the second she needed it.
+
+Pualani: [warm] That's the FOM telling you: label it what it is, and use the authority you already carry. No sugarcoat, no hesitation.
+
+Otto: [dry] Beautiful. And to be clear, during all of that, I did not have the aircraft. She did. Legally and figuratively.
+
+Chester: [warm] Let's talk PIC authority proper. FOM 2.1.2. The PIC has full control and authority in the operation of the aircraft, without limitation, over other crewmembers and their duties during flight time — whether or not they hold valid certificates authorizing them to perform those duties.
+
+Otto: [skeptical] Without limitation. That's a big phrase. Even over someone not certificated for the job?
+
+Chester: [serious] Even then. Crewmembers shall comply with the PIC's orders. It's the FOM's echo of 14 CFR 91.3.
+
+Pualani: [serious] But listen to the flip side, same section, FOM 2.1.2 — if the PIC is not sure that any aspect of flight operations can be safely executed and in compliance with regulations, then the operation will be stopped. Not "maybe." Not "let's see." Will be stopped.
+
+Otto: [dry] So all that authority exists mainly so the captain can say no. I like that. Your ego's not writing any checks there.
+
+Pualani: [laughs] Top Gun in the flight deck, I see you Otto. Your ego's writing a check — the FOM's telling you don't cash it.
+
+Otto: [dry] "That's right, Ice… man. I am dangerous." Only I'm dangerous by refusing the takeoff. Far less cinematic. No fly-bys.
+
+Chester: [warm] One curveball in FOM 2.1.2 — the note. Any time a training or evaluation event is being conducted by a Check Pilot from a pilot seat, the Check Pilot is the designated PIC. So on a check ride, the authority shifts to the Check Pilot in the seat.
+
+Otto: [dry] Ah. So on IOE, the Check Pilot's got the aircraft. Which means I don't. Noted. Reluctantly.
+
+Pualani: [excited] And that's your IOE tie-in, everybody. When you first fly the line on the 787 — Operating Experience — there's a Check Pilot in the other seat. FOM 2.1.2 note means when they're running that event from a pilot seat, they are the designated PIC. So on IOE, know whose authority is whose that day.
+
+Otto: [serious] Tell me about a time that mattered, Pualani. Because on paper it's trivia. In the seat?
+
+Pualani: [warm] In the seat it's everything. My IOE, honest — HNL to LAX, my first real line legs on the 787. We're getting vectored into Los Angeles and Approach throws us a late runway change, off the two-fours over to the two-fives. Classic LAX. And my brain just… locked. Froze for a second. Fresh on the airplane, task-saturated, deer in the headlights.
+
+Chester: [serious] Which is the worst possible second to have two people wondering who's flying.
+
+Pualani: [warm] Exactly. But because my Check Pilot was the designated PIC per FOM 2.1.2, there was zero ambiguity. He just took it — "I have the aircraft" — reset the box for the new runway, made the call, clean. No two captains wrestling over the tiller at four hundred feet. That note exists so the flight deck never has a leadership gap during training. The authority already had a name on it before I ever froze.
+
+Otto: [dry] See, that's the chapter again. The airplane always belongs to somebody specific. Never to Otto.
+
+Chester: [laughs] We're four minutes into your bit and it's already load-bearing.
+
+Otto: [dry] Right — and how long does the PIC's authority actually last? Report to shutdown?
+
+Chester: [serious] FOM 2.1.2.1, Duration of Command. The PIC's control and authority is in effect from the time they report for duty until the termination of the flight.
+
+Pualani: [excited] Memory aid number two, everybody — "Report to Termination." R-to-T. It starts when you report for duty — not at pushback, not at the gate, the moment you report. And it runs all the way to termination of the flight. Report. To. Termination.
+
+Otto: [dry] Reassuringly bookended. Sweet as.
+
+Chester: [warm] Now the chain of command, FOM 2.1.3. The sequence goes: Captain, the PIC. Then the International Relief Officer, the IRO, slash Second in Command, the SIC. Then a PIC-qualified First Officer. Then the First Officer. Then the "A" Flight Attendant, the FFA. Then the rest of the Flight Attendants in descending order.
+
+Otto: [skeptical] And on an augmented crew, when the captain goes to the bunk over the middle of the ocean — who's minding the store?
+
+Chester: [serious] FOM 2.1.3 spells it out. On a flight with an augmented Flight Crew, when the assigned Captain begins their rest period, the IRO will become the acting Captain.
+
+Pualani: [warm] So the IRO's not just a spare paddler. Captain goes to rest, IRO IS the captain for that stretch. On our 787 — HNL to Sydney, to Auckland, to Tokyo Haneda, to Seoul — that's not exotic. That's a normal Tuesday over the water.
+
+Otto: [dry] So when the Captain's asleep, the IRO's got the aircraft. Genuinely, this time. Not figuratively. I want that on the record — there's a version of "somebody's got it" that's actually real, and it's never me.
+
+Chester: [laughs] The self-awareness is growing.
+
+Otto: [serious] Let me give you the story that makes it real. Fictional, numbers accurate. Augmented 787 crew, Auckland up to Honolulu — AKL to HNL, roughly nine hours, so we're carrying an IRO. Home turf for me, by the way; I like leaving from Auckland, they spell things correctly there. Deep in cruise, middle of the Pacific, nearest decent diversion field a long way off. The assigned Captain is on a legit, scheduled rest break — and while he's back there, he has a genuine medical event. Chest, clammy, not good. He is not coming back to that seat. Now what?
+
+Chester: [serious] Now FOM 2.2.8.3 does the heavy lifting. The IRO is SIC of the aircraft, and if the Captain becomes incapacitated, the IRO will assume command, perform the Captain's duties, and assume the Captain's responsibilities. That's not a promotion ceremony. It's instant.
+
+Otto: [dry] Which is exactly why the certificate matters. FOM 2.2.8.3 has a note — a Flight Crewmember holding a restricted ATP certificate must not act as PIC or IRO.
+
+Pualani: [excited] And that makes total sense, yeah? The IRO can end up acting Captain when the assigned Captain rests, and can flat-out assume command if the Captain becomes incapacitated. You no can have a restricted ATP sitting in a seat that might inherit command over the Pacific. The rule's there before the emergency — so it's already true when the emergency comes.
+
+Otto: [serious] That's the part that got me the first time I studied it. The FOM doesn't wait for the crisis to decide who's qualified. It's decided on the ground, at the gate, at report time. So mid-ocean, there's no debate. The IRO has the aircraft. Full stop.
+
+Chester: [warm] Beautifully connected. Okay — the one everybody asks about on the oral. The Operational Control Window. OCW. FOM 2.2.2.1.
+
+Otto: [dry] Go on then. When's the window open?
+
+Chester: [serious] OCW starts two and a half hours — D-150 — prior to the scheduled departure time, and ends when the aircraft is blocked in at the destination airport.
+
+Pualani: [excited] Okay here's my trick for D-150. The 150 is minutes. 150 minutes is two and a half hours. So D-150, then block-in at the gate — that's your window. Opens at 150 minutes before push, closes when you block in at destination.
+
+Otto: [skeptical] And the exceptions? Because there's always a special case hiding in these.
+
+Chester: [serious] There is. FOM 2.2.2.1 — some flights need the Dispatch Release and ATS Flight Plan produced 180 minutes prior, and for those the OCW starts three hours. D-180. The list lives in 8.5.2.1.
+
+Otto: [dry] D-180. Three hours. So picture our HNL to Seoul — HNL to ICN, Incheon. That's a South Korea flight, so the window opens at D-180, not D-150. Seoul gets the extra half hour of babysitting. And here's the Rev 125 change you need — the D-180 list is now South Korea departures, Amazon cargo, AND seven-eight-seven and A330 Europe departures. So this one IS us. Fly the airplane to Europe and you're on the three-hour window.
+
+Pualani: [warm] Standard is D-150, two and a half hours. D-180, three hours, for South Korea like HNL to Incheon, for Amazon cargo, and for our own Europe departures. Two numbers, and know which flights pull the bigger one.
+
+Chester: [serious] And why does the window matter? FOM 2.2.2.3. Within the OCW, any decision to cancel or modify the flight is an operational control action, which requires coordination and endorsement from the Dispatcher and the PIC. The FODO and Pilot Crew Scheduling provide guidance when required — and the Director of Operations is ultimately responsible.
+
+Otto: [skeptical] So inside the window, the business side can't just cancel your flight on a whim?
+
+Chester: [serious] Right. Compare it to FOM 2.2.2.2 — before the OCW, canceling or modifying is a business decision initiated by the business operations work group of the NOC. It does not require coordination and endorsement from the operational control elements. But once you're inside that window, it flips. Now it needs the Dispatcher and the PIC.
+
+Otto: [serious] Give the listeners the scenario, Chester, because this is a favorite check-airman trap.
+
+Chester: [serious] Here it is, and let's set it on that Seoul flight so the numbers bite. HNL to ICN — South Korea, so your window opened at D-180, three hours before push. Now you're sitting at D-90 — ninety minutes to departure. Are you inside the window? Yes. You've been inside it since D-180. The NOC business group decides your 787 is worth more re-flowed somewhere else and wants to cancel it out from under you. Fair question on the oral: can they just do it?
+
+Otto: [dry] And the answer is?
+
+Chester: [serious] No. Inside the OCW, that cancel is an operational control action. Per FOM 2.2.2.3 it requires coordination and endorsement from the Dispatcher and the PIC, and the Director of Operations is ultimately responsible. Now move the clock. Same Seoul flight, but you're at D-200 — that's more than three hours out, so you're before the D-180 window. Now per FOM 2.2.2.2 it's a straight business decision and they can flow the airplane without your endorsement.
+
+Pualani: [warm] That's the whole heart of it. Before the window, business drives. Inside the window, safety and operational control gotta sign off. Da line moves the moment you hit D-150 — or D-180 heading to Korea.
+
+Otto: [dry] And there's a lovely line that anchors all of it — FOM 2.2.1, the note at the end of the operational control section. Business objectives will not override safety concerns of the PIC, Dispatcher, or DO, who share legal responsibility for the flight.
+
+Chester: [serious] That's the spine of the whole chapter. And FOM 2.2.4 — the NOC and SOCC section — says it again in plain words: the safety and regulatory concerns of operational control always take precedence over administrative and business issues.
+
+Pualani: [excited] Safety first, business second. Every time.
+
+Otto: [serious] One more authority worth flagging — the FODO. FOM 2.2.8.5. The FODO is accountable to the Director of Operations for daily oversight of line flying operations, and — this is the teeth — has the authority to temporarily remove Flight Crews from flight operations.
+
+Pualani: [warm] So the FODO no just gives advice. Can pull a crew right off the line. Real authority, delegated straight from the DO.
+
+Otto: [dry] So the FODO can take the aircraft away from you entirely. Which is more than I can do. Again — everyone in this chapter can hold the airplane except me.
+
+Chester: [laughs] There it is. Let's land this with the hard thresholds — the numbers check airmen love. Sterile Flight Deck, FOM 2.3.12. Critical phases are ground operations involving pushback, towing, taxi, takeoff, and landing — plus all other flight operations conducted below 10,000 feet MSL, except cruise flight.
+
+Otto: [skeptical] Below ten thousand, sterile — except cruise. And the ground-hold gotcha?
+
+Chester: [serious] The note in FOM 2.3.12 — the Flight Deck is not considered sterile during lengthy ground holds when the parking brake is set. So sitting on a ground stop at HNL with the brake parked, you can talk. Start rolling again below ten, you button it back up.
+
+Pualani: [excited] And bank and pitch, FOM 2.3.14 — normal flying should not require bank angles greater than 30 degrees, or pitch attitude greater than 20 degrees nose up. Now, the aircraft may exceed 20 nose up under certain conditions or climb profiles — and a light 787 off a short interisland-length leg out of Kona will absolutely rotate up past twenty and feel like a rocket — but normal handling? 30 and 20.
+
+Otto: [dry] Thirty of bank, twenty nose up. No need for speed. No need to buzz the tower. Very sensible.
+
+Pualani: [laughs] There's the Top Gun. Otto, you were a Maverick this whole time.
+
+Otto: [dry] Negative, Pualani. I'm the fella in the tower saying "the pattern is full." Okay — recap time. Bring it home, Chester.
+
+Chester: [serious] Operational control, FOM 2.1 — initiating, conducting, terminating. Memory aid number one: I-C-T. The DO has authority over all flights and delegates to the FODO, who per FOM 2.2.1 is the DO's direct representative. Joint responsibility, FOM 2.1.1 — PIC and Dispatcher, two signatures on the Dispatch Release, whoever learns of a change owns the amendment, and continuation into hazardous conditions with no safer procedure is an emergency.
+
+Pualani: [warm] PIC authority, FOM 2.1.2 — full control without limitation, but if you're not sure it's safe or legal, the operation will be stopped. FOM 2.1.2 note — Check Pilot running a training event from a pilot seat is the designated PIC. And FOM 2.2.8.1 — the PIC may unilaterally exercise emergency authority. Duration of command, FOM 2.1.2.1 — memory aid number two, "Report to Termination." From when you report for duty until the flight terminates.
+
+Otto: [dry] Chain of command, FOM 2.1.3 — Captain, IRO slash SIC, PIC-qualified FO, FO, A Flight Attendant, then the rest. Captain rests, the IRO becomes acting Captain. Captain incapacitated, FOM 2.2.8.3 — the IRO assumes command. And no restricted ATP in the PIC or IRO seat.
+
+Chester: [serious] OCW, FOM 2.2.2.1 — D-150, two and a half hours before departure, closes at block-in. D-180, three hours, for South Korea, Amazon cargo, and seven-eight-seven Europe departures per 8.5.2.1. Inside the window, cancel or modify needs the Dispatcher and PIC per FOM 2.2.2.3, and the DO is ultimately responsible. Before the window, FOM 2.2.2.2, it's a business decision. And the FODO, FOM 2.2.8.5, can temporarily remove a crew.
+
+Pualani: [warm] Hard numbers — sterile flight deck below 10,000 except cruise, FOM 2.3.12. Bank 30, pitch 20 nose up, FOM 2.3.14. And safety always beats business — FOM 2.2.1 note and FOM 2.2.4. That's Chapter 2 in a nutshell.
+
+Otto: [dry] Well. That was heaps more useful than I expected from a chapter titled "General."
+
+Chester: [warm] And I'll admit it — this Kona Pualani sent me is better than my pour-over. Don't tell Seattle. I may have to fly to HNL just to restock.
+
+Pualani: [laughs] Come for the beans, stay for the trades. Shoots! That's FOM Chapter 2, Operating-General. Study 'em, know your numbers, and we go see you next episode. Malama pono, everybody.
+
+Chester: [warm] Fly safe out there.
+
+Otto: [dry] And remember — the airplane always belongs to somebody. A real, named, qualified human being. Never to me. I've got it… figuratively. Which, as we have now thoroughly established, means I've got nothing at all.
+
+SOURCES: FOM 2.1 (Operational Control), 2.1.1 (Joint Responsibility), 2.1.2 (PIC's Responsibility and Authority), 2.1.2.1 (Duration of Command), 2.1.3 (Chain of Command), 2.2.1 (Operational Control — including the note on business objectives and the FODO as direct representative of the DO), 2.2.2.1 (Operational Control Window), 2.2.2.2 (Pre-Cancel/Modify Flights), 2.2.2.3 (Cancel or Modify Flights), 2.2.4 (NOC/SOCC precedence of safety over business), 2.2.8.1 (Pilot-In-Command), 2.2.8.3 (International Relief Officer), 2.2.8.5 (Flight Ops Duty Officer), 2.3.12 (Sterile Flight Deck), 2.3.14 (Style of Flying/Bank and Pitch Angles).

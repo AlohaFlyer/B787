@@ -1,0 +1,14 @@
+# as787pilot.app
+# B787 study material for Alaska Airlines crews. Not intended for search indexing.
+# Note: this file is a request that well behaved crawlers honor.
+# It is not access control and it does not restrict access to anything.
+
+User-agent: *
+Disallow: /
+
+# Content paths listed explicitly. Most study content is inlined directly in the
+# root HTML pages; the paths below hold the remaining external content.
+Disallow: /fom_q/
+Disallow: /assets/
+Disallow: /build_scripts/
+Disallow: /docs/
