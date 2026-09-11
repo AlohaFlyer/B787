@@ -314,6 +314,7 @@
     var p = window.PortalSettings ? window.PortalSettings.profile() : { seat: 'CA', fleet: 'B787', base: 'HNL' };
     el('as-chips').innerHTML = '<span class="as-scope">' + esc(CORPUS ? CORPUS.title : 'this section') + ' only</span>' +
       '<span class="as-chip">' + p.seat + '</span><span class="as-chip">' + p.fleet + '</span><span class="as-chip">' + p.base + '</span>' +
+      (p.state ? '<span class="as-chip">' + esc(p.state) + '</span>' : '') +
       ((p.years || p.years === 0) ? '<span class="as-chip">' + p.years + ' yr</span>' : '');
   }
   function render(hits) {
@@ -492,7 +493,9 @@
       if (!hits.length) return;
       var p = window.PortalSettings.profile();
       var today = new Date().toISOString().slice(0, 10);
-      var who = p.seat + ' on the B787 at Alaska/Hawaiian, domiciled ' + p.base +
+      var who = p.seat + ' on the B787 at Alaska/Hawaiian, resident of ' + (p.state || 'an unstated state') +
+        ' with tax assumptions the pilot set of ' + (p.stateRate || 0) + '% state and ' + (p.fedRate || 35) +
+        '% federal for pay math only, domiciled ' + p.base +
         (p.doh ? ', date of hire ' + p.doh + ', which is ' + p.years + ' years ' + p.months +
           ' months of service as of today, next longevity anniversary ' + p.next : '');
       var sys = 'Today is ' + today + '. You answer questions for a ' + who + '. ' +
@@ -579,6 +582,7 @@
       }, true);
     });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') togglePanel(false); });
+    window.addEventListener('portalsettings:ready', function () { if (CORPUS) chips(); });
     window.addEventListener('online', updateAsk);
     window.addEventListener('offline', updateAsk);
     updateAsk();

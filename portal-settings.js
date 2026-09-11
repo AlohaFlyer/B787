@@ -173,6 +173,16 @@
     '<div class="ps-f"><label>Domicile</label><div class="ps-seg" id="psBase"><button type="button" data-v="HNL">HNL</button><button type="button" data-v="SEA">SEA</button></div></div>' +
     '<div class="ps-f"><label for="psDOH">Date of hire</label><input id="psDOH" type="date" min="1960-01-01"><span class="ps-note" id="psLong"></span></div>' +
     '<p class="ps-note">Fleet is B787. Every question carries this profile and your longevity as of today.</p>' +
+    '<div class="ps-h3">Tax assumptions</div>' +
+    '<div class="ps-f"><label for="psState">State of residence</label><select id="psState"></select></div>' +
+    '<p class="ps-note">Residence, not domicile. Under 49 USC 40116(f) an air carrier employee with duties in two or more states is taxed only by their state of residence, or by a state holding more than 50% of their scheduled flight time for the year.</p>' +
+    '<div class="ps-f"><label for="psStateRate">State effective rate</label><div class="ps-row">' +
+      '<input id="psStateRate" type="number" min="0" max="20" step="0.01" inputmode="decimal">' +
+      '<button class="ps-mini" id="psStateReset" type="button">Reset</button></div>' +
+      '<span class="ps-note" id="psStateNote"></span></div>' +
+    '<div class="ps-f"><label for="psFed">Federal effective rate <span id="psFedVal"></span></label>' +
+      '<input id="psFed" type="range" min="0" max="50" step="0.5"></div>' +
+    '<p class="ps-note">Seeded from ' + TAX_SRC + '. Those are top marginal rates, which are higher than the effective rate you actually pay. Replace both with your real effective rates from your return for accurate net-pay math.</p>' +
     '<div class="ps-h3">Ask Pualani</div>' +
     '<div class="ps-f"><label for="psProv">Answer with</label><select id="psProv">' +
       '<option value="claude">Claude (Anthropic)</option><option value="openai">ChatGPT (OpenAI)</option>' +
@@ -201,10 +211,45 @@
     '</div>' +
   '</div></div>';
 
+  /* Top marginal individual income tax rates, Tax Foundation, effective
+     1 Jan 2026. Two deliberate departures from that source, because this app
+     computes W-2 wages: WA is listed at 9.00 there but that tax reaches capital
+     gains only, and NH taxes no wage income. Both are 0 here.
+     A top marginal rate is NOT an effective rate. It seeds the field and the
+     pilot is expected to replace it with their real effective rate. */
+  var TAX_SRC = 'Tax Foundation, top marginal rates effective 1 Jan 2026';
+  var STATES = {
+    AL: 5.00, AK: 0, AZ: 2.50, AR: 3.90, CA: 13.30, CO: 4.40, CT: 6.99, DE: 6.60,
+    DC: 10.75, FL: 0, GA: 5.19, HI: 11.00, ID: 5.30, IL: 4.95, IN: 2.95, IA: 3.80,
+    KS: 5.58, KY: 3.50, LA: 3.00, ME: 7.15, MD: 6.50, MA: 9.00, MI: 4.25, MN: 9.85,
+    MS: 4.00, MO: 4.70, MT: 5.65, NE: 4.55, NV: 0, NH: 0, NJ: 10.75, NM: 5.90,
+    NY: 10.90, NC: 3.99, ND: 2.50, OH: 2.75, OK: 4.50, OR: 9.90, PA: 3.07, RI: 5.99,
+    SC: 6.00, SD: 0, TN: 0, TX: 0, UT: 4.50, VT: 8.75, VA: 5.75, WA: 0, WV: 4.82,
+    WI: 7.65, WY: 0
+  };
+  function fillStates(selEl, sel) {
+    if (!selEl || selEl.options.length) return;
+    selEl.innerHTML = Object.keys(STATES).sort().map(function (k) {
+      return '<option value="' + k + '">' + k + ' (' + STATES[k].toFixed(2) + '%)</option>';
+    }).join('');
+    selEl.value = sel;
+  }
+
   function el(id) { return document.getElementById(id); }
   var ovl, mounted = false;
   var PROFILE = { seat: LS.get('pwa_seat', 'CA'), fleet: 'B787', base: LS.get('pwa_base', 'HNL'),
-    doh: LS.get('pwa_doh', '2011-10-05') };
+    doh: LS.get('pwa_doh', '2011-10-05'),
+    state: LS.get('pwa_state', 'NV'),
+    stateRate: LS.get('pwa_state_rate', ''),
+    fedRate: LS.get('pwa_fed_rate', '35') };
+  function stateRateNum() {
+    var v = parseFloat(PROFILE.stateRate);
+    return isNaN(v) ? (STATES[PROFILE.state] || 0) : v;
+  }
+  function fedRateNum() {
+    var v = parseFloat(PROFILE.fedRate);
+    return isNaN(v) ? 35 : v;
+  }
 
   function longevity(doh) {
     if (!doh) return null;
@@ -228,6 +273,18 @@
   function paintProfile() {
     var dohEl = el('psDOH');
     if (dohEl) { dohEl.value = PROFILE.doh || ''; el('psLong').textContent = longText(); }
+    var st = el('psState');
+    if (st) {
+      fillStates(st, PROFILE.state);
+      st.value = PROFILE.state;
+      el('psStateRate').value = stateRateNum().toFixed(2);
+      el('psFed').value = fedRateNum();
+      el('psFedVal').textContent = fedRateNum().toFixed(1) + '%';
+      var seeded = STATES[PROFILE.state];
+      el('psStateNote').textContent = seeded === 0
+        ? PROFILE.state + ' levies no tax on wage income.'
+        : (PROFILE.stateRate === '' ? 'Seeded at the ' + PROFILE.state + ' top marginal rate. Edit it.' : 'Your value, not the table.');
+    }
     [['psSeat', 'seat'], ['psBase', 'base']].forEach(function (p) {
       [].forEach.call(el(p[0]).querySelectorAll('button'), function (b) {
         b.setAttribute('aria-pressed', b.getAttribute('data-v') === PROFILE[p[1]] ? 'true' : 'false');
@@ -485,6 +542,25 @@
         LS.set('pwa_' + p[1], PROFILE[p[1]]); paintProfile();
       });
     });
+    el('psState').addEventListener('change', function () {
+      PROFILE.state = this.value; LS.set('pwa_state', PROFILE.state);
+      PROFILE.stateRate = ''; LS.set('pwa_state_rate', '');   // reseed from the table
+      paintProfile();
+      msg('State of residence set to ' + PROFILE.state + '.');
+    });
+    el('psStateRate').addEventListener('change', function () {
+      var v = parseFloat(this.value);
+      PROFILE.stateRate = isNaN(v) ? '' : String(v);
+      LS.set('pwa_state_rate', PROFILE.stateRate); paintProfile();
+    });
+    el('psStateReset').addEventListener('click', function () {
+      PROFILE.stateRate = ''; LS.set('pwa_state_rate', ''); paintProfile();
+      msg('State rate back to the ' + PROFILE.state + ' table value.');
+    });
+    el('psFed').addEventListener('input', function () {
+      PROFILE.fedRate = this.value; LS.set('pwa_fed_rate', PROFILE.fedRate);
+      el('psFedVal').textContent = fedRateNum().toFixed(1) + '%';
+    });
     el('psDOH').addEventListener('change', function () {
       PROFILE.doh = this.value; LS.set('pwa_doh', PROFILE.doh);
       el('psLong').textContent = longText();
@@ -542,6 +618,8 @@
     profile: function () {
       var L = longevity(PROFILE.doh);
       return { seat: PROFILE.seat, fleet: 'B787', base: PROFILE.base, doh: PROFILE.doh,
+        state: PROFILE.state, stateRate: stateRateNum(), fedRate: fedRateNum(),
+        taxSource: TAX_SRC, stateRateIsMine: PROFILE.stateRate !== '',
         years: L ? L.years : null, months: L ? L.months : null, next: L ? L.next : null,
         longevity: longText() };
     },
@@ -617,6 +695,12 @@
     }
   };
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);
-  else mount();
+  // This file is deferred, so pages that paint a profile row at parse time see
+  // the fallback defaults and never correct themselves. Tell them when we exist.
+  function ready() {
+    mount();
+    try { window.dispatchEvent(new CustomEvent('portalsettings:ready')); } catch (e) {}
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
+  else ready();
 })();

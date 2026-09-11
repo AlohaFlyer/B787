@@ -682,7 +682,8 @@
   function PS() { return window.PortalSettings || null; }
   function prof() {
     var s = PS();
-    return s ? s.profile() : { seat: 'CA', fleet: 'B787', base: 'HNL', longevity: '' };
+    return s ? s.profile() : { seat: 'CA', fleet: 'B787', base: 'HNL', longevity: '',
+      state: 'NV', stateRate: 0, fedRate: 35, taxSource: '', stateRateIsMine: false };
   }
   function profileText() {
     var p = prof();
@@ -692,6 +693,8 @@
     var p = prof();
     $('chips').innerHTML = '<span class="chip">' + p.seat + '</span><span class="chip">' + p.fleet +
       '</span><span class="chip">' + p.base + '</span>' +
+      (p.state ? '<span class="chip">' + esc(p.state) + ' ' + Number(p.stateRate).toFixed(2) + '%</span>' : '') +
+      '<span class="chip">Fed ' + Number(p.fedRate).toFixed(1) + '%</span>' +
       (p.years || p.years === 0 ? '<span class="chip">' + p.years + ' yr</span>' : '');
   }
   function updateAskState() {
@@ -956,7 +959,12 @@
       var today = new Date().toISOString().slice(0, 10);
       var who = 'Today is ' + today + '.\n' +
         'Pilot profile: ' + p.seat + ' on the ' + p.fleet + ', domiciled ' + p.base + '.' +
-        (p.doh ? ' Date of hire ' + p.doh + ', so ' + p.years + ' years ' + p.months + ' months of service as of today, next longevity anniversary ' + p.next + '.' : '');
+        (p.doh ? ' Date of hire ' + p.doh + ', so ' + p.years + ' years ' + p.months + ' months of service as of today, next longevity anniversary ' + p.next + '.' : '') +
+        '\nTax assumptions the pilot set, for pay math only: state of residence ' + p.state +
+        ', state effective rate ' + p.stateRate + '%, federal effective rate ' + p.fedRate + '%.' +
+        (p.stateRateIsMine ? ' The state rate is the pilot\'s own figure.'
+          : ' The state rate is a seeded top marginal rate, not an effective rate, so treat it as an upper bound and say so.') +
+        '\nUse these rates rather than assuming any others. State them in the answer. These are the pilot\'s assumptions, not tax advice, and the agreement says nothing about tax.';
 
       THREAD = { sys: SYS, messages: [], turns: [], readList: [], pendingQ: q, imgs: ATT.main.length };
       if (ATT.main.length) THREAD.sys = SYS + imageRule(ATT.main.length);
@@ -1045,6 +1053,7 @@
   window.addEventListener('offline', updateAskState);
   updateAskState();
   paintProfile();
+  window.addEventListener('portalsettings:ready', paintProfile);
 
   load().catch(function () {});
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(function () {});
