@@ -7,6 +7,9 @@
   if (window.PortalSettings) return;
 
   var TAX_SRC = 'Tax Foundation, top marginal rates effective 1 Jan 2026';
+  // Bump this every deploy. It is the only way to tell from inside the browser
+  // whether you are looking at current code or a cached copy.
+  var BUILD = 'v2.36';
 
   var LS = {
     get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } },
@@ -185,6 +188,11 @@
     '<div class="ps-f"><label for="psFed">Federal effective rate <span id="psFedVal"></span></label>' +
       '<input id="psFed" type="range" min="0" max="50" step="0.5"></div>' +
     '<p class="ps-note">Seeded from ' + TAX_SRC + '. Those are top marginal rates, which are higher than the effective rate you actually pay. Replace both with your real effective rates from your return for accurate net-pay math.</p>' +
+    '<div class="ps-h3">Build</div>' +
+    '<div class="ps-f"><label for="psBuild">Running</label><div class="ps-row">' +
+      '<input id="psBuild" type="text" readonly>' +
+      '<button class="ps-mini" id="psRefresh" type="button">Force refresh</button></div>' +
+      '<span class="ps-note" id="psRefreshNote">Deletes every cache, unregisters the service worker, re-fetches the code and reloads. Use it after a deploy, or when the portal looks like the old version.</span></div>' +
     '<div class="ps-h3">Ask Pualani</div>' +
     '<div class="ps-f"><label for="psProv">Answer with</label><select id="psProv">' +
       '<option value="claude">Claude (Anthropic)</option><option value="openai">ChatGPT (OpenAI)</option>' +
@@ -543,6 +551,37 @@
         LS.set('pwa_' + p[1], PROFILE[p[1]]); paintProfile();
       });
     });
+    el('psBuild').value = BUILD;
+    el('psRefresh').addEventListener('click', function () {
+      var btn = this, note = el('psRefreshNote');
+      btn.disabled = true;
+      note.textContent = 'Clearing caches...';
+      var jobs = [];
+      try {
+        if (window.caches && caches.keys) {
+          jobs.push(caches.keys().then(function (ks) {
+            return Promise.all(ks.map(function (k) { return caches.delete(k); }));
+          }));
+        }
+      } catch (e) {}
+      try {
+        if (navigator.serviceWorker && navigator.serviceWorker.getRegistrations) {
+          jobs.push(navigator.serviceWorker.getRegistrations().then(function (rs) {
+            return Promise.all(rs.map(function (r) { return r.unregister(); }));
+          }));
+        }
+      } catch (e) {}
+      Promise.all(jobs).catch(function () {}).then(function () {
+        note.textContent = 'Re-fetching code...';
+        // A plain reload is not enough. The stale copy sits in the HTTP cache as
+        // well as the service worker, and only cache:'reload' rewrites that entry.
+        return Promise.all(['/portal-settings.js', '/assist.js', '/sw.js', location.pathname]
+          .map(function (u) { return fetch(u, { cache: 'reload' }).catch(function () {}); }));
+      }).then(function () {
+        note.textContent = 'Reloading...';
+        setTimeout(function () { location.reload(); }, 250);
+      });
+    });
     el('psState').addEventListener('change', function () {
       PROFILE.state = this.value; LS.set('pwa_state', PROFILE.state);
       PROFILE.stateRate = ''; LS.set('pwa_state_rate', '');   // reseed from the table
@@ -624,6 +663,7 @@
         years: L ? L.years : null, months: L ? L.months : null, next: L ? L.next : null,
         longevity: longText() };
     },
+    build: function () { return BUILD; },
     providerName: function () { return PROV[LS.get('pwa_provider', 'claude')].name; },
     ready: function () {
       var p = LS.get('pwa_provider', 'claude');
