@@ -50,6 +50,67 @@
     }
     return { N: N, df: df, tf: tf, len: len, avg: sum / N || 1 };
   }
+  /* Keywords is the BM25 engine below. Exact and Phrase do no stemming and no
+     expansion: both compare a squashed form, lowercase with every run of
+     non-alphanumerics collapsed to one space, so punctuation in the source does
+     not break a match while word order and completeness still do. */
+  var MODES = {
+    keywords: { label: 'Keywords', help: 'Ranked by relevance. Stems words.' },
+    exact:    { label: 'Exact',    help: 'Every word must appear, as typed.' },
+    phrase:   { label: 'Phrase',   help: 'The whole string, in that order.' }
+  };
+  var MODE = 'keywords';
+  var SEARCHED = false;   // a zero-hit search still counts, otherwise the mode buttons go dead
+  function lsGet(k, d) { try { var v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } }
+  function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  function squash(x) {
+    return String(x == null ? '' : x).toLowerCase().replace(/[^a-z0-9]+/g, ' ').replace(/^ | $/g, '');
+  }
+  function sqDoc(d) { if (d.__sq === undefined) d.__sq = ' ' + squash(d.x) + ' '; return d.__sq; }
+  function sqHead(d) { if (d.__sh === undefined) d.__sh = ' ' + squash((d.t || '') + ' ' + (d.r || '')) + ' '; return d.__sh; }
+  function countOf(hay, needle) {
+    if (!needle) return 0;
+    var n = 0, i = hay.indexOf(needle);
+    while (i >= 0) { n++; i = hay.indexOf(needle, i + 1); }
+    return n;
+  }
+  function searchExact(q, limit) {
+    var sq = squash(q); if (!sq) return [];
+    var words = sq.split(' ').filter(function (w, i, a) { return a.indexOf(w) === i; }), out = [];
+    for (var i = 0; i < CORPUS.docs.length; i++) {
+      var d = CORPUS.docs[i], body = sqDoc(d), head = sqHead(d), sc = 0, all = true;
+      for (var w = 0; w < words.length; w++) {
+        var t = ' ' + words[w] + ' ', c = countOf(body, t);
+        if (!c) { all = false; break; }
+        sc += 1 + Math.log(1 + c) + (countOf(head, t) ? 3 : 0);
+      }
+      if (all) out.push([sc, i]);
+    }
+    out.sort(function (a, c) { return c[0] - a[0]; });
+    return out.slice(0, limit || 10).map(function (r) {
+      return { s: r[0], d: CORPUS.docs[r[1]], terms: words, lit: words.slice() };
+    });
+  }
+  function searchPhrase(q, limit) {
+    var sq = squash(q); if (!sq) return [];
+    var needle = ' ' + sq + ' ', out = [];
+    for (var i = 0; i < CORPUS.docs.length; i++) {
+      var d = CORPUS.docs[i], c = countOf(sqDoc(d), needle);
+      if (!c) continue;
+      out.push([1 + Math.log(1 + c) + (countOf(sqHead(d), needle) ? 3 : 0), i]);
+    }
+    out.sort(function (a, c) { return c[0] - a[0]; });
+    return out.slice(0, limit || 10).map(function (r) {
+      return { s: r[0], d: CORPUS.docs[r[1]], terms: sq.split(' '), lit: [sq] };
+    });
+  }
+  function runSearch(q, limit) {
+    if (MODE === 'exact') return searchExact(q, limit);
+    if (MODE === 'phrase') return searchPhrase(q, limit);
+    return search(q, limit);
+  }
+
   function search(q, limit) {
     var terms = tok(q); if (!terms.length) return [];
     var k1 = 1.5, b = 0.75, sc = new Array(BM.N).fill(0);
@@ -94,6 +155,28 @@
     });
     return h;
   }
+  function reEsc(x) { return x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  function hlLit(str, lits) {
+    var h = esc(str);
+    lits.slice().sort(function (a, b) { return b.length - a.length; }).slice(0, 8).forEach(function (t) {
+      if (!t) return;
+      var pat = t.split(' ').map(reEsc).join('[^a-zA-Z0-9]+');
+      h = h.replace(new RegExp('(?<![a-zA-Z0-9>])(' + pat + ')(?![a-zA-Z0-9])', 'gi'), '<mark>$1</mark>');
+    });
+    return h;
+  }
+  function snipLit(text, lits, w) {
+    w = w || 300;
+    var flat = String(text).replace(/\s+/g, ' ').trim(), low = ' ' + squash(flat) + ' ', at = -1;
+    for (var i = 0; i < lits.length && at < 0; i++) at = low.indexOf(' ' + lits[i] + ' ');
+    if (at < 0) return snip(text, lits, w);
+    var mid = Math.round(at * (flat.length / Math.max(1, low.length - 2)));
+    var best = Math.max(0, Math.min(Math.max(0, flat.length - w), mid - Math.round(w / 3)));
+    var out = flat.slice(best, best + w);
+    if (best > 0) out = '... ' + out;
+    if (best + w < flat.length) out += ' ...';
+    return out;
+  }
   function snip(text, terms, w) {
     w = w || 300;
     var flat = text.replace(/\s+/g, ' ').trim(), low = flat.toLowerCase(), best = 0, hits = -1;
@@ -127,6 +210,13 @@
   '#as-ask .disc{width:76px;height:76px;border-radius:50%;overflow:hidden;background:#fff;border:3px solid #01416e;display:flex;align-items:center;justify-content:center;}' +
   '#as-ask .disc img{width:100%;height:100%;object-fit:contain;padding:3px;}' +
   '#as-ask .lbl{font-size:11px;font-weight:700;color:#01416e;}' +
+  '.as-modebar{display:flex;align-items:center;gap:9px;margin-top:11px;flex-wrap:wrap;}' +
+  '.as-modebar .as-mlbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5b7a8c;}' +
+  '.as-modebar .as-mhelp{font-size:11px;color:#666;flex:1 1 100%;}' +
+  '.as-seg{display:inline-flex;border:2px solid #01416e;border-radius:999px;overflow:hidden;}' +
+  '.as-seg button{font-family:inherit;font-size:12px;font-weight:700;letter-spacing:.03em;background:#fff;color:#01416e;border:none;padding:8px 15px;cursor:pointer;min-height:36px;}' +
+  '.as-seg button+button{border-left:2px solid #01416e;}' +
+  '.as-seg button[aria-pressed="true"]{background:#01416e;color:#fff;}' +
   '.as-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px;font-size:12px;}' +
   '.as-chip{background:#01416e;color:#fff;border-radius:999px;padding:3px 11px;font-weight:700;letter-spacing:.04em;}' +
   '.as-scope{background:#b1d887;color:#01416e;border-radius:999px;padding:3px 11px;font-weight:700;}' +
@@ -148,6 +238,12 @@
   '<div class="as-h"><span id="as-title">SEARCH THIS SECTION</span><button type="button" id="as-x" aria-label="Close">&times;</button></div>' +
   '<div class="as-b"><div class="as-wrap">' +
   '<textarea id="as-q" placeholder="Ask about this section" aria-label="Your question"></textarea>' +
+  '<div class="as-modebar"><span class="as-mlbl">Match</span>' +
+    '<div class="as-seg" id="as-seg" role="group" aria-label="Search mode">' +
+      '<button type="button" data-mode="keywords" aria-pressed="true">Keywords</button>' +
+      '<button type="button" data-mode="exact" aria-pressed="false">Exact</button>' +
+      '<button type="button" data-mode="phrase" aria-pressed="false">Phrase</button>' +
+    '</div><span class="as-mhelp" id="as-mhelp"></span></div>' +
   '<div class="as-row">' +
     '<button id="as-search" type="button">Offline Search</button>' +
     '<button id="as-ask" type="button" title="Ask Pualani"><span class="disc"><img src="/assets/pualani-2001.png" alt=""></span><span class="lbl">Ask Pualani</span></button>' +
@@ -181,23 +277,45 @@
   }
   function render(hits) {
     var box = el('as-res'); box.innerHTML = '';
-    if (!hits.length) { status('Nothing in ' + CORPUS.title + ' matches that. This search only covers this section.'); return; }
-    status(hits.length + ' match' + (hits.length === 1 ? '' : 'es') + ' in ' + CORPUS.title + ', best first.');
+    if (!hits.length) { status(emptyMsg()); return; }
+    status(hits.length + ' match' + (hits.length === 1 ? '' : 'es') + ' in ' + CORPUS.title +
+      ' \u00b7 ' + MODES[MODE].label + (MODE === 'keywords' ? ', best first' : ' match') + '.');
     hits.forEach(function (h) {
       var d = document.createElement('div');
       d.className = 'as-res';
-      d.innerHTML = '<div class="t">' + hl(h.d.t, h.terms) + '</div>' +
+      d.innerHTML = '<div class="t">' + (h.lit ? hlLit(h.d.t, h.lit) : hl(h.d.t, h.terms)) + '</div>' +
         (h.d.r ? '<div class="r">' + esc(h.d.r) + '</div>' : '') +
-        '<div class="sn">' + hl(snip(h.d.x, h.terms), h.terms) + '</div>';
+        '<div class="sn">' + (h.lit
+          ? hlLit(snipLit(h.d.x, h.lit), h.lit)
+          : hl(snip(h.d.x, h.terms), h.terms)) + '</div>';
       box.appendChild(d);
     });
   }
+  function emptyMsg() {
+    var where = CORPUS ? CORPUS.title : 'this section';
+    if (MODE === 'phrase') return 'That exact phrase is not in ' + where + '. Try Exact, or drop a word.';
+    if (MODE === 'exact') return 'Nothing in ' + where + ' contains every one of those words. Try Keywords.';
+    return 'Nothing in ' + where + ' matches that. This search only covers this section.';
+  }
+  function setMode(m, rerun) {
+    if (!MODES[m]) m = 'keywords';
+    MODE = m;
+    lsSet('as787_assist_mode', m);
+    var btns = el('as-seg').querySelectorAll('button');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].setAttribute('aria-pressed', btns[i].getAttribute('data-mode') === m ? 'true' : 'false');
+    }
+    el('as-mhelp').textContent = MODES[m].help;
+    if (rerun && SEARCHED && el('as-q').value.trim()) doSearch();
+  }
+
   function doSearch() {
     var q = el('as-q').value.trim();
     if (!q) { el('as-q').focus(); return; }
     el('as-ans').style.display = 'none';
     status('Searching...');
-    load().then(function () { chips(); render(search(q, 10)); })
+    SEARCHED = true;
+    load().then(function () { chips(); render(runSearch(q, 10)); })
       .catch(function (e) { status('Section index unavailable: ' + e.message + '. Tick Make Available Offline in settings while you have signal.'); });
   }
   function ask() {
@@ -209,8 +327,13 @@
     load().then(function () {
       status('');
       chips();
+      // Ask always uses the keyword engine. The literal modes are for finding a
+      // known string, and starving the model of context to honour them is worse
+      // than a wide read. The mode control governs Offline Search only.
       var hits = search(q, 8);
+      var shownMode = MODE; MODE = 'keywords';
       render(hits);
+      MODE = shownMode;
       if (!hits.length) return;
       var p = window.PortalSettings.profile();
       var today = new Date().toISOString().slice(0, 10);
@@ -264,6 +387,11 @@
     document.body.appendChild(p);
     b.addEventListener('click', function () { togglePanel(); });
     el('as-x').addEventListener('click', function () { togglePanel(false); });
+    el('as-seg').addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-mode]');
+      if (b) setMode(b.getAttribute('data-mode'), true);
+    });
+    setMode(lsGet('as787_assist_mode', 'keywords'), false);
     el('as-search').addEventListener('click', doSearch);
     el('as-ask').addEventListener('click', ask);
     // Keys typed inside the widget belong to the widget. Pages like triggers,

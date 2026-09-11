@@ -60,6 +60,10 @@
   .seg button+button{border-left:2px solid var(--midnight);}
   .seg button[aria-pressed="true"]{background:var(--midnight);color:#fff;}
   .seg button:hover:not([aria-pressed="true"]){background:var(--breeze);}
+  .modebar{display:flex;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap;}
+  .modebar .mlbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#5b7a8c;}
+  .modebar .mhelp{font-size:11px;color:#666;flex:1 1 100%;}
+  @media (max-width:430px){.seg button{padding:8px 13px;font-size:12px;}}
   .chips{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px;font-size:12px;}
   .chips .chip{background:var(--midnight);color:#fff;border-radius:999px;padding:3px 11px;font-weight:700;letter-spacing:.04em;}
   .chips .caveat{color:#8a6d00;font-size:11px;}
@@ -130,6 +134,15 @@
 
   <div class="card">
     <textarea id="q" placeholder="Ask a contract question, e.g. how much rest do I get at a domestic overnight?" aria-label="Your question"></textarea>
+    <div class="modebar">
+      <span class="mlbl">Match</span>
+      <div class="seg" id="modeSeg" role="group" aria-label="Search mode">
+        <button type="button" data-mode="keywords" aria-pressed="true">Keywords</button>
+        <button type="button" data-mode="exact" aria-pressed="false">Exact</button>
+        <button type="button" data-mode="phrase" aria-pressed="false">Phrase</button>
+      </div>
+      <span class="mhelp" id="modeHelp"></span>
+    </div>
     <div class="row">
       <button class="primary" id="searchBtn" type="button">Offline Search</button>
       <button class="pualani" id="askBtn" type="button" title="Ask Pualani">
@@ -268,6 +281,84 @@
     return out;
   }
 
+  /* ---------- literal modes ----------
+     Keywords is the BM25 engine below: stems, synonyms, ranked recall.
+     Exact and Phrase do no stemming and no expansion at all. Both compare a
+     squashed form, lowercase with every run of non-alphanumerics turned into a
+     single space, so "compensation, payable monthly" still matches the phrase
+     "compensation payable monthly" while "compensation is payable" does not. */
+  var MODES = {
+    keywords: { label: 'Keywords', help: 'Ranked by relevance. Stems words and adds related contract terms.' },
+    exact:    { label: 'Exact',    help: 'Every word you type must appear, as typed. No stemming, no synonyms.' },
+    phrase:   { label: 'Phrase',   help: 'The whole string must appear together, in that order.' }
+  };
+  var MODE = 'keywords';
+  var SEARCHED = false;   // a zero-hit search still counts, otherwise the mode buttons go dead
+
+  function squash(s) {
+    return String(s == null ? '' : s).toLowerCase().replace(/[^a-z0-9]+/g, ' ').replace(/^ | $/g, '');
+  }
+  function sqDoc(d) {
+    if (d.__sq === undefined) d.__sq = ' ' + squash(d.x) + ' ';
+    return d.__sq;
+  }
+  function sqHead(d) {
+    if (d.__sh === undefined) d.__sh = ' ' + squash((d.h || '') + ' ' + (d.t || '')) + ' ';
+    return d.__sh;
+  }
+  function countOf(hay, needle) {
+    if (!needle) return 0;
+    var n = 0, i = hay.indexOf(needle);
+    while (i >= 0) { n++; i = hay.indexOf(needle, i + 1); }
+    return n;
+  }
+  function litWords(query) {
+    var q = squash(query);
+    return q ? q.split(' ') : [];
+  }
+
+  function searchExact(query, limit) {
+    var words = litWords(query).filter(function (w, i, a) { return a.indexOf(w) === i; });
+    if (!words.length) return [];
+    var out = [];
+    for (var d = 0; d < IDX.docs.length; d++) {
+      var doc = IDX.docs[d], body = sqDoc(doc), head = sqHead(doc), score = 0, all = true;
+      for (var w = 0; w < words.length; w++) {
+        var t = ' ' + words[w] + ' ';
+        var c = countOf(body, t);
+        if (!c) { all = false; break; }
+        score += 1 + Math.log(1 + c) + (countOf(head, t) ? 3 : 0);
+      }
+      if (all) out.push([score, d]);
+    }
+    out.sort(function (a, c) { return c[0] - a[0]; });
+    return out.slice(0, limit || 12).map(function (r) {
+      return { score: r[0], doc: IDX.docs[r[1]], terms: words, base: words, lit: words.slice() };
+    });
+  }
+
+  function searchPhrase(query, limit) {
+    var p = squash(query);
+    if (!p) return [];
+    var needle = ' ' + p + ' ', out = [];
+    for (var d = 0; d < IDX.docs.length; d++) {
+      var doc = IDX.docs[d], c = countOf(sqDoc(doc), needle);
+      if (!c) continue;
+      out.push([1 + Math.log(1 + c) + (countOf(sqHead(doc), needle) ? 3 : 0), d]);
+    }
+    out.sort(function (a, c) { return c[0] - a[0]; });
+    var words = p.split(' ');
+    return out.slice(0, limit || 12).map(function (r) {
+      return { score: r[0], doc: IDX.docs[r[1]], terms: words, base: words, lit: [p], phrase: p };
+    });
+  }
+
+  function runSearch(query, limit) {
+    if (MODE === 'exact') return searchExact(query, limit);
+    if (MODE === 'phrase') return searchPhrase(query, limit);
+    return search(query, limit);
+  }
+
   function search(query, limit) {
     var base = tok(query);
     if (!base.length) return [];
@@ -338,7 +429,36 @@
     return out;
   }
 
+  // Exact and Phrase centre the window on the literal hit instead of a stem guess.
+  function snippetLit(text, lits, width) {
+    width = width || 320;
+    var flat = tidy(text), low = ' ' + squash(flat) + ' ', at = -1;
+    for (var i = 0; i < lits.length && at < 0; i++) at = low.indexOf(' ' + lits[i] + ' ');
+    if (at < 0) return snippet(text, lits, width);
+    // squashed offsets track the original closely enough to centre a 320 char window
+    var ratio = flat.length / Math.max(1, low.length - 2);
+    var mid = Math.round(at * ratio);
+    var best = Math.max(0, Math.min(Math.max(0, flat.length - width), mid - Math.round(width / 3)));
+    var out = flat.slice(best, best + width);
+    var sp = out.lastIndexOf(' ');
+    if (sp > width - 40) out = out.slice(0, sp);
+    if (best > 0) out = '... ' + out;
+    if (best + width < flat.length) out += ' ...';
+    return out;
+  }
+
   function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function reEsc(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+  // Whole words only, and a phrase tolerates the punctuation the source actually has.
+  function highlightLit(s, lits) {
+    var html = esc(s);
+    lits.slice().sort(function (a, b) { return b.length - a.length; }).slice(0, 8).forEach(function (t) {
+      if (!t) return;
+      var pat = t.split(' ').map(reEsc).join('[^a-zA-Z0-9]+');
+      html = html.replace(new RegExp('(?<![a-zA-Z0-9>])(' + pat + ')(?![a-zA-Z0-9])', 'gi'), '<mark>$1</mark>');
+    });
+    return html;
+  }
   function highlight(s, terms) {
     var html = esc(s);
     var uniq = terms.slice().sort(function (a, b) { return b.length - a.length; }).slice(0, 6);
@@ -381,8 +501,10 @@
 
   function render(hits) {
     var box = $('results'); box.innerHTML = '';
-    if (!hits.length) { setStatus('No match. Try different words, or a section number like 22.B.'); return; }
-    setStatus(hits.length + ' matching passage' + (hits.length === 1 ? '' : 's') + ', best first. Asked as ' + profileText() + '.');
+    if (!hits.length) { setStatus(emptyMsg()); return; }
+    setStatus(hits.length + ' matching passage' + (hits.length === 1 ? '' : 's') +
+      ' \u00b7 ' + MODES[MODE].label + (MODE === 'keywords' ? ', best first' : ' match') +
+      '. Asked as ' + profileText() + '.');
     hits.forEach(function (h) {
       var d = h.doc, div = document.createElement('div');
       div.className = 'res';
@@ -391,7 +513,9 @@
         '<div class="h"><span>SECTION ' + esc(d.s) + (d.t ? ' &middot; ' + esc(d.t) : '') + (d.cp ? ' &middot; ' + esc(d.cp) : '') +
         (isTable ? ' <span class="tag">RATE TABLE</span>' : '') + '</span>' +
         '<span class="pg"><a href="/pwa_pdf.html#page=' + d.p + '">Open PDF p.' + d.p + ' &#9654;</a></span></div>' +
-        '<div class="sn">' + highlight(snippet(d.x, h.terms), h.base) + '</div>';
+        '<div class="sn">' + (h.lit
+          ? highlightLit(snippetLit(d.x, h.lit), h.lit)
+          : highlight(snippet(d.x, h.terms), h.base)) + '</div>';
       div.setAttribute('role', 'button');
       div.setAttribute('tabindex', '0');
       div.addEventListener('click', function (ev) {
@@ -405,11 +529,30 @@
     });
   }
 
+  function emptyMsg() {
+    if (MODE === 'phrase') return 'That exact phrase is not in the agreement. Try Exact, or drop a word.';
+    if (MODE === 'exact') return 'No passage contains every one of those words. Try Keywords, or drop a word.';
+    return 'No match. Try different words, or a section number like 22.B.';
+  }
+
+  function setMode(m, rerun) {
+    if (!MODES[m]) m = 'keywords';
+    MODE = m;
+    LS.set('pwa_search_mode', m);
+    var btns = $('modeSeg').querySelectorAll('button');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].setAttribute('aria-pressed', btns[i].getAttribute('data-mode') === m ? 'true' : 'false');
+    }
+    $('modeHelp').textContent = MODES[m].help;
+    if (rerun && SEARCHED && $('q').value.trim()) doSearch();
+  }
+
   function doSearch() {
     var q = $('q').value.trim();
     if (!q) { $('q').focus(); return; }
     $('answer').style.display = 'none';
-    load().then(function () { render(search(q, 12)); }).catch(function () {});
+    SEARCHED = true;
+    load().then(function () { render(runSearch(q, 12)); }).catch(function () {});
   }
 
   /* ---------- reference popout ---------- */
@@ -530,7 +673,7 @@
   // Section menu for the router pass, built from the index itself.
   function sectionMenu() {
     var seen = {}, out = [];
-    (CORPUS.docs || []).forEach(function (d) {
+    (IDX && IDX.docs || []).forEach(function (d) {
       if (!d.s || seen[d.s]) return;
       seen[d.s] = 1;
       out.push('Section ' + d.s + ': ' + (d.t || ''));
@@ -538,7 +681,7 @@
     return out.join('\n');
   }
   function sectionPages(num) {
-    return (CORPUS.docs || []).filter(function (d) { return String(d.s) === String(num); })
+    return (IDX && IDX.docs || []).filter(function (d) { return String(d.s) === String(num); })
       .sort(function (a, b) { return (parseInt(a.p, 10) || 0) - (parseInt(b.p, 10) || 0); });
   }
   var CTX_CAP = 140000;
@@ -649,6 +792,11 @@
   $('ovlClose').addEventListener('click', closeRef);
   $('ovl').addEventListener('click', function (e) { if (e.target === $('ovl')) closeRef(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeRef(); });
+  $('modeSeg').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-mode]');
+    if (b) setMode(b.getAttribute('data-mode'), true);
+  });
+  setMode(LS.get('pwa_search_mode', 'keywords'), false);
   $('searchBtn').addEventListener('click', doSearch);
   $('askBtn').addEventListener('click', ask);
   $('q').addEventListener('keydown', function (e) {
