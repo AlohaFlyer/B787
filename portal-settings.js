@@ -6,6 +6,8 @@
   'use strict';
   if (window.PortalSettings) return;
 
+  var TAX_SRC = 'Tax Foundation, top marginal rates effective 1 Jan 2026';
+
   var LS = {
     get: function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } },
     set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} },
@@ -217,7 +219,6 @@
      gains only, and NH taxes no wage income. Both are 0 here.
      A top marginal rate is NOT an effective rate. It seeds the field and the
      pilot is expected to replace it with their real effective rate. */
-  var TAX_SRC = 'Tax Foundation, top marginal rates effective 1 Jan 2026';
   var STATES = {
     AL: 5.00, AK: 0, AZ: 2.50, AR: 3.90, CA: 13.30, CO: 4.40, CT: 6.99, DE: 6.60,
     DC: 10.75, FL: 0, GA: 5.19, HI: 11.00, ID: 5.30, IL: 4.95, IN: 2.95, IA: 3.80,
